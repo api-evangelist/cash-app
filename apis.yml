@@ -1,0 +1,235 @@
+aid: cash-app
+url: https://raw.githubusercontent.com/api-evangelist/cash-app/refs/heads/main/apis.yml
+name: Cash App
+kind: company
+description: Cash App is a consumer mobile-first financial services platform operated
+  by Block, Inc. (formerly Square, Inc.), a publicly traded company. Cash App is not
+  itself a chartered bank; its banking, card, and lending features are delivered
+  through partner institutions (deposit accounts and the Cash App Card are issued
+  by partner banks, historically Sutton Bank and Lincoln Savings Bank; brokerage and
+  bitcoin services run through Block subsidiaries). Its public developer surface is
+  a merchant/PSP payment-acceptance product, not a consumer-permissioned data-access
+  API - Cash App Pay lets partners and payment service providers charge customers
+  directly from their Cash App balance or linked funding source, and the Afterpay
+  (Cash App Afterpay) buy-now-pay-later product is offered through the same portal.
+  Block runs a real, public first-party developer portal at developers.cash.app
+  (built on Fern) that publishes downloadable OpenAPI 3.1 specifications for the Cash
+  App Pay Partner API (Customer Request, Network, and Management APIs on api.cash.app)
+  and the Afterpay Global API (on global-api.afterpay.com). Consumer-side account
+  data is reached by third parties through aggregators (e.g. Plaid) rather than a
+  first-party FDX data-access API; no FDX participation or CFPB Section 1033
+  data-rights posture is documented in the developer portal.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial Services
+- Payments
+- United States
+- Fintech
+- Neobank
+- Buy Now Pay Later
+- Payment Acceptance
+- Digital Wallet
+created: '2026-07-23'
+modified: '2026-07-23'
+specificationVersion: '0.19'
+apis:
+- aid: cash-app:cash-app-pay-network-api
+  name: Cash App Pay Network API
+  description: Server-side REST API that registers merchants and processes payments
+    using grants - the core Cash App Pay payment-processing surface for PSP partners.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - Payments
+  - Network API
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-network-api-openapi.json
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+- aid: cash-app:cash-app-pay-customer-request-api
+  name: Cash App Pay Customer Request API
+  description: REST API used to get permission from customers to perform actions on
+    their accounts (such as collecting a payment), producing the grants consumed by
+    the Network API. Wrapped by the Pay Kit JavaScript SDK.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  baseURL: https://api.cash.app/customer-request/v1
+  tags:
+  - Payments
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-customer-request-api-openapi.json
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+- aid: cash-app:cash-app-pay-management-api
+  name: Cash App Pay Management API
+  description: REST API that controls scoped API keys and webhooks, automating key
+    aspects of a Cash App Pay integration including least-privileged microservice
+    access.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  baseURL: https://api.cash.app/management/v1
+  tags:
+  - API Keys
+  - Webhooks
+  - Management API
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-management-api-openapi.json
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+- aid: cash-app:afterpay-payments-api
+  name: Afterpay Payments API
+  description: Afterpay (Cash App Afterpay) Global API for authorizing, capturing,
+    voiding, and refunding buy-now-pay-later payments. HTTP Basic authenticated.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Payments
+  - Buy Now Pay Later
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-payments-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+- aid: cash-app:afterpay-checkouts-api
+  name: Afterpay Checkouts API
+  description: Afterpay Global API for creating and retrieving checkout sessions that
+    begin an Afterpay buy-now-pay-later order flow.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Checkout
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-checkouts-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+- aid: cash-app:afterpay-orders-api
+  name: Afterpay Orders API
+  description: Afterpay Global API for retrieving order details associated with an
+    Afterpay buy-now-pay-later transaction.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Orders
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-orders-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+- aid: cash-app:afterpay-configuration-api
+  name: Afterpay Configuration API
+  description: Afterpay Global API exposing merchant configuration and limits (such
+    as minimum and maximum order amounts) for the Afterpay/Cash App Pay integration.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Configuration
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-configuration-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+- aid: cash-app:afterpay-disputes-api
+  name: Afterpay Disputes API
+  description: Afterpay Global API for listing disputes and submitting evidence to
+    contest Afterpay buy-now-pay-later chargebacks.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Disputes
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-disputes-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+- aid: cash-app:afterpay-grants-api
+  name: Afterpay Grants API
+  description: Afterpay Global API for retrieving and managing the grants that
+    authorize Afterpay payment operations on a customer's behalf.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Grants
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-grants-afterpay-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+- aid: cash-app:cash-app-pay-site-grants-api
+  name: Add Cash App Pay to Your Site (Grants) API
+  description: Afterpay Global API surface for retrieving Cash App Pay grants when
+    adding Cash App Pay directly to a website through the Afterpay Global API.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Grants
+  - Cash App Pay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-grants-cash-app-pay-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+- aid: cash-app:afterpay-service-status-api
+  name: Afterpay Service Status API
+  description: Afterpay Global API health-check endpoint reporting the operational
+    status of the Afterpay service.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Service Status
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-service-status-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+- aid: cash-app:afterpay-billing-agreements-api
+  name: Afterpay Billing Agreements API (Deprecated)
+  description: Deprecated Afterpay Global API for creating and managing recurring
+    billing agreements; retained here as harvested for historical completeness and
+    marked deprecated by Cash App.
+  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  baseURL: https://global-api.afterpay.com
+  tags:
+  - Billing Agreements
+  - Deprecated
+  - Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-billing-agreements-deprecated-openapi.json
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+common:
+- type: Website
+  url: https://cash.app/
+- type: DeveloperPortal
+  url: https://developers.cash.app/home
+- type: Documentation
+  url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+- type: GitHubOrganization
+  url: https://github.com/cashapp
+- type: TermsOfService
+  url: https://cash.app/legal/us/en-us/tos
+- type: PrivacyPolicy
+  url: https://cash.app/legal/us/en-us/privacy
+- type: Support
+  url: https://cash.app/help
+- type: StatusPage
+  url: https://status.cash.app
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

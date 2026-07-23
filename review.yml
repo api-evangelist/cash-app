@@ -1,0 +1,152 @@
+aid: cash-app
+name: Cash App
+review:
+  question: Does Cash App expose a public first-party developer API with downloadable
+    OpenAPI specifications, and what is its US open-finance posture (FDX / CFPB 1033
+    / aggregator)?
+  answer: true
+  date: '2026-07-23'
+  reviewer: API Evangelist
+findings:
+  summary: |
+    Cash App (operated by Block, Inc., formerly Square) runs a real, public,
+    first-party developer portal at https://developers.cash.app (built on the
+    Fern docs platform). The portal's "Available APIs" listing
+    (https://developers.cash.app/openapi.json) enumerates 12 downloadable
+    OpenAPI 3.1.0 specifications, all of which were harvested verbatim into
+    openapi/. The public developer surface is a merchant / payment-service-
+    provider PAYMENT-ACCEPTANCE product, NOT a consumer-permissioned data-access
+    (open-banking) API. There are two distinct API families:
+
+    1. Cash App Pay Partner API on host api.cash.app - three REST APIs:
+       Customer Request API (customer-request/v1), Network API (network/v1),
+       and Management API (management/v1). Docs describe the flow: create a
+       customer request, get customer approval to mint a grant, then use the
+       grant to create a payment. The Management API issues scoped API keys and
+       manages webhooks (API-key auth). A Pay Kit JavaScript SDK wraps the
+       Customer Request API with prebuilt UI. These specs ship no
+       components.securitySchemes; auth (scoped API keys) is described in prose
+       docs rather than the OpenAPI security object.
+    2. Afterpay / Cash App Afterpay Global API on host global-api.afterpay.com -
+       nine specs (Payments, Checkouts, Orders, Configuration, Disputes, Grants
+       - Afterpay, Add Cash App Pay to Your Site / Grants - Cash App Pay,
+       Service Status, and a deprecated Billing Agreements API). These declare
+       HTTP Basic auth (securityScheme sec0: http/basic) and expose sandbox
+       (global-api-sandbox.afterpay.com) and production hosts.
+
+    Cash App is NOT a chartered bank: deposit accounts and the Cash App Card are
+    issued by partner banks (historically Sutton Bank and Lincoln Savings Bank).
+    No FDX (Financial Data Exchange) participation and no CFPB Section 1033
+    personal-financial-data-rights posture is documented anywhere in the
+    developer portal. Consumer-side account/transaction data is reached by third
+    parties through aggregators (e.g. Plaid), not via a first-party FDX
+    data-access API. The open-finance reality here is aggregator-mediated for
+    consumer data; the first-party API is purely merchant payment acceptance.
+  developerPortal:
+    url: https://developers.cash.app/home
+    httpStatus: 200
+    confirmed: true
+    platform: Fern (buildwithfern) - exposes /llms.txt index and an MCP server at
+      https://developers.cash.app/_mcp/server
+  authModel:
+    cashAppPayPartnerApi: Scoped API keys issued via the Management API (described
+      in docs; no securityScheme declared in the OpenAPI documents)
+    afterpayGlobalApi: HTTP Basic authentication (securityScheme sec0 http/basic
+      declared in the specs)
+  specProvenance:
+    listingPage: https://developers.cash.app/openapi.json
+    harvestedVerbatim: true
+    count: 12
+    openapiVersion: 3.1.0
+    specs:
+      - file: openapi/cash-app-network-api-openapi.json
+        title: Network API
+        server: https://api.cash.app/network/v1
+        source: https://developers.cash.app/openapi/network-api.json
+      - file: openapi/cash-app-customer-request-api-openapi.json
+        title: Customer Request API
+        server: https://api.cash.app/customer-request/v1
+        source: https://developers.cash.app/openapi/customer-request-api.json
+      - file: openapi/cash-app-management-api-openapi.json
+        title: Management API
+        server: https://api.cash.app/management/v1
+        source: https://developers.cash.app/openapi/management-api.json
+      - file: openapi/cash-app-payments-openapi.json
+        title: Payments
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/payments.json
+      - file: openapi/cash-app-checkouts-openapi.json
+        title: Checkouts
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/checkouts.json
+      - file: openapi/cash-app-orders-openapi.json
+        title: Orders
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/orders.json
+      - file: openapi/cash-app-configuration-openapi.json
+        title: Configuration
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/configuration.json
+      - file: openapi/cash-app-disputes-openapi.json
+        title: Disputes
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/disputes.json
+      - file: openapi/cash-app-grants-afterpay-openapi.json
+        title: Grants - Afterpay
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/grants-afterpay.json
+      - file: openapi/cash-app-grants-cash-app-pay-openapi.json
+        title: Add Cash App Pay to Your Site (Grants - Cash App Pay)
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/grants-cash-app-pay.json
+      - file: openapi/cash-app-service-status-openapi.json
+        title: Service Status
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/service-status.json
+      - file: openapi/cash-app-billing-agreements-deprecated-openapi.json
+        title: Billing Agreements (Deprecated)
+        server: https://global-api.afterpay.com
+        source: https://developers.cash.app/openapi/billing-agreements-deprecated.json
+  openFinancePosture:
+    firstPartyDeveloperApi: true
+    surfaceType: Merchant / PSP payment acceptance (Cash App Pay + Cash App Afterpay)
+    consumerDataAccessApi: false
+    fdxParticipant: false
+    fdxNote: No FDX participation documented in the developer portal.
+    section1033Posture: none-documented
+    aggregatorAccess: true
+    aggregatorNote: Consumer account/transaction data is reached by third parties
+      via aggregators such as Plaid rather than a first-party FDX/data-access API.
+    charterType: Not a chartered bank; Block, Inc. fintech with bank-partner-issued
+      accounts and card (historically Sutton Bank, Lincoln Savings Bank).
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.cash.app
+      documented: true
+      note: Cash App Pay Partner API (Customer Request, Network, Management).
+    - protocol: REST
+      scheme: https
+      baseURL: https://global-api.afterpay.com
+      documented: true
+      note: Afterpay / Cash App Afterpay Global API; sandbox at
+        https://global-api-sandbox.afterpay.com.
+sources:
+  - url: https://developers.cash.app/home
+    type: DeveloperPortal
+    httpStatus: 200
+  - url: https://developers.cash.app/openapi.json
+    type: APIReference
+    httpStatus: 200
+    note: The Available APIs listing page enumerating the 12 downloadable OpenAPI specs.
+  - url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+    type: Documentation
+    httpStatus: 200
+    note: Describes the three REST APIs plus Pay Kit and the grant-based payment flow.
+  - url: https://developers.cash.app/afterpay/api-reference/reference/introduction/authentication
+    type: Documentation
+    httpStatus: 200
+    note: Afterpay Global API authentication reference (HTTP Basic).
+  - url: https://github.com/cashapp
+    type: GitHubOrganization
+    httpStatus: 200

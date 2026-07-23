@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Cash App Checkouts
+  version: 1.0.0
+extends: openapi/cash-app-checkouts-openapi.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: cash-app
+      x-apievangelist-enriched: '2026-06-20'
+      x-apievangelist-artifacts:
+        authentication: authentication/cash-app-authentication.yml
+        conventions: conventions/cash-app-conventions.yml
+        errors: errors/cash-app-problem-types.yml
+        lifecycle: lifecycle/cash-app-lifecycle.yml
+        sandbox: sandbox/cash-app-sandbox.yml

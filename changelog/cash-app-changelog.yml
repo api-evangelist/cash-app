@@ -1,0 +1,31 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/changelog/changelog-details
+docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/changelog/changelog-details
+scheme: dated-entries (newest first), tagged by API and change type
+current_version: v1
+sdk_changelogs:
+  android: https://github.com/cashapp/cash-app-pay-android-sdk/blob/main/CHANGELOG.md
+  ios: https://github.com/cashapp/cash-app-pay-sdk-ios/blob/main/RELEASE-NOTES.md
+entries:
+- date: '2025-04-15'
+  api: Network API
+  type: added
+  breaking: false
+  highlight: Added PAYMENT_DECLINED_CUSTOMER_BLOCKED_BY_MERCHANT failure code to payment authorizations (customer-initiated merchant block).
+  affected: [create-payment-authorization]
+- date: '2025-02-28'
+  api: Network API
+  type: added
+  breaking: false
+  highlight: Added the Create payment authorization endpoint (incremental authorization).
+  affected: [create-payment-authorization]
+- date: '2025-02-10'
+  api: Network API
+  type: added
+  breaking: false
+  highlight: Added optional statement_descriptor field to the enrichments sub-resource on Create payment; reflected in the customer's in-app Activity.
+  affected: [create-payment]
+window_note: |
+  Recent window captured from the public changelog (newest entries). Full history and SDK-level
+  release notes live at the source URLs above.

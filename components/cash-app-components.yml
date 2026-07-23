@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk
+docs:
+- https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+- https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-i-os/ui-components
+- https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-android/ui-components
+families:
+- name: Pay Kit (Web)
+  kind: hosted-js-checkout-component
+  loader: https://kit.cash.app/v1/pay.js
+  sandbox_loader: https://sandbox.kit.cash.app/v1/pay.js
+  bundling: forbidden - must load from Cash App CDN (security + PCI)
+  entry: window.CashApp.pay({ clientId })
+  behavior: desktop QR code + mobile app redirect; emits lifecycle events (e.g. CUSTOMER_REQUEST_APPROVED)
+  components: [Cash App Pay button, QR/redirect payment surface]
+- name: Pay Kit (iOS)
+  kind: native-ui-sdk
+  repo: https://github.com/cashapp/cash-app-pay-sdk-ios
+  components: [Cash App Pay button UI component]
+- name: Pay Kit (Android)
+  kind: native-ui-sdk
+  repo: https://github.com/cashapp/cash-app-pay-android-sdk
+  components: [Cash App Pay button UI component]
+- name: Pay Kit (React Native)
+  kind: cross-platform-ui
+  docs: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/react-native-requirements
+note: |
+  Pay Kit is the client-side embeddable checkout surface (distinct from the server-side REST APIs).
+  The web SDK is a CDN-hosted component; iOS/Android are native UI SDKs (also listed in packages/).

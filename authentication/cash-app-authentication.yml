@@ -1,0 +1,64 @@
+generated: '2026-06-20'
+method: searched
+source: |
+  https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/using-api-keys
+  https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/signing-requests
+  https://developers.cash.app/afterpay/api-reference/reference/introduction/authentication
+docs:
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/using-api-keys
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/signing-requests
+- https://developers.cash.app/afterpay/api-reference/reference/introduction/authentication
+summary:
+  types: [apiKey, http, hmac-signature]
+  api_key_in: [header]
+  oauth2_flows: []
+schemes:
+- name: cash-app-pay-signed-api-key
+  applies_to:
+  - Cash App Pay Network API (api.cash.app/network/v1)
+  - Cash App Pay Management API (api.cash.app/management/v1)
+  - Cash App Pay Customer Request API (api.cash.app/customer-request/v1)
+  type: apiKey+hmac
+  authorization_header: 'Client {CLIENT_ID} {KEY_ID}'
+  signature:
+    header: X-Signature
+    value_format: 'V1 {signature}'
+    algorithm: HMAC-SHA256
+    signed_string: '{method}\n{path}\n{headers}\n{bodyDigest}'
+    signed_headers: [Accept, Authorization, Content-Type, Host]
+    body_digest: hex(SHA256(body)) lowercased
+    required_on: [Network API, Management API]
+  key_lifecycle:
+    provisioning: automated via Management API create-api-key (scoped keys)
+    bootstrap: client_id + client_secret used once to mint the first API_KEYS_READ/WRITE key
+    expiry_days: 30
+    expiry_field: expires_at
+    rotation: recommended several days before expiry; multiple least-privilege keys advised
+  sandbox:
+    host: sandbox.api.cash.app
+    signature_bypass: 'X-Signature: sandbox:skip-signature-check'
+  notes: |
+    Not OAuth2. Cash App Pay uses signed, scoped API keys: the Authorization header carries the
+    client ID and key ID, and Network/Management requests must also carry an HMAC-SHA256 X-Signature
+    computed with the key's secret. Scopes (PAYMENTS_READ, API_KEYS_WRITE, ...) are attached per key;
+    see scopes/cash-app-scopes.yml.
+- name: afterpay-basic
+  applies_to:
+  - Afterpay Global API (global-api.afterpay.com)
+  type: http
+  scheme: basic
+  spec: RFC 7617
+  credentials: merchantId (username) + secretKey (password)
+  sources:
+  - openapi/cash-app-payments-openapi.json
+  - openapi/cash-app-checkouts-openapi.json
+  - openapi/cash-app-disputes-openapi.json
+  - openapi/cash-app-configuration-openapi.json
+  - openapi/cash-app-orders-openapi.json
+  - openapi/cash-app-grants-afterpay-openapi.json
+  - openapi/cash-app-grants-cash-app-pay-openapi.json
+  - openapi/cash-app-billing-agreements-deprecated-openapi.json
+  note: |
+    Afterpay/Cash App Afterpay Global API uses HTTP Basic auth (declared as securityScheme sec0 in
+    the harvested OpenAPI). All endpoints except /ping require it; failure returns 401 Unauthorized.
+    Afterpay docs note two supported auth options; Basic is the primary documented method.

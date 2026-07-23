@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: searched
+source: live probe of /.well-known/ on cash.app, api.cash.app, afterpay.com, global-api.afterpay.com, developers.cash.app
+hosts:
+- host: https://cash.app
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: cash-app-security.txt
+- host: https://afterpay.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: cash-app-afterpay-security.txt
+- host: https://api.cash.app
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://developers.cash.app
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 200
+    note: docs index (saved to llms/cash-app-llms.txt)
+  - path: /_mcp/server
+    status: 200
+    note: hosted MCP server (Fern docs-search) - see mcp/cash-app-mcp.yml
+- host: https://global-api.afterpay.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+notes: |
+  Cash App / Block do not run OAuth/OIDC discovery on the API hosts (api.cash.app auth is a
+  signed API-key scheme, not OAuth2). security.txt is published at the org root domains and
+  points to the Bugcrowd programs (bugcrowd.com/cashapp and bugcrowd.com/afterpay).

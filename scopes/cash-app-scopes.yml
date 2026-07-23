@@ -1,0 +1,34 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/using-api-keys
+docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/using-api-keys
+model: scoped-api-keys
+note: |
+  Cash App Pay is not OAuth2 - permissions are attached to API keys as scopes at key-creation time
+  (via the Management API create-api-key). Cash App recommends provisioning multiple least-privilege
+  keys. An INSUFFICIENT_SCOPES (HTTP 403) error is returned when a key lacks the scope for an action.
+  The docs enumerate the read/write scope pairs by resource family; the full set follows the
+  {RESOURCE}_READ / {RESOURCE}_WRITE convention.
+schemes:
+- name: cash-app-pay-api-key-scopes
+  applies_to: [Network API, Management API, Customer Request API]
+  granted_via: Management API create-api-key
+  enforced_by: 'Authorization: Client {CLIENT_ID} {KEY_ID}'
+scopes:
+- scope: API_KEYS_READ
+  description: Read API keys via the Management API.
+- scope: API_KEYS_WRITE
+  description: Create, rotate, and delete API keys via the Management API (bootstrap + rotation scope).
+- scope: PAYMENTS_READ
+  description: Read payments, authorizations, captures, and payment state.
+- scope: PAYMENTS_WRITE
+  description: Create, capture, void payments and payment authorizations.
+scope_convention:
+  pattern: '{RESOURCE}_READ / {RESOURCE}_WRITE'
+  resource_families_documented: [API_KEYS, PAYMENTS]
+  note: |
+    Only API_KEYS and PAYMENTS scope names are quoted verbatim in the Using API Keys guide (as the
+    worked bootstrap example). Other resource families (refunds, payouts, merchants, brands, grants,
+    disputes, webhooks) follow the same READ/WRITE convention; their exact scope strings are issued
+    with partner credentials and are not enumerated in the public docs, so they are not listed here
+    to avoid fabrication.

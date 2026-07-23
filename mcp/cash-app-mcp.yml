@@ -1,0 +1,29 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: https://developers.cash.app/_mcp/server (tools/list returned 200 with real inputSchema)
+server:
+  name: cash-app-developers-docs
+  transport: http
+  url: https://developers.cash.app/_mcp/server
+  vendor: Fern (buildwithfern.com) hosted docs MCP
+  auth: none (anonymous)
+  advertised_in: https://developers.cash.app/llms.txt
+tools:
+- name: searchDocs
+  description: Search the documentation at https://developers.cash.app. Returns relevant doc passages with source URLs.
+  read_only: true
+  input_schema:
+    type: object
+    properties:
+      query:
+        type: string
+        description: The search query to run against the docs
+    required:
+    - query
+notes: |
+  This is a documentation-search MCP server (the Fern-generated one every Cash App / Block dev-portal
+  ships), not an API-operations MCP - the single searchDocs tool is not backed by any REST operation.
+  It exposes the developers.cash.app docs (Cash App Pay Partner API + Afterpay Global API) to agents.
+  There is no hosted MCP server that executes Network/Management/Customer Request or Afterpay
+  operations; those remain REST-only. See mcp/cash-app-tool-crosswalk.yml for the divergence record.

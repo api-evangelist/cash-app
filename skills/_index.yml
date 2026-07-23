@@ -1,0 +1,16 @@
+generated: '2026-06-20'
+method: generated
+source: openapi/cash-app-network-api-openapi.json, openapi/cash-app-management-api-openapi.json, openapi/cash-app-customer-request-api-openapi.json + conventions/errors/sandbox artifacts
+skills:
+- file: cash-app-accept-payment.md
+  name: Accept a Cash App Pay payment
+  api: openapi/cash-app-network-api-openapi.json
+  operations: [create-request, retrieve-request, create-payment, capture-payment]
+- file: cash-app-refund-payment.md
+  name: Refund a Cash App Pay payment
+  api: openapi/cash-app-network-api-openapi.json
+  operations: [retrieve-payment, create-refund, capture-refund, retrieve-refund]
+- file: cash-app-provision-keys-and-webhooks.md
+  name: Provision scoped API keys and subscribe to webhooks
+  api: openapi/cash-app-management-api-openapi.json
+  operations: [create-api-key, list-api-keys, create-webhook-endpoint, list-webhook-events, retrieve-webhook-endpoint]

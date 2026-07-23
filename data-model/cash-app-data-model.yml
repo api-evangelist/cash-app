@@ -1,0 +1,90 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/cash-app-network-api-openapi.json, openapi/cash-app-customer-request-api-openapi.json, openapi/cash-app-management-api-openapi.json
+note: |
+  Entity graph derived from the Cash App Pay Partner API paths and id-reference fields. Id prefixes
+  observed in sandbox magic values (MMI_ merchant, GRG_ grant) are noted where seen.
+entities:
+- name: brand
+  id_prefix: null
+  operations: [create-brand, upsert-brand, retrieve-brand, update-brand, list-brands]
+- name: merchant
+  id_prefix: MMI_
+  operations: [create-merchant, upsert-merchant, retrieve-merchant, update-merchant, list-merchants]
+- name: customer
+  operations: [list-customers, retrieve-customer]
+- name: grant
+  id_prefix: GRG_
+  operations: [list-customer-grants, retrieve-customer-grant, revoke-customer-grant]
+- name: payment
+  operations: [create-payment, retrieve-payment, list-payments, create-payment-authorization,
+    capture-payment, void-payment, void-payment-by-idempotency-key]
+- name: refund
+  operations: [create-refund, retrieve-refund, list-refunds, capture-refund, void-refund, void-refund-by-idempotency-key]
+- name: payout
+  operations: [create-payout, retrieve-payout, list-payouts]
+- name: balance
+  operations: [list-balances, retrieve-balance]
+- name: dispute
+  operations: [list-disputes, retrieve-dispute, accept-dispute, challenge-dispute]
+- name: dispute_evidence
+  operations: [list-dispute-evidence, create-dispute-evidence-text, create-dispute-evidence-file,
+    retrieve-dispute-evidence, delete-dispute-evidence]
+- name: fee_plan
+  operations: [list-fee-plans, retrieve-fee-plan]
+- name: customer_request
+  operations: [create-request, retrieve-request, update-request]
+- name: api_key
+  operations: [create-api-key, list-api-keys, retrieve-api-key, delete-api-key]
+- name: webhook_endpoint
+  operations: [create-webhook-endpoint, list-webhook-endpoints, retrieve-webhook-endpoint,
+    update-webhook-endpoint, delete-webhook-endpoint]
+relationships:
+- from: merchant
+  to: brand
+  type: belongs_to
+  via: brand_id
+- from: merchant
+  to: fee_plan
+  type: has_one
+  via: fee_plan_id
+- from: grant
+  to: customer
+  type: belongs_to
+  via: customer_id
+- from: payment
+  to: merchant
+  type: belongs_to
+  via: merchant_id
+- from: payment
+  to: grant
+  type: belongs_to
+  via: grant_id
+- from: refund
+  to: payment
+  type: belongs_to
+  via: payment_id
+- from: dispute
+  to: payment
+  type: belongs_to
+  via: payment_id
+- from: dispute_evidence
+  to: dispute
+  type: belongs_to
+  via: dispute_id
+- from: payout
+  to: merchant
+  type: belongs_to
+  via: merchant_id
+- from: balance
+  to: merchant
+  type: belongs_to
+  via: merchant_id
+- from: customer_request
+  to: grant
+  type: has_one
+  via: grant (produced on approval)
+- from: webhook_endpoint
+  to: api_key
+  type: belongs_to
+  via: api_key_id

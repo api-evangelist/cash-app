@@ -1,0 +1,63 @@
+generated: '2026-06-20'
+method: searched
+source: |
+  developers.cash.app technical guides: idempotency, signing-requests, making-requests, api-versioning,
+  regions-and-localization, errors/error-handling, errors/error-code-reference
+scope: Cash App Pay Partner API (Network, Management, Customer Request)
+authentication:
+  style: 'signed scoped API keys (Authorization: Client {CLIENT_ID} {KEY_ID} + X-Signature HMAC-SHA256)'
+  ref: authentication/cash-app-authentication.yml
+idempotency:
+  supported: true
+  mechanism: idempotency_key field in the request body (not a header)
+  required_on: every write endpoint (create payment/refund/payout, etc.); reads are implicitly idempotent
+  key_format: 1 to 64 characters, unique per endpoint; UUID recommended; case-sensitive
+  region_scoped: true
+  region_header: X-Region
+  region_note: |
+    Idempotency is scoped to the X-Region header. Retrying with a different X-Region can create
+    duplicate data - always retry with the same X-Region.
+  reuse_error: IDEMPOTENCY_KEY_REUSED (HTTP 400) when the same key is reused with a different payload
+  void_by_key: void-payment-by-idempotency-key and void-refund-by-idempotency-key operations exist
+  docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency
+request_signing:
+  header: X-Signature
+  format: 'V1 {hmac-sha256-hex}'
+  docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/signing-requests
+pagination:
+  style: cursor
+  request_param: cursor
+  error: INVALID_CURSOR (HTTP 400); restart with blank cursor to get a fresh valid one
+  applies_to: list/search endpoints
+regions:
+  header: X-Region
+  example_values: [PDX, IAD]
+  purpose: multi-region availability + idempotency scoping
+  docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/regions-and-localization
+versioning:
+  scheme: uri-path (v1); date-pinned field behavior enforced (unknown fields rejected per version)
+  current: v1
+  ref: lifecycle/cash-app-lifecycle.yml
+content_types:
+  request: [application/json, multipart/form-data]
+  multipart_use: file uploads only (dispute evidence)
+error_envelope:
+  shape: '{ "errors": [ { category, code, detail?, field? } ] }'
+  handling_field: code (stable, versioned) - not detail
+  category_values: [API_ERROR, AUTHENTICATION_ERROR, BRAND_ERROR, CUSTOMER_ERROR, DISPUTE_ERROR,
+    GRANT_ERROR, MERCHANT_ERROR, INVALID_REQUEST_ERROR, PAYMENT_PROCESSING_ERROR,
+    PAYOUT_PROCESSING_ERROR, RATE_LIMIT_ERROR, WEBHOOK_ERROR]
+  ref: errors/cash-app-problem-types.yml
+rate_limiting:
+  applies_to: OLAP (list/search) endpoints only
+  never_limited: OLTP payment-processing endpoints (create/read/void/capture payments & refunds)
+  error: RATE_LIMITED (HTTP 429), retryable with exponential backoff
+  increases: available on request from Cash App Pay support
+request_id_tracing:
+  note: not documented as a first-party request-id echo header in public docs
+cross_links:
+  errors: errors/cash-app-problem-types.yml
+  decline_codes: errors/cash-app-decline-codes.yml
+  lifecycle: lifecycle/cash-app-lifecycle.yml
+  authentication: authentication/cash-app-authentication.yml
+  sandbox: sandbox/cash-app-sandbox.yml

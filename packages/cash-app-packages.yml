@@ -1,0 +1,39 @@
+generated: '2026-06-20'
+method: searched
+source: |
+  developers.cash.app Pay Kit SDK docs + github.com/cashapp SDK repositories; changelog page
+  links the Android and iOS SDK repos directly.
+packages:
+- language: kotlin
+  platform: android
+  registry: github
+  name: cash-app-pay-android-sdk
+  url: https://github.com/cashapp/cash-app-pay-android-sdk
+  changelog: https://github.com/cashapp/cash-app-pay-android-sdk/blob/main/CHANGELOG.md
+  description: Cash App Pay Kit SDK for Android - drop-in Cash App Pay button and payment flow.
+  official: true
+- language: swift
+  platform: ios
+  registry: github
+  name: cash-app-pay-sdk-ios
+  url: https://github.com/cashapp/cash-app-pay-sdk-ios
+  changelog: https://github.com/cashapp/cash-app-pay-sdk-ios/blob/main/RELEASE-NOTES.md
+  description: Cash App Pay Kit SDK for iOS (Swift / Objective-C).
+  official: true
+- language: javascript
+  platform: web
+  registry: cdn
+  name: pay-kit-web
+  url: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  install: <script src="https://kit.cash.app/v1/pay.js"></script>
+  sandbox_install: <script src="https://sandbox.kit.cash.app/v1/pay.js"></script>
+  description: |
+    Pay Kit JavaScript SDK - loaded from the Cash App global CDN (must not be bundled). Renders
+    the desktop QR / mobile redirect Cash App Pay flow and emits lifecycle events
+    (e.g. CUSTOMER_REQUEST_APPROVED). Entry point window.CashApp.pay({ clientId }).
+  official: true
+notes: |
+  Cash App Pay ships no first-party server-side REST SDK on npm/PyPI/Maven Central (partners
+  integrate the Network/Management/Customer Request REST APIs directly and use Pay Kit only for
+  the client-side checkout surface). The Afterpay Global API is likewise integrated directly over
+  HTTPS. Only official first-party client SDKs are listed.

@@ -1,0 +1,109 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference
+docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference
+envelope_field: errors[].code
+category: PAYMENT_PROCESSING_ERROR / PAYOUT_PROCESSING_ERROR
+note: |
+  Cash App Pay declines surface as codes in the standard errors[] array with a PAYMENT_PROCESSING_ERROR
+  or PAYOUT_PROCESSING_ERROR category. Declines are Permanent (Do Not Retry) - a new request/grant is
+  required rather than a retry. These complement errors/cash-app-problem-types.yml (API-level errors).
+decline_codes:
+- code: PAYMENT_DECLINED_INSUFFICIENT_FUNDS
+  scope: payment
+  meaning: Customer has insufficient funds.
+  action: permanent; do not retry - a new payment/grant is required.
+- code: PAYMENT_DECLINED_RISK
+  scope: payment
+  meaning: Declined by Cash App risk evaluation.
+  action: permanent; do not retry.
+- code: PAYMENT_DECLINED_LIMIT_REACHED
+  scope: payment
+  meaning: Customer or transaction limit reached.
+  action: permanent; do not retry.
+- code: PAYMENT_DECLINED_COMPLIANCE
+  scope: payment
+  meaning: Declined for compliance reasons.
+  action: permanent; do not retry.
+- code: PAYMENT_DECLINED_CUSTOMER_BLOCKED_MERCHANT
+  scope: payment
+  meaning: Customer has blocked the merchant (customer-initiated block).
+  action: permanent; do not retry.
+  note: also surfaced as PAYMENT_DECLINED_CUSTOMER_BLOCKED_BY_MERCHANT on payment authorizations (added Apr-2025).
+- code: PAYMENT_DECLINED_OTHER
+  scope: payment
+  meaning: Declined for an unspecified reason.
+  action: permanent; do not retry.
+- code: PAYMENT_INVALID_TOO_LARGE
+  scope: payment
+  meaning: Payment amount exceeds allowed maximum.
+  action: retry with a valid amount.
+- code: PAYMENT_INVALID_TOO_SMALL
+  scope: payment
+  meaning: Payment amount below allowed minimum.
+  action: retry with a valid amount.
+- code: PAYMENT_INVALID_AMOUNT_MISMATCH
+  scope: payment
+  meaning: Amount does not match the authorized/grant amount.
+  action: retry with a matching amount.
+- code: PAYMENT_INVALID_CURRENCY_MISMATCH
+  scope: payment
+  meaning: Currency does not match.
+  action: retry with the correct currency.
+- code: REFUND_DECLINED_RISK
+  scope: refund
+  meaning: Refund declined by risk evaluation.
+  action: permanent; do not retry.
+- code: REFUND_DECLINED_COMPLIANCE
+  scope: refund
+  meaning: Refund declined for compliance reasons.
+  action: permanent; do not retry.
+- code: REFUND_DECLINED_OTHER
+  scope: refund
+  meaning: Refund declined for an unspecified reason.
+  action: permanent; do not retry.
+- code: REFUND_INVALID_TOO_LARGE
+  scope: refund
+  meaning: Refund amount exceeds the refundable amount.
+  action: retry with a valid amount.
+- code: REFUND_INVALID_TOO_SMALL
+  scope: refund
+  meaning: Refund amount below minimum.
+  action: retry with a valid amount.
+- code: REFUND_INVALID_CURRENCY_MISMATCH
+  scope: refund
+  meaning: Refund currency mismatch.
+  action: retry with the correct currency.
+- code: REFUND_INVALID_PAYMENT_UNCAPTURED
+  scope: refund
+  meaning: Cannot refund a payment that has not been captured.
+  action: capture first or void instead.
+- code: REFUND_INVALID_SCOPE_MISMATCH
+  scope: refund
+  meaning: Refund scope does not match the payment.
+  action: correct the refund scope.
+- code: PAYOUT_DECLINED_INSUFFICIENT_FUNDS
+  scope: payout
+  meaning: Insufficient funds for payout.
+  action: permanent; do not retry.
+- code: PAYOUT_DECLINED_LIMIT_REACHED
+  scope: payout
+  meaning: Payout limit reached.
+  action: permanent; do not retry.
+- code: PAYOUT_DECLINED_RISK
+  scope: payout
+  meaning: Payout declined by risk evaluation.
+  action: permanent; do not retry.
+- code: PAYOUT_DECLINED_OTHER
+  scope: payout
+  meaning: Payout declined for an unspecified reason (may be retryable per authorization failure type).
+  action: see error detail; some payout authorization failures are retryable.
+- code: PAYOUT_INVALID_CURRENCY
+  scope: payout
+  meaning: Invalid payout currency.
+  action: retry with a supported currency.
+masked_to_buyers: |
+  Decline reasons are returned to the PSP/merchant integration, not shown verbatim to the Cash App
+  customer; customers see a generic in-app decline.
+dispute_reason_codes:
+  note: Sandbox can inject disputes with reason codes CD10-CD13, FR10/FR11, PE10-PE12 (see sandbox/cash-app-sandbox.yml).

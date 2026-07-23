@@ -214,6 +214,14 @@ apis:
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
 common:
+- type: AgenticAccess
+  url: agentic-access/cash-app-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/cash-app-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/cash-app-domain-security.yml
+- type: Authentication
+  url: authentication/cash-app-authentication.yml
 - type: Website
   url: https://cash.app/
 - type: DeveloperPortal
@@ -230,6 +238,64 @@ common:
   url: https://cash.app/help
 - type: StatusPage
   url: https://status.cash.app
+- type: Deprecation
+  url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/api-versioning
+- type: Lifecycle
+  url: lifecycle/cash-app-lifecycle.yml
+- type: GettingStarted
+  url: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+- type: SignUp
+  url: https://developers.cash.app/cash-app-pay-partner-api/guides/partnerships/partner-with-cash-app-pay
+- type: Postman
+  url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/sandbox/postman-collection
+- type: ChangeLog
+  url: changelog/cash-app-changelog.yml
+- type: Security
+  url: security/cash-app-vulnerability-disclosure.yml
+- type: WellKnown
+  url: well-known/cash-app-well-known.yml
+- type: SecurityTxt
+  url: well-known/cash-app-security.txt
+- type: Packages
+  url: packages/cash-app-packages.yml
+- type: SDKs
+  url: packages/cash-app-packages.yml
+- type: MCPServer
+  url: mcp/cash-app-mcp.yml
+- type: ToolCrosswalk
+  url: mcp/cash-app-tool-crosswalk.yml
+- type: LLMsTxt
+  url: llms/cash-app-llms.txt
+- type: Conformance
+  url: conformance/cash-app-conformance.yml
+- type: ErrorCatalog
+  url: errors/cash-app-problem-types.yml
+- type: DeclineCodes
+  url: errors/cash-app-decline-codes.yml
+- type: OAuthScopes
+  url: scopes/cash-app-scopes.yml
+- type: Sandbox
+  url: sandbox/cash-app-sandbox.yml
+- type: Conventions
+  url: conventions/cash-app-conventions.yml
+- type: Idempotency
+  url: conventions/cash-app-conventions.yml
+- type: Components
+  url: components/cash-app-components.yml
+- type: DataModel
+  url: data-model/cash-app-data-model.yml
+- type: Webhooks
+  url: asyncapi/cash-app-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/cash-app-network-api-overlay.yaml
+- type: Overlay
+  url: overlays/cash-app-customer-request-api-overlay.yaml
+- type: Overlay
+  url: overlays/cash-app-management-api-overlay.yaml
+- type: Overlay
+  url: overlays/cash-app-payments-overlay.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

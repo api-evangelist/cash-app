@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: |
+  https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/api-versioning
+  https://status.cash.app ; developers.cash.app changelog
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/api-versioning
+  apis:
+  - name: Customer Request API
+    current: v1
+    support_window: '2022-01-01 to 2027-03-01'
+    accepting_new_developers: true
+  - name: Network API
+    current: v1
+    support_window: '2022-01-01 to 2027-03-01'
+    accepting_new_developers: true
+    prior_versions:
+    - version: v0
+      status: deprecated
+      support_window: '2020-08-01 to 2022-12-31'
+      accepting_new_developers: false
+  - name: Management API
+    current: v1
+  - name: Afterpay Global API
+    current: v2
+    host: global-api.afterpay.com
+deprecation:
+  policy: |
+    Cash App Pay publishes explicit per-version support windows with start and end dates; deprecated
+    versions (e.g. Network API v0) stop accepting new developers and have a defined end-of-support date.
+    Unknown fields are rejected per version to prevent clients depending on unsupported behavior.
+  docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/api-versioning
+  deprecated_apis:
+  - Network API v0 (support ended 2022-12-31)
+  deprecated_specs:
+  - openapi/cash-app-billing-agreements-deprecated-openapi.json (Afterpay Billing Agreements - deprecated)
+status_page: https://status.cash.app
+sla:
+  note: |
+    No published numeric uptime SLA in the developer portal. Payment-processing (OLTP) endpoints are
+    never rate-limited and Cash App runs multi-region (X-Region) for availability.
+changelog: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/changelog/changelog-details

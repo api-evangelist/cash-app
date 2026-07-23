@@ -1,0 +1,100 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/sandbox/developer-sandbox
+docs:
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/sandbox/sandbox-overview
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/sandbox/developer-sandbox
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/sandbox/sandbox-app
+environments:
+  cash_app_pay:
+    sandbox_host: sandbox.api.cash.app
+    production_host: api.cash.app
+    separate_credentials: true
+    signature_bypass: 'X-Signature: sandbox:skip-signature-check'
+    pay_kit_sandbox_cdn: https://sandbox.kit.cash.app/v1/pay.js
+    client_id_prefix_sandbox: 'CAS-CI_'
+    client_id_prefix_production: 'CA-CI_'
+  afterpay:
+    sandbox_host: global-api-sandbox.afterpay.com
+    production_host: global-api.afterpay.com
+backwards_compat_guarantee: 5-year backwards-compatibility guarantee on documented sandbox magic values
+magic_values:
+  create_payment:
+  - field: amount
+    value: 6670
+    result: Connection Error (payment created, HTTP error returned - simulates network failure)
+  - field: amount
+    value: 7770
+    result: PAYMENT_DECLINED_COMPLIANCE
+  - field: amount
+    value: 7771
+    result: PAYMENT_DECLINED_INSUFFICIENT_FUNDS
+  - field: amount
+    value: 7772
+    result: PAYMENT_DECLINED_OTHER
+  - field: amount
+    value: 7773
+    result: PAYMENT_DECLINED_RISK
+  - field: amount
+    value: 7774
+    result: PAYMENT_INVALID_TOO_LARGE
+  - field: amount
+    value: 7775
+    result: PAYMENT_INVALID_TOO_SMALL
+  - field: amount
+    value: 7776
+    result: PAYMENT_DECLINED_LIMIT_REACHED
+  - field: merchant_id
+    value: MMI_sandbox:disabled
+    result: MERCHANT_DISABLED (payment not created)
+  - field: merchant_id
+    value: MMI_sandbox:pending
+    result: MERCHANT_PENDING (payment not created)
+  - field: merchant_id
+    value: MMI_sandbox:missing
+    result: MERCHANT_NOT_FOUND (payment not created)
+  - field: grant_id
+    value: GRG_sandbox:active
+    result: Payment created successfully
+  - field: grant_id
+    value: GRG_sandbox:consumed
+    result: GRANT_CONSUMED (declined)
+  - field: grant_id
+    value: GRG_sandbox:expired
+    result: GRANT_EXPIRED (declined)
+  - field: grant_id
+    value: GRG_sandbox:missing
+    result: GRANT_NOT_FOUND (declined)
+  - field: grant_id
+    value: GRG_sandbox:revoked
+    result: GRANT_REVOKED (declined)
+  create_payment_disputes:
+    note: amounts 8801-8823 create a payment plus a dispute with a specific reason code, queryable via List Disputes ~2s later.
+    values:
+    - {field: amount, value: 8801, result: 'dispute reason CD10'}
+    - {field: amount, value: 8802, result: 'dispute reason CD11'}
+    - {field: amount, value: 8803, result: 'dispute reason CD12'}
+    - {field: amount, value: 8804, result: 'dispute reason CD13'}
+    - {field: amount, value: 8811, result: 'dispute reason FR10'}
+    - {field: amount, value: 8812, result: 'dispute reason FR11'}
+    - {field: amount, value: 8821, result: 'dispute reason PE10'}
+    - {field: amount, value: 8822, result: 'dispute reason PE11'}
+    - {field: amount, value: 8823, result: 'dispute reason PE12'}
+    - {field: amount, value: 8901, result: 'dispute with disputed amount differing from payment amount'}
+  create_refund:
+  - {field: amount, value: 6670, result: Connection Error (refund created, HTTP error returned)}
+  - {field: amount, value: 7770, result: REFUND_DECLINED_COMPLIANCE}
+  - {field: amount, value: 7772, result: REFUND_DECLINED_OTHER}
+  - {field: amount, value: 7773, result: REFUND_DECLINED_RISK}
+  - {field: amount, value: 7774, result: REFUND_DECLINED_TOO_LARGE}
+  - {field: amount, value: 7775, result: REFUND_DECLINED_TOO_SMALL}
+  - {field: grant_id, value: GRG_sandbox:consumed, result: GRANT_CONSUMED}
+  - {field: grant_id, value: GRG_sandbox:expired, result: GRANT_EXPIRED}
+  - {field: grant_id, value: GRG_sandbox:missing, result: GRANT_NOT_FOUND}
+  - {field: grant_id, value: GRG_sandbox:revoked, result: GRANT_REVOKED}
+  create_payout:
+  - {field: amount, value: 1710, result: 'PAYOUT_DECLINED_OTHER (non-retryable auth failure)'}
+  - {field: amount, value: 1711, result: 'PAYOUT_DECLINED_OTHER (retryable auth failure)'}
+  - {field: amount, value: 1720, result: PAYOUT_DECLINED_LIMIT_REACHED}
+  - {field: amount, value: 1810, result: 'INTERNAL_SERVER_ERROR (auth succeeds, capture retryable failure)'}
+  - {field: merchant_id, value: MMI_sandbox:disabled, result: MERCHANT_DISABLED}

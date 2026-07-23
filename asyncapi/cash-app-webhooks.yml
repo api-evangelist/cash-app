@@ -1,0 +1,47 @@
+generated: '2026-06-20'
+method: searched
+source: |
+  https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/webhooks/webhooks-overview-part-1
+  https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api/list-webhook-events
+spec_type: Webhooks
+docs:
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/webhooks/webhooks-overview-part-1
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/webhooks/webhooks-overview-part-2
+- https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/webhooks/webhook-signature-generation
+transport: HTTPS POST (JSON) to subscriber endpoint
+delivery:
+  method: POST
+  content_type: application/json
+  ack: 2xx within configured delivery timeout (default 5s)
+  managed_via: Management API webhook-endpoints operations (create/list/retrieve/update/delete)
+  event_listing: Management API list-webhook-events
+security:
+  signing: each event is signed using the API key associated with the webhook config at delivery time
+  signature_docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/webhooks/webhook-signature-generation
+  key_rotation_note: update webhook endpoint api_key_id when the assigned API key is rotated
+  source_ips:
+  - 52.43.5.66
+  - 35.160.162.127
+  - 35.164.233.105
+  - 52.201.69.179
+  - 18.215.196.131
+  - 18.235.28.71
+  domain_allowlisting: new subscriber domains require manual allowlisting (~1 business day)
+event_types:
+- customer.created
+- customer.updated
+- customer.deleted
+- customer_request.state.updated
+- payment.status.updated
+- refund.status.updated
+- grant.created
+- grant.status.updated
+- merchant.status.updated
+- dispute.created
+- dispute.state.updated
+count: 11
+asyncapi_document:
+  published: false
+  note: |
+    Cash App Pay documents a full webhook catalog but does not publish an AsyncAPI document. No
+    AsyncAPI spec is fabricated; this file captures the real webhook surface (type: Webhooks).

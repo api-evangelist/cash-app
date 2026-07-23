@@ -1,0 +1,72 @@
+generated: '2026-06-20'
+method: derived
+source: mcp/cash-app-mcp.yml + openapi/*.json
+summary: |
+  Cash App publishes a docs-search MCP server (single searchDocs tool) alongside a large REST
+  surface (100 operations across the Cash App Pay Partner API and Afterpay Global API). The MCP
+  tool and the REST operations do NOT overlap: searchDocs is a documentation retrieval tool with
+  no backing REST operation, and every REST operation is exposed only over HTTP. This crosswalk
+  records that divergence honestly rather than fabricating REST bindings for a docs tool.
+surfaces:
+  openapi:
+    files:
+    - openapi/cash-app-network-api-openapi.json
+    - openapi/cash-app-customer-request-api-openapi.json
+    - openapi/cash-app-management-api-openapi.json
+    - openapi/cash-app-payments-openapi.json
+    - openapi/cash-app-checkouts-openapi.json
+    - openapi/cash-app-configuration-openapi.json
+    - openapi/cash-app-disputes-openapi.json
+    - openapi/cash-app-grants-afterpay-openapi.json
+    - openapi/cash-app-grants-cash-app-pay-openapi.json
+    - openapi/cash-app-orders-openapi.json
+    - openapi/cash-app-service-status-openapi.json
+    - openapi/cash-app-billing-agreements-deprecated-openapi.json
+    gated: false
+  graphql:
+    endpoint: null
+    note: No GraphQL surface published.
+  mcp:
+    url: https://developers.cash.app/_mcp/server
+    gated: false
+    tools_list: available (anonymous 200)
+crosswalk: []
+mcp_only:
+- tool: searchDocs
+  reason: |
+    Documentation-search tool (Fern docs MCP). Retrieves passages from developers.cash.app; has
+    no backing REST operation - it is a docs retrieval capability, not an API action.
+rest_only:
+- capability: Payment processing (Network API)
+  operations: [create-payment, retrieve-payment, list-payments, create-payment-authorization,
+    capture-payment, void-payment, void-payment-by-idempotency-key]
+- capability: Refunds (Network API)
+  operations: [create-refund, retrieve-refund, list-refunds, capture-refund, void-refund,
+    void-refund-by-idempotency-key]
+- capability: Payouts & balances (Network API)
+  operations: [create-payout, retrieve-payout, list-payouts, list-balances, retrieve-balance]
+- capability: Merchants & brands (Network API)
+  operations: [create-merchant, upsert-merchant, retrieve-merchant, update-merchant, list-merchants,
+    create-brand, upsert-brand, retrieve-brand, update-brand, list-brands]
+- capability: Customers & grants (Network API)
+  operations: [list-customers, retrieve-customer, list-customer-grants, retrieve-customer-grant,
+    revoke-customer-grant]
+- capability: Disputes (Network API)
+  operations: [list-disputes, retrieve-dispute, accept-dispute, challenge-dispute,
+    list-dispute-evidence, create-dispute-evidence-text, create-dispute-evidence-file,
+    retrieve-dispute-evidence, delete-dispute-evidence]
+- capability: Customer requests (Customer Request API)
+  operations: [create-request, retrieve-request, update-request]
+- capability: API keys & webhooks (Management API)
+  operations: [create-api-key, list-api-keys, retrieve-api-key, delete-api-key,
+    create-webhook-endpoint, list-webhook-endpoints, retrieve-webhook-endpoint,
+    update-webhook-endpoint, delete-webhook-endpoint, list-webhook-events]
+- capability: Afterpay Global API (BNPL)
+  operations: [auth, capture-full-payment, create-refund, void-payment, create-checkout-1,
+    get-checkout, get-configuration, get-payment-by-order-id]
+coverage:
+  tools_named: 1
+  tools_bound_to_rest: 0
+  mcp_only: 1
+  rest_ops_total: 100
+  rest_ops_with_tool: 0

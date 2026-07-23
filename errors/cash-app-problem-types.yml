@@ -1,0 +1,144 @@
+generated: '2026-06-20'
+method: searched
+source: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference
+docs: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference
+format: cash-app-errors-array
+envelope: '{ "errors": [ { "category": ..., "code": ..., "detail"?: ..., "field"?: ... } ] }'
+note: |
+  Cash App Pay does not use RFC 9457 problem+json. Every endpoint returns a top-level errors[] array;
+  the stable, versioned code field is the one to branch on (detail is human-readable and may change).
+  Retry behavior is one of: Retryable | Retryable with New Payload | Permanent (Do Not Retry).
+  Payment/refund/payout decline codes are captured separately in errors/cash-app-decline-codes.yml.
+categories:
+- API_ERROR
+- AUTHENTICATION_ERROR
+- BRAND_ERROR
+- CUSTOMER_ERROR
+- DISPUTE_ERROR
+- GRANT_ERROR
+- MERCHANT_ERROR
+- INVALID_REQUEST_ERROR
+- PAYMENT_PROCESSING_ERROR
+- PAYOUT_PROCESSING_ERROR
+- RATE_LIMIT_ERROR
+- WEBHOOK_ERROR
+problems:
+- code: UNAUTHORIZED
+  category: AUTHENTICATION_ERROR
+  status: 401
+  retry: retryable-with-new-payload
+  title: Request could not be authenticated (bad credentials / wrong environment / mismatched client-key pair)
+- code: ACCESS_TOKEN_REVOKED
+  category: AUTHENTICATION_ERROR
+  status: 401
+  retry: retryable-with-new-payload
+  title: API key was revoked; refresh credentials
+- code: ACCESS_TOKEN_EXPIRED
+  category: AUTHENTICATION_ERROR
+  status: 401
+  retry: retryable-with-new-payload
+  title: API key expired (keys expire after 30 days); refresh credentials
+- code: CLIENT_DISABLED
+  category: AUTHENTICATION_ERROR
+  status: 401
+  retry: retryable
+  title: API client disabled by Cash App Pay
+- code: FORBIDDEN
+  category: AUTHENTICATION_ERROR
+  status: 403
+  retry: retryable-with-new-payload
+  title: Valid credentials but no access to the requested resource
+- code: INSUFFICIENT_SCOPES
+  category: AUTHENTICATION_ERROR
+  status: 403
+  retry: retryable-with-new-payload
+  title: API key lacks the scope required for this action; use a key with the right scope
+- code: EXPECTED_JSON_BODY
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Missing or unparseable JSON payload
+- code: MISSING_REQUIRED_PARAMETER
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable
+  title: A required query or body parameter was not provided (see field)
+- code: CONFLICTING_PARAMETERS
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Duplicate keys in the request payload (see field)
+- code: UNKNOWN_QUERY_PARAMETER
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Query parameter not valid in this API version (see field)
+- code: UNKNOWN_BODY_PARAMETER
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Body field not valid in this API version (see field)
+- code: INVALID_CONTENT_TYPE
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Unsupported Content-Type (only application/json and multipart/form-data accepted)
+- code: NOT_FOUND
+  category: INVALID_REQUEST_ERROR
+  status: 404
+  retry: retryable-with-new-payload
+  title: Requested resource not found or not owned by the client
+- code: CONFLICT
+  category: INVALID_REQUEST_ERROR
+  status: 409
+  retry: retryable
+  title: Action conflicts with the current state of the resource
+- code: INVALID_CURSOR
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Pagination cursor could not be parsed; restart pagination with a blank cursor
+- code: IDEMPOTENCY_KEY_REUSED
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: retryable-with-new-payload
+  title: Idempotency key already used with a different payload; retry with a new key
+- code: INVALID_STATE_TRANSITION
+  category: INVALID_REQUEST_ERROR
+  status: 400
+  retry: permanent
+  title: Change not allowed by the resource state machine (stale data or client-side bug)
+- code: RATE_LIMITED
+  category: RATE_LIMIT_ERROR
+  status: 429
+  retry: retryable
+  title: Too many requests to OLAP (list/search) endpoints; back off exponentially
+- code: INTERNAL_SERVER_ERROR
+  category: API_ERROR
+  status: 500
+  retry: retryable
+  title: Unexpected server error
+- code: SERVICE_UNAVAILABLE
+  category: API_ERROR
+  status: 503
+  retry: retryable
+  title: Service temporarily unavailable
+- code: GATEWAY_TIMEOUT
+  category: API_ERROR
+  status: 504
+  retry: retryable
+  title: Upstream timeout
+resource_errors:
+  grant: [GRANT_NOT_FOUND, GRANT_CONSUMED, GRANT_EXPIRED, GRANT_REVOKED, GRANT_ACTION_TYPE_MISMATCH]
+  merchant: [MERCHANT_NOT_FOUND, MERCHANT_DISABLED, MERCHANT_PENDING, MERCHANT_MISSING_ADDRESS_OR_SITE,
+    MISSING_SETTLEMENT_CONFIGURATION]
+  brand: [BRAND_NOT_FOUND]
+  customer: [CUSTOMER_DELETED_ACCOUNT, CUSTOMER_DISABLED]
+  dispute: [DISPUTE_MISSING_EVIDENCE]
+  webhook: [WEBHOOK_ENDPOINT_NOT_FOUND, WEBHOOK_ENDPOINT_TOO_MANY]
+  validation: [EXPECTED_STRING, EXPECTED_INTEGER, EXPECTED_BOOLEAN, VALUE_EMPTY, VALUE_TOO_LONG,
+    VALUE_TOO_HIGH, VALUE_TOO_LOW, INVALID_PHONE_NUMBER, INVALID_TIME, INVALID_REGION, MISSING_REGION,
+    FEATURE_DISABLED]
+derived_from_openapi:
+  network_api_response_codes: [200, 201, 400, 404, 409]
+  afterpay_payments_response_codes: [200, 201, 204, 402, 404, 410, 412, 422, 500]

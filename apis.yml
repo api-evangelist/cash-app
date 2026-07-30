@@ -214,6 +214,8 @@ apis:
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/cash-app/overview
 - type: AgenticAccess
   url: agentic-access/cash-app-agentic-access.yml
 - type: VulnerabilityDisclosure

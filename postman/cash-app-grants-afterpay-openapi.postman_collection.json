@@ -1,0 +1,1463 @@
+{
+  "info": {
+    "_postman_id": "4708b2ec-230a-4489-80a5-c214d9198b08",
+    "name": "Grants - Afterpay",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:17:23.000Z",
+    "updatedAt": "2026-07-28T01:17:24.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4708b2ec-230a-4489-80a5-c214d9198b08"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "grants",
+          "item": [
+            {
+              "name": "approvals",
+              "item": [
+                {
+                  "name": "Create Grant Approval",
+                  "id": "83797c0a-818a-48b9-bbfc-5652757cea45",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"grants\": [\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants/approvals",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants",
+                        "approvals"
+                      ]
+                    },
+                    "description": "Initiates the approval process for a new grant.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "39f7f25b-182a-4053-9042-819e8fc01348",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grants\": [\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "approvals"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"token\": \"<string>\",\n  \"expires\": \"<dateTime>\",\n  \"redirectCheckoutUrl\": \"<uri>\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-39f7f25b-182a-4053-9042-819e8fc01348"
+                    },
+                    {
+                      "id": "c9540b92-9728-4233-a41e-8f51f1b5801c",
+                      "name": "Authentication failed or insufficient permissions.\n\n| errorCode | Description |\n| --- | --- |\n| unauthorized | The API credentials are invalid or missing. |\n| insufficient_permissions | The merchant lacks the required 'merchant_api_v2/initiate' permission",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grants\": [\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "approvals"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-c9540b92-9728-4233-a41e-8f51f1b5801c"
+                    },
+                    {
+                      "id": "3e4619e8-41ea-464c-b0f3-5e096c3787cb",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| feature_not_enabled | On file payments are not enabled for this merchant. |\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grants\": [\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "approvals"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-3e4619e8-41ea-464c-b0f3-5e096c3787cb"
+                    },
+                    {
+                      "id": "70864956-b2ab-4925-a087-f56e8a37d305",
+                      "name": "Unsupported Media Type - Content-Type header is missing or invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grants\": [\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "approvals"
+                          ]
+                        }
+                      },
+                      "status": "Unsupported Media Type",
+                      "code": 415,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-70864956-b2ab-4925-a087-f56e8a37d305"
+                    },
+                    {
+                      "id": "f3fa0611-1d74-403a-812b-16ecc56fe5c6",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object | One or more required fields in the request body were missing or invalid. |\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"grants\": [\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"ON_FILE\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ],\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/approvals",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "approvals"
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-f3fa0611-1d74-403a-812b-16ecc56fe5c6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-83797c0a-818a-48b9-bbfc-5652757cea45"
+                }
+              ],
+              "id": "7ba79994-b065-4a6b-8edc-a3e80fffa74c",
+              "createdAt": "2026-07-28T01:17:24.000Z",
+              "updatedAt": "2026-07-28T01:17:24.000Z",
+              "uid": "35240-7ba79994-b065-4a6b-8edc-a3e80fffa74c"
+            },
+            {
+              "name": "{grantId}",
+              "item": [
+                {
+                  "name": "revoke",
+                  "item": [
+                    {
+                      "name": "Revoke Grant",
+                      "id": "d8305db3-4ea2-46ce-9a05-ff4bfa52094d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/:grantId/revoke",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            ":grantId",
+                            "revoke"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9f9c24c8-b4d8-40ba-8454-2ca84f616ecb",
+                              "key": "grantId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier id of the grant to revoke"
+                            }
+                          ]
+                        },
+                        "description": "Revokes a grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "23b5a9e6-77d2-4086-bf86-3f9ea5dfd9f8",
+                          "name": "OK",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/grants/:grantId/revoke",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "grants",
+                                ":grantId",
+                                "revoke"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "grantId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"grant\": {\n    \"id\": \"<string>\",\n    \"type\": \"ON_FILE\",\n    \"status\": \"CANCELLED\",\n    \"created\": \"<dateTime>\",\n    \"merchantReference\": \"<string,null>\",\n    \"cancelled\": \"<dateTime>\",\n    \"expires\": \"<dateTime>\",\n    \"consumerReference\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"requestId\": \"<string,null>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:17:24.000Z",
+                          "updatedAt": "2026-07-28T01:17:24.000Z",
+                          "uid": "35240-23b5a9e6-77d2-4086-bf86-3f9ea5dfd9f8"
+                        },
+                        {
+                          "id": "0443c423-6a6e-4ed3-a1e9-9e896fbe25dc",
+                          "name": "| errorCode | Description |\n| --- | --- |\n| feature_not_enabled | On file payments are not enabled for this merchant. |\n",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/grants/:grantId/revoke",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "grants",
+                                ":grantId",
+                                "revoke"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "grantId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:24.000Z",
+                          "updatedAt": "2026-07-28T01:17:24.000Z",
+                          "uid": "35240-0443c423-6a6e-4ed3-a1e9-9e896fbe25dc"
+                        },
+                        {
+                          "id": "c67e460a-f022-494c-9f44-04962b765e06",
+                          "name": "| errorCode | Description |\n| --- | --- |\n| grant_not_found | The specified grant was not found. |\n",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/grants/:grantId/revoke",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "grants",
+                                ":grantId",
+                                "revoke"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "grantId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:24.000Z",
+                          "updatedAt": "2026-07-28T01:17:24.000Z",
+                          "uid": "35240-c67e460a-f022-494c-9f44-04962b765e06"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-d8305db3-4ea2-46ce-9a05-ff4bfa52094d"
+                    }
+                  ],
+                  "id": "61ff1055-2f5d-47f0-9265-06781bccb640",
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-61ff1055-2f5d-47f0-9265-06781bccb640"
+                },
+                {
+                  "name": "Retrieve Grant",
+                  "id": "362ad047-befe-4bce-9f9d-d7d10c47ae1c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants/:grantId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants",
+                        ":grantId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d789619f-e7e2-42cd-8d70-6b25b47101eb",
+                          "key": "grantId",
+                          "value": "<string>",
+                          "description": "(Required) ID of the grant to retrieve."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a grant by its ID.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "a84b4324-a8f5-4723-a456-ee0a7ca1748f",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/:grantId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            ":grantId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "grantId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"grant\": {\n    \"id\": \"<string>\",\n    \"type\": \"ON_FILE\",\n    \"status\": \"CANCELLED\",\n    \"created\": \"<dateTime>\",\n    \"merchantReference\": \"<string,null>\",\n    \"cancelled\": \"<dateTime>\",\n    \"expires\": \"<dateTime>\",\n    \"consumerReference\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"requestId\": \"<string,null>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-a84b4324-a8f5-4723-a456-ee0a7ca1748f"
+                    },
+                    {
+                      "id": "0e8e1a5e-6253-472b-884c-3194473ef262",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| feature_not_enabled | On file payments are not enabled for this merchant. |\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/:grantId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            ":grantId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "grantId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-0e8e1a5e-6253-472b-884c-3194473ef262"
+                    },
+                    {
+                      "id": "e1f9fcc0-26b5-4853-ac38-8db751f5ed75",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| grant_not_found | The specified grant id was not found. |\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/:grantId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            ":grantId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "grantId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-e1f9fcc0-26b5-4853-ac38-8db751f5ed75"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-362ad047-befe-4bce-9f9d-d7d10c47ae1c"
+                }
+              ],
+              "id": "941f32e6-3493-4e63-a048-4c5ef0aa2b60",
+              "createdAt": "2026-07-28T01:17:24.000Z",
+              "updatedAt": "2026-07-28T01:17:24.000Z",
+              "uid": "35240-941f32e6-3493-4e63-a048-4c5ef0aa2b60"
+            },
+            {
+              "name": "alias",
+              "item": [
+                {
+                  "name": "Create Grant Alias",
+                  "id": "4eec2b6f-628a-43fb-aab5-130f4d94845f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants/alias",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants",
+                        "alias"
+                      ]
+                    },
+                    "description": "Creates an alias for an existing grant to help load the payment schedule widget.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "d8943669-ed96-4534-9cd9-011ed9fa554a",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/alias",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "alias"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"token\": \"<string>\",\n  \"expiry\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-d8943669-ed96-4534-9cd9-011ed9fa554a"
+                    },
+                    {
+                      "id": "c998d7de-f2fb-4a14-8d5b-efbbf08704bf",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| feature_not_enabled | On file payments are not enabled for this merchant. |\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/alias",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "alias"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-c998d7de-f2fb-4a14-8d5b-efbbf08704bf"
+                    },
+                    {
+                      "id": "217e573a-0351-4a26-856e-dc7b27ef4795",
+                      "name": "Unsupported Media Type - Content-Type header is missing or invalid",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/alias",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "alias"
+                          ]
+                        }
+                      },
+                      "status": "Unsupported Media Type",
+                      "code": 415,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-217e573a-0351-4a26-856e-dc7b27ef4795"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-4eec2b6f-628a-43fb-aab5-130f4d94845f"
+                }
+              ],
+              "id": "17695f9c-7e94-48f1-a33f-18ae09729924",
+              "createdAt": "2026-07-28T01:17:24.000Z",
+              "updatedAt": "2026-07-28T01:17:24.000Z",
+              "uid": "35240-17695f9c-7e94-48f1-a33f-18ae09729924"
+            },
+            {
+              "name": "start",
+              "item": [
+                {
+                  "name": "Start Grant Link Flow",
+                  "id": "64c4d814-5aeb-4efe-9e7e-d7e6e3ab2f35",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants/start",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants",
+                        "start"
+                      ]
+                    },
+                    "description": "Initiates the headless grant link flow process.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "48f24638-7652-45d2-bccf-35e434e418fb",
+                      "name": "Created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "start"
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"token\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"expiresAt\": \"<dateTime>\",\n  \"deliveryType\": \"SMS\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-48f24638-7652-45d2-bccf-35e434e418fb"
+                    },
+                    {
+                      "id": "dc3026b3-f09d-4f80-8e26-1f1e436e1a2d",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| not_found | Afterpay consumer account does not exist |\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "start"
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-dc3026b3-f09d-4f80-8e26-1f1e436e1a2d"
+                    },
+                    {
+                      "id": "c24dd860-2058-4fdf-b157-83112a2bf3fa",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| invalid_state | Failed to send code |\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "start"
+                          ]
+                        }
+                      },
+                      "status": "Precondition Failed",
+                      "code": 412,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-c24dd860-2058-4fdf-b157-83112a2bf3fa"
+                    },
+                    {
+                      "id": "c0d715fb-e315-436e-92e2-6a8fe1353238",
+                      "name": "| errorCode | Description |\n| --- | --- |\n| too_many_requests | Too many requests |\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/start",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "start"
+                          ]
+                        }
+                      },
+                      "status": "Too Many Requests",
+                      "code": 429,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:24.000Z",
+                      "updatedAt": "2026-07-28T01:17:24.000Z",
+                      "uid": "35240-c0d715fb-e315-436e-92e2-6a8fe1353238"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-64c4d814-5aeb-4efe-9e7e-d7e6e3ab2f35"
+                }
+              ],
+              "id": "88972156-d334-4d3b-927a-600468b24cce",
+              "createdAt": "2026-07-28T01:17:24.000Z",
+              "updatedAt": "2026-07-28T01:17:24.000Z",
+              "uid": "35240-88972156-d334-4d3b-927a-600468b24cce"
+            },
+            {
+              "name": "Create Grant",
+              "id": "27003ebd-9c95-4595-8c10-bce3a6739a64",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"token\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/grants",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "grants"
+                  ]
+                },
+                "description": "Creates a new grant from a grant approval token. \n"
+              },
+              "response": [
+                {
+                  "id": "b8f1ebc2-8d30-491c-a95e-d96309992fe9",
+                  "name": "Created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"requestId\": \"<string>\",\n  \"token\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"grant\": {\n    \"id\": \"<string>\",\n    \"type\": \"ON_FILE\",\n    \"status\": \"CANCELLED\",\n    \"created\": \"<dateTime>\",\n    \"merchantReference\": \"<string,null>\",\n    \"cancelled\": \"<dateTime>\",\n    \"expires\": \"<dateTime>\",\n    \"consumerReference\": \"<string,null>\",\n    \"email\": \"<string,null>\",\n    \"requestId\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-b8f1ebc2-8d30-491c-a95e-d96309992fe9"
+                },
+                {
+                  "id": "ad2c4301-2db2-4f51-a101-0a62982146eb",
+                  "name": "| errorCode | Description |\n| --- | --- |\n| feature_not_enabled | On file payments are not enabled for this merchant. |\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"requestId\": \"<string>\",\n  \"token\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"Any type\"\n}",
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-ad2c4301-2db2-4f51-a101-0a62982146eb"
+                },
+                {
+                  "id": "b98a733c-6ae2-4fd5-91c2-1b278c1fe4db",
+                  "name": "| errorCode | Description |\n| --- | --- |\n| consumer_ineligible | Consumer not eligible |\n",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"requestId\": \"<string>\",\n  \"token\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants"
+                      ]
+                    }
+                  },
+                  "status": "Precondition Failed",
+                  "code": 412,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"Any type\"\n}",
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-b98a733c-6ae2-4fd5-91c2-1b278c1fe4db"
+                },
+                {
+                  "id": "e47a3aa9-9115-4dc0-937d-1933df2b0ff3",
+                  "name": "Unsupported Media Type - Content-Type header is missing or invalid",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"requestId\": \"<string>\",\n  \"token\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants"
+                      ]
+                    }
+                  },
+                  "status": "Unsupported Media Type",
+                  "code": 415,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"Any type\"\n}",
+                  "createdAt": "2026-07-28T01:17:24.000Z",
+                  "updatedAt": "2026-07-28T01:17:24.000Z",
+                  "uid": "35240-e47a3aa9-9115-4dc0-937d-1933df2b0ff3"
+                }
+              ],
+              "createdAt": "2026-07-28T01:17:24.000Z",
+              "updatedAt": "2026-07-28T01:17:24.000Z",
+              "uid": "35240-27003ebd-9c95-4595-8c10-bce3a6739a64"
+            }
+          ],
+          "id": "d9f12a67-f5b8-4f6c-9b62-3ea20156c01b",
+          "createdAt": "2026-07-28T01:17:24.000Z",
+          "updatedAt": "2026-07-28T01:17:24.000Z",
+          "uid": "35240-d9f12a67-f5b8-4f6c-9b62-3ea20156c01b"
+        }
+      ],
+      "id": "da1dcf64-7618-4306-9164-fbb448da24d2",
+      "createdAt": "2026-07-28T01:17:24.000Z",
+      "updatedAt": "2026-07-28T01:17:24.000Z",
+      "uid": "35240-da1dcf64-7618-4306-9164-fbb448da24d2"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://global-api-sandbox.afterpay.com"
+    }
+  ]
+}

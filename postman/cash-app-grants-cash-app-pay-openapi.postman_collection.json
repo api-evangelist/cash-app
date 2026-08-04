@@ -1,0 +1,507 @@
+{
+  "info": {
+    "_postman_id": "2e725342-199a-42dc-949c-b7ed378739e1",
+    "name": "Add Cash App Pay to Your Site",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:17:24.000Z",
+    "updatedAt": "2026-07-28T01:17:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2e725342-199a-42dc-949c-b7ed378739e1"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "grants",
+          "item": [
+            {
+              "name": "retrieve",
+              "item": [
+                {
+                  "name": "Retrieve Grant",
+                  "id": "ca7df4a3-a239-43a2-bcfc-a030b0c5a2b0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants/retrieve",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants",
+                        "retrieve"
+                      ]
+                    },
+                    "description": "Retrieves a Cash App Pay customer grant by the ID of the customer that approved it and its own ID."
+                  },
+                  "response": [
+                    {
+                      "id": "f59f8b24-8535-4ce3-96f2-308850f95ea5",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/retrieve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "retrieve"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"grant\": {\n    \"id\": \"<string>\",\n    \"intent\": \"ONE_TIME\",\n    \"type\": \"CASHAPP\",\n    \"details\": {\n      \"status\": \"EXPIRED\",\n      \"cashapp\": {\n        \"customerId\": \"<string>\",\n        \"cashtag\": \"<string>\"\n      },\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"expiresAt\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T01:17:25.000Z",
+                      "updatedAt": "2026-07-28T01:17:25.000Z",
+                      "uid": "35240-f59f8b24-8535-4ce3-96f2-308850f95ea5"
+                    },
+                    {
+                      "id": "b3f7dfdb-9d98-4328-acba-5c48606ee574",
+                      "name": "Unauthenticated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/retrieve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "retrieve"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"httpStatusCode\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T01:17:25.000Z",
+                      "updatedAt": "2026-07-28T01:17:25.000Z",
+                      "uid": "35240-b3f7dfdb-9d98-4328-acba-5c48606ee574"
+                    },
+                    {
+                      "id": "07331cca-4a65-46d9-aec4-adb29fdcfb93",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/retrieve",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "retrieve"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"httpStatusCode\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T01:17:25.000Z",
+                      "updatedAt": "2026-07-28T01:17:25.000Z",
+                      "uid": "35240-07331cca-4a65-46d9-aec4-adb29fdcfb93"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:25.000Z",
+                  "updatedAt": "2026-07-28T01:17:25.000Z",
+                  "uid": "35240-ca7df4a3-a239-43a2-bcfc-a030b0c5a2b0"
+                }
+              ],
+              "id": "b6929a38-6bd1-49d5-8215-bd70516bc6c5",
+              "createdAt": "2026-07-28T01:17:25.000Z",
+              "updatedAt": "2026-07-28T01:17:25.000Z",
+              "uid": "35240-b6929a38-6bd1-49d5-8215-bd70516bc6c5"
+            },
+            {
+              "name": "revoke",
+              "item": [
+                {
+                  "name": "Revoke Grant",
+                  "id": "a16af958-3b37-4a7c-911f-536e28cc6b54",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/grants/revoke",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "grants",
+                        "revoke"
+                      ]
+                    },
+                    "description": "Revokes a Cash App Pay customer grant by the ID of the customer that approved it and its own ID."
+                  },
+                  "response": [
+                    {
+                      "id": "b6c93382-75e3-425d-b8a1-9eacd0b7c542",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/revoke",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "revoke"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"grant\": {\n    \"id\": \"<string>\",\n    \"intent\": \"ONE_TIME\",\n    \"type\": \"CASHAPP\",\n    \"details\": {\n      \"status\": \"CONSUMED\",\n      \"cashapp\": {\n        \"customerId\": \"<string>\",\n        \"cashtag\": \"<string>\"\n      },\n      \"createdAt\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"expiresAt\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T01:17:25.000Z",
+                      "updatedAt": "2026-07-28T01:17:25.000Z",
+                      "uid": "35240-b6c93382-75e3-425d-b8a1-9eacd0b7c542"
+                    },
+                    {
+                      "id": "597f316e-e2c8-4aa0-81bc-d0e070412dd0",
+                      "name": "Unauthenticated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/revoke",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "revoke"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"httpStatusCode\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T01:17:25.000Z",
+                      "updatedAt": "2026-07-28T01:17:25.000Z",
+                      "uid": "35240-597f316e-e2c8-4aa0-81bc-d0e070412dd0"
+                    },
+                    {
+                      "id": "68cf2138-1c31-4f0c-93f1-590e8d37d621",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"customerId\": \"<string>\",\n  \"grantId\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/grants/revoke",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "grants",
+                            "revoke"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorId\": \"<string>\",\n  \"message\": \"<string>\",\n  \"httpStatusCode\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T01:17:25.000Z",
+                      "updatedAt": "2026-07-28T01:17:25.000Z",
+                      "uid": "35240-68cf2138-1c31-4f0c-93f1-590e8d37d621"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:25.000Z",
+                  "updatedAt": "2026-07-28T01:17:25.000Z",
+                  "uid": "35240-a16af958-3b37-4a7c-911f-536e28cc6b54"
+                }
+              ],
+              "id": "8cbf0915-09de-4e98-bc80-4a24325f45cf",
+              "createdAt": "2026-07-28T01:17:25.000Z",
+              "updatedAt": "2026-07-28T01:17:25.000Z",
+              "uid": "35240-8cbf0915-09de-4e98-bc80-4a24325f45cf"
+            }
+          ],
+          "id": "68198dff-1473-47b9-bfa2-f02d36d12e82",
+          "createdAt": "2026-07-28T01:17:25.000Z",
+          "updatedAt": "2026-07-28T01:17:25.000Z",
+          "uid": "35240-68198dff-1473-47b9-bfa2-f02d36d12e82"
+        }
+      ],
+      "id": "f763f6a9-56f1-4410-aa43-ae68cbb7885d",
+      "createdAt": "2026-07-28T01:17:25.000Z",
+      "updatedAt": "2026-07-28T01:17:25.000Z",
+      "uid": "35240-f763f6a9-56f1-4410-aa43-ae68cbb7885d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://global-api-sandbox.afterpay.com"
+    }
+  ]
+}

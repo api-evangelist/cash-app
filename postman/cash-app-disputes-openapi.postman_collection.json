@@ -1,0 +1,1172 @@
+{
+  "info": {
+    "_postman_id": "a5e350fd-74a4-40ac-8bb3-4777c2462da1",
+    "name": "Disputes",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:17:22.000Z",
+    "updatedAt": "2026-07-28T01:17:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a5e350fd-74a4-40ac-8bb3-4777c2462da1"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "disputes",
+          "item": [
+            {
+              "name": "{dispute_id}",
+              "item": [
+                {
+                  "name": "accept",
+                  "item": [
+                    {
+                      "name": "Accept Dispute",
+                      "id": "c5b79530-cc9b-4eaa-8dc6-6214ce99b80d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/disputes/:dispute_id/accept?=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "disputes",
+                            ":dispute_id",
+                            "accept"
+                          ],
+                          "query": [
+                            {
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "568df1fc-aa63-40f5-998b-68125a59eb4f",
+                              "key": "dispute_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Merchants can call this endpoint to accept a dispute case. The endpoint only works if the dispute is in a non-terminal state (the status is not `won` or `lost`).\n\n> **Note:** Calling the API changes the dispute status to lost."
+                      },
+                      "response": [
+                        {
+                          "id": "229f86f9-3213-4703-a74d-67b33304a941",
+                          "name": "If successful, returns the updated dispute object.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/:dispute_id/accept?=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                ":dispute_id",
+                                "accept"
+                              ],
+                              "query": [
+                                {
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "dispute_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"order\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"reason\": \"product_unacceptable\",\n  \"status\": \"merchant_voided\",\n  \"open\": true,\n  \"responseDueBy\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"openingNote\": \"<string>\",\n  \"closingReason\": \"customer_cancelled\",\n  \"merchantOrderId\": \"<string>\",\n  \"transactionDate\": \"<string>\",\n  \"settlementAmount\": \"<string>\",\n  \"openingNoteAttachments\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"closingNote\": \"<string>\",\n  \"meta\": {\n    \"transactionAmount\": \"<string>\",\n    \"orderType\": \"<string>\",\n    \"network\": \"<string>\",\n    \"networkReferenceId\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-229f86f9-3213-4703-a74d-67b33304a941"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:17:23.000Z",
+                      "updatedAt": "2026-07-28T01:17:23.000Z",
+                      "uid": "35240-c5b79530-cc9b-4eaa-8dc6-6214ce99b80d"
+                    }
+                  ],
+                  "id": "ffb42e4c-5132-4768-abe7-bd8492d850f6",
+                  "createdAt": "2026-07-28T01:17:23.000Z",
+                  "updatedAt": "2026-07-28T01:17:23.000Z",
+                  "uid": "35240-ffb42e4c-5132-4768-abe7-bd8492d850f6"
+                },
+                {
+                  "name": "Receive Dispute",
+                  "id": "423aa6a7-914c-4dcd-bb54-abe9de71f3a8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/disputes/:dispute_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "disputes",
+                        ":dispute_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c4ae0ff7-7d27-4591-9984-66494bee8141",
+                          "key": "dispute_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get detailed information about a dispute."
+                  },
+                  "response": [
+                    {
+                      "id": "d9d6e27f-1018-490e-b03d-bd61ec71c3f4",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/disputes/:dispute_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "disputes",
+                            ":dispute_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "dispute_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"order\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"reason\": \"product_unacceptable\",\n  \"status\": \"merchant_voided\",\n  \"open\": true,\n  \"responseDueBy\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"openingNote\": \"<string>\",\n  \"closingReason\": \"customer_cancelled\",\n  \"merchantOrderId\": \"<string>\",\n  \"transactionDate\": \"<string>\",\n  \"settlementAmount\": \"<string>\",\n  \"openingNoteAttachments\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"closingNote\": \"<string>\",\n  \"meta\": {\n    \"transactionAmount\": \"<string>\",\n    \"orderType\": \"<string>\",\n    \"network\": \"<string>\",\n    \"networkReferenceId\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:17:23.000Z",
+                      "updatedAt": "2026-07-28T01:17:23.000Z",
+                      "uid": "35240-d9d6e27f-1018-490e-b03d-bd61ec71c3f4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:23.000Z",
+                  "updatedAt": "2026-07-28T01:17:23.000Z",
+                  "uid": "35240-423aa6a7-914c-4dcd-bb54-abe9de71f3a8"
+                },
+                {
+                  "name": "Respond to Dispute",
+                  "id": "4138957e-c3d4-4016-8057-7eb98c600075",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"evidence\": {\n    \"productDescription\": \"<string>\",\n    \"refundPolicy\": \"<binary>\",\n    \"refundPolicyDisclosure\": \"<string>\",\n    \"refundRefusalExplanation\": \"<string>\",\n    \"shippingDocumentation\": \"<binary>\",\n    \"shippingAddress\": \"<string>\",\n    \"shippingDate\": \"<string>\",\n    \"shippingCarrier\": \"<string>\",\n    \"shippingTrackingNumber\": \"<string>\",\n    \"uncategorizedFile\": \"<binary>\",\n    \"uncategorizedText\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/disputes/:dispute_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "disputes",
+                        ":dispute_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d07e9f20-3d27-4015-a2d6-24ce88099c2b",
+                          "key": "dispute_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "The Respond to the Dispute endpoint allows a merchant to submit evidence for the dispute. This is only allowed if the dispute is the state `needs_response`.\n\nMerchants only have one opportunity to submit evidence. Once a 200 response is received, this information cannot be updated or changed."
+                  },
+                  "response": [
+                    {
+                      "id": "9bd0607a-b140-4f63-b5b8-37d8319b6122",
+                      "name": "When successful, returns the updated dispute object",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"evidence\": {\n    \"productDescription\": \"<string>\",\n    \"refundPolicy\": \"<binary>\",\n    \"refundPolicyDisclosure\": \"<string>\",\n    \"refundRefusalExplanation\": \"<string>\",\n    \"shippingDocumentation\": \"<binary>\",\n    \"shippingAddress\": \"<string>\",\n    \"shippingDate\": \"<string>\",\n    \"shippingCarrier\": \"<string>\",\n    \"shippingTrackingNumber\": \"<string>\",\n    \"uncategorizedFile\": \"<binary>\",\n    \"uncategorizedText\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/disputes/:dispute_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "disputes",
+                            ":dispute_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "dispute_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"order\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"reason\": \"product_unacceptable\",\n  \"status\": \"merchant_voided\",\n  \"open\": true,\n  \"responseDueBy\": \"<string>\",\n  \"createdAt\": \"<string>\",\n  \"openingNote\": \"<string>\",\n  \"closingReason\": \"customer_cancelled\",\n  \"merchantOrderId\": \"<string>\",\n  \"transactionDate\": \"<string>\",\n  \"settlementAmount\": \"<string>\",\n  \"openingNoteAttachments\": \"<string>\",\n  \"updatedAt\": \"<string>\",\n  \"closingNote\": \"<string>\",\n  \"meta\": {\n    \"transactionAmount\": \"<string>\",\n    \"orderType\": \"<string>\",\n    \"network\": \"<string>\",\n    \"networkReferenceId\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:17:23.000Z",
+                      "updatedAt": "2026-07-28T01:17:23.000Z",
+                      "uid": "35240-9bd0607a-b140-4f63-b5b8-37d8319b6122"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:23.000Z",
+                  "updatedAt": "2026-07-28T01:17:23.000Z",
+                  "uid": "35240-4138957e-c3d4-4016-8057-7eb98c600075"
+                }
+              ],
+              "id": "a3d26b1f-c4f6-4b8f-a3d7-cd366534cb34",
+              "createdAt": "2026-07-28T01:17:23.000Z",
+              "updatedAt": "2026-07-28T01:17:23.000Z",
+              "uid": "35240-a3d26b1f-c4f6-4b8f-a3d7-cd366534cb34"
+            },
+            {
+              "name": "files",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Retrieve file",
+                      "id": "7caa2d8e-c1ea-4c0c-bc88-8c58f7de4734",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "disputes",
+                            "files",
+                            ":id"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ID of the file to be retrieved.",
+                              "key": "id",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "92a6cff9-de97-4132-bbe1-4388652a686e",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Use this endpoint to retrieve files for disputes."
+                      },
+                      "response": [
+                        {
+                          "id": "51fcb21b-311e-4f4a-afea-f1e3f1dbcbb5",
+                          "name": "Indicates that the file has been retrieved successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"url\": \"<string>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-51fcb21b-311e-4f4a-afea-f1e3f1dbcbb5"
+                        },
+                        {
+                          "id": "93ac3710-59c8-4eb2-998d-cc356cbb16cf",
+                          "name": "Unauthorized. Invalid merchant credentials.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-93ac3710-59c8-4eb2-998d-cc356cbb16cf"
+                        },
+                        {
+                          "id": "de323767-0bb9-4534-81b3-d2db6601717e",
+                          "name": "Not Found. The corresponding entity can't be found for the merchant.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-de323767-0bb9-4534-81b3-d2db6601717e"
+                        },
+                        {
+                          "id": "bccac906-5e6c-4195-b511-5b8aa58c8e5e",
+                          "name": "Precondition Failed. Invalid action for the dispute case, or the refund amount is larger than the refundable amount.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Precondition Failed",
+                          "code": 412,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-bccac906-5e6c-4195-b511-5b8aa58c8e5e"
+                        },
+                        {
+                          "id": "90e5c5d8-5e88-4713-889a-843bb8ca5005",
+                          "name": "Request Entity Too Large. The uploaded file is too large. It must be less than 10 MB.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Request Entity Too Large",
+                          "code": 413,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-90e5c5d8-5e88-4713-889a-843bb8ca5005"
+                        },
+                        {
+                          "id": "24e1f718-101b-4041-88b6-e161ff022692",
+                          "name": "Unsupported Media Type. Afterpay does not support the filetype of the uploaded file. It must be: GIF, PDF, JPEG, or PNG.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unsupported Media Type",
+                          "code": 415,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-24e1f718-101b-4041-88b6-e161ff022692"
+                        },
+                        {
+                          "id": "e485f91c-5dd2-43cc-883c-008a93d0fdaa",
+                          "name": "Unprocessable Entity. Invalid parameter in the Dispute API request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-e485f91c-5dd2-43cc-883c-008a93d0fdaa"
+                        },
+                        {
+                          "id": "24cfbe33-a50c-4113-b288-73976d39520c",
+                          "name": "Too Many Requests. Too many requests in a short period of time, retry later.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) ",
+                                "key": "User-Agent",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/disputes/files/:id?id=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "disputes",
+                                "files",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ID of the file to be retrieved.",
+                                  "key": "id",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Too Many Requests",
+                          "code": 429,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"description\": \"Any type\"\n}",
+                          "createdAt": "2026-07-28T01:17:23.000Z",
+                          "updatedAt": "2026-07-28T01:17:23.000Z",
+                          "uid": "35240-24cfbe33-a50c-4113-b288-73976d39520c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:17:23.000Z",
+                      "updatedAt": "2026-07-28T01:17:23.000Z",
+                      "uid": "35240-7caa2d8e-c1ea-4c0c-bc88-8c58f7de4734"
+                    }
+                  ],
+                  "id": "0920cf92-58f0-4317-86e4-09f1de24432d",
+                  "createdAt": "2026-07-28T01:17:23.000Z",
+                  "updatedAt": "2026-07-28T01:17:23.000Z",
+                  "uid": "35240-0920cf92-58f0-4317-86e4-09f1de24432d"
+                },
+                {
+                  "name": "Upload File",
+                  "id": "8f4ea887-8f8a-4b55-8e16-9f732546de8a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"file\": {\n    \"description\": \"The file you want to upload.\"\n  },\n  \"fileType\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/disputes/files",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "disputes",
+                        "files"
+                      ]
+                    },
+                    "description": "Use this endpoint to upload files for disputes."
+                  },
+                  "response": [
+                    {
+                      "id": "e2662230-3d80-4e30-af14-e48629cc180f",
+                      "name": "Indicates a successful file upload.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"file\": {\n    \"description\": \"The file you want to upload.\"\n  },\n  \"fileType\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/disputes/files",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "disputes",
+                            "files"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"expiresAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:17:23.000Z",
+                      "updatedAt": "2026-07-28T01:17:23.000Z",
+                      "uid": "35240-e2662230-3d80-4e30-af14-e48629cc180f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:23.000Z",
+                  "updatedAt": "2026-07-28T01:17:23.000Z",
+                  "uid": "35240-8f4ea887-8f8a-4b55-8e16-9f732546de8a"
+                }
+              ],
+              "id": "0d581dda-604d-4f1d-b5fb-71a88d22d352",
+              "createdAt": "2026-07-28T01:17:23.000Z",
+              "updatedAt": "2026-07-28T01:17:23.000Z",
+              "uid": "35240-0d581dda-604d-4f1d-b5fb-71a88d22d352"
+            },
+            {
+              "name": "Retrieve Dispute",
+              "id": "daf0da5b-670d-468e-a771-46e0af19510c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/disputes?order=<integer>&merchant=<string>&status=<string>&openedAfter=<dateTime>&openedBefore=<dateTime>&offset=<integer>&limit=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "disputes"
+                  ],
+                  "query": [
+                    {
+                      "description": "Payment or Order token using which you can filter the list.",
+                      "key": "order",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Merchant token using which you can filter the list.",
+                      "key": "merchant",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Dispute status using which you can filter the list.",
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter disputes that were created on or after this timestamp (inclusive).",
+                      "key": "openedAfter",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Filter disputes that were created on or before this timestamp (inclusive).",
+                      "key": "openedBefore",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "Offset for the search results.",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The maximum number of records that you want returned from this request.",
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "List disputes within a date range based on certain criteria. This endpoint can be used for debugging or synchronizing the disputes from Afterpay if/when you are unable to use the webhook method.\n"
+              },
+              "response": [
+                {
+                  "id": "1881676d-3382-4257-afb6-45f492a2b3d5",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/disputes?order=<integer>&merchant=<string>&status=<string>&openedAfter=<dateTime>&openedBefore=<dateTime>&offset=<integer>&limit=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "disputes"
+                      ],
+                      "query": [
+                        {
+                          "description": "Payment or Order token using which you can filter the list.",
+                          "key": "order",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Merchant token using which you can filter the list.",
+                          "key": "merchant",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Dispute status using which you can filter the list.",
+                          "key": "status",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Filter disputes that were created on or after this timestamp (inclusive).",
+                          "key": "openedAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Filter disputes that were created on or before this timestamp (inclusive).",
+                          "key": "openedBefore",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "Offset for the search results.",
+                          "key": "offset",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The maximum number of records that you want returned from this request.",
+                          "key": "limit",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"order\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"reason\": \"product_unacceptable\",\n      \"status\": \"merchant_refunded\",\n      \"open\": true,\n      \"responseDueBy\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"openingNote\": \"<string>\",\n      \"closingReason\": \"deadline_expired\",\n      \"merchantOrderId\": \"<string>\",\n      \"transactionDate\": \"<string>\",\n      \"settlementAmount\": \"<string>\",\n      \"openingNoteAttachments\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"closingNote\": \"<string>\",\n      \"meta\": {\n        \"transactionAmount\": \"<string>\",\n        \"orderType\": \"<string>\",\n        \"network\": \"<string>\",\n        \"networkReferenceId\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"order\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"reason\": \"fraudulent\",\n      \"status\": \"needs_response\",\n      \"open\": true,\n      \"responseDueBy\": \"<string>\",\n      \"createdAt\": \"<string>\",\n      \"openingNote\": \"<string>\",\n      \"closingReason\": \"deadline_expired\",\n      \"merchantOrderId\": \"<string>\",\n      \"transactionDate\": \"<string>\",\n      \"settlementAmount\": \"<string>\",\n      \"openingNoteAttachments\": \"<string>\",\n      \"updatedAt\": \"<string>\",\n      \"closingNote\": \"<string>\",\n      \"meta\": {\n        \"transactionAmount\": \"<string>\",\n        \"orderType\": \"<string>\",\n        \"network\": \"<string>\",\n        \"networkReferenceId\": \"<string>\"\n      }\n    }\n  ],\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"total\": \"<integer>\"\n}",
+                  "createdAt": "2026-07-28T01:17:23.000Z",
+                  "updatedAt": "2026-07-28T01:17:23.000Z",
+                  "uid": "35240-1881676d-3382-4257-afb6-45f492a2b3d5"
+                }
+              ],
+              "createdAt": "2026-07-28T01:17:23.000Z",
+              "updatedAt": "2026-07-28T01:17:23.000Z",
+              "uid": "35240-daf0da5b-670d-468e-a771-46e0af19510c"
+            }
+          ],
+          "id": "badaf21c-0733-4601-ad56-72d722679162",
+          "createdAt": "2026-07-28T01:17:23.000Z",
+          "updatedAt": "2026-07-28T01:17:23.000Z",
+          "uid": "35240-badaf21c-0733-4601-ad56-72d722679162"
+        }
+      ],
+      "id": "19cdadee-30dd-470f-909b-0aa25df140bf",
+      "createdAt": "2026-07-28T01:17:23.000Z",
+      "updatedAt": "2026-07-28T01:17:23.000Z",
+      "uid": "35240-19cdadee-30dd-470f-909b-0aa25df140bf"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://global-api-sandbox.afterpay.com"
+    }
+  ]
+}

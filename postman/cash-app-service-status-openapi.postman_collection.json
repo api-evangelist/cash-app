@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "9e8e9924-2830-46be-b0ec-61ddc4ed2039",
+    "name": "Service Status",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:17:25.000Z",
+    "updatedAt": "2026-07-28T01:17:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9e8e9924-2830-46be-b0ec-61ddc4ed2039"
+  },
+  "item": [
+    {
+      "name": "ping",
+      "item": [
+        {
+          "name": "Ping",
+          "id": "a7ee2422-f30f-4e94-a7ee-8290f4ab12fe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ping",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ping"
+              ]
+            },
+            "description": "Use this endpoint to check that the service is available and reachable.\n\nUnlike all other endpoints, this endpoint does not require authentication, and responds with `text/plain` instead of `application/json`.\n\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n"
+          },
+          "response": [
+            {
+              "id": "c4f4d096-d08f-4a37-a125-a0de4871ea30",
+              "name": "Response with status 200",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T01:17:26.000Z",
+              "updatedAt": "2026-07-28T01:17:26.000Z",
+              "uid": "35240-c4f4d096-d08f-4a37-a125-a0de4871ea30"
+            },
+            {
+              "id": "cdf558fc-aff8-4f9a-8f6d-35aa8a21df2f",
+              "name": "The request was made by a HTTP Method other than `GET`, `HEAD` or `OPTIONS`. For example, `POST`, `PUT` or `DELETE`.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ping",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ping"
+                  ]
+                }
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"Any type\"\n}",
+              "createdAt": "2026-07-28T01:17:26.000Z",
+              "updatedAt": "2026-07-28T01:17:26.000Z",
+              "uid": "35240-cdf558fc-aff8-4f9a-8f6d-35aa8a21df2f"
+            }
+          ],
+          "createdAt": "2026-07-28T01:17:26.000Z",
+          "updatedAt": "2026-07-28T01:17:26.000Z",
+          "uid": "35240-a7ee2422-f30f-4e94-a7ee-8290f4ab12fe"
+        }
+      ],
+      "id": "74653fb7-4dd0-488e-90ce-602c6410bba3",
+      "createdAt": "2026-07-28T01:17:26.000Z",
+      "updatedAt": "2026-07-28T01:17:26.000Z",
+      "uid": "35240-74653fb7-4dd0-488e-90ce-602c6410bba3"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://global-api-sandbox.afterpay.com"
+    }
+  ]
+}

@@ -1,0 +1,461 @@
+{
+  "info": {
+    "_postman_id": "6d9c6d98-47b5-4bc9-9353-81ecd8297239",
+    "name": "Checkouts",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:17:20.000Z",
+    "updatedAt": "2026-07-28T01:17:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6d9c6d98-47b5-4bc9-9353-81ecd8297239"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "checkouts",
+          "item": [
+            {
+              "name": "{token}",
+              "item": [
+                {
+                  "name": "Get Checkout",
+                  "id": "9f3e065f-6108-460b-b9ee-d5a9263556f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/checkouts/:token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "checkouts",
+                        ":token"
+                      ],
+                      "variable": [
+                        {
+                          "id": "42ccfac6-26aa-4e1d-89b7-c7ccf2255825",
+                          "key": "token",
+                          "value": "<string>",
+                          "description": "(Required) The token of the checkout to be retrieved."
+                        }
+                      ]
+                    },
+                    "description": "This endpoint retrieves an incomplete individual checkout by token.\n\nCheckout details are only retained in this temporary format for up to 60 minutes. If a checkout token expires or has an order created against it, it can no longer be retrieved from this endpoint.\nTo retrieve a [Payment](../docs/ONLINE-API/Payment-object.md) record (Afterpay Order) along with its associated checkout details, see Get Payment By Token.\n"
+                  },
+                  "response": [
+                    {
+                      "id": "cef4aa74-b3c9-437e-8e2c-d15611625592",
+                      "name": "Returns an object combining the [Checkout Request](reference/Checkouts.v2.yaml/components/schemas/Checkout-Request) and [Checkout Response](reference/Checkouts.v2.yaml/components/schemas/Checkout-Response) for a provided token.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/checkouts/:token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "checkouts",
+                            ":token"
+                          ],
+                          "variable": [
+                            {
+                              "key": "token"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"token\": \"<string>\",\n  \"expires\": \"<string>\",\n  \"redirectCheckoutUrl\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"GB\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"CA\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"USD\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"STANDARD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"CAD\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"mode\": \"standard\"\n}",
+                      "createdAt": "2026-07-28T01:17:20.000Z",
+                      "updatedAt": "2026-07-28T01:17:20.000Z",
+                      "uid": "35240-cef4aa74-b3c9-437e-8e2c-d15611625592"
+                    },
+                    {
+                      "id": "e634f425-920e-4d9c-a59e-5c6a0ce67022",
+                      "name": "No checkout token was provided.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/checkouts/:token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "checkouts",
+                            ":token"
+                          ],
+                          "variable": [
+                            {
+                              "key": "token"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:20.000Z",
+                      "updatedAt": "2026-07-28T01:17:20.000Z",
+                      "uid": "35240-e634f425-920e-4d9c-a59e-5c6a0ce67022"
+                    },
+                    {
+                      "id": "c1fa1ca8-115f-45ee-b203-25ea09888ff1",
+                      "name": "The checkout token is invalid, expired, completed, or does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) ",
+                            "key": "User-Agent",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/checkouts/:token",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "checkouts",
+                            ":token"
+                          ],
+                          "variable": [
+                            {
+                              "key": "token"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Precondition Failed",
+                      "code": 412,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"Any type\"\n}",
+                      "createdAt": "2026-07-28T01:17:20.000Z",
+                      "updatedAt": "2026-07-28T01:17:20.000Z",
+                      "uid": "35240-c1fa1ca8-115f-45ee-b203-25ea09888ff1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:17:20.000Z",
+                  "updatedAt": "2026-07-28T01:17:20.000Z",
+                  "uid": "35240-9f3e065f-6108-460b-b9ee-d5a9263556f4"
+                }
+              ],
+              "id": "36689c03-cf7b-45e2-80be-d048d01382ab",
+              "createdAt": "2026-07-28T01:17:20.000Z",
+              "updatedAt": "2026-07-28T01:17:20.000Z",
+              "uid": "35240-36689c03-cf7b-45e2-80be-d048d01382ab"
+            },
+            {
+              "name": "Create Checkout",
+              "id": "a9f5658f-4396-403e-9f30-79cc9dc0f9d3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"NZD\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"AU\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"US\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"EXPRESS\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"GBP\"\n  },\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"mode\": \"standard\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/checkouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "checkouts"
+                  ]
+                },
+                "description": "The `checkouts` endpoint is responsible for creating a new checkout and returning the associated checkout token.\n"
+              },
+              "response": [
+                {
+                  "id": "3ab9219e-39ee-4d82-9aff-c0f3663572c7",
+                  "name": "Returns a token, expiry date/time, and checkout URL if successful.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"NZD\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"AU\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"US\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"EXPRESS\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"GBP\"\n  },\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"mode\": \"standard\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/checkouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "checkouts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"token\": \"<string>\",\n  \"expires\": \"<string>\",\n  \"redirectCheckoutUrl\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:17:20.000Z",
+                  "updatedAt": "2026-07-28T01:17:20.000Z",
+                  "uid": "35240-3ab9219e-39ee-4d82-9aff-c0f3663572c7"
+                },
+                {
+                  "id": "721dbe36-d32e-4b20-9069-8702fb5c0f7b",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"NZD\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"AU\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"US\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"EXPRESS\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"GBP\"\n  },\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"mode\": \"standard\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/checkouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "checkouts"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"Any type\"\n}",
+                  "createdAt": "2026-07-28T01:17:20.000Z",
+                  "updatedAt": "2026-07-28T01:17:20.000Z",
+                  "uid": "35240-721dbe36-d32e-4b20-9069-8702fb5c0f7b"
+                },
+                {
+                  "id": "27f94b7e-829e-429e-9092-7c8e179d9af9",
+                  "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object | One or more required fields were missing or invalid. |\n| unsupported_payment_type | The `amount` is outside of the merchant's payment limits, as returned by GET Configuration. |\n| unsupported_cu",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"NZD\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"AU\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"US\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"EXPRESS\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"USD\"\n  },\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"GBP\"\n  },\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"CAD\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"AUD\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"mode\": \"standard\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/checkouts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "checkouts"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"Any type\"\n}",
+                  "createdAt": "2026-07-28T01:17:20.000Z",
+                  "updatedAt": "2026-07-28T01:17:20.000Z",
+                  "uid": "35240-27f94b7e-829e-429e-9092-7c8e179d9af9"
+                }
+              ],
+              "createdAt": "2026-07-28T01:17:20.000Z",
+              "updatedAt": "2026-07-28T01:17:20.000Z",
+              "uid": "35240-a9f5658f-4396-403e-9f30-79cc9dc0f9d3"
+            }
+          ],
+          "id": "bc257f43-3b6f-4020-8b7f-1b00011c7e93",
+          "createdAt": "2026-07-28T01:17:20.000Z",
+          "updatedAt": "2026-07-28T01:17:20.000Z",
+          "uid": "35240-bc257f43-3b6f-4020-8b7f-1b00011c7e93"
+        }
+      ],
+      "id": "0b6880e4-7c13-42d4-a6ce-3401e2ddfa49",
+      "createdAt": "2026-07-28T01:17:20.000Z",
+      "updatedAt": "2026-07-28T01:17:20.000Z",
+      "uid": "35240-0b6880e4-7c13-42d4-a6ce-3401e2ddfa49"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://global-api-sandbox.afterpay.com"
+    }
+  ]
+}

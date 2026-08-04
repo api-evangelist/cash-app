@@ -1,0 +1,529 @@
+{
+  "info": {
+    "_postman_id": "ae5c62b0-2753-4478-9e4e-2c4d590fc661",
+    "name": "Customer Request API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:17:16.000Z",
+    "updatedAt": "2026-07-28T01:17:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ae5c62b0-2753-4478-9e4e-2c4d590fc661"
+  },
+  "item": [
+    {
+      "name": "requests",
+      "item": [
+        {
+          "name": "{request_id}",
+          "item": [
+            {
+              "name": "Retrieve request",
+              "id": "a9ad4d31-e646-4648-9848-93c8d7bba13c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/requests/:request_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f5e439f2-58bf-402e-9558-4cc59d64573b",
+                      "key": "request_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Retrieves a customer request by its ID."
+              },
+              "response": [
+                {
+                  "id": "61c39930-a695-4671-b3dd-e4067ea31b93",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/requests/:request_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requests",
+                        ":request_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "request_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"request\": {\n    \"id\": \"<string>\",\n    \"status\": \"PENDING\",\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"redirect_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"expires_at\": \"<dateTime>\",\n    \"origin\": {\n      \"type\": \"REQUEST_INITIATOR\",\n      \"id\": \"<string>\"\n    },\n    \"channel\": \"IN_APP\",\n    \"auth_flow_triggers\": {\n      \"qr_code_image_url\": \"<uri>\",\n      \"qr_code_svg_url\": \"<uri>\",\n      \"mobile_url\": \"<uri>\",\n      \"refreshes_at\": \"<dateTime>\",\n      \"desktop_url\": \"<uri>\"\n    },\n    \"grants\": [\n      {\n        \"id\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"action\": {\n          \"scope_id\": \"<string>\",\n          \"type\": \"ONE_TIME_PAYMENT\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"USD\"\n        },\n        \"status\": \"REVOKED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"IN_PERSON\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"expires_at\": \"<dateTime>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"action\": {\n          \"scope_id\": \"<string>\",\n          \"type\": \"ONE_TIME_PAYMENT\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"USD\"\n        },\n        \"status\": \"REVOKED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"IN_PERSON\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"expires_at\": \"<dateTime>\"\n      }\n    ],\n    \"reference_id\": \"<string>\",\n    \"requester_profile\": {\n      \"name\": \"<string>\",\n      \"logo_url\": \"<uri>\"\n    },\n    \"customer_profile\": {\n      \"id\": \"<string>\",\n      \"cashtag\": \"<string>\"\n    },\n    \"metadata\": {\n      \"ut45\": \"<string>\",\n      \"consecteturb\": \"<string>\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:17:17.000Z",
+                  "updatedAt": "2026-07-28T01:17:17.000Z",
+                  "uid": "35240-61c39930-a695-4671-b3dd-e4067ea31b93"
+                },
+                {
+                  "id": "14cc7640-a201-4ee4-9e26-3dbf02325fa2",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/requests/:request_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requests",
+                        ":request_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "request_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"category\": \"GRANT_ERROR\",\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"category\": \"AUTHENTICATION_ERROR\",\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:17:17.000Z",
+                  "updatedAt": "2026-07-28T01:17:17.000Z",
+                  "uid": "35240-14cc7640-a201-4ee4-9e26-3dbf02325fa2"
+                }
+              ],
+              "createdAt": "2026-07-28T01:17:17.000Z",
+              "updatedAt": "2026-07-28T01:17:17.000Z",
+              "uid": "35240-a9ad4d31-e646-4648-9848-93c8d7bba13c"
+            },
+            {
+              "name": "Update request",
+              "id": "7f97c234-b2c5-42d3-a19f-3b89232bec58",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"<string,null>\",\n    \"metadata\": {\n      \"ut825\": \"<string>\",\n      \"minim_3\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/requests/:request_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9b2b0558-16f9-48c0-8d6a-778dd3035fe8",
+                      "key": "request_id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Updates a customer request. The request must have its `status` in a `PENDING` state to successfully update.\n\nTo clear a field, set it to `null`. Fields that are not provided in the request will not be changed.\nIf updating an array field, the entire contents of the array must be passed."
+              },
+              "response": [
+                {
+                  "id": "08f40f57-0bc2-4113-a8d7-4ccecfef7f11",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"<string,null>\",\n    \"metadata\": {\n      \"ut825\": \"<string>\",\n      \"minim_3\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/requests/:request_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requests",
+                        ":request_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "request_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"request\": {\n    \"id\": \"<string>\",\n    \"status\": \"PENDING\",\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"redirect_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"expires_at\": \"<dateTime>\",\n    \"origin\": {\n      \"type\": \"REQUEST_INITIATOR\",\n      \"id\": \"<string>\"\n    },\n    \"channel\": \"ONLINE\",\n    \"auth_flow_triggers\": {\n      \"qr_code_image_url\": \"<uri>\",\n      \"qr_code_svg_url\": \"<uri>\",\n      \"mobile_url\": \"<uri>\",\n      \"refreshes_at\": \"<dateTime>\",\n      \"desktop_url\": \"<uri>\"\n    },\n    \"grants\": [\n      {\n        \"id\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"action\": {\n          \"scope_id\": \"<string>\",\n          \"type\": \"ONE_TIME_PAYMENT\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"USD\"\n        },\n        \"status\": \"EXPIRED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"ONLINE\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"expires_at\": \"<dateTime>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"action\": {\n          \"scope_id\": \"<string>\",\n          \"type\": \"ONE_TIME_PAYMENT\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"USD\"\n        },\n        \"status\": \"REVOKED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"ONLINE\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"expires_at\": \"<dateTime>\"\n      }\n    ],\n    \"reference_id\": \"<string>\",\n    \"requester_profile\": {\n      \"name\": \"<string>\",\n      \"logo_url\": \"<uri>\"\n    },\n    \"customer_profile\": {\n      \"id\": \"<string>\",\n      \"cashtag\": \"<string>\"\n    },\n    \"metadata\": {\n      \"cillumfb9\": \"<string>\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T01:17:17.000Z",
+                  "updatedAt": "2026-07-28T01:17:17.000Z",
+                  "uid": "35240-08f40f57-0bc2-4113-a8d7-4ccecfef7f11"
+                },
+                {
+                  "id": "6b92551c-319f-4d85-ba54-d76dcfdfa6b0",
+                  "name": "Bad Request",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"<string,null>\",\n    \"metadata\": {\n      \"ut825\": \"<string>\",\n      \"minim_3\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/requests/:request_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requests",
+                        ":request_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "request_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"category\": \"GRANT_ERROR\",\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"category\": \"AUTHENTICATION_ERROR\",\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:17:17.000Z",
+                  "updatedAt": "2026-07-28T01:17:17.000Z",
+                  "uid": "35240-6b92551c-319f-4d85-ba54-d76dcfdfa6b0"
+                },
+                {
+                  "id": "5ea883d5-83c7-4e4a-a474-42688732faf0",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "description": "(Required) ",
+                        "key": "User-Agent",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"<string,null>\",\n    \"metadata\": {\n      \"ut825\": \"<string>\",\n      \"minim_3\": \"<string>\"\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/requests/:request_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requests",
+                        ":request_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "request_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"category\": \"GRANT_ERROR\",\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"field\": \"<string>\"\n    },\n    {\n      \"category\": \"AUTHENTICATION_ERROR\",\n      \"code\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"field\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:17:17.000Z",
+                  "updatedAt": "2026-07-28T01:17:17.000Z",
+                  "uid": "35240-5ea883d5-83c7-4e4a-a474-42688732faf0"
+                }
+              ],
+              "createdAt": "2026-07-28T01:17:17.000Z",
+              "updatedAt": "2026-07-28T01:17:17.000Z",
+              "uid": "35240-7f97c234-b2c5-42d3-a19f-3b89232bec58"
+            }
+          ],
+          "id": "27fc4362-8f2a-4b89-98a1-3bb212868297",
+          "createdAt": "2026-07-28T01:17:17.000Z",
+          "updatedAt": "2026-07-28T01:17:17.000Z",
+          "uid": "35240-27fc4362-8f2a-4b89-98a1-3bb212868297"
+        },
+        {
+          "name": "Create request",
+          "id": "fe4994b9-01e2-4041-9454-5a2a4e46eaaf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"<string>\",\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"channel\": \"ONLINE\",\n    \"redirect_url\": \"<uri>\",\n    \"reference_id\": \"<string>\",\n    \"metadata\": {\n      \"none_6\": \"<string>\",\n      \"laborum_e\": \"<string>\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/requests",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "requests"
+              ]
+            },
+            "description": "Creates a request to perform an action on a customer's account. All available actions can be found in the `action` schema."
+          },
+          "response": [
+            {
+              "id": "0b3cdda3-c4bf-4962-bcde-a023ca3e5cfe",
+              "name": "Created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotency_key\": \"<string>\",\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"channel\": \"ONLINE\",\n    \"redirect_url\": \"<uri>\",\n    \"reference_id\": \"<string>\",\n    \"metadata\": {\n      \"none_6\": \"<string>\",\n      \"laborum_e\": \"<string>\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/requests",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requests"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"request\": {\n    \"id\": \"<string>\",\n    \"status\": \"PENDING\",\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"USD\"\n      }\n    ],\n    \"redirect_url\": \"<uri>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"expires_at\": \"<dateTime>\",\n    \"origin\": {\n      \"type\": \"DIRECT\",\n      \"id\": \"<string>\"\n    },\n    \"channel\": \"IN_APP\",\n    \"auth_flow_triggers\": {\n      \"qr_code_image_url\": \"<uri>\",\n      \"qr_code_svg_url\": \"<uri>\",\n      \"mobile_url\": \"<uri>\",\n      \"refreshes_at\": \"<dateTime>\",\n      \"desktop_url\": \"<uri>\"\n    },\n    \"grants\": [\n      {\n        \"id\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"action\": {\n          \"scope_id\": \"<string>\",\n          \"type\": \"ONE_TIME_PAYMENT\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"USD\"\n        },\n        \"status\": \"REVOKED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"IN_PERSON\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"expires_at\": \"<dateTime>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"customer_id\": \"<string>\",\n        \"request_id\": \"<string>\",\n        \"action\": {\n          \"scope_id\": \"<string>\",\n          \"type\": \"ONE_TIME_PAYMENT\",\n          \"amount\": \"<integer>\",\n          \"currency\": \"USD\"\n        },\n        \"status\": \"EXPIRED\",\n        \"type\": \"ONE_TIME\",\n        \"channel\": \"ONLINE\",\n        \"created_at\": \"<dateTime>\",\n        \"updated_at\": \"<dateTime>\",\n        \"expires_at\": \"<dateTime>\"\n      }\n    ],\n    \"reference_id\": \"<string>\",\n    \"requester_profile\": {\n      \"name\": \"<string>\",\n      \"logo_url\": \"<uri>\"\n    },\n    \"customer_profile\": {\n      \"id\": \"<string>\",\n      \"cashtag\": \"<string>\"\n    },\n    \"metadata\": {\n      \"aute_00f\": \"<string>\",\n      \"in75a\": \"<string>\",\n      \"nisi_3f\": \"<string>\",\n      \"elited0\": \"<string>\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T01:17:17.000Z",
+              "updatedAt": "2026-07-28T01:17:17.000Z",
+              "uid": "35240-0b3cdda3-c4bf-4962-bcde-a023ca3e5cfe"
+            }
+          ],
+          "createdAt": "2026-07-28T01:17:17.000Z",
+          "updatedAt": "2026-07-28T01:17:17.000Z",
+          "uid": "35240-fe4994b9-01e2-4041-9454-5a2a4e46eaaf"
+        }
+      ],
+      "id": "1f306a5a-f2d4-4946-9118-3eb701a85041",
+      "createdAt": "2026-07-28T01:17:17.000Z",
+      "updatedAt": "2026-07-28T01:17:17.000Z",
+      "uid": "35240-1f306a5a-f2d4-4946-9118-3eb701a85041"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.cash.app/customer-request/v1"
+    }
+  ]
+}

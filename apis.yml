@@ -19,6 +19,17 @@ description: Cash App is a consumer mobile-first financial services platform ope
   data is reached by third parties through aggregators (e.g. Plaid) rather than a
   first-party FDX data-access API; no FDX participation or CFPB Section 1033
   data-rights posture is documented in the developer portal.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-11'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Financial Services
@@ -214,6 +225,8 @@ apis:
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
 common:
+- type: AgentSkill
+  url: skills/cash-app-accept-payment.md
 - type: APIReference
   url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api/list-brands
 - type: PostmanWorkspace

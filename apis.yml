@@ -242,15 +242,15 @@ common:
   url: https://cash.app/help
 - type: StatusPage
   url: https://status.cash.app
-- type: Deprecation
+- type: DeprecationPolicy
   url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/requests/api-versioning
 - type: Lifecycle
   url: lifecycle/cash-app-lifecycle.yml
 - type: GettingStarted
   url: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
-- type: SignUp
+- type: Signup
   url: https://developers.cash.app/cash-app-pay-partner-api/guides/partnerships/partner-with-cash-app-pay
-- type: Postman
+- type: PostmanCollection
   url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/sandbox/postman-collection
 - type: ChangeLog
   url: changelog/cash-app-changelog.yml
@@ -290,7 +290,7 @@ common:
   url: data-model/cash-app-data-model.yml
 - type: Webhooks
   url: asyncapi/cash-app-webhooks.yml
-- type: AgentSkill
+- type: AgentSkills
   url: skills/_index.yml
 - type: Overlay
   url: overlays/cash-app-network-api-overlay.yaml

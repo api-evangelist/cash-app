@@ -1,0 +1,441 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Payments",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "toCreatedDate",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive end date and time to search, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format."
+              },
+              {
+                "name": "fromCreatedDate",
+                "value": "",
+                "type": "query",
+                "description": "An inclusive start date and time to search, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format."
+              },
+              {
+                "name": "tokens",
+                "value": "",
+                "type": "query",
+                "description": "One or more order tokens to search for."
+              },
+              {
+                "name": "includeNextLink",
+                "value": "",
+                "type": "query",
+                "description": "Returns a modified pagination object which includes a URL to return the next page. The default value is false."
+              },
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "One or more Afterpay Order IDs to search for."
+              },
+              {
+                "name": "merchantReferences",
+                "value": "",
+                "type": "query",
+                "description": "One or more Merchant Reference IDs to search for."
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "One or more Afterpay Order Statuses to search for. Possible values include \"APPROVED\" and \"DECLINED\"."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "A field to order results by. If provided, must be one of \"createdAt\", \"id\", \"totalAmount\", \"merchantReference\" or \"email\"."
+              },
+              {
+                "name": "ascending",
+                "value": "",
+                "type": "query",
+                "description": "`true` to order results in ascending order, or `false` for descending order."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves a collection of payments along with their order details.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n"
+        },
+        {
+          "info": {
+            "name": "Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/auth",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint requests a payment auth, which determines the order approval status. If approved, the auth has an expiration date and time, which is returned in the events list for the \"AUTH_APPROVED\" payment event. Authorization expires after 13 days.\n\nThis operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.\n\nThe customer's payment plan starts at the time of auth approval.\n\n**No"
+        },
+        {
+          "info": {
+            "name": "Capture Full Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/capture",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint makes a payment capture for the full value of the payment plan.\n\nThis operation is idempotent based on the token, which allows for the safe retry of requests, guaranteeing the payment operation is only made once.\n\nSince the idempotency of this endpoint is based on the token, the inclusion of a `requestId` is not required.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n"
+        },
+        {
+          "info": {
+            "name": "Get Payment By Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/:orderId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the Afterpay Order, for which a Payment event has been completed."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves an individual payment along with its order details.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n"
+        },
+        {
+          "info": {
+            "name": "Update Payment by Order ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/:orderId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The Order ID to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is to create merchant side order ID's following the Afterpay order ID creation. Call the endpoint immediately after the Afterpay order is created."
+        },
+        {
+          "info": {
+            "name": "Capture Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/:orderId/capture",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint captures a full or partial payment. Any amounts successfully captured are settled from Afterpay to the merchant's nominated bank account on the following day. Records of all payments captured against an order are returned in the events list as events of type, \"CAPTURED\".\n\n**Note:** Authorization expires after 13 days and then the transaction is automatically voided. Voided transactions are frozen and cannot be captured, reopened or changed in any way. In this case your only option "
+        },
+        {
+          "info": {
+            "name": "Update Shipping Courier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/:orderId/courier",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique Afterpay Order ID to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint updates an order with shipping courier information. The Afterpay team may use this information when providing support.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n"
+        },
+        {
+          "info": {
+            "name": "Create Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/:orderId/refund",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique Afterpay Order ID to apply the refund to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint performs a full or partial refund. The refund operation is idempotent if a unique `requestId` and `merchantReference` are provided.\n\nIf using the Deferred Payment Flow, be aware that only captured funds can be refunded. Do not create refunds after 120 days from the date of purchase.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n"
+        },
+        {
+          "info": {
+            "name": "Void",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/:orderId/void",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path",
+                "description": "The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint voids the remaining `openToCapture` amount of the payment auth, and refunds the customer.\n\n<Info title=\"Note\">\n  To make a partial void, specify an amount in the request body.\n</Info>\n\nThis operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.\n\n\n\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read   "
+        },
+        {
+          "info": {
+            "name": "Get Payment By Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/token::token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Order token that was used to complete payment."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves an individual payment along with its order details.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n"
+        },
+        {
+          "info": {
+            "name": "Reverse Payment By Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/payments/token::token/reversal",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The token of the checkout to be reversed (voided)."
+              }
+            ]
+          },
+          "docs": "This endpoint makes a reversal of the checkout that is used to start the Afterpay payment process. This cancels the order asynchronously as soon as it is created without the need of an additional call to the void endpoint. For a payment to be eligible, the order must be in an Auth-Approved or Captured state, and it must be issued within 10 minutes of the order being created.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

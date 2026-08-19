@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Checkouts",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/checkouts",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The `checkouts` endpoint is responsible for creating a new checkout and returning the associated checkout token.\n"
+        },
+        {
+          "info": {
+            "name": "Get Checkout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/checkouts/:token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The token of the checkout to be retrieved."
+              }
+            ]
+          },
+          "docs": "This endpoint retrieves an incomplete individual checkout by token.\n\nCheckout details are only retained in this temporary format for up to 60 minutes. If a checkout token expires or has an order created against it, it can no longer be retrieved from this endpoint.\nTo retrieve a [Payment](../docs/ONLINE-API/Payment-object.md) record (Afterpay Order) along with its associated checkout details, see Get Payment By Token.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

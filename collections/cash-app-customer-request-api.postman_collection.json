@@ -1,0 +1,558 @@
+{
+  "item": [
+    {
+      "id": "d92cceef-2c06-4cef-bcda-5bf40e74c364",
+      "name": "requests",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "11b5cbce-0ca4-4df9-af9a-a26b97dfeda2",
+          "name": "Create request",
+          "request": {
+            "name": "Create request",
+            "description": {
+              "content": "Creates a request to perform an action on a customer's account. All available actions can be found in the `action` schema.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "requests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"<string>\",\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\"\n      }\n    ],\n    \"channel\": \"<string>\",\n    \"redirect_url\": \"<uri>\",\n    \"reference_id\": \"<string>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1b6fe4bd-2250-4113-ba8a-974a382ac441",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "requests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotency_key\": \"string\",\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 5488,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 5034,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"channel\": \"IN_APP\",\n    \"redirect_url\": \"https://hCpXgQYEexggRdqwGDdepLgjhaYo.bsuUXU0hY163gTGuvBuB2PEZ.th\",\n    \"reference_id\": \"string\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request\": {\n    \"id\": \"string\",\n    \"status\": \"PENDING\",\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 273,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 1365,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"redirect_url\": \"https://CLtUXvWcfgqie.qjyjD-e.hOLWacWSPrZm9urevP-dPvkOlEUhEIdGRTDtvP\",\n    \"created_at\": \"2021-12-15T11:07:06.030Z\",\n    \"updated_at\": \"2016-05-04T00:23:54.293Z\",\n    \"expires_at\": \"2020-12-23T17:20:34.126Z\",\n    \"origin\": {\n      \"type\": \"DIRECT\",\n      \"id\": \"string\"\n    },\n    \"channel\": \"IN_PERSON\",\n    \"auth_flow_triggers\": {\n      \"qr_code_image_url\": \"https://cnuRBlcanTrLZVOzyYTnjFbx.ithf,a2BrLclwH+AQUpSdv.E,3YteuRLmp-OBc.Fxatn2T5Nd38vR.7\",\n      \"qr_code_svg_url\": \"http://XZJsH.vytNpzj\",\n      \"mobile_url\": \"https://LHFmOTiQFFHHm.qsxyxU,6ybdn5\",\n      \"refreshes_at\": \"1958-02-18T10:55:05.229Z\",\n      \"desktop_url\": \"http://LycjieJfcrfVATCUsxOcYKRQHk.eibfO-BCERnm7zOEb7KbXfn8dmVtkIY6asTO8XY1QcKvwKf\"\n    },\n    \"grants\": [\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"request_id\": \"string\",\n        \"action\": {\n          \"scope_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"ACTIVE\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"ONLINE\",\n        \"created_at\": \"2015-01-25T02:15:53.074Z\",\n        \"updated_at\": \"1957-11-09T05:32:30.769Z\",\n        \"expires_at\": \"2005-12-15T04:30:01.898Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"request_id\": \"string\",\n        \"action\": {\n          \"scope_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"EXPIRED\",\n        \"type\": \"ONE_TIME\",\n        \"channel\": \"IN_PERSON\",\n        \"created_at\": \"1995-11-01T02:11:23.499Z\",\n        \"updated_at\": \"1977-10-25T07:24:23.929Z\",\n        \"expires_at\": \"1997-01-18T06:36:51.518Z\"\n      }\n    ],\n    \"reference_id\": \"string\",\n    \"requester_profile\": {\n      \"name\": \"string\",\n      \"logo_url\": \"http://eAfLJTNsSNmf.uobijnOzxCbqvxLayOA-X2UkbM-MbhN-gxxkvJZJnrBiG,lpSM5sWDOAtFIfvaULJJOzjIB\"\n    },\n    \"customer_profile\": {\n      \"id\": \"string\",\n      \"cashtag\": \"string\"\n    },\n    \"metadata\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "715f3775-a17b-4586-ac49-10f12f708708",
+          "name": "Retrieve request",
+          "request": {
+            "name": "Retrieve request",
+            "description": {
+              "content": "Retrieves a customer request by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "requests",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2aa44c26-6e28-427d-a82a-473606993169",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request\": {\n    \"id\": \"string\",\n    \"status\": \"PENDING\",\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 5736,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3484,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"redirect_url\": \"http://AAnjMLDUMhyATuOxsDOSHgMvIaJF.xgsHwdIoQ62fGDX2nRd2om,tDBKAEZylvRJaLkU0bDI0N\",\n    \"created_at\": \"1978-10-12T19:59:39.168Z\",\n    \"updated_at\": \"1984-04-07T19:52:10.165Z\",\n    \"expires_at\": \"1967-05-16T02:35:32.500Z\",\n    \"origin\": {\n      \"type\": \"DIRECT\",\n      \"id\": \"string\"\n    },\n    \"channel\": \"IN_PERSON\",\n    \"auth_flow_triggers\": {\n      \"qr_code_image_url\": \"https://PqxvLSVcmuPV.gmDIYbAJ\",\n      \"qr_code_svg_url\": \"https://RIEiVGknjYFKkYUFDjNdEiefII.jszCUR9AeAx-OCXYp-ev\",\n      \"mobile_url\": \"http://bECCFfgwNFTPyIePreSECTaI.wmqjrXehXkV2YAZAyTDwZr1arhHUZhzSxAd3FPqoJOw5olTxTii8S\",\n      \"refreshes_at\": \"2001-10-29T08:02:10.191Z\",\n      \"desktop_url\": \"https://yHAyhNgWkKSJzQaGxtRbVzvMWe.qsicg,vt0He5-calH8m1\"\n    },\n    \"grants\": [\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"request_id\": \"string\",\n        \"action\": {\n          \"scope_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"REVOKED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"IN_PERSON\",\n        \"created_at\": \"1975-05-07T19:30:52.283Z\",\n        \"updated_at\": \"2001-11-10T08:35:30.511Z\",\n        \"expires_at\": \"1997-08-08T20:21:04.727Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"request_id\": \"string\",\n        \"action\": {\n          \"scope_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"ACTIVE\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"IN_APP\",\n        \"created_at\": \"2006-06-10T08:28:13.574Z\",\n        \"updated_at\": \"1966-04-09T13:21:55.421Z\",\n        \"expires_at\": \"1975-11-08T12:47:17.879Z\"\n      }\n    ],\n    \"reference_id\": \"string\",\n    \"requester_profile\": {\n      \"name\": \"string\",\n      \"logo_url\": \"https://MmBuOWGwIanDeLkmnfe.enhwDDy8lWRCMdN7S\"\n    },\n    \"customer_profile\": {\n      \"id\": \"string\",\n      \"cashtag\": \"string\"\n    },\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "422952f9-6ed6-4112-85b3-e07c5addcf87",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"BRAND_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ae7ff69-b7de-4ea8-8368-4be927698bad",
+          "name": "Update request",
+          "request": {
+            "name": "Update request",
+            "description": {
+              "content": "Updates a customer request. The request must have its `status` in a `PENDING` state to successfully update.\n\nTo clear a field, set it to `null`. Fields that are not provided in the request will not be changed.\nIf updating an array field, the entire contents of the array must be passed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "requests",
+                ":request_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "request_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\"\n      },\n      {\n        \"scope_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"amount\": \"<integer>\",\n        \"currency\": \"<string>\"\n      }\n    ],\n    \"reference_id\": \"<string,null>\",\n    \"metadata\": {\n      \"key_0\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9973500e-d5b7-47d9-97a6-46abb7ca1a04",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3953,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3784,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"string\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"request\": {\n    \"id\": \"string\",\n    \"status\": \"PENDING\",\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3469,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 1282,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"redirect_url\": \"http://ArxgcZwghXJKmdLSEniyxiCUu.zipaG7qCOC,OPaB\",\n    \"created_at\": \"1995-12-31T10:06:46.701Z\",\n    \"updated_at\": \"1957-12-17T20:08:43.054Z\",\n    \"expires_at\": \"1977-10-23T11:41:42.872Z\",\n    \"origin\": {\n      \"type\": \"DIRECT\",\n      \"id\": \"string\"\n    },\n    \"channel\": \"IN_APP\",\n    \"auth_flow_triggers\": {\n      \"qr_code_image_url\": \"https://dVpODvSekpXItwMzHMyKWXcZDsuKvXNg.yprvqNZLek65dq,cj2SGCNMVT6wKo1nSSW8Y5rpj.wIoApgClwhWP\",\n      \"qr_code_svg_url\": \"https://rriRXrMbkWklDBCwhYfyhzS.omha-4ZY0sgBs.dUz5hbijzlDBsAH,sIEz-lvLx\",\n      \"mobile_url\": \"https://S.otcbx.fVfnhrE7js3aHbIK1\",\n      \"refreshes_at\": \"1965-01-12T05:44:30.732Z\",\n      \"desktop_url\": \"https://vvihgImPkjOPRmFMwEdbylAQEEYDXOuv.xldya4\"\n    },\n    \"grants\": [\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"request_id\": \"string\",\n        \"action\": {\n          \"scope_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"EXPIRED\",\n        \"type\": \"ONE_TIME\",\n        \"channel\": \"ONLINE\",\n        \"created_at\": \"1951-09-11T00:22:41.958Z\",\n        \"updated_at\": \"1963-04-24T18:43:25.701Z\",\n        \"expires_at\": \"1957-12-24T21:55:53.060Z\"\n      },\n      {\n        \"id\": \"string\",\n        \"customer_id\": \"string\",\n        \"request_id\": \"string\",\n        \"action\": {\n          \"scope_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"amount\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"currency\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"status\": \"CONSUMED\",\n        \"type\": \"EXTENDED\",\n        \"channel\": \"IN_APP\",\n        \"created_at\": \"1973-05-13T13:48:15.212Z\",\n        \"updated_at\": \"2026-06-18T16:42:35.739Z\",\n        \"expires_at\": \"1976-03-23T19:09:53.892Z\"\n      }\n    ],\n    \"reference_id\": \"string\",\n    \"requester_profile\": {\n      \"name\": \"string\",\n      \"logo_url\": \"http://jTPNxXmaVSvzeoGhaGwKU.twhraNtqCgpWhviFeN\"\n    },\n    \"customer_profile\": {\n      \"id\": \"string\",\n      \"cashtag\": \"string\"\n    },\n    \"metadata\": {\n      \"key_0\": \"string\"\n    },\n    \"customer_metadata\": {\n      \"reference_id\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f4fdf00-9440-427b-a342-8b2b2fb01df1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3953,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3784,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"string\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"BRAND_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48d1d8e7-0681-43a4-9be2-e40ddfa45b7f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "requests",
+                    ":request_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "request_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"request\": {\n    \"actions\": [\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3953,\n        \"currency\": \"USD\"\n      },\n      {\n        \"scope_id\": \"string\",\n        \"type\": \"ONE_TIME_PAYMENT\",\n        \"amount\": 3784,\n        \"currency\": \"USD\"\n      }\n    ],\n    \"reference_id\": \"string\",\n    \"metadata\": {\n      \"key_0\": \"string\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"BRAND_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cash.app/customer-request/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "32377d59-ada3-4a85-aedf-e839b61c99b5",
+    "name": "Customer Request API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

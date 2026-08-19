@@ -1,0 +1,3115 @@
+{
+  "item": [
+    {
+      "id": "9273e5b3-cd48-437c-9a68-a8383f4b1544",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5955f44c-3dd6-434c-8199-584817febb64",
+          "name": "List Payments",
+          "request": {
+            "name": "List Payments",
+            "description": {
+              "content": "This endpoint retrieves a collection of payments along with their order details.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "toCreatedDate",
+                  "value": "2020-12-30",
+                  "description": "An inclusive end date and time to search, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format."
+                },
+                {
+                  "disabled": false,
+                  "key": "fromCreatedDate",
+                  "value": "2020-01-01",
+                  "description": "An inclusive start date and time to search, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format."
+                },
+                {
+                  "disabled": false,
+                  "key": "tokens",
+                  "value": "<string>",
+                  "description": "One or more order tokens to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "tokens",
+                  "value": "<string>",
+                  "description": "One or more order tokens to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeNextLink",
+                  "value": "false",
+                  "description": "Returns a modified pagination object which includes a URL to return the next page. The default value is false."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "One or more Afterpay Order IDs to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "One or more Afterpay Order IDs to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchantReferences",
+                  "value": "<string>",
+                  "description": "One or more Merchant Reference IDs to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "merchantReferences",
+                  "value": "<string>",
+                  "description": "One or more Merchant Reference IDs to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "One or more Afterpay Order Statuses to search for. Possible values include \"APPROVED\" and \"DECLINED\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "statuses",
+                  "value": "<string>",
+                  "description": "One or more Afterpay Order Statuses to search for. Possible values include \"APPROVED\" and \"DECLINED\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "createdAt",
+                  "description": "A field to order results by. If provided, must be one of \"createdAt\", \"id\", \"totalAmount\", \"merchantReference\" or \"email\"."
+                },
+                {
+                  "disabled": false,
+                  "key": "ascending",
+                  "value": "false",
+                  "description": "`true` to order results in ascending order, or `false` for descending order."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47880fc8-2dee-46ca-9179-fb0052b8ccd4",
+              "name": "Returns the matching Payment objects, enclosed in a Pagination object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "toCreatedDate",
+                      "value": "2020-12-30"
+                    },
+                    {
+                      "key": "fromCreatedDate",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "tokens",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tokens",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNextLink",
+                      "value": "false"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchantReferences",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchantReferences",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "ascending",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalResults\": 9794,\n  \"offset\": 720,\n  \"limit\": 5779,\n  \"results\": [\n    {\n      \"id\": \"string\",\n      \"token\": \"string\",\n      \"status\": \"APPROVED\",\n      \"created\": \"string\",\n      \"originalAmount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"openToCaptureAmount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentState\": \"PARTIALLY_CAPTURED\",\n      \"merchantReference\": \"string\",\n      \"refunds\": [\n        {\n          \"requestId\": \"string\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"merchantReference\": \"string\",\n          \"refundMerchantReference\": \"string\",\n          \"refundId\": \"string\",\n          \"refundedAt\": \"string\"\n        },\n        {\n          \"requestId\": \"string\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"merchantReference\": \"string\",\n          \"refundMerchantReference\": \"string\",\n          \"refundId\": \"string\",\n          \"refundedAt\": \"string\"\n        }\n      ],\n      \"orderDetails\": {\n        \"consumer\": {\n          \"email\": \"GF6tIoGXhn@GJhfrxwpWOTGLRxMTqRSaquMlrNB.ltp\",\n          \"givenNames\": \"string\",\n          \"surname\": \"string\",\n          \"phoneNumber\": \"string\"\n        },\n        \"billing\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"area1\": \"string\",\n          \"region\": \"string\",\n          \"postcode\": \"string\",\n          \"countryCode\": \"NZ\",\n          \"line2\": \"string\",\n          \"area2\": \"string\",\n          \"phoneNumber\": \"string\"\n        },\n        \"courier\": {\n          \"shippedAt\": \"2008-03-20T09:07:59.923Z\",\n          \"name\": \"string\",\n          \"tracking\": \"string\",\n          \"priority\": \"EXPRESS\"\n        },\n        \"items\": [\n          {\n            \"name\": \"string\",\n            \"quantity\": 3255,\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": \"string\",\n            \"pageUrl\": \"string\",\n            \"imageUrl\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"estimatedShipmentDate\": \"2010-12-29\",\n            \"preorder\": false\n          },\n          {\n            \"name\": \"string\",\n            \"quantity\": 5012,\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": \"string\",\n            \"pageUrl\": \"string\",\n            \"imageUrl\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"estimatedShipmentDate\": \"2007-03-15\",\n            \"preorder\": false\n          }\n        ],\n        \"discounts\": [\n          {\n            \"displayName\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"displayName\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"taxAmount\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"shippingAmount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      \"events\": [\n        {\n          \"id\": \"string\",\n          \"created\": \"string\",\n          \"expires\": \"string\",\n          \"type\": \"CAPTURED\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"paymentEventMerchantReference\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"created\": \"string\",\n          \"expires\": \"string\",\n          \"type\": \"CAPTURED\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"paymentEventMerchantReference\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"token\": \"string\",\n      \"status\": \"APPROVED\",\n      \"created\": \"string\",\n      \"originalAmount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"openToCaptureAmount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentState\": \"CAPTURED\",\n      \"merchantReference\": \"string\",\n      \"refunds\": [\n        {\n          \"requestId\": \"string\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"merchantReference\": \"string\",\n          \"refundMerchantReference\": \"string\",\n          \"refundId\": \"string\",\n          \"refundedAt\": \"string\"\n        },\n        {\n          \"requestId\": \"string\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"merchantReference\": \"string\",\n          \"refundMerchantReference\": \"string\",\n          \"refundId\": \"string\",\n          \"refundedAt\": \"string\"\n        }\n      ],\n      \"orderDetails\": {\n        \"consumer\": {\n          \"email\": \"71U1P@xCmGO.xe\",\n          \"givenNames\": \"string\",\n          \"surname\": \"string\",\n          \"phoneNumber\": \"string\"\n        },\n        \"billing\": {\n          \"name\": \"string\",\n          \"line1\": \"string\",\n          \"area1\": \"string\",\n          \"region\": \"string\",\n          \"postcode\": \"string\",\n          \"countryCode\": \"NZ\",\n          \"line2\": \"string\",\n          \"area2\": \"string\",\n          \"phoneNumber\": \"string\"\n        },\n        \"courier\": {\n          \"shippedAt\": \"2019-05-16T23:16:58.875Z\",\n          \"name\": \"string\",\n          \"tracking\": \"string\",\n          \"priority\": \"STANDARD\"\n        },\n        \"items\": [\n          {\n            \"name\": \"string\",\n            \"quantity\": 7941,\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": \"string\",\n            \"pageUrl\": \"string\",\n            \"imageUrl\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"estimatedShipmentDate\": \"1997-06-25\",\n            \"preorder\": false\n          },\n          {\n            \"name\": \"string\",\n            \"quantity\": 3315,\n            \"price\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sku\": \"string\",\n            \"pageUrl\": \"string\",\n            \"imageUrl\": \"string\",\n            \"categories\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"estimatedShipmentDate\": \"1998-10-17\",\n            \"preorder\": false\n          }\n        ],\n        \"discounts\": [\n          {\n            \"displayName\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"displayName\": \"string\",\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"taxAmount\": {\n          \"amount\": \"string\",\n          \"currency\": \"GBP\"\n        },\n        \"shippingAmount\": {\n          \"amount\": \"string\",\n          \"currency\": \"NZD\"\n        }\n      },\n      \"events\": [\n        {\n          \"id\": \"string\",\n          \"created\": \"string\",\n          \"expires\": \"string\",\n          \"type\": \"EXPIRED\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"paymentEventMerchantReference\": \"string\"\n        },\n        {\n          \"id\": \"string\",\n          \"created\": \"string\",\n          \"expires\": \"string\",\n          \"type\": \"EXPIRED\",\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"paymentEventMerchantReference\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3055d2b5-48ab-4db6-a4d5-35a98ee9077d",
+              "name": "An invalid query parameter was provided. For example, a value for `limit` was provided, but was less than 1 or more than 250. Error code `error`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "toCreatedDate",
+                      "value": "2020-12-30"
+                    },
+                    {
+                      "key": "fromCreatedDate",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "tokens",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tokens",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNextLink",
+                      "value": "false"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchantReferences",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchantReferences",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "ascending",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7383634-49f4-42ae-a536-cbca41e5d797",
+              "name": "This is usually caused by sending a `fromCreatedDate` or `toCreatedDate` in an invalid format. Please ensure the dash and colon characters are included, and any plus characters are URL-encoded. Also, for the array parameters (`ids`, `tokens`, `merchantReferences` and `statuses`), do not use comma-separated values or square brackets. Instead, include each parameter multiple times, as needed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "toCreatedDate",
+                      "value": "2020-12-30"
+                    },
+                    {
+                      "key": "fromCreatedDate",
+                      "value": "2020-01-01"
+                    },
+                    {
+                      "key": "tokens",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tokens",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeNextLink",
+                      "value": "false"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchantReferences",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "merchantReferences",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "statuses",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "ascending",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75595043-bbce-4991-968d-bfb71de63bb9",
+          "name": "Auth",
+          "request": {
+            "name": "Auth",
+            "description": {
+              "content": "This endpoint requests a payment auth, which determines the order approval status. If approved, the auth has an expiration date and time, which is returned in the events list for the \"AUTH_APPROVED\" payment event. Authorization expires after 13 days.\n\nThis operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.\n\nThe customer's payment plan starts at the time of auth approval.\n\n**Note:** Authorization expires after 13 days and then the transaction is automatically voided. Voided transactions are frozen and cannot be reopened or changed in any way. In this case, use the `v2/checkouts` endpoint to create a new order.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"requestid\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"<string>\"\n    },\n    \"subscription\": {\n      \"type\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"intervalCount\": \"<integer>\"\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24df81dd-3c78-4e66-9369-88ee40602c17",
+              "name": "If the payment is approved by Afterpay, a Payment object is returned with a `status` of **APPROVED** and a `paymentState` of **AUTH_APPROVED**.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestid\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"GB\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"CUSTOMER\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"YEAR\",\n      \"intervalCount\": 2694\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"GBP\"\n  },\n  \"paymentState\": \"CAPTURE_DECLINED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"N2jY3kwwothg3@OZESvn.rxl\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"2015-04-21T17:06:57.230Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"STANDARD\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 2807,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"2016-12-29\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 6948,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1979-03-07\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"GBP\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"GBP\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e066f61-8035-4b2a-8194-a7bf808859fe",
+              "name": "If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a `status` of \"DECLINED\" and a `paymentState` of \"AUTH_DECLINED\". advise the customer to contact the Afterpay Customer Service team for more information.\n\nAs well, the following errorCodes are possible:\n| errorCode | Description |\n| --- | --- |\n| invalid_token | The checkout token is invalid, expired, or does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestid\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"GB\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"CUSTOMER\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"YEAR\",\n      \"intervalCount\": 2694\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "881d926a-f726-41e9-ab8d-b77ecf97eccf",
+              "name": "The customer has not confirmed their payment for the order associated with this token. Error code `invalid_order_transaction_status`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestid\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"GB\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"CUSTOMER\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"YEAR\",\n      \"intervalCount\": 2694\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa1d0948-32f5-48b2-91c1-9c609faafc40",
+              "name": "The checkout token was missing or empty. Error code `invalid_object`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestid\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"GB\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"CUSTOMER\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"YEAR\",\n      \"intervalCount\": 2694\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4027a995-764c-452c-bfa7-5d8f3ac16ed0",
+          "name": "Capture Full Payment",
+          "request": {
+            "name": "Capture Full Payment",
+            "description": {
+              "content": "This endpoint makes a payment capture for the full value of the payment plan.\n\nThis operation is idempotent based on the token, which allows for the safe retry of requests, guaranteeing the payment operation is only made once.\n\nSince the idempotency of this endpoint is based on the token, the inclusion of a `requestId` is not required.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"items\": {\n    \"name\": \"<string>\",\n    \"quantity\": \"<integer>\",\n    \"price\": {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    \"sku\": \"<string>\",\n    \"pageUrl\": \"<string>\",\n    \"imageUrl\": \"<string>\",\n    \"categories\": [\n      [\n        \"<string>\",\n        \"<string>\"\n      ],\n      [\n        \"<string>\",\n        \"<string>\"\n      ]\n    ],\n    \"estimatedShipmentDate\": \"<date>\",\n    \"preorder\": false\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"<string>\"\n    },\n    \"subscription\": {\n      \"type\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"intervalCount\": \"<integer>\"\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e4e8706-4f2b-496a-a89d-a0c0106b56b4",
+              "name": "| Status | Description |\n| ----- | ----- |\n| `APPROVED` | If payment is approved by Afterpay, returns a Payment object in response, with a status of \"APPROVED\". |\n| `DECLINED` | If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a status of \"DECLINED\". Please advise the customer to contact the Afterpay Customer Service team for more information. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"items\": {\n    \"name\": \"string\",\n    \"quantity\": 3335,\n    \"price\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    },\n    \"sku\": \"string\",\n    \"pageUrl\": \"string\",\n    \"imageUrl\": \"string\",\n    \"categories\": [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ],\n    \"estimatedShipmentDate\": \"1957-03-17\",\n    \"preorder\": false\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"MONTH\",\n      \"intervalCount\": 4507\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"PARTIALLY_CAPTURED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"RLLnrC8uBD@DRsXxvtdQTseflQFYaajHmyyyqDiXC.nuaz\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1948-07-28T08:21:03.076Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 7727,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1997-04-15\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 9523,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1985-08-21\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_APPROVED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48d1fd09-ef2a-451a-af5d-23f9d6acf120",
+              "name": "The checkout token is invalid, expired, or does not exist. Error code `invalid_token`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"items\": {\n    \"name\": \"string\",\n    \"quantity\": 3335,\n    \"price\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    },\n    \"sku\": \"string\",\n    \"pageUrl\": \"string\",\n    \"imageUrl\": \"string\",\n    \"categories\": [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ],\n    \"estimatedShipmentDate\": \"1957-03-17\",\n    \"preorder\": false\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"MONTH\",\n      \"intervalCount\": 4507\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c834f33-41f6-4d3c-a576-18c3266e445d",
+              "name": "The Consumer has not confirmed their payment for the order associated with this token. Error code `invalid_order_transaction_status`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"items\": {\n    \"name\": \"string\",\n    \"quantity\": 3335,\n    \"price\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    },\n    \"sku\": \"string\",\n    \"pageUrl\": \"string\",\n    \"imageUrl\": \"string\",\n    \"categories\": [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ],\n    \"estimatedShipmentDate\": \"1957-03-17\",\n    \"preorder\": false\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"MONTH\",\n      \"intervalCount\": 4507\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8cab0e9d-9ca3-476c-8f8f-79c7b0990f16",
+              "name": "The checkout token was missing or empty. Error code `invalid_object`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"isCheckoutAdjusted\": \"<boolean>\",\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"items\": {\n    \"name\": \"string\",\n    \"quantity\": 3335,\n    \"price\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    },\n    \"sku\": \"string\",\n    \"pageUrl\": \"string\",\n    \"imageUrl\": \"string\",\n    \"categories\": [\n      [\n        \"string\",\n        \"string\"\n      ],\n      [\n        \"string\",\n        \"string\"\n      ]\n    ],\n    \"estimatedShipmentDate\": \"1957-03-17\",\n    \"preorder\": false\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"VARIABLE\",\n      \"interval\": \"MONTH\",\n      \"intervalCount\": 4507\n    }\n  },\n  \"grantId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d73027a2-65fe-449f-a586-68d125598efe",
+          "name": "Get Payment By Order ID",
+          "request": {
+            "name": "Get Payment By Order ID",
+            "description": {
+              "content": "This endpoint retrieves an individual payment along with its order details.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique ID of the Afterpay Order, for which a Payment event has been completed."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5332948e-187b-4dee-a166-e883ce793eec",
+              "name": "Returns a Payment object in response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, for which a Payment event has been completed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"PARTIALLY_CAPTURED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"RLLnrC8uBD@DRsXxvtdQTseflQFYaajHmyyyqDiXC.nuaz\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1948-07-28T08:21:03.076Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 7727,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1997-04-15\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 9523,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1985-08-21\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_APPROVED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b63b3c9-4b6f-43c4-a10d-5b240479525b",
+              "name": "No Afterpay Order was found matching the `orderId` provided. Error code `not_found`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, for which a Payment event has been completed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f24390d-3b86-4f92-8a46-4ac877f160a4",
+          "name": "Update Payment by Order ID",
+          "request": {
+            "name": "Update Payment by Order ID",
+            "description": {
+              "content": "This endpoint is to create merchant side order ID's following the Afterpay order ID creation. Call the endpoint immediately after the Afterpay order is created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                ":orderId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The Order ID to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantReference\": \"new_merchant_order_id_1234\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a35e9c7c-5e51-4da2-9f85-5e3281944f6c",
+              "name": "Returns object containing the following attributes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The Order ID to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"new_merchant_order_id_1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"string\",\n  \"created\": {},\n  \"originalAmount\": {},\n  \"openToCaptureAmount\": {},\n  \"paymentState\": \"string\",\n  \"merchantReference\": {},\n  \"refunds\": {},\n  \"orderDetails\": {},\n  \"events\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88125a09-e23e-49b0-890c-5059e70d61af",
+              "name": "The Afterpay payment ID to update was not found. Error code `not_found`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The Order ID to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantReference\": \"new_merchant_order_id_1234\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2c2ad34-e984-4d6b-ada1-524127c62a06",
+          "name": "Capture Payment",
+          "request": {
+            "name": "Capture Payment",
+            "description": {
+              "content": "This endpoint captures a full or partial payment. Any amounts successfully captured are settled from Afterpay to the merchant's nominated bank account on the following day. Records of all payments captured against an order are returned in the events list as events of type, \"CAPTURED\".\n\n**Note:** Authorization expires after 13 days and then the transaction is automatically voided. Voided transactions are frozen and cannot be captured, reopened or changed in any way. In this case your only option is to use the v2/checkouts endpoint to create a new order.\n\nThis operation is idempotent based on the `requestId` (if provided), which allows the safe retry of multiple requests. This safe retry guarantees the payment operation only occurs once.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                ":orderId",
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"paymentEventMerchantReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c1ff4e1-80df-4c7d-bd34-71da4516b17c",
+              "name": "If successful, returns an updated copy of the Payment object, with the newly captured payment appended to the `events` array as a Payment Event object with a `type` of \"CAPTURED\".",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"paymentEventMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"PARTIALLY_CAPTURED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"RLLnrC8uBD@DRsXxvtdQTseflQFYaajHmyyyqDiXC.nuaz\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1948-07-28T08:21:03.076Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 7727,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1997-04-15\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 9523,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1985-08-21\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_APPROVED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "124e7c26-4466-40c5-91c5-107392281a52",
+              "name": "No numeric `orderId` was provided, or an invalid string was provided. Error code `not_found`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"paymentEventMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee375ede-6d8b-4dfb-85a9-e2d5149ea088",
+              "name": "Payment has already been fully captured for this order, or partially captured with the remainder voided. Error code `payment_captured`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"paymentEventMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gone",
+              "code": 410,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a8c5bc1-22e1-40bd-b63a-129d45d7fc77",
+              "name": "| errorCode | Description |\n| --- | --- |\n| error | A numeric `orderId` was provided, but did not match any valid order. |\n| invalid_state | The order was declined by Afterpay; no payment can be captured for this order. |\n| payment_voided | The auth for this order has already been completely voided. |\n| payment_expired | The auth for this order has expired; no further payment can be captured. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"paymentEventMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfc8a62c-9343-4e91-9604-025c0ef8570c",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object | The `amount` was missing or invalid, or the `paymentEventMerchantReference` exceeded 128 characters. |\n| invalid_amount | The `amount` was less than the minimum capture amount, or more than the `openToCaptureAmount`. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"merchantReference\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"paymentEventMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bda57bd8-aeef-4df4-92b7-8c3970f47e63",
+          "name": "Update Shipping Courier",
+          "request": {
+            "name": "Update Shipping Courier",
+            "description": {
+              "content": "This endpoint updates an order with shipping courier information. The Afterpay team may use this information when providing support.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                ":orderId",
+                "courier"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique Afterpay Order ID to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"shippedAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"tracking\": \"<string>\",\n  \"priority\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "710b5d6b-1904-4ca4-b71c-e8b6b87585df",
+              "name": "Returns a Payment object in response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "courier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique Afterpay Order ID to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippedAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"tracking\": \"<string>\",\n  \"priority\": \"EXPRESS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"PARTIALLY_CAPTURED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"RLLnrC8uBD@DRsXxvtdQTseflQFYaajHmyyyqDiXC.nuaz\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1948-07-28T08:21:03.076Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 7727,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1997-04-15\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 9523,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1985-08-21\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_APPROVED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97965393-9acb-4c02-99c8-a749f2778078",
+              "name": "No Afterpay Order was found matching the `orderId` provided. Error code `precondition_failed`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "courier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique Afterpay Order ID to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippedAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"tracking\": \"<string>\",\n  \"priority\": \"EXPRESS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55893537-7f81-43f5-9e8f-c86c357e9a0f",
+              "name": "A value for shippedAt was provided, but not a valid [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) date. Or, a value for priority was provided, but wasn't one of \"STANDARD\" or \"EXPRESS\". Error code `invalid_object`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "courier"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique Afterpay Order ID to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"shippedAt\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"tracking\": \"<string>\",\n  \"priority\": \"EXPRESS\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22033f99-c478-44ca-905f-fafd79dcd234",
+          "name": "Create Refund",
+          "request": {
+            "name": "Create Refund",
+            "description": {
+              "content": "This endpoint performs a full or partial refund. The refund operation is idempotent if a unique `requestId` and `merchantReference` are provided.\n\nIf using the Deferred Payment Flow, be aware that only captured funds can be refunded. Do not create refunds after 120 days from the date of purchase.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                ":orderId",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique Afterpay Order ID to apply the refund to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"refundMerchantReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "039fd0d7-7a67-4925-8072-62cdc4854ef2",
+              "name": "Returns a Refund object in response. All request parameters are echoed in the response. In addition, the response includes the following:\n| Attribute | Type | Description |\n| --- | --- | --- |\n| `refundId` | string | The unique, permanent, Afterpay-generated Refund ID. |\n| `refundedAt` | string | The UTC timestamp of when the refund was completed, in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique Afterpay Order ID to apply the refund to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"GBP\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"refundMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"string\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"merchantReference\": \"string\",\n  \"refundMerchantReference\": \"string\",\n  \"refundId\": \"string\",\n  \"refundedAt\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0a1af46-5bdb-4879-9118-cc8a53b38e27",
+              "name": "The `orderId` is invalid, does not exist, or is not eligible for a refund. For example, the order was declined. Error code `precondition_failed`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique Afterpay Order ID to apply the refund to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"GBP\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"refundMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dc517b6-5e9d-4de8-b02c-6f929870d85f",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object | The `refundMerchantReference` exceeded 128 characters. |\n| invalid_amount | The `amount` requested exceeded the amount available. |\n| invalid_object | The currency of the refund does not match the currency of the order (and the Merchant account). |\n| refund_timelimit_exceeded | The refund exceeds the time limit of 120 days. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique Afterpay Order ID to apply the refund to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"GBP\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"refundMerchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e97fe61f-1461-42aa-af98-fefe06e1ceb9",
+          "name": "Void",
+          "request": {
+            "name": "Void",
+            "description": {
+              "content": "This endpoint voids the remaining `openToCapture` amount of the payment auth, and refunds the customer.\n\n<Info title=\"Note\">\n  To make a partial void, specify an amount in the request body.\n</Info>\n\nThis operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.\n\n\n\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                ":orderId",
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"requestId\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a15c04e0-ee29-4502-89bc-47d24b64c8c3",
+              "name": "If successful, returns an updated copy of the Payment object.\n- A new Payment Event object is appended to the events array, with a type of \"VOIDED\".\n- A new Refund object is prepended to the refunds array.\n- If the openToCapture amount is reduced to zero as a result of this Void request, the paymentState is updated as follows:\n  - from \"AUTH_APPROVED\" to \"VOIDED\", or\n  - from \"PARTIALLY_CAPTURED\" to \"CAPTURED\".\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"requestId\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"PARTIALLY_CAPTURED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"RLLnrC8uBD@DRsXxvtdQTseflQFYaajHmyyyqDiXC.nuaz\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1948-07-28T08:21:03.076Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 7727,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1997-04-15\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 9523,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1985-08-21\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_APPROVED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe1d06d3-2a14-456e-a05f-ccafc98532a0",
+              "name": "The `orderId` string provided was empty or did not match a valid order. Error code `not_found`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"requestId\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "916c7687-49f3-4abc-9222-f9147794b6a9",
+              "name": "The amount in USD has exceeded the open-to-capture amount in USD. Example message: \"Void amount USD 999.00 exceeded open to capture amount USD 40.00.\" Error code `invalid_amount`.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    ":orderId",
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) The unique ID of the Afterpay Order, returned as the `id` property of the Auth response."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"requestId\": \"<string>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "075cfb0b-d36d-4b81-8826-89c3b70e2865",
+          "name": "Get Payment By Token",
+          "request": {
+            "name": "Get Payment By Token",
+            "description": {
+              "content": "This endpoint retrieves an individual payment along with its order details.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                "token:{{token}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e50c8ce-3813-4d5a-ba05-9fd3e9c80ffd",
+              "name": "Returns a Payment object in response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "token:{{token}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"PARTIALLY_CAPTURED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"RLLnrC8uBD@DRsXxvtdQTseflQFYaajHmyyyqDiXC.nuaz\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"NZ\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1948-07-28T08:21:03.076Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 7727,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1997-04-15\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 9523,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1985-08-21\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"USD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"AUD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"AUTH_APPROVED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a2de4b5-af88-4424-82c1-52a19b438693",
+              "name": "No Afterpay Order was found matching the `token` provided. Error code `not_found`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "token:{{token}}"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bb0d060-dd7d-46da-87f0-032b4be35fe2",
+          "name": "Reverse Payment By Token",
+          "request": {
+            "name": "Reverse Payment By Token",
+            "description": {
+              "content": "This endpoint makes a reversal of the checkout that is used to start the Afterpay payment process. This cancels the order asynchronously as soon as it is created without the need of an additional call to the void endpoint. For a payment to be eligible, the order must be in an Auth-Approved or Captured state, and it must be issued within 10 minutes of the order being created.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "payments",
+                "token:{{token}}",
+                "reversal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f152583-8acf-4c3e-8168-c641d83f1bc7",
+              "name": "The Reversal endpoint indicates a successful response with a 204 status code response. Returns no content in the response.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "token:{{token}}",
+                    "reversal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ad585ba-eb83-4530-9586-08b40be00a5d",
+              "name": "Invalid Token. Error code `invalid_token`.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "token:{{token}}",
+                    "reversal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bc5dfa8-ab76-4ecd-96c1-02ac0f22d833",
+              "name": "| errorCode | Description |\n| --- | --- |\n| precondition_failed | Payment reversal previously processed |\n| precondition_failed | Payment not eligible for a reversal |\n| precondition_failed | Order outside reversal window |\n| precondition_failed | Order in pending reversal, no captures/auth accepted |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "payments",
+                    "token:{{token}}",
+                    "reversal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://global-api-sandbox.afterpay.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Order token that was used to complete payment.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "token"
+    }
+  ],
+  "info": {
+    "_postman_id": "2e378b18-e96b-4c9d-8008-50e28265bfe2",
+    "name": "Payments",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

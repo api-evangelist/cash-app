@@ -1,0 +1,248 @@
+{
+  "item": [
+    {
+      "id": "501cbda5-8524-4878-a6a0-3de1d2cffc27",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d121434c-1908-40b0-833b-b3e6b6f4db5b",
+          "name": "Create Order",
+          "request": {
+            "name": "Create Order",
+            "description": {
+              "content": "This is the first step in the on file grant purchase process. Use the token in the response to initiate the payment\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"grantId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"<string>\"\n    },\n    \"subscription\": {\n      \"type\": \"<string>\",\n      \"interval\": \"<string>\",\n      \"intervalCount\": \"<integer>\"\n    }\n  },\n  \"autopay\": \"<boolean>\",\n  \"paymentScheduleType\": \"<string>\",\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a18c2b7c-3332-4174-af62-d297f6a0338c",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"grantId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"FIXED\",\n      \"interval\": \"WEEK\",\n      \"intervalCount\": 2547\n    }\n  },\n  \"autopay\": \"<boolean>\",\n  \"paymentScheduleType\": \"DEFAULT\",\n  \"consumer\": {\n    \"email\": \"JdVberSA@jds.ymo\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 7558,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1959-09-13\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 6180,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"2011-06-03\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1957-03-29T13:26:39.658Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"EXPRESS\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"expires\": \"1975-01-22T21:01:59.700Z\",\n  \"paymentSchedule\": [\n    {\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"dueDate\": \"2021-02-17\"\n    },\n    {\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"dueDate\": \"2016-03-31\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97d3fd84-e580-4e77-996f-157d571e6449",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"grantId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"FIXED\",\n      \"interval\": \"WEEK\",\n      \"intervalCount\": 2547\n    }\n  },\n  \"autopay\": \"<boolean>\",\n  \"paymentScheduleType\": \"DEFAULT\",\n  \"consumer\": {\n    \"email\": \"JdVberSA@jds.ymo\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 7558,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1959-09-13\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 6180,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"2011-06-03\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1957-03-29T13:26:39.658Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"EXPRESS\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a352664-5ebc-4d09-bcec-56e521d914b5",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object             | One or more required fields were missing or invalid.                     |\n| unsupported_payment_type   | The amount is outside of the merchant's payment limits, as returned by Get Configuration. |\n| unsupported_currency       | The amount is outside of the merchant's payment limits, as returned by Get Configuration. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"grantId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    },\n    \"subscription\": {\n      \"type\": \"FIXED\",\n      \"interval\": \"WEEK\",\n      \"intervalCount\": 2547\n    }\n  },\n  \"autopay\": \"<boolean>\",\n  \"paymentScheduleType\": \"DEFAULT\",\n  \"consumer\": {\n    \"email\": \"JdVberSA@jds.ymo\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"US\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 7558,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1959-09-13\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 6180,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"2011-06-03\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1957-03-29T13:26:39.658Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"EXPRESS\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://global-api-sandbox.afterpay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0e1be4c1-c637-461c-826a-a00bc288e5e4",
+    "name": "Orders",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

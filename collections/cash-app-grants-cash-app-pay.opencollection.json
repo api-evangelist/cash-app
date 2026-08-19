@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Add Cash App Pay to Your Site",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/retrieve",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves a Cash App Pay customer grant by the ID of the customer that approved it and its own ID."
+        },
+        {
+          "info": {
+            "name": "Revoke Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/revoke",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Revokes a Cash App Pay customer grant by the ID of the customer that approved it and its own ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

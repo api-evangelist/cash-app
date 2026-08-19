@@ -1,0 +1,3156 @@
+{
+  "item": [
+    {
+      "id": "026bbbdc-5554-42f8-a62a-37e811cbabe9",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d9abb6e1-c64e-410c-aa65-d42c17d6df49",
+          "name": "Start Billing Agreement Approval Process",
+          "request": {
+            "name": "Start Billing Agreement Approval Process",
+            "description": {
+              "content": "Initiates the approval process for a new billing agreement.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                "approvals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"<string>\",\n    \"redirectCancelUrl\": \"<string>\",\n    \"popupOriginUrl\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"agreements\": [\n    {\n      \"type\": \"<string>\",\n      \"merchantReference\": \"<string,null>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"merchantReference\": \"<string,null>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae3434cd-92c8-4638-9664-6049881a3b74",
+              "name": "The consumer approved the billing agreement",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "approvals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"string\",\n    \"redirectCancelUrl\": \"string\",\n    \"popupOriginUrl\": \"string\",\n    \"name\": \"string\"\n  },\n  \"consumer\": {\n    \"email\": \"6Pmypo1zsrd@fQMXOrgpwquWftFiPfqxEVqNzdJDYJ.pkp\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"agreements\": [\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    },\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"expires\": \"2000-04-06T17:28:31.864Z\",\n  \"redirectCheckoutUrl\": \"http://BdcaAWgScaONfXKJlT.kaetsAeh+1oeP7rf3UEQNJIjGf0C,0NMEMG,wlA0aj366ePBsRbtHWnZw8apeOGL9RMHq\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a9f331e-a110-4d65-9eef-2778e0c98f38",
+              "name": "Authentication failed or insufficient permissions.\n\n| errorCode | Description |\n| --- | --- |\n| unauthorized | The API credentials are invalid or missing. |\n| insufficient_permissions | The merchant lacks the required 'merchant_api_v2/initiate' permission. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "approvals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"string\",\n    \"redirectCancelUrl\": \"string\",\n    \"popupOriginUrl\": \"string\",\n    \"name\": \"string\"\n  },\n  \"consumer\": {\n    \"email\": \"6Pmypo1zsrd@fQMXOrgpwquWftFiPfqxEVqNzdJDYJ.pkp\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"agreements\": [\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    },\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c24790d2-4e51-40f9-bb16-0ee5eb6db392",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "approvals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"string\",\n    \"redirectCancelUrl\": \"string\",\n    \"popupOriginUrl\": \"string\",\n    \"name\": \"string\"\n  },\n  \"consumer\": {\n    \"email\": \"6Pmypo1zsrd@fQMXOrgpwquWftFiPfqxEVqNzdJDYJ.pkp\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"agreements\": [\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    },\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55c245e8-71fb-41c9-a89c-9af57973f97f",
+              "name": "Unsupported Media Type - Content-Type header is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "approvals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"string\",\n    \"redirectCancelUrl\": \"string\",\n    \"popupOriginUrl\": \"string\",\n    \"name\": \"string\"\n  },\n  \"consumer\": {\n    \"email\": \"6Pmypo1zsrd@fQMXOrgpwquWftFiPfqxEVqNzdJDYJ.pkp\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"agreements\": [\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    },\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "934a34c2-0a75-40d9-b7ad-ddc32d0c769c",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object | One or more required fields in the request body were missing or invalid. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "approvals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchant\": {\n    \"redirectConfirmUrl\": \"string\",\n    \"redirectCancelUrl\": \"string\",\n    \"popupOriginUrl\": \"string\",\n    \"name\": \"string\"\n  },\n  \"consumer\": {\n    \"email\": \"6Pmypo1zsrd@fQMXOrgpwquWftFiPfqxEVqNzdJDYJ.pkp\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"agreements\": [\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    },\n    {\n      \"type\": \"BILLING\",\n      \"merchantReference\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3ecd825-e9e3-4e3b-bd9a-6487968be9fd",
+          "name": "Create Billing Agreement",
+          "request": {
+            "name": "Create Billing Agreement",
+            "description": {
+              "content": "Creates a new billing agreement from an order token.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9aacce3-dbce-4df2-942d-c6c705247479",
+              "name": "Billing agreement created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"type\": \"BILLING\",\n  \"status\": \"ACTIVE\",\n  \"created\": \"1966-10-04T01:32:31.940Z\",\n  \"merchantReference\": \"string\",\n  \"cancelled\": \"1999-06-27T15:07:49.014Z\",\n  \"expires\": \"1954-04-30T05:52:34.858Z\",\n  \"events\": [\n    {\n      \"type\": \"CAPTURE\",\n      \"created\": \"1981-09-24T03:52:50.723Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 6544.709250858437\n    },\n    {\n      \"type\": \"VOID\",\n      \"created\": \"2006-05-28T21:41:53.416Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 2079.9733342954273\n    }\n  ],\n  \"requestId\": \"string\",\n  \"consumerReference\": \"string\",\n  \"email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83e992d3-9f04-4c7a-a802-892a753509a4",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n| headless_billing_agreement_not_authorised | Headless flow is not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12d15aaf-f4de-4b5e-86cf-7905fe731447",
+              "name": "| errorCode | Description |\n| --- | --- |\n| consumer_ineligible | Consumer not eligible |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec721b0a-f321-46c0-8ca8-8996844f99d3",
+              "name": "Unsupported Media Type - Content-Type header is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"requestId\": \"<string>\",\n  \"merchantReference\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "462077e0-1c87-4d0d-abe5-36650502d4de",
+          "name": "Create Billing Agreement Alias",
+          "request": {
+            "name": "Create Billing Agreement Alias",
+            "description": {
+              "content": "Creates an alias for an existing billing agreement to help load payment schedule widget.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                "alias"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null-duration>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64660088-8de7-4571-b8a2-13e4d24c83ac",
+              "name": "Alias created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "alias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null-duration>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"expiry\": \"2014-10-01T14:43:10.973Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9cb8113-ba4b-4a4a-bfc5-965ebecc9c21",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "alias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null-duration>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0117ccd9-14d9-489f-b3e8-48a0720fbc9d",
+              "name": "Unsupported Media Type - Content-Type header is missing or invalid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "alias"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"duration\": \"<string,null-duration>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4cb6154-8e52-4251-893b-341f61e9ac57",
+          "name": "Cancel Billing Agreement (Alternative)",
+          "request": {
+            "name": "Cancel Billing Agreement (Alternative)",
+            "description": {
+              "content": "Alternative endpoint to cancel a billing agreement using a request body instead of path parameter.\nFunctionally equivalent to DELETE /v2/billing-agreements/{token}.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e8b5ac77-e4d7-46cb-9118-518959c487d0",
+              "name": "Billing agreement cancelled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"type\": \"BILLING\",\n  \"status\": \"ACTIVE\",\n  \"created\": \"1966-10-04T01:32:31.940Z\",\n  \"merchantReference\": \"string\",\n  \"cancelled\": \"1999-06-27T15:07:49.014Z\",\n  \"expires\": \"1954-04-30T05:52:34.858Z\",\n  \"events\": [\n    {\n      \"type\": \"CAPTURE\",\n      \"created\": \"1981-09-24T03:52:50.723Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 6544.709250858437\n    },\n    {\n      \"type\": \"VOID\",\n      \"created\": \"2006-05-28T21:41:53.416Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 2079.9733342954273\n    }\n  ],\n  \"requestId\": \"string\",\n  \"consumerReference\": \"string\",\n  \"email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d02ea545-edfc-443f-a486-02591355d00f",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "379f7266-ac6c-4054-88b8-8ab17649c21b",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_found | The specified billing agreement token was not found. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3415d431-bd53-4558-b7eb-9dac9d4db220",
+          "name": "Retrieve Billing Agreement Offers",
+          "request": {
+            "name": "Retrieve Billing Agreement Offers",
+            "description": {
+              "content": "Retrieves available offers for billing agreements based on amount and frequency.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e876113e-ae34-41ad-ab2a-a27cd63a1074",
+              "name": "Offers retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"consumerMaskedEmail\": \"string\",\n  \"consumerAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"GBP\"\n  },\n  \"offers\": [\n    {\n      \"type\": \"PAY_IN_4\",\n      \"merchantAmount\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"exchangeRate\": 1135.776101251793,\n      \"amountDueToday\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"payments\": [\n        {\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dueDate\": \"1980-06-13\"\n        },\n        {\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dueDate\": \"1978-10-24\"\n        }\n      ],\n      \"crossBorder\": false,\n      \"appliedPromotion\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"consumer\": {\n        \"noPaymentUpfront\": {\n          \"eligible\": false,\n          \"eligibilityLimit\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    },\n    {\n      \"type\": \"PAY_IN_4\",\n      \"merchantAmount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"exchangeRate\": 5687.885687926567,\n      \"amountDueToday\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"payments\": [\n        {\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dueDate\": \"2000-09-22\"\n        },\n        {\n          \"amount\": {\n            \"amount\": \"string\",\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"dueDate\": \"1953-12-08\"\n        }\n      ],\n      \"crossBorder\": false,\n      \"appliedPromotion\": {\n        \"amount\": \"string\",\n        \"currency\": \"NZD\"\n      },\n      \"consumer\": {\n        \"noPaymentUpfront\": {\n          \"eligible\": false,\n          \"eligibilityLimit\": {\n            \"amount\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"currency\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f762c764-f21e-414f-88ba-c127f4a24efe",
+              "name": "Authentication failed or insufficient permissions.\n\n| errorCode | Description |\n| --- | --- |\n| unauthorized | The API credentials are invalid or missing. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b5432c9-8bc5-4613-8304-b5f98dacf5a4",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0de8045d-01d6-4b01-90fb-54bde9539bdd",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object | One or more required fields in the request body were missing or invalid. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<string>\",\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "389905a7-b62f-4dd4-b900-d02312c4e19d",
+          "name": "Retrieve Billing Agreement",
+          "request": {
+            "name": "Retrieve Billing Agreement",
+            "description": {
+              "content": "Alternative endpoint to retrieve billing agreement details using a request body instead of path parameter.\nFunctionally equivalent to GET /v2/billing-agreements/{token}.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                "retrieve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e3625977-a9a3-4aab-a2c2-e565460341ee",
+              "name": "Billing agreement details retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"type\": \"BILLING\",\n  \"status\": \"ACTIVE\",\n  \"created\": \"1966-10-04T01:32:31.940Z\",\n  \"merchantReference\": \"string\",\n  \"cancelled\": \"1999-06-27T15:07:49.014Z\",\n  \"expires\": \"1954-04-30T05:52:34.858Z\",\n  \"events\": [\n    {\n      \"type\": \"CAPTURE\",\n      \"created\": \"1981-09-24T03:52:50.723Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 6544.709250858437\n    },\n    {\n      \"type\": \"VOID\",\n      \"created\": \"2006-05-28T21:41:53.416Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 2079.9733342954273\n    }\n  ],\n  \"requestId\": \"string\",\n  \"consumerReference\": \"string\",\n  \"email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec3588c2-442e-4fe0-ab21-918230a46698",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e7c1937-8360-4be3-b06a-3551b69c6ad8",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_found | The specified billing agreement token was not found. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "retrieve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b5b1a9b1-c754-4271-abfd-3fd7de516be5",
+          "name": "Start Billing Agreement Link Flow",
+          "request": {
+            "name": "Start Billing Agreement Link Flow",
+            "description": {
+              "content": "Initiates the headless billing agreement link flow process.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                "start"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19404478-2318-430c-aeb1-8850737983a0",
+              "name": "Link flow started successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"requestId\": \"string\",\n  \"expiresAt\": \"2011-05-13T19:25:50.382Z\",\n  \"deliveryType\": \"SMS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9aae307d-c151-4208-acb7-b1566e49eb00",
+              "name": "| errorCode | Description |\n| --- | --- |\n| not_found | Afterpay consumer account does not exist |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "735a220b-c398-4814-ad72-e4c899fb6c10",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_state | Failed to send code |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "572817b4-deae-4785-b3f9-85533a80e3f0",
+              "name": "| errorCode | Description |\n| --- | --- |\n| too_many_requests | Too many requests |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    "start"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"alias\": \"<string>\",\n  \"requestId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "addce19b-c211-4496-a158-653915a4ce4f",
+          "name": "Get Billing Agreement Details",
+          "request": {
+            "name": "Get Billing Agreement Details",
+            "description": {
+              "content": "Retrieves the details of a billing agreement using its token.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) The unique identifier token of the billing agreement to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c6d98ee4-45f1-47a3-8f0e-1c44590bd5c3",
+              "name": "Billing agreement details retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The unique identifier token of the billing agreement to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"type\": \"BILLING\",\n  \"status\": \"ACTIVE\",\n  \"created\": \"1966-10-04T01:32:31.940Z\",\n  \"merchantReference\": \"string\",\n  \"cancelled\": \"1999-06-27T15:07:49.014Z\",\n  \"expires\": \"1954-04-30T05:52:34.858Z\",\n  \"events\": [\n    {\n      \"type\": \"CAPTURE\",\n      \"created\": \"1981-09-24T03:52:50.723Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 6544.709250858437\n    },\n    {\n      \"type\": \"VOID\",\n      \"created\": \"2006-05-28T21:41:53.416Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 2079.9733342954273\n    }\n  ],\n  \"requestId\": \"string\",\n  \"consumerReference\": \"string\",\n  \"email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2dae273-c481-4fdd-aa82-be9590491751",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The unique identifier token of the billing agreement to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "badc835b-5632-42ed-bc00-648091e4744d",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_found | The specified billing agreement token was not found. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The unique identifier token of the billing agreement to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb15acf0-4a78-4f90-90a7-698f18bd4f0b",
+          "name": "Cancel Billing Agreement",
+          "request": {
+            "name": "Cancel Billing Agreement",
+            "description": {
+              "content": "Cancels an existing billing agreement using its token.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "billing-agreements",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) The unique identifier token of the billing agreement to cancel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bde8e898-6bc0-41bd-9af3-4d3770b5678d",
+              "name": "Billing agreement cancelled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The unique identifier token of the billing agreement to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"token\": \"string\",\n  \"type\": \"BILLING\",\n  \"status\": \"ACTIVE\",\n  \"created\": \"1966-10-04T01:32:31.940Z\",\n  \"merchantReference\": \"string\",\n  \"cancelled\": \"1999-06-27T15:07:49.014Z\",\n  \"expires\": \"1954-04-30T05:52:34.858Z\",\n  \"events\": [\n    {\n      \"type\": \"CAPTURE\",\n      \"created\": \"1981-09-24T03:52:50.723Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 6544.709250858437\n    },\n    {\n      \"type\": \"VOID\",\n      \"created\": \"2006-05-28T21:41:53.416Z\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"status\": \"DECLINED\",\n      \"merchantReference\": \"string\",\n      \"orderId\": 2079.9733342954273\n    }\n  ],\n  \"requestId\": \"string\",\n  \"consumerReference\": \"string\",\n  \"email\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8390efb-92ec-40f0-a720-2100ad7dabe4",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The unique identifier token of the billing agreement to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a286147-0f7c-472d-87bc-f885ec339447",
+              "name": "| errorCode | Description |\n| --- | --- |\n| billing_agreement_not_found | The specified billing agreement token was not found. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "billing-agreements",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) The unique identifier token of the billing agreement to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f435b2b6-5009-44a6-8a45-3980db6d09cb",
+          "name": "Capture Full Recurring Payment",
+          "request": {
+            "name": "Capture Full Recurring Payment",
+            "description": {
+              "content": "Creates and immediately captures a recurring payment using a billing agreement token.\nThis endpoint combines authorization and capture into a single step.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "recurring-payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"custom\": {\n    \"key_0\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dabf97e8-c4f2-49b4-b15e-d59bf2bfe52d",
+              "name": "| Status | Description |\n| ----- | ----- |\n| `APPROVED` | If payment is approved by Afterpay, returns a Payment object in response, with a status of \"APPROVED\". |\n| `DECLINED` | If payment is declined by Afterpay, for example, if expired payment method, returns a Payment object in response, with a status of \"DECLINED\". Please advise the consumer to contact the Afterpay Customer Service team for more information. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"paymentState\": \"VOIDED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"PUQ8Hd66cObNw0d@AEirKyVUuoXzVz.to\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"CA\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1994-09-17T13:43:47.790Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 839,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"NZD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1964-05-09\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 3379,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"CAD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1979-04-01\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"NZD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"GBP\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30be357b-ba3f-48ba-b593-5147ae290dc1",
+              "name": "If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a `status` of \"DECLINED\" and a `paymentState` of \"AUTH_DECLINED\". Please advise the consumer to contact the Afterpay Customer Service team for more information.\n\nAs well, the following errorCodes are possible:\n| errorCode | Description |\n| --- | --- |\n| invalid_token | The checkout token is invalid, expired, or does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01c75ac2-e54a-43f2-aec6-e8cf85735889",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d361675-7f3f-4f08-b6db-97a889324a59",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object             | One or more required fields were missing or invalid.                     |\n| unsupported_payment_type   | The amount is outside of the merchant's payment limits, as returned by Get Configuration. |\n| unsupported_currency       | The amount is outside of the merchant's payment limits, as returned by Get Configuration. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bde8820-b22c-445d-81e8-e06f2c36a056",
+          "name": "Authorize Recurring Payment",
+          "request": {
+            "name": "Authorize Recurring Payment",
+            "description": {
+              "content": "Authorizes a recurring payment using a billing agreement token.\nThis endpoint performs authorization only, requiring a separate capture step.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "recurring-payments",
+                "auth"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"amount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"consumer\": {\n    \"email\": \"<email>\",\n    \"givenNames\": \"<string>\",\n    \"surname\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"billing\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"shipping\": {\n    \"name\": \"<string>\",\n    \"line1\": \"<string>\",\n    \"area1\": \"<string>\",\n    \"region\": \"<string>\",\n    \"postcode\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"area2\": \"<string>\",\n    \"phoneNumber\": \"<string>\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"tracking\": \"<string>\",\n    \"priority\": \"<string>\"\n  },\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"<string>\",\n      \"quantity\": \"<integer>\",\n      \"price\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      },\n      \"sku\": \"<string>\",\n      \"pageUrl\": \"<string>\",\n      \"imageUrl\": \"<string>\",\n      \"categories\": [\n        [\n          \"<string>\",\n          \"<string>\"\n        ],\n        [\n          \"<string>\",\n          \"<string>\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"<date>\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      }\n    },\n    {\n      \"displayName\": \"<string>\",\n      \"amount\": {\n        \"amount\": \"<string>\",\n        \"currency\": \"<string>\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"<string>\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"<string>\",\n    \"currency\": \"<string>\"\n  },\n  \"custom\": {\n    \"key_0\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df41dc58-bc68-42ba-b229-41137077a224",
+              "name": "If the payment is approved by Afterpay, a Payment object is returned with a `status` of **APPROVED** and a `paymentState` of **AUTH_APPROVED**.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"token\": \"string\",\n  \"status\": \"APPROVED\",\n  \"created\": \"string\",\n  \"originalAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"GBP\"\n  },\n  \"openToCaptureAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"paymentState\": \"AUTH_DECLINED\",\n  \"merchantReference\": \"string\",\n  \"refunds\": [\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"AUD\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    },\n    {\n      \"requestId\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"merchantReference\": \"string\",\n      \"refundMerchantReference\": \"string\",\n      \"refundId\": \"string\",\n      \"refundedAt\": \"string\"\n    }\n  ],\n  \"orderDetails\": {\n    \"consumer\": {\n      \"email\": \"rNk@ZhzhOeYWeVDZdNTjF.oqrx\",\n      \"givenNames\": \"string\",\n      \"surname\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"billing\": {\n      \"name\": \"string\",\n      \"line1\": \"string\",\n      \"area1\": \"string\",\n      \"region\": \"string\",\n      \"postcode\": \"string\",\n      \"countryCode\": \"CA\",\n      \"line2\": \"string\",\n      \"area2\": \"string\",\n      \"phoneNumber\": \"string\"\n    },\n    \"courier\": {\n      \"shippedAt\": \"1972-01-15T03:09:34.824Z\",\n      \"name\": \"string\",\n      \"tracking\": \"string\",\n      \"priority\": \"EXPRESS\"\n    },\n    \"items\": [\n      {\n        \"name\": \"string\",\n        \"quantity\": 2831,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"NZD\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1995-11-30\",\n        \"preorder\": false\n      },\n      {\n        \"name\": \"string\",\n        \"quantity\": 4906,\n        \"price\": {\n          \"amount\": \"string\",\n          \"currency\": \"GBP\"\n        },\n        \"sku\": \"string\",\n        \"pageUrl\": \"string\",\n        \"imageUrl\": \"string\",\n        \"categories\": [\n          [\n            \"string\",\n            \"string\"\n          ],\n          [\n            \"string\",\n            \"string\"\n          ]\n        ],\n        \"estimatedShipmentDate\": \"1978-12-16\",\n        \"preorder\": false\n      }\n    ],\n    \"discounts\": [\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        }\n      },\n      {\n        \"displayName\": \"string\",\n        \"amount\": {\n          \"amount\": \"string\",\n          \"currency\": \"AUD\"\n        }\n      }\n    ],\n    \"taxAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"NZD\"\n    },\n    \"shippingAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"NZD\"\n    }\n  },\n  \"events\": [\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created\": \"string\",\n      \"expires\": \"string\",\n      \"type\": \"CAPTURE_DECLINED\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"CAD\"\n      },\n      \"paymentEventMerchantReference\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "984752aa-23aa-42b3-9613-99a6f2d8c83f",
+              "name": "If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a `status` of \"DECLINED\" and a `paymentState` of \"AUTH_DECLINED\". Please advise the consumer to contact the Afterpay Customer Service team for more information.\n\nAs well, the following errorCodes are possible:\n| errorCode | Description |\n| --- | --- |\n| invalid_token | The checkout token is invalid, expired, or does not exist.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Payment Required",
+              "code": 402,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c7663f3-2ede-4d36-8b5e-ed8344bdc12d",
+              "name": "| errorCode | Description |\n| --- | --- |\n|npuf_eligibility_mismatch|Npuf eligibility mismatch|\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Precondition Failed",
+              "code": 412,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a071fa4f-a9d3-48b0-be55-3004099f3c08",
+              "name": "Unsupported Media Type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unsupported Media Type",
+              "code": 415,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63ba270b-ecb6-465a-ada5-6c4964601cc1",
+              "name": "| errorCode | Description |\n| --- | --- |\n| invalid_object             | One or more required fields were missing or invalid.                     |\n| unsupported_payment_type   | The amount is outside of the merchant's payment limits, as returned by Get Configuration. |\n| unsupported_currency       | The amount is outside of the merchant's payment limits, as returned by Get Configuration. |\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "recurring-payments",
+                    "auth"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requestId\": \"<uuid>\",\n  \"paymentMethod\": {\n    \"token\": \"string\",\n    \"type\": \"BILLING_AGREEMENT\"\n  },\n  \"amount\": {\n    \"amount\": \"string\",\n    \"currency\": \"CAD\"\n  },\n  \"consumer\": {\n    \"email\": \"xhEafCU97ZZt@tgnuedyeUoerbaQouXwBMjcIFbUBIQ.jzqd\",\n    \"givenNames\": \"string\",\n    \"surname\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"billing\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"shipping\": {\n    \"name\": \"string\",\n    \"line1\": \"string\",\n    \"area1\": \"string\",\n    \"region\": \"string\",\n    \"postcode\": \"string\",\n    \"countryCode\": \"NZ\",\n    \"line2\": \"string\",\n    \"area2\": \"string\",\n    \"phoneNumber\": \"string\"\n  },\n  \"courier\": {\n    \"shippedAt\": \"1974-11-09T04:38:29.227Z\",\n    \"name\": \"string\",\n    \"tracking\": \"string\",\n    \"priority\": \"STANDARD\"\n  },\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"quantity\": 5290,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1964-12-08\",\n      \"preorder\": false\n    },\n    {\n      \"name\": \"string\",\n      \"quantity\": 8205,\n      \"price\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      },\n      \"sku\": \"string\",\n      \"pageUrl\": \"string\",\n      \"imageUrl\": \"string\",\n      \"categories\": [\n        [\n          \"string\",\n          \"string\"\n        ],\n        [\n          \"string\",\n          \"string\"\n        ]\n      ],\n      \"estimatedShipmentDate\": \"1986-11-21\",\n      \"preorder\": false\n    }\n  ],\n  \"discounts\": [\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"USD\"\n      }\n    },\n    {\n      \"displayName\": \"string\",\n      \"amount\": {\n        \"amount\": \"string\",\n        \"currency\": \"GBP\"\n      }\n    }\n  ],\n  \"description\": \"<string>\",\n  \"merchant\": {\n    \"name\": \"string\"\n  },\n  \"merchantReference\": \"<string>\",\n  \"shippingAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"AUD\"\n  },\n  \"taxAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"custom\": {\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {}\n  },\n  \"paymentScheduleChecksum\": \"<string>\",\n  \"enrichments\": {\n    \"initiation\": {\n      \"actor\": \"MERCHANT\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://global-api-sandbox.afterpay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f4ad1f00-4757-4599-bb2e-635669d2b070",
+    "name": "Billing Agreements (Deprecated)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

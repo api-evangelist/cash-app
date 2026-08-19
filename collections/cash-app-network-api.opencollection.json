@@ -1,0 +1,1899 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Network API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "brands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List brands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/brands",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of brands to return."
+              },
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include brands with a `reference_id` matching the given value."
+              }
+            ]
+          },
+          "docs": "Returns a list of brands matching the given query parameters.\n\n**This endpoint is rate limited to 50 QPS.**\n\nScopes: `BRANDS_READ`"
+        },
+        {
+          "info": {
+            "name": "Create brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/brands",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new brand with the given attributes.\n\n**This endpoint is not rate limited.**\n\nScopes: `BRANDS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Upsert brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cash.app/network/v1/brands",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a brand based on the brand's `reference_id`.\n\nIf a brand with a matching `reference_id` is found, \nit will be updated. Ensure proper mapping; if no matching brand is found, \na new one will be created. \n\nThe HTTP response code (`200 OK` or `201 Created`) indicates\nwhether the resource was updated or created, respectively.\n\n<Note>\n\n `brand_id` is the primary unique identifier for all Brand APIs.\n Be cautious when using `reference_id` as a unique identifier. \n</Note>\n\n**This endp"
+        },
+        {
+          "info": {
+            "name": "Retrieve brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/brands/:brand_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a brand matching the given `brand_id`.\n\n**This endpoint is not rate limited.**\n\nScopes: `BRANDS_READ`"
+        },
+        {
+          "info": {
+            "name": "Update brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cash.app/network/v1/brands/:brand_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "brand_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a brand matching the provided `brand_id` with the given attributes.\n\nTo clear a field, set it to `null`. Fields that are not provided in the request will not be changed.\n\n**This endpoint is not rate limited.**\n\nScopes: `BRANDS_WRITE`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "merchants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List merchants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/merchants",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include merchants with a `reference_id` matching the given value."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of merchants to return."
+              }
+            ]
+          },
+          "docs": "Returns a list of merchants matching the given query parameters.\n\n**This endpoint is rate limited to 50 QPS.**\n\nScopes: `MERCHANTS_READ`"
+        },
+        {
+          "info": {
+            "name": "Create merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/merchants",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new merchant. Merchants must have an `address` or `site_url` set.\n\n**This endpoint is not rate limited.**\n\nScopes: `MERCHANTS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Upsert merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.cash.app/network/v1/merchants",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates or updates a merchant based on the merchant's `reference_id`.\n\nIf a merchant with a matching `reference_id` is found, \nit will be updated. If no matching merchant is found,\na new one will be created.\n\nThe HTTP response code (`200 OK` or `201 Created`) indicates\nwhether the resource was updated or created, respectively.\n\n<Info>\n\n `merchant_id` is the primary unique identifier for all Merchant APIs.\n Be cautious when using `reference_id` as a unique identifier.\n \n Merchants must have an `a"
+        },
+        {
+          "info": {
+            "name": "Retrieve merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/merchants/:merchant_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a merchant matching the given `merchant_id`.\n\n**This endpoint is not rate limited.**\n\nScopes: `MERCHANTS_READ`"
+        },
+        {
+          "info": {
+            "name": "Update merchant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cash.app/network/v1/merchants/:merchant_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a merchant matching the provided `merchant_id` with the given attributes.\n\nTo clear a field, set it to `null`. Fields that are not provided in the request will not be changed.\n\n**This endpoint is not rate limited.**\n\nScopes: `MERCHANTS_WRITE`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/customers",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of customers to return."
+              },
+              {
+                "name": "cashtag",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include customers with a matching Cashtag."
+              }
+            ]
+          },
+          "docs": "Returns a list of all customers matching the given query parameters who have ever authorized this client to take an action on their account.\n\n**This endpoint is rate limited to 50 QPS.**\n\nScopes: `CUSTOMERS_READ`"
+        },
+        {
+          "info": {
+            "name": "Retrieve customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/customers/:customer_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a customer by its ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `CUSTOMERS_READ`"
+        },
+        {
+          "info": {
+            "name": "Retrieve customer grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/customers/:customer_id/grants/:grant_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "grant_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a customer grant by the ID of the customer that approved it and its own ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `GRANTS_READ`"
+        },
+        {
+          "info": {
+            "name": "List customer grants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/customers/:customer_id/grants",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of customer grants to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of all customer grants for a given customer that match the provided query parameters.\n\n**This endpoint is rate limited to 250 QPS.**\n\nScopes: `GRANTS_READ`"
+        },
+        {
+          "info": {
+            "name": "Revoke customer grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/customers/:customer_id/grants/:grant_id/revoke",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "grant_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Revokes a customer grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.\n\n<Note> \nYou cannot un-revoke a grant. Use with caution.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `GRANTS_WRITE`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/payments",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include payments with a `reference_id` matching the given value."
+              },
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include payments made by a customer that matches the the given ID."
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include payments made to a merchant that matches the the given ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of payments to return."
+              }
+            ]
+          },
+          "docs": "Returns a list of payments matching the given query parameters.\n\n**This endpoint is rate limited to 100 QPS.**\n\nScopes: `PAYMENTS_READ`"
+        },
+        {
+          "info": {
+            "name": "Create payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/payments",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a payment from a customer to a merchant.\n\n\n<Note>\n  Creating a payment requires a grant that is associated with the `ON_FILE_PAYMENT` or `ONE_TIME_PAYMENT` actions. To generate a grant, use the Customer Request API.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `PAYMENTS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Retrieve payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/payments/:payment_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a payment by its ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `PAYMENTS_READ`"
+        },
+        {
+          "info": {
+            "name": "Create incremental authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/payments/:payment_id/authorizations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an authorization update for a payment. The authorization amount must be greater than or equal to the current authorized amount.\n\nUse this endpoint for incremental authorization instead of overcapturing using the Capture payment endpoint. By creating additional payment authorizations exceeding the current authorized amount, you can request additional funds without risking the original amount being declined.\n\n**This endpoint is not rate limited.** \n\nScopes: `PAYMENTS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Capture payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/payments/:payment_id/capture",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a payment with the given amount and finalizes it so that it can be paid out in the next nightly settlement batch.\n\n**This endpoint is not rate limited.**\n\nScopes: `PAYMENTS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Void payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/payments/:payment_id/void",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payment_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Moves an authorized payment to the voided state and releases the payment authorization from the customer's Cash App account.\n\n<Note> \nYou can only void an authorized payment. If a payment is captured, refund it instead. You cannot void any payment that has had an attempted capture. Authorizations not captured within seven days are automatically voided.\n</Note>\n\nThis endpoint will return a success message if the payment was successfully voided _or_ if the payment was previously voided.\n\n**This en"
+        },
+        {
+          "info": {
+            "name": "Void payment by idempotency key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/payments/void-by-idempotency-key",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves an authorized payment to the voided state and releases the payment authorization from the customer's Cash App account.\n\n  <Note>\n  You can only void an authorized payment. If a payment is captured, refund the payment instead.\n  \n   You cannot void any payment that has had an attempted capture. Authorizations not captured within seven days are automatically voided.\n  </Note> \n\nThis endpoint will return a success message if the payment was successfully voided _or_ if the payment was previous"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "payouts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payouts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/payouts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include only payouts made to a merchant that matches the given ID."
+              },
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to include only payouts made to a customer that matches the given ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of payouts to return."
+              }
+            ]
+          },
+          "docs": "<Warning title=\"Early Access\" icon=\"robot-astromech\">\nPayouts is an **early access** feature. We're actively improving this API based on your feedback.\n\nEarly access features come with some caveats:\n\n* May evolve rapidly, requiring integration updates\n* Not subject to our 10 year version support policy\n* Not subject to SLAs (unless specified in a contract)\n</Warning>\n\nReturns a list of payouts matching the given query parameters.\n\n**This endpoint is rate limited to 100 QPS.**\n\nScopes: `PAYOUTS_R"
+        },
+        {
+          "info": {
+            "name": "Create payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/payouts",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "<Warning title=\"Early Access\" icon=\"robot-astromech\">\nPayouts is an **early access** feature. We're actively improving this API based on your feedback.\n\nEarly access features come with some caveats:\n\n* May evolve rapidly, requiring integration updates\n* Not subject to our 10 year version support policy\n* Not subject to SLAs (unless specified in a contract)\n</Warning>\n\nCreates a payout to a customer. A payout allows a merchant to send money to a customer's Cash App account.\n\n**This endpoint is no"
+        },
+        {
+          "info": {
+            "name": "Retrieve payout",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/payouts/:payout_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "payout_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "<Warning title=\"Early Access\" icon=\"robot-astromech\">\nPayouts is an **early access** feature. We're actively improving this API based on your feedback.\n\nEarly access features come with some caveats:\n\n* May evolve rapidly, requiring integration updates\n* Not subject to our 10 year version support policy\n* Not subject to SLAs (unless specified in a contract)\n</Warning>\n\nRetrieves a payout by its ID.\n\n**This endpoint is not rate-limited.**\n\nScopes: `PAYOUTS_READ`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "balances",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List balances",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/balances",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the customer whose balances will be listed."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of balances to list."
+              },
+              {
+                "name": "grant_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the grant that authorizes reading the customer's balances. This grant is created when a customer approves a `CHECKING_BALANCE` action in the Customer Request API."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of balances to return."
+              }
+            ]
+          },
+          "docs": "<Warning title=\"Beta\" icon=\"robot-astromech\">\nBalances is a **beta** feature. We're actively improving this API based on your feedback.\n</Warning>\n\nReturns a list of balances for a customer matching the given query parameters.\n\nScopes: `BALANCES_READ`"
+        },
+        {
+          "info": {
+            "name": "Retrieve balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/balances/:balance_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "balance_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "grant_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the grant that authorizes reading the customer's balances. This grant is created when a customer approves a `CHECKING_BALANCE` action in the Customer Request API."
+              }
+            ]
+          },
+          "docs": "<Warning title=\"Beta\" icon=\"robot-astromech\">\nBalances is a **beta** feature. We're actively improving this API based on your feedback.\n</Warning>\n\nRetrieves a balance by its ID.\n\nScopes: `BALANCES_READ`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List refunds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/refunds",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include refunds with a `reference_id` matching the given value."
+              },
+              {
+                "name": "customer_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include refunds made to a customer that matches the the given ID."
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include refunds made by a merchant that matches the given ID."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of refunds to return."
+              }
+            ]
+          },
+          "docs": "Returns a list of refunds matching the given query parameters.\n\n**This endpoint is rate limited to 100 QPS.**\n\nScopes: `REFUNDS_READ`"
+        },
+        {
+          "info": {
+            "name": "Create refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/refunds",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a refund from a merchant to a customer.\n\n- To issue a refund, provide a `payment_id` in the request. \n\nThe grant must be associated with the `ON_FILE_PAYMENT` actions.\n\nTo generate a grant to pass to this field, use the Customer Request API.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Retrieve refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/refunds/:refund_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "refund_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a refund by its ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_READ`"
+        },
+        {
+          "info": {
+            "name": "Capture refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/refunds/:refund_id/capture",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "refund_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finalizes a refund so that it can be allocated in the next nightly settlement batch.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Void refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/refunds/:refund_id/void",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "refund_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Moves an authorized refund to the voided state and removes the \"pending refund\" screen from a customer's Cash App account.\n\n<Note> \nYou can only void an authorized refund.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Void refund by idempotency key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/refunds/void-by-idempotency-key",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Moves an authorized refund to the voided state using the idempotency key specified while creating the refund.\n\n<Note> \nYou can only void an authorized refund. If a refund is captured, there is no way to reverse it.\n</Note>\n\nIn rare cases, an issue with an integration, network connectivity, or the Cash App Pay API may cause an API client to end up in a state where a refund is created in Cash App Pay, but the API client doesn't know the ID of the refund. This endpoint allows an API client to void "
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "disputes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List disputes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/disputes",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of disputes to return."
+              },
+              {
+                "name": "merchant_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include disputes filed against a merchant that matches the the given ID."
+              }
+            ]
+          },
+          "docs": "Returns a list of all disputes (matching the given query parameters) associated with payments created by this client.\n\n**This endpoint is rate limited to 50 QPS.**\n\nScopes: `DISPUTES_READ`"
+        },
+        {
+          "info": {
+            "name": "Retrieve dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a dispute by its ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `DISPUTES_READ`"
+        },
+        {
+          "info": {
+            "name": "Accept dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/accept",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resolves a dispute by having the merchant accept responsibility for it. This leads to a \"loss\" of the dispute from the merchant's perspective, and a \"win\" of the dispute from the customer's perspective.\n\n<Note> \nAfter a dispute is accepted, the decision is final; it can never be changed.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `DISPUTES_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Challenge dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/challenge",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Submits evidence uploaded to this dispute to Cash App Pay for review.\n\nAfter Cash App Pay reviews the dispute, a final decision will be reached and funds will be settled appropriately. If this endpoint is not called by the `response_due_at` timestamp, the merchant will automatically \"lose\" the dispute.\n\n<Info> \nChallenging a dispute does not guarantee that the merchant will \"win\" it. It only means that it will be reviewed, instead of being automatically accepted by the merchant.\n</Info>\n\n**This "
+        },
+        {
+          "info": {
+            "name": "List dispute evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/evidence",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of pieces of dispute evidence to return"
+              }
+            ]
+          },
+          "docs": "Returns a list of all pieces of evidence associated with the given dispute.\n\n**This endpoint is rate limited to 50 QPS.**\n\nScopes: `DISPUTES_READ`"
+        },
+        {
+          "info": {
+            "name": "Create dispute evidence text",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/evidence-text",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a piece of evidence for the given dispute from a blob of plain text, which can then be submitted with the [challenge dispute](Network-API.v1.yaml/paths/~1disputes~1{dispute_id}~1challenge) endpoint.\n\nIf you have more than 500 characters of text to submit as evidence, split it into multiple pieces where possible.\n\n<Note> \nUploading evidence does not challenge the dispute. Make sure to call the [challenge dispute](Network-API.v1.yaml/paths/~1disputes~1{dispute_id}~1challenge) endpoint befo"
+        },
+        {
+          "info": {
+            "name": "Create dispute evidence file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/evidence-file",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "request",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a binary file as a piece of evidence for the given dispute, which can then be submitted with the [challenge dispute](Network-API.v1.yaml/paths/~1disputes~1{dispute_id}~1challenge) endpoint.\n\nThe file must be one of the supported formats, or else it may not be usable to challenge the dispute:\n\n- `JPEG`\n- `HEIC`\n- `HEIF`\n- `PNG`\n- `PDF`\n- `TIFF`\n\n<Note> \nUploading evidence does not challenge the dispute. Make sure to call the [challenge dispute](Network-API.v1.yaml/paths/~1disputes~1{dispu"
+        },
+        {
+          "info": {
+            "name": "Retrieve dispute evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/evidence/:evidence_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "evidence_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a piece of dispute evidence by the ID of the dispute its for and its own ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `DISPUTES_READ`"
+        },
+        {
+          "info": {
+            "name": "Delete dispute evidence",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cash.app/network/v1/disputes/:dispute_id/evidence/:evidence_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "evidence_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a piece of dispute evidence by the ID of the dispute its for and its own ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `DISPUTES_WRITE`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "feePlans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Fee Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/fee-plans/:fee_plan_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fee_plan_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a fee plan by its ID.\n\n**This endpoint is not rate limited.**\n\nScopes: `FEE_PLANS_READ`"
+        },
+        {
+          "info": {
+            "name": "List fee plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/network/v1/fee-plans",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of fee plans to return."
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include fee plans that matches the the given currency."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include fee plans that matches the the given status."
+              },
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "Filters results to only include the fee plans that match the given reference ID."
+              }
+            ]
+          },
+          "docs": "Returns a list of all fee plans (matching the given query parameters) associated with this client.\n\n**This endpoint is rate limited to 50 QPS.**\n\nScopes: `FEE_PLANS_READ`"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

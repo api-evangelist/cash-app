@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "124d5a98-5595-4f24-b297-2218c3fa6867",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6b3da8e7-e420-49a6-9376-3fdad813680c",
+          "name": "Get Configuration",
+          "request": {
+            "name": "Get Configuration",
+            "description": {
+              "content": "Use this endpoint to retrieve the merchant's applicable payment limits.\n\nA request to [Create Checkout](Checkouts.v2.yaml/paths/~1v2~1checkouts/post) may be rejected if the order amount is not between the `minimumAmount` and `maximumAmount` (inclusive).\n\nAfterpay merchant configuration does not change frequently. For this reason, the configuration response includes Cache-Control headers to minimise network round trips when using a modern HTTP client. You should call Get Configuration on a fixed schedule, preferably once per day.\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 20             |\n\n**Example request**\n\n`GET /v2/configuration?include=publicid&include=consumerlending&include=paybyinstallment`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "configuration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Repeat this query parameter to include optional configuration fields in the response. The endpoint always returns `minimumAmount` and `maximumAmount`.\n\nSupported values:\n- `publicid`: include `publicId`, the merchant public identifier (MPID) when one exists.\n- `consumerlending`: include `consumerLending`, which indicates whether consumer lending is enabled and, when enabled, the eligible minimum and maximum order amounts.\n- `paybyinstallment`: include `payByInstallment`, the configured pay by installment minimum and maximum eligible order amounts."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Repeat this query parameter to include optional configuration fields in the response. The endpoint always returns `minimumAmount` and `maximumAmount`.\n\nSupported values:\n- `publicid`: include `publicId`, the merchant public identifier (MPID) when one exists.\n- `consumerlending`: include `consumerLending`, which indicates whether consumer lending is enabled and, when enabled, the eligible minimum and maximum order amounts.\n- `paybyinstallment`: include `payByInstallment`, the configured pay by installment minimum and maximum eligible order amounts."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96598fcb-83fc-48b7-99ba-b51166ff343e",
+              "name": "Returns a [configuration](../reference/Configuration.v2.yaml/components/schemas/Merchant-limit) object containing the following attributes.\n| Attribute | Type           | Description |\n|-----------|----------------| ----------- |\n| `minimumAmount`    | Money    | Minimum order amount. Note: This attribute may not be included if the Merchant account has no minimum order amount.\n| `maximumAmount`    | Money    | Maximum order amount.\n| `publicId`    | string    | Merchant public identifier (MPID). Returned when `include=publicid` is requested and a public mapping exists for the merchant.\n| `consumerLending`    | object    | Returned when `include=consumerlending` is requested. Contains `enabled` and, when enabled, `minimumAmount` and `maximumAmount` for consumer lending.\n| `payByInstallment`    | object    | Returned when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains `minimumAmount` and `maximumAmount`.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "configuration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"minimumAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"NZD\"\n  },\n  \"maximumAmount\": {\n    \"amount\": \"string\",\n    \"currency\": \"USD\"\n  },\n  \"publicId\": \"string\",\n  \"consumerLending\": {\n    \"enabled\": true,\n    \"minimumAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"USD\"\n    },\n    \"maximumAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"GBP\"\n    }\n  },\n  \"payByInstallment\": {\n    \"minimumAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"NZD\"\n    },\n    \"maximumAmount\": {\n      \"amount\": \"string\",\n      \"currency\": \"CAD\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9b3eb33-98eb-4994-8c2c-d04a39d9d35e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "configuration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "key": "Accept",
+                    "value": "application/json",
+                    "description": ""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorId\": \"string\",\n  \"message\": \"string\",\n  \"httpStatusCode\": 7777\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf5cefae-e213-44e2-9800-612564f137ad",
+          "name": "Get Configuration Mappings",
+          "request": {
+            "name": "Get Configuration Mappings",
+            "description": {
+              "content": "To set-up Cash App Pay on file, use this endpoint to retrieve your Cash App Pay brand ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v2",
+                "configuration",
+                "mappings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "678bba93-1a82-43c4-84eb-02185fd127db",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "configuration",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Accept",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"externalBrandId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efb90ef5-a55e-4b60-bb49-78be3dce5875",
+              "name": "Unauthenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "configuration",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Accept",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorId\": \"string\",\n  \"message\": \"string\",\n  \"httpStatusCode\": 2550\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f009b4c-7629-4fc1-b767-02de2c34c562",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v2",
+                    "configuration",
+                    "mappings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Basic authentication",
+                    "key": "Authorization",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Accept",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorId\": \"string\",\n  \"message\": \"string\",\n  \"httpStatusCode\": 613\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://global-api-sandbox.afterpay.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76dfeac8-739c-4281-98eb-c0b6985fded0",
+    "name": "Configuration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

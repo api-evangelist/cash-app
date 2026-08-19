@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Grants - Afterpay",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Grant Approval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/approvals",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the approval process for a new grant.\n"
+        },
+        {
+          "info": {
+            "name": "Create Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new grant from a grant approval token. \n"
+        },
+        {
+          "info": {
+            "name": "Retrieve Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/:grantId",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "grantId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the grant to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves a grant by its ID.\n"
+        },
+        {
+          "info": {
+            "name": "Revoke Grant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/:grantId/revoke",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "grantId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier id of the grant to revoke"
+              }
+            ]
+          },
+          "docs": "Revokes a grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.\n"
+        },
+        {
+          "info": {
+            "name": "Create Grant Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/alias",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an alias for an existing grant to help load the payment schedule widget.\n"
+        },
+        {
+          "info": {
+            "name": "Start Grant Link Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/grants/start",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the headless grant link flow process.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

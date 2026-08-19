@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Customer Request API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/customer-request/v1/requests",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a request to perform an action on a customer's account. All available actions can be found in the `action` schema."
+        },
+        {
+          "info": {
+            "name": "Retrieve request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/customer-request/v1/requests/:request_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a customer request by its ID."
+        },
+        {
+          "info": {
+            "name": "Update request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cash.app/customer-request/v1/requests/:request_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "request_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a customer request. The request must have its `status` in a `PENDING` state to successfully update.\n\nTo clear a field, set it to `null`. Fields that are not provided in the request will not be changed.\nIf updating an array field, the entire contents of the array must be passed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

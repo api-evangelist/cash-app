@@ -1,0 +1,470 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Management API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "apiKeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/management/v1/api-keys",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of API keys to return."
+              }
+            ]
+          },
+          "docs": "Returns a list of active API keys matching the given query parameters.\n\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_READ`"
+        },
+        {
+          "info": {
+            "name": "Create API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/management/v1/api-keys",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new API key and secret to use in the `Authorization` and `X-Signature` headers for requests to the Cash App Pay API. This key will automatically expire at the date and time specified in the `expires_at` field in the response payload.\n\n<Note title=\"Note\">\n The `secret` returned in the response payload is what you use to calculate the `X-Signature` header. The API key ID is only used to keep track of which API keys are active, and isn't considered secret.\n Keep in mind that the `secret` "
+        },
+        {
+          "info": {
+            "name": "Retrieve API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/management/v1/api-keys/:api_key_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves an API key by ID.\n\n**This endpoint is rate limited to 10 QPS.**\n\nScopes: `API_KEYS_READ`"
+        },
+        {
+          "info": {
+            "name": "Delete API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cash.app/management/v1/api-keys/:api_key_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes an API key. After an API key is deleted, it can no longer be used for authentication. All API clients using the secret associated with this API key  will immediately be forbidden from talking to the Cash App Pay API.\n\n<Note title=\"Note\">\n There is no way to un-delete an API key, so treat this endpoint with caution in production environments.\n</Note>\n\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_WRITE`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List webhook endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/management/v1/webhook-endpoints",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of webhook endpoints to return."
+              },
+              {
+                "name": "reference_id",
+                "value": "",
+                "type": "query",
+                "description": "A user-defined identifier for this webhook endpoint, typically used to associate the webhook endpoint with a record in an external system."
+              }
+            ]
+          },
+          "docs": "Returns a list of webhook endpoints matching the query parameters provided.\n\nScopes: `WEBHOOK_CONFIG_READ`"
+        },
+        {
+          "info": {
+            "name": "Create webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/management/v1/webhook-endpoints",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new webhook endpoint which Cash App can send events to.\n\n<Note title=\"Note\">\n Webhook events will not be successfully delivered for new domains until the new domain is allow-listed. New domains must be manually reviewed and allow-listed. It will typically take 1 business day to allow-list new domains.\n</Note>\n\nScopes: `WEBHOOK_CONFIG_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Retrieve webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/management/v1/webhook-endpoints/:webhook_endpoint_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the webhook endpoint matching the `webhook_endpoint_id` provided.\n\nScopes: `WEBHOOK_CONFIG_READ`"
+        },
+        {
+          "info": {
+            "name": "Update webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.cash.app/management/v1/webhook-endpoints/:webhook_endpoint_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the webhook endpoint matching the `webhook_endpoint_id` provided.\n\nScopes: `WEBHOOK_CONFIG_WRITE`"
+        },
+        {
+          "info": {
+            "name": "Delete webhook endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.cash.app/management/v1/webhook-endpoints/:webhook_endpoint_id",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the webhook endpoint matching the `webhook_endpoint_id` provided. Note: Events that are created before the webhook endpoint was deleted will still be delivered after the webhook endpoint gets deleted.\n\nScopes: `WEBHOOK_CONFIG_WRITE`"
+        },
+        {
+          "info": {
+            "name": "List webhook events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.cash.app/management/v1/webhook-events",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "webhook_endpoint_id",
+                "value": "",
+                "type": "query",
+                "description": "Events delivered to this webhook endpoint ID."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of an event that was delivered to a webhook endpoint. The status can either be PENDING, SUCCESS, or FAILED."
+              },
+              {
+                "name": "event_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of event that will be sent to the webhook endpoint."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of webhook events to return."
+              }
+            ]
+          },
+          "docs": "Returns a list of all webhook events matching the query parameters provided. Expired events are not included.\n\nScopes: `WEBHOOK_EVENTS_READ`"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "requestChains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create request chain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.cash.app/management/v1/request-chains",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              },
+              {
+                "name": "X-Region",
+                "value": ""
+              },
+              {
+                "name": "X-Signature",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes multiple requests, grouped into \"chains\", in a single call. The API Client (Client) can use multiple chains and specify sub-requests within each chain to run sequentially or in parallel. However the chains, themselves, will only run sequentially.\n\n### Accessing a previous response's value\n\nClients can access a previous response's value by using the format: `$[previous request's uid]:[key path]`. Clients can use this in the value fields of:\n- `requests[].body`\n- `requests[].path_params`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

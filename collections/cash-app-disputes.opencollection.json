@@ -1,0 +1,254 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Disputes",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/disputes",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Payment or Order token using which you can filter the list."
+              },
+              {
+                "name": "merchant",
+                "value": "",
+                "type": "query",
+                "description": "Merchant token using which you can filter the list."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Dispute status using which you can filter the list."
+              },
+              {
+                "name": "openedAfter",
+                "value": "",
+                "type": "query",
+                "description": "Filter disputes that were created on or after this timestamp (inclusive)."
+              },
+              {
+                "name": "openedBefore",
+                "value": "",
+                "type": "query",
+                "description": "Filter disputes that were created on or before this timestamp (inclusive)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for the search results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of records that you want returned from this request."
+              }
+            ]
+          },
+          "docs": "List disputes within a date range based on certain criteria. This endpoint can be used for debugging or synchronizing the disputes from Afterpay if/when you are unable to use the webhook method.\n"
+        },
+        {
+          "info": {
+            "name": "Receive Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/disputes/:dispute_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get detailed information about a dispute."
+        },
+        {
+          "info": {
+            "name": "Respond to Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/disputes/:dispute_id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "The Respond to the Dispute endpoint allows a merchant to submit evidence for the dispute. This is only allowed if the dispute is the state `needs_response`.\n\nMerchants only have one opportunity to submit evidence. Once a 200 response is received, this information cannot be updated or changed."
+        },
+        {
+          "info": {
+            "name": "Accept Dispute",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/disputes/:dispute_id/accept",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dispute_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Merchants can call this endpoint to accept a dispute case. The endpoint only works if the dispute is in a non-terminal state (the status is not `won` or `lost`).\n\n> **Note:** Calling the API changes the dispute status to lost."
+        },
+        {
+          "info": {
+            "name": "Upload File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/disputes/files",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this endpoint to upload files for disputes."
+        },
+        {
+          "info": {
+            "name": "Retrieve file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/disputes/files/:id",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "ID of the file to be retrieved."
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve files for disputes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,333 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Billing Agreements (Deprecated)",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start Billing Agreement Approval Process",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/approvals",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the approval process for a new billing agreement.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Create Billing Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new billing agreement from an order token.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*\n"
+        },
+        {
+          "info": {
+            "name": "Create Billing Agreement Alias",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/alias",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an alias for an existing billing agreement to help load payment schedule widget.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Cancel Billing Agreement (Alternative)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/cancel",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alternative endpoint to cancel a billing agreement using a request body instead of path parameter.\nFunctionally equivalent to DELETE /v2/billing-agreements/{token}.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Retrieve Billing Agreement Offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/offers",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves available offers for billing agreements based on amount and frequency.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Retrieve Billing Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/retrieve",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Alternative endpoint to retrieve billing agreement details using a request body instead of path parameter.\nFunctionally equivalent to GET /v2/billing-agreements/{token}.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Start Billing Agreement Link Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/start",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates the headless billing agreement link flow process.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Get Billing Agreement Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/:token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier token of the billing agreement to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves the details of a billing agreement using its token.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Cancel Billing Agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://global-api-sandbox.afterpay.com/v2/billing-agreements/:token",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier token of the billing agreement to cancel"
+              }
+            ]
+          },
+          "docs": "Cancels an existing billing agreement using its token.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Capture Full Recurring Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/recurring-payments",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and immediately captures a recurring payment using a billing agreement token.\nThis endpoint combines authorization and capture into a single step.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        },
+        {
+          "info": {
+            "name": "Authorize Recurring Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://global-api-sandbox.afterpay.com/v2/recurring-payments/auth",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authorizes a recurring payment using a billing agreement token.\nThis endpoint performs authorization only, requiring a separate capture step.\n\n*Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

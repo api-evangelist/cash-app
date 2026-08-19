@@ -1,0 +1,2343 @@
+{
+  "item": [
+    {
+      "id": "31bca8f9-1dd3-4e4c-a156-509b3b0f838a",
+      "name": "apiKeys",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "02999dfa-4c9b-4673-8700-638df09fb17c",
+          "name": "List API keys",
+          "request": {
+            "name": "List API keys",
+            "description": {
+              "content": "Returns a list of active API keys matching the given query parameters.\n\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_READ`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api-keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of API keys to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "84951fa4-b135-4ca2-90bd-1ab6de5e8667",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_keys\": [\n    {\n      \"id\": \"string\",\n      \"created_at\": \"1986-01-01T11:42:09.864Z\",\n      \"expires_at\": \"2023-11-10T13:11:58.153Z\",\n      \"scopes\": [\n        \"DISPUTES_READ\",\n        \"MERCHANTS_WRITE\"\n      ],\n      \"reference_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"created_at\": \"1991-06-14T08:10:52.439Z\",\n      \"expires_at\": \"1968-12-14T09:14:21.704Z\",\n      \"scopes\": [\n        \"PAYMENTS_WRITE\",\n        \"CUSTOMERS_READ\"\n      ],\n      \"reference_id\": \"string\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94aa689e-4dd2-4381-9149-2c92f85fccf3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbb6b278-bc2e-43ea-a55b-929144fed6e4",
+          "name": "Create API key",
+          "request": {
+            "name": "Create API key",
+            "description": {
+              "content": "Creates a new API key and secret to use in the `Authorization` and `X-Signature` headers for requests to the Cash App Pay API. This key will automatically expire at the date and time specified in the `expires_at` field in the response payload.\n\n<Note title=\"Note\">\n The `secret` returned in the response payload is what you use to calculate the `X-Signature` header. The API key ID is only used to keep track of which API keys are active, and isn't considered secret.\n Keep in mind that the `secret` can never be retrieved in subsequent requests to the API, so make sure to store it immediately!\n</Note>\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_WRITE`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api-keys"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"<string>\",\n  \"api_key\": {\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"reference_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5ed05a6-1d99-4a22-9472-34696695a81d",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotency_key\": \"string\",\n  \"api_key\": {\n    \"scopes\": [\n      \"BRANDS_READ\",\n      \"WEBHOOK_CONFIG_READ\"\n    ],\n    \"reference_id\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_key\": {\n    \"id\": \"string\",\n    \"created_at\": \"1974-04-19T05:59:44.727Z\",\n    \"expires_at\": \"1966-12-30T05:33:12.438Z\",\n    \"scopes\": [\n      \"PAYMENTS_WRITE\",\n      \"CUSTOMERS_READ\"\n    ],\n    \"reference_id\": \"string\"\n  },\n  \"secret\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55584c4a-9804-4bb6-9706-466b6e8f0c86",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotency_key\": \"string\",\n  \"api_key\": {\n    \"scopes\": [\n      \"BRANDS_READ\",\n      \"WEBHOOK_CONFIG_READ\"\n    ],\n    \"reference_id\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c94c70a8-ea4f-4e64-882b-2e5188a98f6d",
+          "name": "Retrieve API key",
+          "request": {
+            "name": "Retrieve API key",
+            "description": {
+              "content": "Retrieves an API key by ID.\n\n**This endpoint is rate limited to 10 QPS.**\n\nScopes: `API_KEYS_READ`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api-keys",
+                ":api_key_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a0b8a8f-b3c2-4d76-8bda-260905ad612a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"api_key\": {\n    \"id\": \"string\",\n    \"created_at\": \"1951-05-26T03:28:08.952Z\",\n    \"expires_at\": \"2007-09-03T01:59:16.696Z\",\n    \"scopes\": [\n      \"MERCHANTS_WRITE\",\n      \"DISPUTES_READ\"\n    ],\n    \"reference_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dff1e1c-7cf7-490a-b5ae-40c173c0a61b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04224332-61ce-4da0-99a6-e9393e4693aa",
+          "name": "Delete API key",
+          "request": {
+            "name": "Delete API key",
+            "description": {
+              "content": "Deletes an API key. After an API key is deleted, it can no longer be used for authentication. All API clients using the secret associated with this API key  will immediately be forbidden from talking to the Cash App Pay API.\n\n<Note title=\"Note\">\n There is no way to un-delete an API key, so treat this endpoint with caution in production environments.\n</Note>\n\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_WRITE`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api-keys",
+                ":api_key_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "api_key_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87fafdd1-aafd-4a5d-97dd-507a6152ae84",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api-keys",
+                    ":api_key_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "api_key_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "baca8c69-9e1f-4f67-b938-ee78fc3c8dc7",
+      "name": "Webhooks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7bdc7f15-cf66-413f-bb97-c398dce4df91",
+          "name": "List webhook endpoints",
+          "request": {
+            "name": "List webhook endpoints",
+            "description": {
+              "content": "Returns a list of webhook endpoints matching the query parameters provided.\n\nScopes: `WEBHOOK_CONFIG_READ`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook-endpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of webhook endpoints to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "reference_id",
+                  "value": "<string>",
+                  "description": "A user-defined identifier for this webhook endpoint, typically used to associate the webhook endpoint with a record in an external system."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7cfd5af-87e6-4ce9-9ee6-26ae31dbfdca",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reference_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhook_endpoints\": [\n    {\n      \"id\": \"string\",\n      \"api_key_id\": \"string\",\n      \"url\": \"https://VhSwTHtfPkddkAobzqrLvLvkg.qjjM,zN-ZBBXu1,xMb5CDUQ6F9pkxTk\",\n      \"event_configurations\": [\n        {\n          \"event_type\": \"grant.status.updated\",\n          \"api_version\": \"v1\"\n        },\n        {\n          \"event_type\": \"dispute.state.updated\",\n          \"api_version\": \"v1\"\n        }\n      ],\n      \"created_at\": \"1982-09-06T10:42:36.954Z\",\n      \"updated_at\": \"2017-01-27T10:31:17.201Z\",\n      \"delivery_timeout\": 5000,\n      \"status\": \"APPROVED\",\n      \"reference_id\": \"string\",\n      \"max_delivery_frequency\": 6094.693787623307\n    },\n    {\n      \"id\": \"string\",\n      \"api_key_id\": \"string\",\n      \"url\": \"https://EdJmLkvqDqEoQ.annVHkgOfvOsyDx-urmv4\",\n      \"event_configurations\": [\n        {\n          \"event_type\": \"customer_request.state.updated\",\n          \"api_version\": \"v1\"\n        },\n        {\n          \"event_type\": \"dispute.created\",\n          \"api_version\": \"v1\"\n        }\n      ],\n      \"created_at\": \"2018-07-22T17:24:53.338Z\",\n      \"updated_at\": \"1952-07-11T18:55:30.624Z\",\n      \"delivery_timeout\": 5000,\n      \"status\": \"APPROVED\",\n      \"reference_id\": \"string\",\n      \"max_delivery_frequency\": 7067.976157821029\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07b2a77b-714e-4a83-99ec-5bd03990b9a2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "reference_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22637353-8ba0-4de1-9a2e-8232c846fb0e",
+          "name": "Create webhook endpoint",
+          "request": {
+            "name": "Create webhook endpoint",
+            "description": {
+              "content": "Creates a new webhook endpoint which Cash App can send events to.\n\n<Note title=\"Note\">\n Webhook events will not be successfully delivered for new domains until the new domain is allow-listed. New domains must be manually reviewed and allow-listed. It will typically take 1 business day to allow-list new domains.\n</Note>\n\nScopes: `WEBHOOK_CONFIG_WRITE`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook-endpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idempotency_key\": \"<string>\",\n  \"webhook_endpoint\": {\n    \"api_key_id\": \"<string>\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"<string>\",\n        \"api_version\": \"<string>\"\n      },\n      {\n        \"event_type\": \"<string>\",\n        \"api_version\": \"<string>\"\n      }\n    ],\n    \"url\": \"<string,null>\",\n    \"reference_id\": \"<string>\",\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": \"<double>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "496ac168-0b79-4abe-9728-14cd4271d239",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotency_key\": \"string\",\n  \"webhook_endpoint\": {\n    \"api_key_id\": \"string\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"dispute.created\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"grant.status.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"url\": \"string\",\n    \"reference_id\": \"string\",\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": 75.88470603169472\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhook_endpoint\": {\n    \"id\": \"string\",\n    \"api_key_id\": \"string\",\n    \"url\": \"https://zjsKVmSRUxxqfKX.mxF.ww5SQZj0tkgz.dyu\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"grant.status.updated\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"customer.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"created_at\": \"1948-09-07T17:27:52.775Z\",\n    \"updated_at\": \"1979-12-09T23:37:26.825Z\",\n    \"delivery_timeout\": 5000,\n    \"status\": \"ENDPOINT_URL_UNDER_REVIEW\",\n    \"reference_id\": \"string\",\n    \"max_delivery_frequency\": 8633.90080157198\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b52276a3-e63f-4d17-8c50-659f6aa68dbe",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"idempotency_key\": \"string\",\n  \"webhook_endpoint\": {\n    \"api_key_id\": \"string\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"dispute.created\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"grant.status.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"url\": \"string\",\n    \"reference_id\": \"string\",\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": 75.88470603169472\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dfe3d1e-a6f6-43e6-96e9-8d821030c464",
+          "name": "Retrieve webhook endpoint",
+          "request": {
+            "name": "Retrieve webhook endpoint",
+            "description": {
+              "content": "Returns the webhook endpoint matching the `webhook_endpoint_id` provided.\n\nScopes: `WEBHOOK_CONFIG_READ`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook-endpoints",
+                ":webhook_endpoint_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_endpoint_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e28ea2d7-301f-4815-8829-f0f6d7c97ff0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhook_endpoint\": {\n    \"id\": \"string\",\n    \"api_key_id\": \"string\",\n    \"url\": \"https://UvuTxNoaHqvBSEDzsQFHAKcQGTyaEpdu.ofNQveCicN+hhPlDamF1XhVmf-TD.nD4xkmDbXVtJv8N9uhoZ9xN9\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"customer.updated\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"customer_request.state.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"created_at\": \"1949-01-02T01:32:16.429Z\",\n    \"updated_at\": \"1962-03-15T01:47:15.845Z\",\n    \"delivery_timeout\": 5000,\n    \"status\": \"APPROVED\",\n    \"reference_id\": \"string\",\n    \"max_delivery_frequency\": 5323.272025543081\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28daaa5b-f92d-4aab-a09e-4bb0197fac18",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "253382d0-b55c-477d-bf91-61121a32f96a",
+          "name": "Update webhook endpoint",
+          "request": {
+            "name": "Update webhook endpoint",
+            "description": {
+              "content": "Updates the webhook endpoint matching the `webhook_endpoint_id` provided.\n\nScopes: `WEBHOOK_CONFIG_WRITE`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook-endpoints",
+                ":webhook_endpoint_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_endpoint_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"webhook_endpoint\": {\n    \"url\": \"<string,null-uri>\",\n    \"reference_id\": \"<string,null>\",\n    \"api_key_id\": \"<string>\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"<string>\",\n        \"api_version\": \"<string>\"\n      },\n      {\n        \"event_type\": \"<string>\",\n        \"api_version\": \"<string>\"\n      }\n    ],\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": \"<number,null-double>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "461a1ee2-6384-4797-b7e4-6c6fd8dbf6c5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_endpoint\": {\n    \"url\": \"http://uZpOGGYLcIeApllNIYVLsJdqglsbZuEJh.jcXfLzAQBWxFvLJsjVonnElQOteSSXq4B0uuLwEfqGa3bphU-M9LZmGbZX70yuAD2hx2U7-+HEQ+YsP\",\n    \"reference_id\": \"string\",\n    \"api_key_id\": \"string\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"dispute.created\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"payment.status.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": 9812.237981291499\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhook_endpoint\": {\n    \"id\": \"string\",\n    \"api_key_id\": \"string\",\n    \"url\": \"http://TZeBeiWaabHylQSjIwygFqjLySA.nxTk7\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"customer_request.state.updated\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"customer.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"created_at\": \"2002-09-23T02:26:28.491Z\",\n    \"updated_at\": \"1948-05-08T00:45:28.008Z\",\n    \"delivery_timeout\": 5000,\n    \"status\": \"APPROVED\",\n    \"reference_id\": \"string\",\n    \"max_delivery_frequency\": 6048.547924132506\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff1e446b-102e-44f6-891e-2469374b687c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_endpoint\": {\n    \"url\": \"http://uZpOGGYLcIeApllNIYVLsJdqglsbZuEJh.jcXfLzAQBWxFvLJsjVonnElQOteSSXq4B0uuLwEfqGa3bphU-M9LZmGbZX70yuAD2hx2U7-+HEQ+YsP\",\n    \"reference_id\": \"string\",\n    \"api_key_id\": \"string\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"dispute.created\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"payment.status.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": 9812.237981291499\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb166036-3381-49e9-8f0a-35e40c98449e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"webhook_endpoint\": {\n    \"url\": \"http://uZpOGGYLcIeApllNIYVLsJdqglsbZuEJh.jcXfLzAQBWxFvLJsjVonnElQOteSSXq4B0uuLwEfqGa3bphU-M9LZmGbZX70yuAD2hx2U7-+HEQ+YsP\",\n    \"reference_id\": \"string\",\n    \"api_key_id\": \"string\",\n    \"event_configurations\": [\n      {\n        \"event_type\": \"dispute.created\",\n        \"api_version\": \"v1\"\n      },\n      {\n        \"event_type\": \"payment.status.updated\",\n        \"api_version\": \"v1\"\n      }\n    ],\n    \"delivery_timeout\": 5000,\n    \"max_delivery_frequency\": 9812.237981291499\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83e52bc9-c3bb-4116-8814-aac52ca9fe63",
+          "name": "Delete webhook endpoint",
+          "request": {
+            "name": "Delete webhook endpoint",
+            "description": {
+              "content": "Deletes the webhook endpoint matching the `webhook_endpoint_id` provided. Note: Events that are created before the webhook endpoint was deleted will still be delivered after the webhook endpoint gets deleted.\n\nScopes: `WEBHOOK_CONFIG_WRITE`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook-endpoints",
+                ":webhook_endpoint_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webhook_endpoint_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e45c5190-8f7d-4af3-86cb-087b4a319ff7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da82eaf7-50a1-4874-8ea6-0be97995d2eb",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-endpoints",
+                    ":webhook_endpoint_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webhook_endpoint_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a800ded3-9900-4a49-91cb-1b4d186b2a33",
+          "name": "List webhook events",
+          "request": {
+            "name": "List webhook events",
+            "description": {
+              "content": "Returns a list of all webhook events matching the query parameters provided. Expired events are not included.\n\nScopes: `WEBHOOK_EVENTS_READ`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhook-events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "webhook_endpoint_id",
+                  "value": "<string>",
+                  "description": "Events delivered to this webhook endpoint ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of an event that was delivered to a webhook endpoint. The status can either be PENDING, SUCCESS, or FAILED."
+                },
+                {
+                  "disabled": false,
+                  "key": "event_type",
+                  "value": "<string>",
+                  "description": "The type of event that will be sent to the webhook endpoint."
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of webhook events to return."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ecf6b93e-a703-42d0-98bc-e88c6df2efcd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "webhook_endpoint_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PENDING"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "merchant.status.updated"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"webhook_events\": [\n    {\n      \"id\": \"string\",\n      \"webhook_endpoint_id\": \"string\",\n      \"event_type\": \"customer.updated\",\n      \"status\": \"SUCCESS\",\n      \"created_at\": \"1950-03-09T14:37:18.784Z\",\n      \"updated_at\": \"1992-04-08T19:38:16.498Z\",\n      \"expires_at\": \"1990-01-04T08:40:43.727Z\",\n      \"event_data\": {\n        \"event_id\": \"string\",\n        \"type\": \"customer.created\",\n        \"created_at\": \"1958-11-30T15:28:35.585Z\",\n        \"data\": {\n          \"id\": \"string\",\n          \"object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"merchant\"\n        }\n      },\n      \"api_version\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"webhook_endpoint_id\": \"string\",\n      \"event_type\": \"customer_request.state.updated\",\n      \"status\": \"SUCCESS\",\n      \"created_at\": \"1992-03-03T04:33:48.619Z\",\n      \"updated_at\": \"2000-03-31T17:31:26.115Z\",\n      \"expires_at\": \"1969-01-12T04:52:54.228Z\",\n      \"event_data\": {\n        \"event_id\": \"string\",\n        \"type\": \"customer.updated\",\n        \"created_at\": \"1952-11-17T11:19:57.455Z\",\n        \"data\": {\n          \"id\": \"string\",\n          \"object\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"type\": \"customer\"\n        }\n      },\n      \"api_version\": \"string\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d942179-477d-427d-9343-7e7aba40bea3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhook-events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "webhook_endpoint_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PENDING"
+                    },
+                    {
+                      "key": "event_type",
+                      "value": "merchant.status.updated"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1e81d09b-24a2-4566-910e-caafc123d0f0",
+      "name": "requestChains",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ba39286b-2776-464e-a79c-5827bb16a210",
+          "name": "Create request chain",
+          "request": {
+            "name": "Create request chain",
+            "description": {
+              "content": "Executes multiple requests, grouped into \"chains\", in a single call. The API Client (Client) can use multiple chains and specify sub-requests within each chain to run sequentially or in parallel. However the chains, themselves, will only run sequentially.\n\n### Accessing a previous response's value\n\nClients can access a previous response's value by using the format: `$[previous request's uid]:[key path]`. Clients can use this in the value fields of:\n- `requests[].body`\n- `requests[].path_params`\n- `requests[].query_params`\n\nThe request's path `requests[].path` has an extra step to access a previous response's value. In the request's path, the Client will first refer to a key in the `requests[].path_params` field using the format: `{[path_params key name]}`. From there `requests[].path_params` can use the pattern described in **Accessing a previous response's value** to obtain a previous response's value.\n\n<Warning>\nThe initial security headers will be passed to all requests.\n\nScopes are not required for this endpoint. However, the API key must contain the appropriate scopes required by the individual requests to execute.\n</Warning>\n\nFor FAQs and performance improvement details, visit [Optimizing Performance with Request Chaining](../docs/partner-onboarding/optimizing-performance-with-request-chaining.md).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "request-chains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Region",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Signature",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "User-Agent",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requests\": [\n    {\n      \"uid\": \"<string>\",\n      \"method\": \"<string>\",\n      \"path\": \"<string>\",\n      \"path_params\": {},\n      \"query_params\": {},\n      \"body\": {}\n    },\n    {\n      \"uid\": \"<string>\",\n      \"method\": \"<string>\",\n      \"path\": \"<string>\",\n      \"path_params\": {},\n      \"query_params\": {},\n      \"body\": {}\n    }\n  ],\n  \"chains\": [\n    {\n      \"requests\": [\n        {\n          \"uid\": \"<string>\"\n        },\n        {\n          \"uid\": \"<string>\"\n        }\n      ],\n      \"execution_mode\": \"<string>\"\n    },\n    {\n      \"requests\": [\n        {\n          \"uid\": \"<string>\"\n        },\n        {\n          \"uid\": \"<string>\"\n        }\n      ],\n      \"execution_mode\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8136b6f6-80fa-4a0e-a020-86891aba5c9e",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request-chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"uid\": \"string\",\n      \"method\": \"PUT\",\n      \"path\": \"string\",\n      \"path_params\": {},\n      \"query_params\": {},\n      \"body\": {}\n    },\n    {\n      \"uid\": \"string\",\n      \"method\": \"GET\",\n      \"path\": \"string\",\n      \"path_params\": {},\n      \"query_params\": {},\n      \"body\": {}\n    }\n  ],\n  \"chains\": [\n    {\n      \"requests\": [\n        {\n          \"uid\": \"string\"\n        },\n        {\n          \"uid\": \"string\"\n        }\n      ],\n      \"execution_mode\": \"SEQUENTIAL\"\n    },\n    {\n      \"requests\": [\n        {\n          \"uid\": \"string\"\n        },\n        {\n          \"uid\": \"string\"\n        }\n      ],\n      \"execution_mode\": \"PARALLEL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"responses\": [\n    {\n      \"request_uid\": \"string\",\n      \"execution_status\": \"NOT_STARTED\",\n      \"path\": \"string\",\n      \"method\": \"GET\",\n      \"status_code\": 6185,\n      \"body\": {},\n      \"completed_at\": \"1953-12-20T19:53:44.451Z\"\n    },\n    {\n      \"request_uid\": \"string\",\n      \"execution_status\": \"NOT_STARTED\",\n      \"path\": \"string\",\n      \"method\": \"POST\",\n      \"status_code\": 5906,\n      \"body\": {},\n      \"completed_at\": \"2013-06-21T16:13:02.429Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9f77b6a-a327-4ae2-a1ad-e34cb4163004",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "request-chains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "Accept",
+                    "value": "string"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Region",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Signature",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "User-Agent",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"requests\": [\n    {\n      \"uid\": \"string\",\n      \"method\": \"PUT\",\n      \"path\": \"string\",\n      \"path_params\": {},\n      \"query_params\": {},\n      \"body\": {}\n    },\n    {\n      \"uid\": \"string\",\n      \"method\": \"GET\",\n      \"path\": \"string\",\n      \"path_params\": {},\n      \"query_params\": {},\n      \"body\": {}\n    }\n  ],\n  \"chains\": [\n    {\n      \"requests\": [\n        {\n          \"uid\": \"string\"\n        },\n        {\n          \"uid\": \"string\"\n        }\n      ],\n      \"execution_mode\": \"SEQUENTIAL\"\n    },\n    {\n      \"requests\": [\n        {\n          \"uid\": \"string\"\n        },\n        {\n          \"uid\": \"string\"\n        }\n      ],\n      \"execution_mode\": \"PARALLEL\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"category\": \"API_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    },\n    {\n      \"category\": \"INVALID_REQUEST_ERROR\",\n      \"code\": \"string\",\n      \"detail\": \"string\",\n      \"field\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.cash.app/management/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "561fe41b-dfeb-4148-b385-2dc2b7b89c9e",
+    "name": "Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

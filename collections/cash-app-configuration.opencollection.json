@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Configuration",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/configuration",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Repeat this query parameter to include optional configuration fields in the response. The endpoint always returns `minimumAmount` and `maximumAmount`.\n\nSupported values:\n- `publicid`: include `publicId`, the merchant public identifier (MPID) when one exists.\n- `consumerlending`: include `consumerLending`, which indicates whether consumer lending is enabled and, when enabled, the eligible minimum and maximum order amounts.\n- `paybyinstallment`: include `payByInstallment`, the configured pay by installment minimum and maximum eligible order amounts."
+              }
+            ]
+          },
+          "docs": "Use this endpoint to retrieve the merchant's applicable payment limits.\n\nA request to [Create Checkout](Checkouts.v2.yaml/paths/~1v2~1checkouts/post) may be rejected if the order amount is not between the `minimumAmount` and `maximumAmount` (inclusive).\n\nAfterpay merchant configuration does not change frequently. For this reason, the configuration response includes Cache-Control headers to minimise network round trips when using a modern HTTP client. You should call Get Configuration on a fixed "
+        },
+        {
+          "info": {
+            "name": "Get Configuration Mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://global-api-sandbox.afterpay.com/v2/configuration/mappings",
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": ""
+              },
+              {
+                "name": "User-Agent",
+                "value": ""
+              },
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "To set-up Cash App Pay on file, use this endpoint to retrieve your Cash App Pay brand ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

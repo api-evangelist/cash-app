@@ -32,6 +32,15 @@ deliveryModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
+- Financial-Services
+- Payments
+- United States
+- Fintech
+- Neobank
+- Buy Now Pay Later
+- Payment Acceptance
+- Digital Wallet
+tags_raw:
 - Financial Services
 - Payments
 - United States
@@ -85,6 +94,10 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
   baseURL: https://api.cash.app/management/v1
   tags:
+  - APIKeys
+  - Webhook
+  - Management API
+  tags_raw:
   - API Keys
   - Webhooks
   - Management API
@@ -131,6 +144,9 @@ apis:
   humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
   baseURL: https://global-api.afterpay.com
   tags:
+  - Order
+  - Afterpay
+  tags_raw:
   - Orders
   - Afterpay
   properties:

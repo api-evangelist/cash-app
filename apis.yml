@@ -53,193 +53,826 @@ created: '2026-07-23'
 modified: '2026-07-23'
 specificationVersion: '0.23'
 apis:
-- aid: cash-app:cash-app-pay-network-api
-  name: Cash App Pay Network API
-  description: Server-side REST API that registers merchants and processes payments
-    using grants - the core Cash App Pay payment-processing surface for PSP partners.
+- aid: cash-app:cash-app-add-cash-app-pay-to-your-site-api
+  name: Cash App Add Cash App Pay To Your Site API
+  description: >-
+    The Add Cash App Pay To Your Site API from Cash App — 0 operation(s) for add cash app pay to your
+    site.
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
-  - Payments
-  - Network API
+  - Add Cash App Pay To Your Site
   properties:
   - type: OpenAPI
-    url: openapi/cash-app-network-api-openapi.json
+    url: openapi/cash-app-add-cash-app-pay-to-your-site-api-openapi.yml
   - type: Documentation
-    url: https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
   - type: APIReference
     url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
-- aid: cash-app:cash-app-pay-customer-request-api
-  name: Cash App Pay Customer Request API
-  description: REST API used to get permission from customers to perform actions on
-    their accounts (such as collecting a payment), producing the grants consumed by
-    the Network API. Wrapped by the Pay Kit JavaScript SDK.
-  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
-  baseURL: https://api.cash.app/customer-request/v1
-  tags:
-  - Payments
-  - Authorization
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-customer-request-api-openapi.json
   - type: Documentation
-    url: https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
   - type: APIReference
     url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
-- aid: cash-app:cash-app-pay-management-api
-  name: Cash App Pay Management API
-  description: REST API that controls scoped API keys and webhooks, automating key
-    aspects of a Cash App Pay integration including least-privileged microservice
-    access.
-  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
-  baseURL: https://api.cash.app/management/v1
-  tags:
-  - APIKeys
-  - Webhook
-  - Management API
-  tags_raw:
-  - API Keys
-  - Webhooks
-  - Management API
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-management-api-openapi.json
   - type: Documentation
     url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
   - type: APIReference
     url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
-- aid: cash-app:afterpay-payments-api
-  name: Afterpay Payments API
-  description: Afterpay (Cash App Afterpay) Global API for authorizing, capturing,
-    voiding, and refunding buy-now-pay-later payments. HTTP Basic authenticated.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
-  tags:
-  - Payments
-  - Buy Now Pay Later
-  - Afterpay
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-payments-openapi.json
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/introduction
-- aid: cash-app:afterpay-checkouts-api
-  name: Afterpay Checkouts API
-  description: Afterpay Global API for creating and retrieving checkout sessions that
-    begin an Afterpay buy-now-pay-later order flow.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
-  tags:
-  - Checkout
-  - Afterpay
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-checkouts-openapi.json
   - type: APIReference
-    url: https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
-- aid: cash-app:afterpay-orders-api
-  name: Afterpay Orders API
-  description: Afterpay Global API for retrieving order details associated with an
-    Afterpay buy-now-pay-later transaction.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
-  tags:
-  - Order
-  - Afterpay
-  tags_raw:
-  - Orders
-  - Afterpay
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-orders-openapi.json
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
   - type: APIReference
-    url: https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
-- aid: cash-app:afterpay-configuration-api
-  name: Afterpay Configuration API
-  description: Afterpay Global API exposing merchant configuration and limits (such
-    as minimum and maximum order amounts) for the Afterpay/Cash App Pay integration.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
-  tags:
-  - Configuration
-  - Afterpay
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-configuration-openapi.json
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
   - type: APIReference
-    url: https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
-- aid: cash-app:afterpay-disputes-api
-  name: Afterpay Disputes API
-  description: Afterpay Global API for listing disputes and submitting evidence to
-    contest Afterpay buy-now-pay-later chargebacks.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
-  tags:
-  - Disputes
-  - Afterpay
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-disputes-openapi.json
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
-- aid: cash-app:afterpay-grants-api
-  name: Afterpay Grants API
-  description: Afterpay Global API for retrieving and managing the grants that
-    authorize Afterpay payment operations on a customer's behalf.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-apikeys-api
+  name: Cash App API Keys API
+  description: The apiKeys API from Cash App — 2 operation(s) for apikeys.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
   tags:
-  - Grants
-  - Afterpay
+  - apiKeys
   properties:
   - type: OpenAPI
-    url: openapi/cash-app-grants-afterpay-openapi.json
+    url: openapi/cash-app-apikeys-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/introduction
-- aid: cash-app:cash-app-pay-site-grants-api
-  name: Add Cash App Pay to Your Site (Grants) API
-  description: Afterpay Global API surface for retrieving Cash App Pay grants when
-    adding Cash App Pay directly to a website through the Afterpay Global API.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
-  tags:
-  - Grants
-  - Cash App Pay
-  properties:
-  - type: OpenAPI
-    url: openapi/cash-app-grants-cash-app-pay-openapi.json
   - type: APIReference
-    url: https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
-- aid: cash-app:afterpay-service-status-api
-  name: Afterpay Service Status API
-  description: Afterpay Global API health-check endpoint reporting the operational
-    status of the Afterpay service.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-balances-api
+  name: Cash App Balances API
+  description: The balances API from Cash App — 2 operation(s) for balances.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
   tags:
-  - Service Status
-  - Afterpay
+  - balances
   properties:
   - type: OpenAPI
-    url: openapi/cash-app-service-status-openapi.json
+    url: openapi/cash-app-balances-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
   - type: APIReference
     url: https://developers.cash.app/afterpay/api-reference/reference/introduction
-- aid: cash-app:afterpay-billing-agreements-api
-  name: Afterpay Billing Agreements API (Deprecated)
-  description: Deprecated Afterpay Global API for creating and managing recurring
-    billing agreements; retained here as harvested for historical completeness and
-    marked deprecated by Cash App.
-  humanURL: https://developers.cash.app/afterpay/api-reference/reference/introduction
-  baseURL: https://global-api.afterpay.com
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-billing-agreements-deprecated-api
+  name: Cash App Billing Agreements (Deprecated) API
+  description: >-
+    The Billing Agreements (Deprecated) API from Cash App — 0 operation(s) for billing agreements (deprecated).
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
   tags:
-  - Billing Agreements
-  - Deprecated
-  - Afterpay
+  - Billing Agreements (Deprecated)
   properties:
   - type: OpenAPI
-    url: openapi/cash-app-billing-agreements-deprecated-openapi.json
+    url: openapi/cash-app-billing-agreements-deprecated-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
   - type: APIReference
-    url: https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-brands-api
+  name: Cash App Brands API
+  description: The brands API from Cash App — 2 operation(s) for brands.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - brands
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-brands-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-customer-request-api-api
+  name: Cash App Customer Request API
+  description: The Customer Request API API from Cash App — 0 operation(s) for customer request api.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - Customer Request API
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-customer-request-api-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-customers-api
+  name: Cash App Customers API
+  description: The customers API from Cash App — 5 operation(s) for customers.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - customers
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-customers-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-default-api
+  name: Cash App App Default API
+  description: The App Default API from Cash App — 39 operation(s) for app default.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - App Default
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-default-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-disputes-api
+  name: Cash App Disputes API
+  description: The disputes API from Cash App — 8 operation(s) for disputes.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - disputes
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-disputes-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-feeplans-api
+  name: Cash App Fee Plans API
+  description: The feePlans API from Cash App — 2 operation(s) for feeplans.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - feePlans
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-feeplans-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-grants-afterpay-api
+  name: Cash App Grants Afterpay API
+  description: The Grants Afterpay API from Cash App — 0 operation(s) for grants afterpay.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - Grants Afterpay
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-grants-afterpay-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-merchants-api
+  name: Cash App Merchants API
+  description: The merchants API from Cash App — 2 operation(s) for merchants.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - merchants
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-merchants-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-network-api-api
+  name: Cash App Network API
+  description: The Network API API from Cash App — 0 operation(s) for network api.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - Network API
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-network-api-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-payments-api
+  name: Cash App Payments API
+  description: The payments API from Cash App — 6 operation(s) for payments.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - payments
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-payouts-api
+  name: Cash App Payouts API
+  description: The payouts API from Cash App — 2 operation(s) for payouts.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - payouts
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-payouts-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-refunds-api
+  name: Cash App Refunds API
+  description: The refunds API from Cash App — 5 operation(s) for refunds.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - refunds
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-refunds-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-requestchains-api
+  name: Cash App Request Chains API
+  description: The requestChains API from Cash App — 1 operation(s) for requestchains.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - requestChains
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-requestchains-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-requests-api
+  name: Cash App Requests API
+  description: The requests API from Cash App — 2 operation(s) for requests.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - requests
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-requests-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
+- aid: cash-app:cash-app-webhooks-api
+  name: Cash App Webhooks API
+  description: The Webhooks API from Cash App — 3 operation(s) for webhooks.
+  humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  baseURL: https://api.cash.app/network/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/cash-app-webhooks-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/introduction-to-cash-app-pay-ap-is
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
+  - type: Documentation
+    url: >-
+      https://developers.cash.app/cash-app-pay-partner-api/guides/pay-kit-sdk/pay-kit-web-overview/getting-started
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/customer-request-api
+  - type: Documentation
+    url: https://developers.cash.app/cash-app-pay-partner-api/guides/welcome
+  - type: APIReference
+    url: https://developers.cash.app/cash-app-pay-partner-api/api-reference/management-api
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/introduction
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/checkouts/schemas/checkout-request
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/data-models/order-details-object
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/configuration/schemas/merchant-limits
+  - type: APIReference
+    url: https://developers.cash.app/afterpay/api-reference/reference/disputes/schemas/dispute
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/grants-cash-app-pay/schemas/grant
+  - type: APIReference
+    url: >-
+      https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
 common:
 - type: AgentSkill
   url: skills/cash-app-accept-payment.md

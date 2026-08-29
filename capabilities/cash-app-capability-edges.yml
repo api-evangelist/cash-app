@@ -1,0 +1,68 @@
+slug: cash-app
+provider: Cash App
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: payments
+  spec_file: cash-app-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.82
+  evidence: POST /payments/{payment_id}/authorizations "Create incremental authorization"; POST /payments/{payment_id}/capture
+    "Capture payment"; POST /payments/{payment_id}/void "Void payment"
+  reason: Core payment instruction capture, authorisation, capture and void over a payments network —
+    unambiguously payment initiation/authorisation.
+- tag: cash-app-default-api
+  spec_file: cash-app-default-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.78
+  evidence: POST /v2/recurring-payments/auth "Authorize Recurring Payment"; POST /v2/recurring-payments
+    "Capture Full Recurring Payment"; POST /v2/checkouts "Create Checkout"
+  reason: Aggregated default tag covers billing agreements (payment mandates), checkouts, orders, payments
+    and recurring payment authorisation/capture — i.e. capture, validation and authorisation of payment
+    instructions.
+- tag: disputes
+  spec_file: cash-app-disputes-api-openapi.yml
+  capability_id: BC-1340.70
+  capability_id_l1: BC-1340
+  capability_name: Card Transaction Processing Management
+  confidence: 0.72
+  evidence: POST /disputes/{dispute_id}/challenge "Challenge dispute"; POST /disputes/{dispute_id}/evidence-file
+    "Create dispute evidence file"; schema "DisputeSettlementWithholding"
+  reason: Accept/challenge of transaction disputes with evidence submission and settlement withholding
+    is chargeback handling within transaction processing for the payment network.
+- tag: refunds
+  spec_file: cash-app-refunds-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.72
+  evidence: POST /refunds "Create refund"; POST /refunds/{refund_id}/capture "Capture refund"; POST /refunds/{refund_id}/void
+    "Void refund"
+  reason: Refund creation, capture and void are reverse-payment processing on the payments network; L1
+    only as it straddles payment initiation and transaction processing.
+- tag: requests
+  spec_file: cash-app-requests-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: POST /requests create-request; schemas OneTimePaymentActionType, OnFileDepositActionType,
+    RequestAuthFlowTriggers
+  reason: Cash App's Customer Request API creates a request carrying payment/payout/deposit actions plus
+    auth-flow grant triggers — i.e. capture and authorisation of a payment instruction from the consumer.
+    Sub-capability is the best fit though the surface is partly an authorisation-consent construct, hence
+    moderate confidence.

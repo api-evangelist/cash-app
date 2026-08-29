@@ -874,6 +874,9 @@ apis:
     url: >-
       https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
 common:
+- type: CapabilityMap
+  url: capabilities/cash-app-capability-edges.yml
+  name: Cash App Business Capability Map
 - type: AgentSkill
   url: skills/cash-app-accept-payment.md
 - type: APIReference

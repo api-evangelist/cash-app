@@ -60,7 +60,8 @@ apis:
     site.
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
-  tags:
+  tags: []
+  tags_raw:
   - Add Cash App Pay To Your Site
   properties:
   - type: OpenAPI
@@ -104,6 +105,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - APIKeys
+  tags_raw:
   - apiKeys
   properties:
   - type: OpenAPI
@@ -147,6 +150,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Balances
+  tags_raw:
   - balances
   properties:
   - type: OpenAPI
@@ -234,6 +239,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Brands
+  tags_raw:
   - brands
   properties:
   - type: OpenAPI
@@ -320,6 +327,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Customers
+  tags_raw:
   - customers
   properties:
   - type: OpenAPI
@@ -406,6 +415,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Disputes
+  tags_raw:
   - disputes
   properties:
   - type: OpenAPI
@@ -449,6 +460,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - FeePlans
+  tags_raw:
   - feePlans
   properties:
   - type: OpenAPI
@@ -535,6 +548,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Merchants
+  tags_raw:
   - merchants
   properties:
   - type: OpenAPI
@@ -621,6 +636,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Payments
+  tags_raw:
   - payments
   properties:
   - type: OpenAPI
@@ -664,6 +681,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Payouts
+  tags_raw:
   - payouts
   properties:
   - type: OpenAPI
@@ -707,6 +726,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Refunds
+  tags_raw:
   - refunds
   properties:
   - type: OpenAPI
@@ -749,7 +770,8 @@ apis:
   description: The requestChains API from Cash App — 1 operation(s) for requestchains.
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
-  tags:
+  tags: []
+  tags_raw:
   - requestChains
   properties:
   - type: OpenAPI
@@ -793,6 +815,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Requests
+  tags_raw:
   - requests
   properties:
   - type: OpenAPI
@@ -836,6 +860,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI

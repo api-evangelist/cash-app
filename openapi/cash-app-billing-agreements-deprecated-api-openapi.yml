@@ -1,0 +1,74 @@
+openapi: 3.2.0
+info:
+  title: Billing Agreements (Deprecated) API
+  version: 1.0.0
+servers:
+- url: https://global-api-sandbox.afterpay.com
+  description: Sandbox
+- url: https://global-api.afterpay.com
+  description: Production
+tags:
+- name: Billing Agreements (Deprecated)
+paths: {}
+webhooks:
+  agreement-status-updated:
+    post:
+      operationId: agreement-status-updated
+      summary: Billing agreement status updated
+      description: Webhook notification sent when a billing agreement's status changes
+      parameters:
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                agreementToken:
+                  type: string
+                  description: Token identifying the billing agreement
+                status:
+                  $ref: '#/components/schemas/WebhooksAgreementStatusUpdatedPayloadContentApplicationJsonSchemaStatus'
+                  description: Current status of the agreement
+                reasons:
+                  type: array
+                  items:
+                    type: string
+                  description: List of reasons for the status update such as {PAYMENT_METHOD_EXPIRED, PENDING_RENEWAL, ACCOUNT_DEACTIVATED, USER_CANCELLED}
+                message:
+                  type:
+                  - string
+                  - 'null'
+                  description: Optional message providing additional context
+                dateTime:
+                  type: string
+                  format: date-time
+                  description: Timestamp of the status update
+              required:
+              - agreementToken
+              - status
+              - reasons
+              - dateTime
+      tags:
+      - Billing Agreements (Deprecated)
+components:
+  schemas:
+    WebhooksAgreementStatusUpdatedPayloadContentApplicationJsonSchemaStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - TERMINATED
+      description: Current status of the agreement
+      title: WebhooksAgreementStatusUpdatedPayloadContentApplicationJsonSchemaStatus
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic

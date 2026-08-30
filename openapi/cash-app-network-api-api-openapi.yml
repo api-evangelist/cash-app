@@ -1,0 +1,2080 @@
+openapi: 3.2.0
+info:
+  title: Network API
+  version: 1.0.0
+servers:
+- url: https://api.cash.app/network/v1
+  description: Production
+- url: https://sandbox.api.cash.app/network/v1
+  description: Sandbox
+tags:
+- name: Network API
+paths: {}
+webhooks:
+  merchant-status-updated:
+    post:
+      operationId: merchant-status-updated
+      summary: 'Event: merchant.status.updated'
+      description: "**When is this event triggered?**\n\nThis event is created whenever a merchant's status is changed. The status change can be due to do many different things:\n  - An API client-initiated action to disable / enable the merchant\n  - An asynchronous merchant registration process completing, moving the merchant from pending to active\n  - A compliance ban on the merchant, moving them to disabled"
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `merchant.status.updated` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksMerchantStatusUpdatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the merchant that had a status change.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  grant-created:
+    post:
+      operationId: grant-created
+      summary: 'Event: grant.created'
+      description: '**When is this event triggered?**
+
+
+        This event is created whenever a grant is created. This is caused by a customer request being approved.'
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `grant.created` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksGrantCreatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the grant that was created.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  grant-status-updated:
+    post:
+      operationId: grant-status-updated
+      summary: 'Event: grant.status.updated'
+      description: "**When is this event triggered?**\n\nThis event is created whenever a grant's status is changed. The status change can be due to a couple different things:\n  - An API client-initiated action to create a payment or revoke a grant (all opertions which consume a one-time use grant)\n  - A customer revoking an extended-use grant"
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `grant.status.updated` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksGrantStatusUpdatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the grant that had a status change.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  customer-created:
+    post:
+      operationId: customer-created
+      summary: 'Event: customer.created'
+      description: '**When is this event triggered?**
+
+
+        This event is created whenever a new Cash App Pay customer is created. A new Cash App Pay customer is created when a Cash App user approves a client''s Cash App Pay request for the first time. This event allows clients to detect customers who are using a client''s Cash App Pay integration for the first time.'
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `customer.created` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksCustomerCreatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the Customer that was created.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  customer-updated:
+    post:
+      operationId: customer-updated
+      summary: 'Event: customer.updated'
+      description: "**When is this event triggered?**\n\nThis event is created whenever a Cash App Pay customer is updated. The `customer.updated` event can be triggered when:\n  - A customer updates their Cashtag.\n  - A customer approves a request with a `customer_metadata.reference_id` attribute. Upon approval of the request, the customer's `reference_id` attribute is updated.\n\n  > **Note:** If the `customer_metadata.reference_id` is the same as the customer's current `reference_id`, the customer will not be updated and the event will not be triggered."
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `customer.updated` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksCustomerUpdatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the Customer that was updated.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  customer-deleted:
+    post:
+      operationId: customer-deleted
+      summary: 'Event: customer.deleted'
+      description: '**When is this event triggered?**
+
+
+        This event is created whenever a Cash App Pay customer is deleted. The `customer.deleted` event will be triggered when a customer account is deleted by Cash App.'
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `customer.deleted` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksCustomerDeletedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the Customer that was deleted.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  payment-status-updated:
+    post:
+      operationId: payment-status-updated
+      summary: 'Event: payment.status.updated'
+      description: "**When is this event triggered?**\n\nThis event is created whenever a payment status is changed. The status change can be due to a couple different things:\n  - An API client-initiated action to void or capture the payment\n  - A payment auto-voiding after 7 days of not being captured"
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `payment.status.updated` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksPaymentStatusUpdatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the payment that had a status change.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  refund-status-updated:
+    post:
+      operationId: refund-status-updated
+      summary: 'Event: refund.status.updated'
+      description: "**When is this event triggered?**\n\nThis event is created whenever a refund status is changed. The status change can be due to a couple different things:\n  - An API client-initiated action to void or capture the refund\n  - A refund auto-voiding after 7 days of not being captured"
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `refund.status.updated` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksRefundStatusUpdatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the refund that had a status change.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  dispute-created:
+    post:
+      operationId: dispute-created
+      summary: 'Event: dispute.created'
+      description: '**When is this event triggered?**
+
+
+        This event is created whenever a dispute is created. This is caused by a customer filing a dispute concerning a payment collected by a merchant managed by this API client.'
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `dispute.created` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksDisputeCreatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the dispute that was created.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+  dispute-status-updated:
+    post:
+      operationId: dispute-status-updated
+      summary: 'Event: dispute.status.updated'
+      description: "**When is this event triggered?**\n\nThis event is created whenever a dispute's state is updated. This can be caused by a variety of things:\n  - An API client-driven change where the dispute is accepted or challenged\n  - Cash App Pay making a final decision on a dispute"
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Webhook received successfully
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The type of event that occurred. `dispute.status.updated` for this event.
+                event_id:
+                  type: string
+                  description: A unique identifier provided by Cash App for the event.
+                created_at:
+                  type: string
+                  format: date-time
+                  description: 'When this event occured in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+
+                    The time that the event is delivered may be significantly later than this timestamp due to webhooks being retried for up to 72 hours.'
+                data:
+                  $ref: '#/components/schemas/WebhooksDisputeStatusUpdatedPayloadContentApplicationJsonSchemaData'
+                  description: Data about the dispute that was updated.
+              required:
+              - type
+              - event_id
+              - created_at
+              - data
+      tags:
+      - Network API
+components:
+  schemas:
+    Category:
+      type: string
+      description: The merchant category code associated with the entity. Values are from the [ISO-18245 specification](https://www.iso.org/standard/33365.html).
+      title: Category
+    PaymentEnrichmentsInitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: 'The party who initiated the payment.
+
+
+        - `CUSTOMER`
+
+        - `MERCHANT`'
+      title: PaymentEnrichmentsInitiationActor
+    WebhooksGrantCreatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the grant.
+        object:
+          $ref: '#/components/schemas/WebhooksGrantCreatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the grant immediately after the grant was created.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `grant`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the grant that was created.
+      title: WebhooksGrantCreatedPayloadContentApplicationJsonSchemaData
+    WebhooksCustomerUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      required:
+      - customer
+      description: A snapshot of the customer immediately after the customer was updated.
+      title: WebhooksCustomerUpdatedPayloadContentApplicationJsonSchemaDataObject
+    WebhooksGrantStatusUpdatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the grant.
+        object:
+          $ref: '#/components/schemas/WebhooksGrantStatusUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the grant immediately after the grant's status changed.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `grant`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the grant that had a status change.
+      title: WebhooksGrantStatusUpdatedPayloadContentApplicationJsonSchemaData
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this payment issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        amount:
+          type: integer
+          description: 'The amount of money to collect, in the lowest denomination of currency on the payment. This is the _original_ amount authorized when the payment was created.
+
+
+            Min value: `1`'
+        net_amount:
+          type: integer
+          description: 'The amount remaining after refunds and voided payments are deducted from the amount field. The amount will be in the lowest denomination of the currency on the payment.
+
+            This is the amount that will be shown to the customer in their Cash App account.
+
+
+
+            Min value: `0`'
+        captured_amount:
+          type: integer
+          description: 'The amount of money on this payment that has been allocated for settlement. The amount will be in the lowest denomination of the currency on the payment.
+
+
+            Min value: `0`'
+        voided_amount:
+          type: integer
+          description: 'The amount of money on this payment that is no longer authorized and has been released back to the customer. The amount will be in the lowest denomination of the currency on the payment.
+
+
+            Min value: `0`'
+        refunded_amount:
+          type: integer
+          description: 'Sum of captured refunds in the lowest denomination of currency on the payment.
+
+
+            Min value: `0`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        customer_id:
+          type: string
+          description: 'ID of the customer that sent this payment.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant that received this payment.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        grant_id:
+          type: string
+          description: 'ID of the grant to used to create this payment.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        status:
+          $ref: '#/components/schemas/PaymentStatus'
+          description: 'The step of the payment processing lifecycle that this payment is currently at.
+
+
+            - `AUTHORIZED`
+
+            - `CAPTURED`
+
+            - `VOIDED`
+
+            - `DECLINED`'
+        created_at:
+          type: string
+          format: date-time
+          description: When this payment was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this payment was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        capture_before:
+          type: string
+          format: date-time
+          description: When this payment should be captured by, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        refund_ids:
+          type: array
+          items:
+            type: string
+          description: 'A list of one or more IDs associated with refunds issued for this payment.
+
+
+            Min array length: `1`
+
+            Min length of IDs: `1`
+
+            Max length of IDs: `128`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this payment, typically used to associate the payment with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        enrichments:
+          $ref: '#/components/schemas/PaymentEnrichments'
+        decline_errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'If the payment was declined, contains a list of the reasons why it was declined.
+
+
+            Min number of items: `1`'
+        fee_amount:
+          type: number
+          format: double
+          description: The total fee amount that was charged to the merchant for processing this payment.
+        fee_rate:
+          $ref: '#/components/schemas/FeeRate'
+          description: The breakdown of the fee that was charged to the merchant for processing this payment.
+        authorization_updates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorization'
+          description: "A list of authorization update attempts associated with this payment, sorted in chronological order.\n\nNote: This field contains only the authorization update attempts, so this field will be empty when \nthe payment is first created (even though the amount is authorized in this flow, it is not an update)."
+      required:
+      - id
+      - amount
+      - net_amount
+      - captured_amount
+      - voided_amount
+      - refunded_amount
+      - currency
+      - customer_id
+      - merchant_id
+      - grant_id
+      - status
+      - created_at
+      - updated_at
+      title: Payment
+    Country:
+      type: string
+      enum:
+      - US
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-3166 Alpha-2](https://www.iso.org/iso-3166-country-codes.html) specification.
+
+
+        Current values:
+
+
+        - `US`: United States of America'
+      title: Country
+    WebhooksPaymentStatusUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - payment
+      description: A snapshot of the payment data immediately after the payment's status changed.
+      title: WebhooksPaymentStatusUpdatedPayloadContentApplicationJsonSchemaDataObject
+    Merchant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'A unique identifier for the merchant issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        brand_id:
+          type: string
+          description: 'ID of the brand associated with this merchant.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        name:
+          type: string
+          description: 'The name of the individual or business entity associated with the merchant.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        country:
+          $ref: '#/components/schemas/Country'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        category:
+          $ref: '#/components/schemas/Category'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this merchant, typically used to associate the merchant with a record in an external system. Independent from the [brand reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-brand#request-body).
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        status:
+          $ref: '#/components/schemas/MerchantStatus'
+          description: 'Whether or not this merchant can be used to accept payments or issue refunds.
+
+
+            - `ACTIVE`: The merchant can accept payments or issue refunds.
+
+            - `RISK_DISABLED`: Cash App Pay blocked this merchant due to them being high risk. There is no way to re-enable them programmaticaly.
+
+            - `COMPLIANCE_DISABLED`: Cash App Pay blocked this merchant due to them not following the terms of service, Program Rules, or local laws. There is no way to re-enable them programmaticaly.
+
+            - `CLIENT_DISABLED`: The client called the [UpdateMerchant](Network-API.v1.yaml/paths/~1merchants~1{merchant_id}/patch) endpoint and disabled this merchant, preventing it from being able to handle payments or refunds. To reverse this, call the endpoint again with the status field set to `ACTIVE`.
+
+            - `PENDING`: The merchant is not ready to accept payments or refunds yet; the registration process is still running.'
+        created_at:
+          type: string
+          format: date-time
+          description: When this merchant was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this merchant was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        address:
+          $ref: '#/components/schemas/Address'
+        site_url:
+          type: string
+          format: uri
+          description: 'The URL of the website, if this merchant is for an eCommerce site.
+
+
+            Min length: `8`
+
+            Max length: `8000`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        default_fee_plans:
+          $ref: '#/components/schemas/MerchantFeePlans'
+      required:
+      - id
+      - brand_id
+      - name
+      - country
+      - currency
+      - category
+      - reference_id
+      - status
+      - created_at
+      - updated_at
+      - address
+      description: A merchant represents a depository account when processing payments from Cash App customers. Merchants do not have direct access to Cash App, so processed payments are stored in this account until they are ready for settlement.
+      title: Merchant
+    DisputeSettlementWithholding:
+      type: string
+      enum:
+      - NOT_WITHHELD
+      - WITHHELD_ALREADY
+      description: 'Indicates if the disputed amount has already been withheld from a settlement or not.
+
+
+        Current values:
+
+
+        - `NOT_WITHHELD`: The disputed amount has not yet been withheld in a settlement. It may impact future settlements if the dispute is "lost" by the merchant.
+
+
+        - `WITHHELD_ALREADY`: The disputed amount was withheld in a prior settlement. This dispute will not impact future settlements.'
+      title: DisputeSettlementWithholding
+    Action:
+      oneOf:
+      - $ref: '#/components/schemas/OneTimePaymentAction'
+      - $ref: '#/components/schemas/OnFilePaymentAction'
+      - $ref: '#/components/schemas/OnFileDepositAction'
+      - $ref: '#/components/schemas/LinkAccountAction'
+      description: Represents what the client intends to do to a customer if given authorization.
+      title: Action
+    Channel:
+      type: string
+      enum:
+      - IN_PERSON
+      - ONLINE
+      - IN_APP
+      description: 'How the customer is expected to interact with the request.
+
+
+        - `IN_PERSON`: The customer presents or scans a QR code at a physical location to approve the request.
+
+        - `ONLINE`: The customer scans a QR code or is redirected to Cash App from a browser context.
+
+        - `IN_APP`: The customer scans a QR code or is redirected to Cash App from a native mobile application context.'
+      title: Channel
+    WebhooksCustomerDeletedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the customer.
+        object:
+          $ref: '#/components/schemas/WebhooksCustomerDeletedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the customer immediately after the customer was deleted.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `customer`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the Customer that was deleted.
+      title: WebhooksCustomerDeletedPayloadContentApplicationJsonSchemaData
+    FeeRate:
+      type: object
+      properties:
+        basis_points:
+          type: integer
+          description: The variable fee charged for processing the payment expressed as 1/100th of a percentage.
+        fixed_amount:
+          type: integer
+          description: "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
+      description: A fee rate contains the components of a fee charged by Cash App to partners for a given payment.
+      title: FeeRate
+    PaymentEnrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/PaymentEnrichmentsInitiation'
+          description: If present, provides information about transaction initiation.
+        recurring_series_id:
+          type: string
+          description: 'If present, indicates that this payment is part of a recurring series of payments, such as a subscription.
+
+
+            The value should contain a unique identifier for the recurring series that is constant across all of its payments, so it can be used to group them together.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        statement_descriptor:
+          type: string
+          description: 'If present, adds the descriptor as line item on to a customer''s payment receipt in their in-app Activity page.
+
+            The descriptor will be present under the header "On statement as".
+
+
+            Statement descriptor requirements vary by platform. If the input for this field exceeds the character limit, it will be truncated to the limit, then suffixed with an ellipsis (...).
+
+
+            Min length: `1`
+
+            Max length: `22`'
+        restricted_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentEnrichmentsRestrictedCategoriesItems'
+          description: If present, indicates that this payment is associated with one or more restricted categories. Contact the Cash App Pay support team to use this field.
+      description: "Describes optional fields beyond core payment information to supplement payment processing.\n\nEnrichments provide additional context about a payment, which can improve the overall payment experience including, but not limited to: \n  - Increased approval rates\n  - Enhanced transaction insights\n  - Better payment flows in Cash App"
+      title: PaymentEnrichments
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this customer issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        cashtag:
+          type: string
+          description: 'Public identifier for the customer on Cash App. [Learn more](https://cash.app/help/us/en-us/3123-cashtags).
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        reference_id:
+          type: string
+          description: A user-defined identifier for this customer, typically used to associate the customer with a record in an external system. This value can be provided via the `CustomerRequest.customer_metadata.reference_id` attribute. Upon approval of the CustomerRequest, a corresponding customer resource is created with the `reference_id` attribute.
+      required:
+      - id
+      - cashtag
+      title: Customer
+    WebhooksCustomerCreatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      required:
+      - customer
+      description: A snapshot of the customer immediately after the customer was created.
+      title: WebhooksCustomerCreatedPayloadContentApplicationJsonSchemaDataObject
+    WebhooksDisputeCreatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the dispute.
+        object:
+          $ref: '#/components/schemas/WebhooksDisputeCreatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the dispute immediately after the dispute was created.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `dispute`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the dispute that was created.
+      title: WebhooksDisputeCreatedPayloadContentApplicationJsonSchemaData
+    WebhooksPaymentStatusUpdatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the payment.
+        object:
+          $ref: '#/components/schemas/WebhooksPaymentStatusUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the payment data immediately after the payment's status changed.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `payment`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the payment that had a status change.
+      title: WebhooksPaymentStatusUpdatedPayloadContentApplicationJsonSchemaData
+    WebhooksRefundStatusUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      description: A snapshot of the refund immediately after the refund's status changed.
+      title: WebhooksRefundStatusUpdatedPayloadContentApplicationJsonSchemaDataObject
+    RefundStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - DECLINED
+      description: 'The step of the refund processing lifecycle that this refund is currently at.
+
+
+        - `AUTHORIZED`
+
+        - `CAPTURED`
+
+        - `VOIDED`
+
+        - `DECLINED`'
+      title: RefundStatus
+    MerchantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - RISK_DISABLED
+      - COMPLIANCE_DISABLED
+      - CLIENT_DISABLED
+      - PENDING
+      description: 'Whether or not this merchant can be used to accept payments or issue refunds.
+
+
+        - `ACTIVE`: The merchant can accept payments or issue refunds.
+
+        - `RISK_DISABLED`: Cash App Pay blocked this merchant due to them being high risk. There is no way to re-enable them programmaticaly.
+
+        - `COMPLIANCE_DISABLED`: Cash App Pay blocked this merchant due to them not following the terms of service, Program Rules, or local laws. There is no way to re-enable them programmaticaly.
+
+        - `CLIENT_DISABLED`: The client called the [UpdateMerchant](Network-API.v1.yaml/paths/~1merchants~1{merchant_id}/patch) endpoint and disabled this merchant, preventing it from being able to handle payments or refunds. To reverse this, call the endpoint again with the status field set to `ACTIVE`.
+
+        - `PENDING`: The merchant is not ready to accept payments or refunds yet; the registration process is still running.'
+      title: MerchantStatus
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    PaymentStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - DECLINED
+      description: 'The step of the payment processing lifecycle that this payment is currently at.
+
+
+        - `AUTHORIZED`
+
+        - `CAPTURED`
+
+        - `VOIDED`
+
+        - `DECLINED`'
+      title: PaymentStatus
+    WebhooksGrantStatusUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      description: A snapshot of the grant immediately after the grant's status changed.
+      title: WebhooksGrantStatusUpdatedPayloadContentApplicationJsonSchemaDataObject
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this refund issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        amount:
+          type: integer
+          description: 'Amount of money to refund, in the lowest denomination of currency on the refund.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        customer_id:
+          type: string
+          description: 'ID of the customer that received this refund.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant that issued this refund.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        status:
+          $ref: '#/components/schemas/RefundStatus'
+          description: 'The step of the refund processing lifecycle that this refund is currently at.
+
+
+            - `AUTHORIZED`
+
+            - `CAPTURED`
+
+            - `VOIDED`
+
+            - `DECLINED`'
+        created_at:
+          type: string
+          format: date-time
+          description: When this refund was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this refund was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        grant_id:
+          type: string
+          description: 'This is currently unused and empty.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        payment_id:
+          type: string
+          description: 'This is currently unused and empty.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        decline_errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'If the refund was declined, contains a list of the reasons why it was declined.
+
+
+            Min number of items: `1`'
+      required:
+      - id
+      - amount
+      - currency
+      - customer_id
+      - merchant_id
+      - status
+      - created_at
+      - updated_at
+      title: Refund
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    WebhooksMerchantStatusUpdatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the merchant.
+        object:
+          $ref: '#/components/schemas/WebhooksMerchantStatusUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the merchant data immediately after the merchant's status changed.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `merchant`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the merchant that had a status change.
+      title: WebhooksMerchantStatusUpdatedPayloadContentApplicationJsonSchemaData
+    WebhooksDisputeStatusUpdatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the dispute.
+        object:
+          $ref: '#/components/schemas/WebhooksDisputeStatusUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the dispute immediately after the dispute's status was updated.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `dispute`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the dispute that was updated.
+      title: WebhooksDisputeStatusUpdatedPayloadContentApplicationJsonSchemaData
+    WebhooksCustomerDeletedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Customer'
+      required:
+      - customer
+      description: A snapshot of the customer immediately after the customer was deleted.
+      title: WebhooksCustomerDeletedPayloadContentApplicationJsonSchemaDataObject
+    GrantType:
+      type: string
+      enum:
+      - ONE_TIME
+      - EXTENDED
+      description: Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).
+      title: GrantType
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    OneTimePaymentActionType:
+      type: string
+      enum:
+      - ONE_TIME_PAYMENT
+      description: The type of the action (`ONE_TIME_PAYMENT`).
+      title: OneTimePaymentActionType
+    WebhooksCustomerUpdatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the customer.
+        object:
+          $ref: '#/components/schemas/WebhooksCustomerUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the customer immediately after the customer was updated.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `customer`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the Customer that was updated.
+      title: WebhooksCustomerUpdatedPayloadContentApplicationJsonSchemaData
+    PaymentEnrichmentsRestrictedCategoriesItems:
+      type: string
+      enum:
+      - ALCOHOL
+      - FINANCIAL_SERVICES
+      - CANNABIS
+      title: PaymentEnrichmentsRestrictedCategoriesItems
+    OnFileDepositActionType:
+      type: string
+      enum:
+      - ON_FILE_DEPOSIT
+      description: The type of the action (`ON_FILE_DEPOSIT`).
+      title: OnFileDepositActionType
+    WebhooksRefundStatusUpdatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the refund.
+        object:
+          $ref: '#/components/schemas/WebhooksRefundStatusUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the refund immediately after the refund's status changed.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `refund`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the refund that had a status change.
+      title: WebhooksRefundStatusUpdatedPayloadContentApplicationJsonSchemaData
+    AuthorizationStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - DECLINED
+      description: 'The step of the authorization processing lifecycle that this authorization is currently at.
+
+
+        Allowed values:
+
+        - AUTHORIZED
+
+        - DECLINED'
+      title: AuthorizationStatus
+    OnFilePaymentAction:
+      type: object
+      properties:
+        scope_id:
+          type: string
+          description: 'ID of the client or brand that will charge customers.
+
+
+            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
+
+
+            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
+
+
+            Merchant IDs may *not* be passed.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        type:
+          $ref: '#/components/schemas/OnFilePaymentActionType'
+          description: The type of the action (`ON_FILE_PAYMENT`).
+        account_reference_id:
+          type: string
+          description: Identifier of the account or customer associated to the on file action.
+      required:
+      - scope_id
+      - type
+      description: Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.
+      title: OnFilePaymentAction
+    WebhooksCustomerCreatedPayloadContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: A unique identifier provided by Cash App for the customer.
+        object:
+          $ref: '#/components/schemas/WebhooksCustomerCreatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the customer immediately after the customer was created.
+        type:
+          type: string
+          description: The resource type contained in the `object` field. For this event, it is `customer`.
+      required:
+      - id
+      - object
+      - type
+      description: Data about the Customer that was created.
+      title: WebhooksCustomerCreatedPayloadContentApplicationJsonSchemaData
+    OneTimePaymentAction:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'Amount to charge the customer, in the lowest unit of the associated currency.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        scope_id:
+          type: string
+          description: 'ID of the client, brand, or merchant that will charge the customer.
+
+
+            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
+
+
+            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
+
+
+            If a merchant ID is passed, the grant from this action can be used to create a payment for the merchant with a matching ID.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        type:
+          $ref: '#/components/schemas/OneTimePaymentActionType'
+          description: The type of the action (`ONE_TIME_PAYMENT`).
+      required:
+      - scope_id
+      - type
+      description: 'Describes an intent for a client to charge a customer a given amount.
+
+
+        Note the following restrictions when using this action:
+
+
+        - If no amount is provided to the action, the payment charged may be **any** amount.
+
+        - If `amount` is provided, `currency` must be provided too (and vice versa).'
+      title: OneTimePaymentAction
+    LinkAccountActionType:
+      type: string
+      enum:
+      - LINK_ACCOUNT
+      description: The type of the action (`LINK_ACCOUNT`).
+      title: LinkAccountActionType
+    WebhooksDisputeCreatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        dispute:
+          $ref: '#/components/schemas/Dispute'
+      required:
+      - dispute
+      description: A snapshot of the dispute immediately after the dispute was created.
+      title: WebhooksDisputeCreatedPayloadContentApplicationJsonSchemaDataObject
+    OnFilePaymentActionType:
+      type: string
+      enum:
+      - ON_FILE_PAYMENT
+      default: ON_FILE_PAYMENT
+      description: The type of the action (`ON_FILE_PAYMENT`).
+      title: OnFilePaymentActionType
+    Dispute:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'A unique identifier for the dispute issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        payment_id:
+          type: string
+          description: 'ID of the disputed payment.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        amount:
+          type: integer
+          description: 'Amount of disputed money, in the lowest denomination of currency on the associated payment.
+
+
+            Min value: `1`'
+        customer_credited_amount:
+          type:
+          - integer
+          - 'null'
+          description: "The amount credited to the Customer after resolving the dispute. \n\nNote: The amount will be in the lowest denomination of the currency used on the associated payment.\n\nMin value: `0`"
+        reason:
+          $ref: '#/components/schemas/DisputeReason'
+          description: '4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.
+
+
+            Current values:
+
+
+            - `FR10`: Customer has no knowledge of the payment.
+
+            - `FR11`: Customer has no knowledge of the payment and liability has shifted to the merchant due to collusion, fraud monitoring program thresholds, or any other reason.
+
+            - `PE10`: Payment was processed twice.
+
+            - `PE11`: Payment amount differs from agreed amount.
+
+            - `PE12`: Payment was paid for by another means.
+
+            - `CD10`: Cancelled services.
+
+            - `CD11`: Goods or services differ from what was agreed upon for the payment.
+
+            - `CD12`: The goods or services were not received.
+
+            - `CD13`: The purchase was cancelled or returned, but the refund has not been processed.'
+        settlement_withholding:
+          $ref: '#/components/schemas/DisputeSettlementWithholding'
+          description: 'Indicates if the disputed amount has already been withheld from a settlement or not.
+
+
+            Current values:
+
+
+            - `NOT_WITHHELD`: The disputed amount has not yet been withheld in a settlement. It may impact future settlements if the dispute is "lost" by the merchant.
+
+
+            - `WITHHELD_ALREADY`: The disputed amount was withheld in a prior settlement. This dispute will not impact future settlements.'
+        state:
+          $ref: '#/components/schemas/DisputeState'
+          description: 'The step in the dispute lifecycle that this dispute is currently at:
+
+
+            - `RESPONSE_REQUIRED`
+
+            - `NO_RESPONSE_REQUIRED`
+
+            - `PROCESSING`
+
+            - `ACCEPTED`
+
+            - `WON`
+
+            - `PARTIALLY_WON`
+
+            - `LOST`'
+        created_at:
+          type: string
+          format: date-time
+          description: When this dispute was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        response_due_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When the dispute must be challenged by, after which it will be automatically accepted, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this dispute was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        merchant_id:
+          type: string
+          description: 'ID of the merchant that collected the disputed payment.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+      required:
+      - id
+      - payment_id
+      - amount
+      - reason
+      - settlement_withholding
+      - state
+      - created_at
+      - updated_at
+      - merchant_id
+      description: Represents a dispute initiated by a customer within Cash App or the customer's linked bank
+      title: Dispute
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    WebhooksDisputeStatusUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        dispute:
+          $ref: '#/components/schemas/Dispute'
+      required:
+      - dispute
+      description: A snapshot of the dispute immediately after the dispute's status was updated.
+      title: WebhooksDisputeStatusUpdatedPayloadContentApplicationJsonSchemaDataObject
+    Authorization:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this authorization issued by Cash App.
+
+
+            Min length: 1 character
+
+            Max length: 128 characters'
+        amount:
+          type: integer
+          description: Total authorized amount after this authorization was processed, in the lowest denomination of currency on the payment.
+        currency:
+          $ref: '#/components/schemas/Currency'
+        status:
+          $ref: '#/components/schemas/AuthorizationStatus'
+          description: 'The step of the authorization processing lifecycle that this authorization is currently at.
+
+
+            Allowed values:
+
+            - AUTHORIZED
+
+            - DECLINED'
+        created_at:
+          type: string
+          format: date-time
+          description: When this authorization was created, in RFC 3339 format (UTC).
+        payment_id:
+          type: string
+          description: ID of the payment associated with this authorization
+        previous_amount:
+          type: integer
+          description: Total authorized amount before this authorization was requested
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this authorization, typically used to associate the authorization with a record in an external system.
+
+
+            Min length: 1
+
+            Max length: 1024'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        decline_errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'If the authorization was declined, it contains a list of the reasons why it was declined.
+
+
+            Min number of items: 1'
+      required:
+      - id
+      - amount
+      - currency
+      - status
+      - created_at
+      - payment_id
+      - previous_amount
+      description: Represents an authorization update for a payment
+      title: Authorization
+    WebhooksMerchantStatusUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+      required:
+      - merchant
+      description: A snapshot of the merchant data immediately after the merchant's status changed.
+      title: WebhooksMerchantStatusUpdatedPayloadContentApplicationJsonSchemaDataObject
+    MerchantFeePlans:
+      type: object
+      properties:
+        in_app_fee_plan_id:
+          type: string
+          description: The fee plan ID identifying the fee plan that will be used for all in-app payments.
+        in_person_fee_plan_id:
+          type: string
+          description: The fee plan ID identifying the fee plan that will be used for all in-person payments.
+        online_fee_plan_id:
+          type: string
+          description: The fee plan ID identifying the fee plan that will be used for all online payments.
+      description: Merchant fee plans contains the IDs of the different fee plans for a merchant. These IDs represent the processing fees that merchants will be charged for processing payments for each channel. You can use the Fee Plans API to get all the fee information for each fee plan.
+      title: MerchantFeePlans
+    GrantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CONSUMED
+      - REVOKED
+      - EXPIRED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.'
+      title: GrantStatus
+    DisputeState:
+      type: string
+      enum:
+      - RESPONSE_REQUIRED
+      - NO_RESPONSE_REQUIRED
+      - PROCESSING
+      - ACCEPTED
+      - WON
+      - PARTIALLY_WON
+      - LOST
+      description: 'The step in the dispute lifecycle that this dispute is currently at:
+
+
+        - `RESPONSE_REQUIRED`
+
+        - `NO_RESPONSE_REQUIRED`
+
+        - `PROCESSING`
+
+        - `ACCEPTED`
+
+        - `WON`
+
+        - `PARTIALLY_WON`
+
+        - `LOST`'
+      title: DisputeState
+    PaymentEnrichmentsInitiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/PaymentEnrichmentsInitiationActor'
+          description: 'The party who initiated the payment.
+
+
+            - `CUSTOMER`
+
+            - `MERCHANT`'
+      required:
+      - actor
+      description: If present, provides information about transaction initiation.
+      title: PaymentEnrichmentsInitiation
+    Grant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this grant issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        customer_id:
+          type: string
+          description: 'ID of the customer that approved this grant.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        request_id:
+          type: string
+          description: 'A unique identifier issued by Cash App for the customer request that resulted in the creation of this grant.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        action:
+          $ref: '#/components/schemas/Action'
+        status:
+          $ref: '#/components/schemas/GrantStatus'
+          description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+            If `ACTIVE`, it can be used to perform the action.
+
+
+            If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+            If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+            If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.'
+        type:
+          $ref: '#/components/schemas/GrantType'
+          description: Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).
+        channel:
+          $ref: '#/components/schemas/Channel'
+        created_at:
+          type: string
+          format: date-time
+          description: When this grant was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this grant was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        expires_at:
+          type: string
+          format: date-time
+          description: 'If present, indicates when the grant''s status will become `EXPIRED`, preventing a client from using it to create payments or refunds.
+
+
+            The timestamp is in the [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).'
+      required:
+      - id
+      - customer_id
+      - request_id
+      - action
+      - status
+      - type
+      - channel
+      - created_at
+      - updated_at
+      description: Describes a grant that can be used to perform actions specified in a customer request using the Network API.
+      title: Grant
+    OnFileDepositAction:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OnFileDepositActionType'
+          description: The type of the action (`ON_FILE_DEPOSIT`).
+        scope_id:
+          type: string
+          description: 'ID of the client or brand that indicates the set of merchants that will deposit to customers.
+
+
+            If a client ID is passed, the grant from this action can be used to create a deposit for any merchant owned by the client.
+
+
+            If a brand ID is passed, the grant from this action can be used to create a deposit for any merchant that has a matching brand ID.
+
+            Min length: `1`
+
+            Max length: `128`'
+        account_reference_id:
+          type: string
+          description: Identifier of the account or customer associated to the on file action.
+      required:
+      - type
+      - scope_id
+      - account_reference_id
+      description: Describes an intent for a client to deposit funds into the Cash App account balances in perpetuity until the Cash App account revokes the grant.
+      title: OnFileDepositAction
+    WebhooksGrantCreatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      description: A snapshot of the grant immediately after the grant was created.
+      title: WebhooksGrantCreatedPayloadContentApplicationJsonSchemaDataObject
+    DisputeReason:
+      type: string
+      enum:
+      - FR10
+      - FR11
+      - PE10
+      - PE11
+      - PE12
+      - CD10
+      - CD11
+      - CD13
+      description: '4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.
+
+
+        Current values:
+
+
+        - `FR10`: Customer has no knowledge of the payment.
+
+        - `FR11`: Customer has no knowledge of the payment and liability has shifted to the merchant due to collusion, fraud monitoring program thresholds, or any other reason.
+
+        - `PE10`: Payment was processed twice.
+
+        - `PE11`: Payment amount differs from agreed amount.
+
+        - `PE12`: Payment was paid for by another means.
+
+        - `CD10`: Cancelled services.
+
+        - `CD11`: Goods or services differ from what was agreed upon for the payment.
+
+        - `CD12`: The goods or services were not received.
+
+        - `CD13`: The purchase was cancelled or returned, but the refund has not been processed.'
+      title: DisputeReason
+    Address:
+      type: object
+      properties:
+        address_line_1:
+          type: string
+          description: 'First line of the street address, typically including street number, street name, and / or building name.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        address_line_2:
+          type: string
+          description: 'Second line of the address, if any.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        locality:
+          type: string
+          description: 'City or township where the entity is located.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        country:
+          $ref: '#/components/schemas/Country'
+        postal_code:
+          type: string
+          description: 'ZIP or postal code.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        administrative_district_level_1:
+          type: string
+          description: 'State or province.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+      required:
+      - country
+      description: Where this entity is located
+      title: Address
+    LinkAccountAction:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkAccountActionType'
+          description: The type of the action (`LINK_ACCOUNT`).
+      required:
+      - type
+      description: Describes an intent for a client to manage a customer's merchant profiles in Cash App.
+      title: LinkAccountAction

@@ -1,0 +1,5116 @@
+openapi: 3.2.0
+info:
+  title: Cash App API
+  version: 1.0.0
+  description: 'Operations tagged  across 9 of this provider''s published API definitions: cash-app-billing-agreements-deprecated-openapi.json, cash-app-checkouts-openapi.json, cash-app-configuration-openapi.json, cash-app-disputes-openapi.json, cash-app-grants-afterpay-openapi.json, cash-app-grants-cash-app-pay-openapi.json, cash-app-orders-openapi.json, cash-app-payments-openapi.json, cash-app-service-status-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://global-api-sandbox.afterpay.com
+  description: Sandbox
+- url: https://global-api.afterpay.com
+  description: Production
+tags:
+- name: ''
+paths:
+  /v2/billing-agreements/approvals:
+    post:
+      operationId: start-billing-agreement-approval
+      summary: Start Billing Agreement Approval Process
+      description: 'Initiates the approval process for a new billing agreement.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: The consumer approved the billing agreement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementApprovalResponse'
+        '401':
+          description: 'Authentication failed or insufficient permissions.
+
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | unauthorized | The API credentials are invalid or missing. |
+
+            | insufficient_permissions | The merchant lacks the required ''merchant_api_v2/initiate'' permission. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | One or more required fields in the request body were missing or invalid. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The billing agreement approval request details
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingAgreementApprovalRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements:
+    post:
+      operationId: create-billing-agreement
+      summary: Create Billing Agreement
+      description: 'Creates a new billing agreement from an order token.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Billing agreement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            | headless_billing_agreement_not_authorised | Headless flow is not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | consumer_ineligible | Consumer not eligible |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the details needed to create a billing agreement
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgreementRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements/alias:
+    post:
+      operationId: alias-billing-agreement
+      summary: Create Billing Agreement Alias
+      description: 'Creates an alias for an existing billing agreement to help load payment schedule widget.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Alias created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementAliasResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the billing agreement token and optional duration
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingAgreementAliasRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements/cancel:
+    put:
+      operationId: cancel-billing-agreement-alt
+      summary: Cancel Billing Agreement (Alternative)
+      description: 'Alternative endpoint to cancel a billing agreement using a request body instead of path parameter.
+
+        Functionally equivalent to DELETE /v2/billing-agreements/{token}.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Billing agreement cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_found | The specified billing agreement token was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the billing agreement token to cancel
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelBillingAgreementRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements/offers:
+    post:
+      operationId: retrieve-billing-agreement-offers
+      summary: Retrieve Billing Agreement Offers
+      description: 'Retrieves available offers for billing agreements based on amount and frequency.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Offers retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffersResponse'
+        '401':
+          description: 'Authentication failed or insufficient permissions.
+
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | unauthorized | The API credentials are invalid or missing. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | One or more required fields in the request body were missing or invalid. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the amount and billing agreement token to check offers for
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OffersRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements/retrieve:
+    post:
+      operationId: retrieve-billing-agreement
+      summary: Retrieve Billing Agreement
+      description: 'Alternative endpoint to retrieve billing agreement details using a request body instead of path parameter.
+
+        Functionally equivalent to GET /v2/billing-agreements/{token}.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Billing agreement details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_found | The specified billing agreement token was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the billing agreement token to retrieve
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBillingAgreementRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements/start:
+    post:
+      operationId: start-billing-agreement-link
+      summary: Start Billing Agreement Link Flow
+      description: 'Initiates the headless billing agreement link flow process.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Link flow started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LinkStartResponse'
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | not_found | Afterpay consumer account does not exist |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_state | Failed to send code |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '429':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | too_many_requests | Too many requests |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the details needed to start the billing agreement link flow
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LinkStartRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/billing-agreements/{token}:
+    get:
+      operationId: get-billing-agreement
+      summary: Get Billing Agreement Details
+      description: 'Retrieves the details of a billing agreement using its token.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: token
+        in: path
+        description: The unique identifier token of the billing agreement to retrieve
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Billing agreement details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_found | The specified billing agreement token was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    delete:
+      operationId: cancel-billing-agreement
+      summary: Cancel Billing Agreement
+      description: 'Cancels an existing billing agreement using its token.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: token
+        in: path
+        description: The unique identifier token of the billing agreement to cancel
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Billing agreement cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillingAgreementResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_authorised | Recurring payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | billing_agreement_not_found | The specified billing agreement token was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/recurring-payments:
+    post:
+      operationId: capture-full-recurring-payment
+      summary: Capture Full Recurring Payment
+      description: 'Creates and immediately captures a recurring payment using a billing agreement token.
+
+        This endpoint combines authorization and capture into a single step.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: '| Status | Description |
+
+            | ----- | ----- |
+
+            | `APPROVED` | If payment is approved by Afterpay, returns a Payment object in response, with a status of "APPROVED". |
+
+            | `DECLINED` | If payment is declined by Afterpay, for example, if expired payment method, returns a Payment object in response, with a status of "DECLINED". Please advise the consumer to contact the Afterpay Customer Service team for more information. |
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '402':
+          description: 'If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a `status` of "DECLINED" and a `paymentState` of "AUTH_DECLINED". Please advise the consumer to contact the Afterpay Customer Service team for more information.
+
+
+            As well, the following errorCodes are possible:
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_token | The checkout token is invalid, expired, or does not exist.
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object             | One or more required fields were missing or invalid.                     |
+
+            | unsupported_payment_type   | The amount is outside of the merchant''s payment limits, as returned by Get Configuration. |
+
+            | unsupported_currency       | The amount is outside of the merchant''s payment limits, as returned by Get Configuration. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the payment details to process
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecurringPaymentRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/recurring-payments/auth:
+    post:
+      operationId: auth
+      summary: Authorize Recurring Payment
+      description: 'Authorizes a recurring payment using a billing agreement token.
+
+        This endpoint performs authorization only, requiring a separate capture step.
+
+
+        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: If the payment is approved by Afterpay, a Payment object is returned with a `status` of **APPROVED** and a `paymentState` of **AUTH_APPROVED**.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentAuth'
+        '402':
+          description: 'If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a `status` of "DECLINED" and a `paymentState` of "AUTH_DECLINED". Please advise the consumer to contact the Afterpay Customer Service team for more information.
+
+
+            As well, the following errorCodes are possible:
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_token | The checkout token is invalid, expired, or does not exist.
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            |npuf_eligibility_mismatch|Npuf eligibility mismatch|
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object             | One or more required fields were missing or invalid.                     |
+
+            | unsupported_payment_type   | The amount is outside of the merchant''s payment limits, as returned by Get Configuration. |
+
+            | unsupported_currency       | The amount is outside of the merchant''s payment limits, as returned by Get Configuration. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: The request containing the payment details to authorize
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecurringPaymentRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/checkouts:
+    post:
+      operationId: create-checkout-1
+      summary: Create Checkout
+      description: 'The `checkouts` endpoint is responsible for creating a new checkout and returning the associated checkout token.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Returns a token, expiry date/time, and checkout URL if successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checkout-Response'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | One or more required fields were missing or invalid. |
+
+            | unsupported_payment_type | The `amount` is outside of the merchant''s payment limits, as returned by GET Configuration. |
+
+            | unsupported_currency | One or more Money objects contained a currency that differs from the merchant''s account currency. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Checkout-Request'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/checkouts/{token}:
+    get:
+      operationId: get-checkout
+      summary: Get Checkout
+      description: 'This endpoint retrieves an incomplete individual checkout by token.
+
+
+        Checkout details are only retained in this temporary format for up to 60 minutes. If a checkout token expires or has an order created against it, it can no longer be retrieved from this endpoint.
+
+        To retrieve a [Payment](../docs/ONLINE-API/Payment-object.md) record (Afterpay Order) along with its associated checkout details, see Get Payment By Token.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: token
+        in: path
+        description: The token of the checkout to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: 'Returns an object combining the [Checkout Request](reference/Checkouts.v2.yaml/components/schemas/Checkout-Request) and [Checkout Response](reference/Checkouts.v2.yaml/components/schemas/Checkout-Response) for a provided token.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get-checkout_Response_200'
+        '404':
+          description: No checkout token was provided.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: The checkout token is invalid, expired, completed, or does not exist.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/configuration:
+    get:
+      operationId: get-configuration
+      summary: Get Configuration
+      description: 'Use this endpoint to retrieve the merchant''s applicable payment limits.
+
+
+        A request to [Create Checkout](Checkouts.v2.yaml/paths/~1v2~1checkouts/post) may be rejected if the order amount is not between the `minimumAmount` and `maximumAmount` (inclusive).
+
+
+        Afterpay merchant configuration does not change frequently. For this reason, the configuration response includes Cache-Control headers to minimise network round trips when using a modern HTTP client. You should call Get Configuration on a fixed schedule, preferably once per day.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 20             |
+
+
+        **Example request**
+
+
+        `GET /v2/configuration?include=publicid&include=consumerlending&include=paybyinstallment`'
+      tags:
+      - ''
+      parameters:
+      - name: include
+        in: query
+        description: 'Repeat this query parameter to include optional configuration fields in the response. The endpoint always returns `minimumAmount` and `maximumAmount`.
+
+
+          Supported values:
+
+          - `publicid`: include `publicId`, the merchant public identifier (MPID) when one exists.
+
+          - `consumerlending`: include `consumerLending`, which indicates whether consumer lending is enabled and, when enabled, the eligible minimum and maximum order amounts.
+
+          - `paybyinstallment`: include `payByInstallment`, the configured pay by installment minimum and maximum eligible order amounts.'
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: 'Returns a [configuration](../reference/Configuration.v2.yaml/components/schemas/Merchant-limit) object containing the following attributes.
+
+            | Attribute | Type           | Description |
+
+            |-----------|----------------| ----------- |
+
+            | `minimumAmount`    | Money    | Minimum order amount. Note: This attribute may not be included if the Merchant account has no minimum order amount.
+
+            | `maximumAmount`    | Money    | Maximum order amount.
+
+            | `publicId`    | string    | Merchant public identifier (MPID). Returned when `include=publicid` is requested and a public mapping exists for the merchant.
+
+            | `consumerLending`    | object    | Returned when `include=consumerlending` is requested. Contains `enabled` and, when enabled, `minimumAmount` and `maximumAmount` for consumer lending.
+
+            | `payByInstallment`    | object    | Returned when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains `minimumAmount` and `maximumAmount`.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Merchant-limit'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-configurationRequestUnauthorizedError'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/configuration/mappings:
+    get:
+      operationId: get-configuration-mappings
+      summary: Get Configuration Mappings
+      description: To set-up Cash App Pay on file, use this endpoint to retrieve your Cash App Pay brand ID.
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Accept
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigurationMappings'
+        '401':
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-configuration-mappingsRequestUnauthorizedError'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Get-configuration-mappingsRequestForbiddenError'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes:
+    get:
+      operationId: retrieve-dispute
+      summary: Retrieve Dispute
+      description: 'List disputes within a date range based on certain criteria. This endpoint can be used for debugging or synchronizing the disputes from Afterpay if/when you are unable to use the webhook method.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: order
+        in: query
+        description: Payment or Order token using which you can filter the list.
+        required: false
+        schema:
+          type: integer
+      - name: merchant
+        in: query
+        description: Merchant token using which you can filter the list.
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Dispute status using which you can filter the list.
+        required: false
+        schema:
+          type: string
+      - name: openedAfter
+        in: query
+        description: Filter disputes that were created on or after this timestamp (inclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: openedBefore
+        in: query
+        description: Filter disputes that were created on or before this timestamp (inclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: offset
+        in: query
+        description: Offset for the search results.
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The maximum number of records that you want returned from this request.
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve-dispute_Response_200'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/{dispute_id}:
+    get:
+      operationId: receive-dispute
+      summary: Receive Dispute
+      description: Get detailed information about a dispute.
+      tags:
+      - ''
+      parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dispute'
+    post:
+      operationId: respond-to-dispute
+      summary: Respond to Dispute
+      description: 'The Respond to the Dispute endpoint allows a merchant to submit evidence for the dispute. This is only allowed if the dispute is the state `needs_response`.
+
+
+        Merchants only have one opportunity to submit evidence. Once a 200 response is received, this information cannot be updated or changed.'
+      tags:
+      - ''
+      parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When successful, returns the updated dispute object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dispute'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: A unique ID given to a dispute.
+                evidence:
+                  $ref: '#/components/schemas/evidence'
+                  description: Evidence for the dispute. Note that there should be at least one valid field.
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/{dispute_id}/accept:
+    get:
+      operationId: accept-dispute
+      summary: Accept Dispute
+      description: 'Merchants can call this endpoint to accept a dispute case. The endpoint only works if the dispute is in a non-terminal state (the status is not `won` or `lost`).
+
+
+        > **Note:** Calling the API changes the dispute status to lost.'
+      tags:
+      - ''
+      parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - in: query
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If successful, returns the updated dispute object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dispute'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/files:
+    post:
+      operationId: upload-file
+      summary: Upload File
+      description: Use this endpoint to upload files for disputes.
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Indicates a successful file upload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/upload-file_Response_200'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: The file you want to upload.
+                fileType:
+                  type: string
+                  description: The type of file. Only `dispute_evidence` is supported.
+              required:
+              - file
+              - fileType
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/files/{id}:
+    get:
+      operationId: retrieve-file
+      summary: Retrieve file
+      description: Use this endpoint to retrieve files for disputes.
+      tags:
+      - ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: ID of the file to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Indicates that the file has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve-file_Response_200'
+        '401':
+          description: Unauthorized. Invalid merchant credentials.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: Not Found. The corresponding entity can't be found for the merchant.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: Precondition Failed. Invalid action for the dispute case, or the refund amount is larger than the refundable amount.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '413':
+          description: Request Entity Too Large. The uploaded file is too large. It must be less than 10 MB.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: 'Unsupported Media Type. Afterpay does not support the filetype of the uploaded file. It must be: GIF, PDF, JPEG, or PNG.'
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: Unprocessable Entity. Invalid parameter in the Dispute API request.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '429':
+          description: Too Many Requests. Too many requests in a short period of time, retry later.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/approvals:
+    post:
+      operationId: start-grant-approval
+      summary: Create Grant Approval
+      description: 'Initiates the approval process for a new grant.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantApprovalResponse'
+        '401':
+          description: 'Authentication failed or insufficient permissions.
+
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | unauthorized | The API credentials are invalid or missing. |
+
+            | insufficient_permissions | The merchant lacks the required ''merchant_api_v2/initiate'' permission. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | One or more required fields in the request body were missing or invalid. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantApprovalRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants:
+    post:
+      operationId: create-grant
+      summary: Create Grant
+      description: "Creates a new grant from a grant approval token. \n"
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | consumer_ineligible | Consumer not eligible |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGrantRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/{grantId}:
+    get:
+      operationId: get-grant
+      summary: Retrieve Grant
+      description: 'Retrieves a grant by its ID.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: grantId
+        in: path
+        description: ID of the grant to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | grant_not_found | The specified grant id was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/{grantId}/revoke:
+    post:
+      operationId: revoke-grant
+      summary: Revoke Grant
+      description: 'Revokes a grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: grantId
+        in: path
+        description: The unique identifier id of the grant to revoke
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | grant_not_found | The specified grant was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/alias:
+    post:
+      operationId: alias-grant
+      summary: Create Grant Alias
+      description: 'Creates an alias for an existing grant to help load the payment schedule widget.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantAliasResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantAliasRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/start:
+    post:
+      operationId: start-billing-agreement-link
+      summary: Start Grant Link Flow
+      description: 'Initiates the headless grant link flow process.
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantStartResponse'
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | not_found | Afterpay consumer account does not exist |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_state | Failed to send code |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '429':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | too_many_requests | Too many requests |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantStartRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/retrieve:
+    post:
+      operationId: retrieve-grant
+      summary: Retrieve Grant
+      description: Retrieves a Cash App Pay customer grant by the ID of the customer that approved it and its own ID.
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Accept
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve-grant_Response_200'
+        '401':
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrieve-grantRequestUnauthorizedError'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrieve-grantRequestForbiddenError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveGrantRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/revoke:
+    post:
+      operationId: revoke-grant
+      summary: Revoke Grant
+      description: Revokes a Cash App Pay customer grant by the ID of the customer that approved it and its own ID.
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Accept
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/revoke-grant_Response_200'
+        '401':
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-grantRequestUnauthorizedError'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-grantRequestForbiddenError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveGrantRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/orders:
+    post:
+      operationId: create-grant
+      summary: Create Order
+      description: 'This is the first step in the on file grant purchase process. Use the token in the response to initiate the payment
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrderResponse'
+        '415':
+          description: Unsupported Media Type
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object             | One or more required fields were missing or invalid.                     |
+
+            | unsupported_payment_type   | The amount is outside of the merchant''s payment limits, as returned by Get Configuration. |
+
+            | unsupported_currency       | The amount is outside of the merchant''s payment limits, as returned by Get Configuration. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments:
+    get:
+      operationId: list-payments
+      summary: List Payments
+      description: 'This endpoint retrieves a collection of payments along with their order details.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 20             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: toCreatedDate
+        in: query
+        description: An inclusive end date and time to search, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
+        required: false
+        schema:
+          type: string
+          default: '2020-12-30'
+      - name: fromCreatedDate
+        in: query
+        description: An inclusive start date and time to search, in [ISO 8601](http://www.iso.org/iso/home/standards/iso8601.htm) format.
+        required: false
+        schema:
+          type: string
+          default: '2020-01-01'
+      - name: tokens
+        in: query
+        description: One or more order tokens to search for.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: includeNextLink
+        in: query
+        description: Returns a modified pagination object which includes a URL to return the next page. The default value is false.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: ids
+        in: query
+        description: One or more Afterpay Order IDs to search for.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: merchantReferences
+        in: query
+        description: One or more Merchant Reference IDs to search for.
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: statuses
+        in: query
+        description: One or more Afterpay Order Statuses to search for. Possible values include "APPROVED" and "DECLINED".
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: orderBy
+        in: query
+        description: A field to order results by. If provided, must be one of "createdAt", "id", "totalAmount", "merchantReference" or "email".
+        required: false
+        schema:
+          type: string
+          default: createdAt
+      - name: ascending
+        in: query
+        description: '`true` to order results in ascending order, or `false` for descending order.'
+        required: false
+        schema:
+          type: boolean
+          default: false
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Returns the matching Payment objects, enclosed in a Pagination object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/list-payments_Response_200'
+        '422':
+          description: An invalid query parameter was provided. For example, a value for `limit` was provided, but was less than 1 or more than 250. Error code `error`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '500':
+          description: This is usually caused by sending a `fromCreatedDate` or `toCreatedDate` in an invalid format. Please ensure the dash and colon characters are included, and any plus characters are URL-encoded. Also, for the array parameters (`ids`, `tokens`, `merchantReferences` and `statuses`), do not use comma-separated values or square brackets. Instead, include each parameter multiple times, as needed.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/auth:
+    post:
+      operationId: auth
+      summary: Auth
+      description: 'This endpoint requests a payment auth, which determines the order approval status. If approved, the auth has an expiration date and time, which is returned in the events list for the "AUTH_APPROVED" payment event. Authorization expires after 13 days.
+
+
+        This operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.
+
+
+        The customer''s payment plan starts at the time of auth approval.
+
+
+        **Note:** Authorization expires after 13 days and then the transaction is automatically voided. Voided transactions are frozen and cannot be reopened or changed in any way. In this case, use the `v2/checkouts` endpoint to create a new order.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 70             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: If the payment is approved by Afterpay, a Payment object is returned with a `status` of **APPROVED** and a `paymentState` of **AUTH_APPROVED**.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentAuth'
+        '402':
+          description: 'If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a `status` of "DECLINED" and a `paymentState` of "AUTH_DECLINED". advise the customer to contact the Afterpay Customer Service team for more information.
+
+
+            As well, the following errorCodes are possible:
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_token | The checkout token is invalid, expired, or does not exist.
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: The customer has not confirmed their payment for the order associated with this token. Error code `invalid_order_transaction_status`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: The checkout token was missing or empty. Error code `invalid_object`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizePayment'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/capture:
+    post:
+      operationId: capture-full-payment
+      summary: Capture Full Payment
+      description: 'This endpoint makes a payment capture for the full value of the payment plan.
+
+
+        This operation is idempotent based on the token, which allows for the safe retry of requests, guaranteeing the payment operation is only made once.
+
+
+        Since the idempotency of this endpoint is based on the token, the inclusion of a `requestId` is not required.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 70             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: '| Status | Description |
+
+            | ----- | ----- |
+
+            | `APPROVED` | If payment is approved by Afterpay, returns a Payment object in response, with a status of "APPROVED". |
+
+            | `DECLINED` | If payment is declined by Afterpay, for example, if invalid card details were entered, returns a Payment object in response, with a status of "DECLINED". Please advise the customer to contact the Afterpay Customer Service team for more information. |
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '402':
+          description: The checkout token is invalid, expired, or does not exist. Error code `invalid_token`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: The Consumer has not confirmed their payment for the order associated with this token. Error code `invalid_order_transaction_status`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: The checkout token was missing or empty. Error code `invalid_object`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: The token returned in the Create Checkout request.
+                merchantReference:
+                  type: string
+                  description: The merchant’s order id/reference that this payment corresponds to. This updates any value previously provided in the Create Checkout request.
+                amount:
+                  $ref: '#/components/schemas/Money'
+                  description: '**Required for express checkout only.** Amount to be checked against the value in the create checkout request. If the amounts do not match, then the request is rejected and an error specific to this scenario is returned. '
+                isCheckoutAdjusted:
+                  type: boolean
+                  description: '**Express checkout only.** The isCheckoutAdjusted field can be used to allow the order amount to be changed after the checkout flow.'
+                paymentScheduleChecksum:
+                  type: string
+                  description: '**Express checkout only.** A unique value representing the payment schedule that must be provided when there have been changes since the initial order creation (retrieved from checkout widget).'
+                items:
+                  $ref: '#/components/schemas/Item'
+                  description: '**Express checkout only.** An array of order items that have been updated. Provide if it has changed since the initial order creation.'
+                shipping:
+                  $ref: '#/components/schemas/Contact'
+                  description: '**Express checkout only.** The shipping address if it has changed since the initial order creation. '
+                enrichments:
+                  $ref: '#/components/schemas/Enrichments'
+                grantId:
+                  type: string
+                  description: The Afterpay or Cash App Pay on-file grant ID. Required when processing a payment using a previously stored on-file grant.
+              required:
+              - token
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/{orderId}:
+    get:
+      operationId: get-payment-by-order-id
+      summary: Get Payment By Order ID
+      description: 'This endpoint retrieves an individual payment along with its order details.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 20             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: orderId
+        in: path
+        description: The unique ID of the Afterpay Order, for which a Payment event has been completed.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Returns a Payment object in response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: No Afterpay Order was found matching the `orderId` provided. Error code `not_found`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    put:
+      operationId: update-payment-by-order-id
+      summary: Update Payment by Order ID
+      description: This endpoint is to create merchant side order ID's following the Afterpay order ID creation. Call the endpoint immediately after the Afterpay order is created.
+      tags:
+      - ''
+      parameters:
+      - name: orderId
+        in: path
+        description: The Order ID to update
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Returns object containing the following attributes.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/update-payment-by-order-id_Response_201'
+        '404':
+          description: The Afterpay payment ID to update was not found. Error code `not_found`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                merchantReference:
+                  type: string
+                  default: new_merchant_order_id_1234
+                  description: The merchant’s new order ID to replace with
+              required:
+              - merchantReference
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/{orderId}/capture:
+    post:
+      operationId: capture-payment
+      summary: Capture Payment
+      description: 'This endpoint captures a full or partial payment. Any amounts successfully captured are settled from Afterpay to the merchant''s nominated bank account on the following day. Records of all payments captured against an order are returned in the events list as events of type, "CAPTURED".
+
+
+        **Note:** Authorization expires after 13 days and then the transaction is automatically voided. Voided transactions are frozen and cannot be captured, reopened or changed in any way. In this case your only option is to use the v2/checkouts endpoint to create a new order.
+
+
+        This operation is idempotent based on the `requestId` (if provided), which allows the safe retry of multiple requests. This safe retry guarantees the payment operation only occurs once.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 70             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: orderId
+        in: path
+        description: The unique ID of the Afterpay Order, returned as the `id` property of the Auth response.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: If successful, returns an updated copy of the Payment object, with the newly captured payment appended to the `events` array as a Payment Event object with a `type` of "CAPTURED".
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: No numeric `orderId` was provided, or an invalid string was provided. Error code `not_found`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '410':
+          description: Payment has already been fully captured for this order, or partially captured with the remainder voided. Error code `payment_captured`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | error | A numeric `orderId` was provided, but did not match any valid order. |
+
+            | invalid_state | The order was declined by Afterpay; no payment can be captured for this order. |
+
+            | payment_voided | The auth for this order has already been completely voided. |
+
+            | payment_expired | The auth for this order has expired; no further payment can be captured. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | The `amount` was missing or invalid, or the `paymentEventMerchantReference` exceeded 128 characters. |
+
+            | invalid_amount | The `amount` was less than the minimum capture amount, or more than the `openToCaptureAmount`. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CapturePayment'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/{orderId}/courier:
+    put:
+      operationId: update-shipping-courier
+      summary: Update Shipping Courier
+      description: 'This endpoint updates an order with shipping courier information. The Afterpay team may use this information when providing support.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 20             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: orderId
+        in: path
+        description: The unique Afterpay Order ID to update.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          $ref: '#/components/schemas/V2PaymentsOrderIdCourierPutParametersAccept'
+      responses:
+        '200':
+          description: Returns a Payment object in response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '412':
+          description: No Afterpay Order was found matching the `orderId` provided. Error code `precondition_failed`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: A value for shippedAt was provided, but not a valid [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) date. Or, a value for priority was provided, but wasn't one of "STANDARD" or "EXPRESS". Error code `invalid_object`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shipping-Courier'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/{orderId}/refund:
+    post:
+      operationId: create-refund
+      summary: Create Refund
+      description: 'This endpoint performs a full or partial refund. The refund operation is idempotent if a unique `requestId` and `merchantReference` are provided.
+
+
+        If using the Deferred Payment Flow, be aware that only captured funds can be refunded. Do not create refunds after 120 days from the date of purchase.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 70             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: orderId
+        in: path
+        description: The unique Afterpay Order ID to apply the refund to.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: 'Returns a Refund object in response. All request parameters are echoed in the response. In addition, the response includes the following:
+
+            | Attribute | Type | Description |
+
+            | --- | --- | --- |
+
+            | `refundId` | string | The unique, permanent, Afterpay-generated Refund ID. |
+
+            | `refundedAt` | string | The UTC timestamp of when the refund was completed, in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format. |
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+        '412':
+          description: The `orderId` is invalid, does not exist, or is not eligible for a refund. For example, the order was declined. Error code `precondition_failed`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | The `refundMerchantReference` exceeded 128 characters. |
+
+            | invalid_amount | The `amount` requested exceeded the amount available. |
+
+            | invalid_object | The currency of the refund does not match the currency of the order (and the Merchant account). |
+
+            | refund_timelimit_exceeded | The refund exceeds the time limit of 120 days. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRefund'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/{orderId}/void:
+    post:
+      operationId: void-payment
+      summary: Void
+      description: "This endpoint voids the remaining `openToCapture` amount of the payment auth, and refunds the customer.\n\n<Info title=\"Note\">\n  To make a partial void, specify an amount in the request body.\n</Info>\n\nThis operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.\n\n\n\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n"
+      tags:
+      - ''
+      parameters:
+      - name: orderId
+        in: path
+        description: The unique ID of the Afterpay Order, returned as the `id` property of the Auth response.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: "If successful, returns an updated copy of the Payment object.\n- A new Payment Event object is appended to the events array, with a type of \"VOIDED\".\n- A new Refund object is prepended to the refunds array.\n- If the openToCapture amount is reduced to zero as a result of this Void request, the paymentState is updated as follows:\n  - from \"AUTH_APPROVED\" to \"VOIDED\", or\n  - from \"PARTIALLY_CAPTURED\" to \"CAPTURED\".\n"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: The `orderId` string provided was empty or did not match a valid order. Error code `not_found`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: 'The amount in USD has exceeded the open-to-capture amount in USD. Example message: "Void amount USD 999.00 exceeded open to capture amount USD 40.00." Error code `invalid_amount`.
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  $ref: '#/components/schemas/Money'
+                  description: The amount to void. Must be less than or equal to the open to capture amount.
+                requestId:
+                  type: string
+                  description: A unique request ID, required for safe retries. It is recommended that the merchant generate a UUID for each unique void.
+                reason:
+                  type: string
+                  description: Can be passed in void requests to conditionally modify wording of the corresponding customer refund email. This can be set to 1 of 3 values, `cancelledItems`, `amountAdjustment` or `null`
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/token:{token}:
+    get:
+      operationId: get-payment-by-token
+      summary: Get Payment By Token
+      description: 'This endpoint retrieves an individual payment along with its order details.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 20             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: token
+        in: path
+        description: Order token that was used to complete payment.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Returns a Payment object in response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+        '404':
+          description: No Afterpay Order was found matching the `token` provided. Error code `not_found`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/payments/token:{token}/reversal:
+    post:
+      operationId: reverse-payment-by-token
+      summary: Reverse Payment By Token
+      description: 'This endpoint makes a reversal of the checkout that is used to start the Afterpay payment process. This cancels the order asynchronously as soon as it is created without the need of an additional call to the void endpoint. For a payment to be eligible, the order must be in an Auth-Approved or Captured state, and it must be issued within 10 minutes of the order being created.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 70             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: token
+        in: path
+        description: The token of the checkout to be reversed (voided).
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '204':
+          description: The Reversal endpoint indicates a successful response with a 204 status code response. Returns no content in the response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/reverse-payment-by-token_Response_204'
+        '402':
+          description: Invalid Token. Error code `invalid_token`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | precondition_failed | Payment reversal previously processed |
+
+            | precondition_failed | Payment not eligible for a reversal |
+
+            | precondition_failed | Order outside reversal window |
+
+            | precondition_failed | Order in pending reversal, no captures/auth accepted |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /ping:
+    get:
+      operationId: ping
+      summary: Ping
+      description: 'Use this endpoint to check that the service is available and reachable.
+
+
+        Unlike all other endpoints, this endpoint does not require authentication, and responds with `text/plain` instead of `application/json`.
+
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open    | 10             |
+
+        | Read    | 20             |
+
+        '
+      tags:
+      - ''
+      parameters:
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: text/plain
+      responses:
+        '200':
+          description: Response with status 200
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '405':
+          description: The request was made by a HTTP Method other than `GET`, `HEAD` or `OPTIONS`. For example, `POST`, `PUT` or `DELETE`.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+components:
+  schemas:
+    ConsumerOffersNoPaymentUpfront:
+      type: object
+      properties:
+        eligible:
+          type: boolean
+          description: Indicates if the consumer is eligible for no payment upfront
+        eligibilityLimit:
+          $ref: '#/components/schemas/Money'
+          description: The maximum amount eligible for no payment upfront
+      required:
+      - eligible
+      - eligibilityLimit
+      description: Information about the no payment upfront feature eligibility
+      title: ConsumerOffersNoPaymentUpfront
+    Offer:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OfferType'
+          description: Type of the offer
+        merchantAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount for the merchant
+        exchangeRate:
+          type: number
+          format: double
+          description: Exchange rate for cross-border transactions
+        amountDueToday:
+          $ref: '#/components/schemas/Money'
+          description: Amount due for immediate payment
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentSchedule'
+          description: List of scheduled payments
+        crossBorder:
+          type: boolean
+          description: Indicates if this is a cross-border transaction
+        appliedPromotion:
+          $ref: '#/components/schemas/Money'
+          description: Amount of promotion applied
+        consumer:
+          $ref: '#/components/schemas/ConsumerOffers'
+          description: Consumer offer details
+      description: Represents an offer with payment details
+      title: Offer
+    PaymentAuth:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique, permanent, Afterpay generated Order ID.
+        token:
+          type: string
+          description: The token obtained from the checkout call
+        status:
+          $ref: '#/components/schemas/PaymentAuthStatus'
+          description: represents the status of the order
+        created:
+          type: string
+          description: ' is the UTC timestamp of when the payment was completed.'
+        originalAmount:
+          $ref: '#/components/schemas/Money'
+        openToCaptureAmount:
+          $ref: '#/components/schemas/Money'
+        paymentState:
+          $ref: '#/components/schemas/PaymentAuthPaymentState'
+          description: is the current state for capturing payments
+        merchantReference:
+          type: string
+          description: is the merchant's order id/reference that the payment corresponds to.
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+        orderDetails:
+          $ref: '#/components/schemas/Order-Details'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment-Event'
+      description: Describes the schema for a (read-only) payment object
+      title: PaymentAuth
+    PaymentAuthPaymentState:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - PARTIALLY_CAPTURED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      description: is the current state for capturing payments
+      title: PaymentAuthPaymentState
+    PaymentPaymentState:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - PARTIALLY_CAPTURED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      description: is the current state for capturing payments
+      title: PaymentPaymentState
+    Payment:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique, permanent, Afterpay generated Order ID.
+        token:
+          type: string
+          description: The token obtained from the checkout call
+        status:
+          $ref: '#/components/schemas/PaymentStatus'
+          description: represents the status of the order
+        created:
+          type: string
+          description: ' is the UTC timestamp of when the payment was completed.'
+        originalAmount:
+          $ref: '#/components/schemas/Money'
+        openToCaptureAmount:
+          $ref: '#/components/schemas/Money'
+        paymentState:
+          $ref: '#/components/schemas/PaymentPaymentState'
+          description: is the current state for capturing payments
+        merchantReference:
+          type: string
+          description: is the merchant's order id/reference that the payment corresponds to.
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+        orderDetails:
+          $ref: '#/components/schemas/Order-Details'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment-Event'
+      description: Describes the schema for a (read-only) payment object
+      title: Payment
+    GetBillingAgreementRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The billing agreement token to retrieve
+      required:
+      - token
+      description: Request to retrieve a billing agreement by token
+      title: GetBillingAgreementRequest
+    Money:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
+      required:
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
+    RecurringPaymentRequestPaymentMethodType:
+      type: string
+      enum:
+      - BILLING_AGREEMENT
+      description: The payment method type
+      title: RecurringPaymentRequestPaymentMethodType
+    ConsumerOffers:
+      type: object
+      properties:
+        noPaymentUpfront:
+          $ref: '#/components/schemas/ConsumerOffersNoPaymentUpfront'
+          description: Information about the no payment upfront feature eligibility
+      description: Consumer offers
+      title: ConsumerOffers
+    AgreementApproval:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgreementApprovalType'
+          description: Agreement Type for approval.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: A merchant-provided reference for the agreement.
+      required:
+      - type
+      description: Details about the agreement to be created.
+      title: AgreementApproval
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+          description: First line of the address
+        line2:
+          type: string
+          description: 'Second line of the address '
+        area1:
+          type: string
+          description: '- AU: Suburb
+
+            - NZ: Town or City
+
+            - UK: Postal Town
+
+            - US: City
+
+            - Canada: City'
+        area2:
+          type: string
+          description: '- NZ: suburb
+
+            - UK: village or local area.'
+        region:
+          type: string
+          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+        postcode:
+          type: string
+        countryCode:
+          $ref: '#/components/schemas/ContactCountryCode'
+        phoneNumber:
+          type: string
+          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
+      required:
+      - name
+      - line1
+      - area1
+      - region
+      - postcode
+      - countryCode
+      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
+      title: Contact
+    AgreementApprovalType:
+      type: string
+      enum:
+      - BILLING
+      description: Agreement Type for approval.
+      title: AgreementApprovalType
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
+    PaymentEventType:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      - EXPIRED
+      title: PaymentEventType
+    Consumer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        givenNames:
+          type: string
+          description: The consumer's first name
+        surname:
+          type: string
+          description: The consumer's last name
+        phoneNumber:
+          type: string
+      required:
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
+    Order-Details:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
+      title: Order-Details
+    PaymentStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentStatus
+    CreateAgreementRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
+        merchantReference:
+          type: string
+          description: 'The reference order id that this payment corresponds to in the merchant''s system.
+
+            Note: Providing a new value will update any value previously set in the Create Checkout request.'
+      required:
+      - token
+      title: CreateAgreementRequest
+    RecurringPaymentRequestEnrichmentsInitiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiationActor'
+          description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
+      description: Describes who initiated the transaction
+      title: RecurringPaymentRequestEnrichmentsInitiation
+    AgreementEventResponseType:
+      type: string
+      enum:
+      - CAPTURE
+      - VOID
+      description: Type of event
+      title: AgreementEventResponseType
+    RecurringPaymentRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          description: A unique identifier for the request, used for idempotency
+        paymentMethod:
+          $ref: '#/components/schemas/RecurringPaymentRequestPaymentMethod'
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: The total amount of the payment
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        description:
+          type: string
+        merchant:
+          $ref: '#/components/schemas/RecurringPaymentRequestMerchant'
+        merchantReference:
+          type: string
+          description: The reference/order ID in the merchant's system
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+          description: The shipping cost amount
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: The tax amount
+        custom:
+          type: object
+          additionalProperties:
+            description: Any type
+          description: Custom key-value pairs for merchant use
+        paymentScheduleChecksum:
+          type: string
+          description: Payment schedule validation checksum
+        enrichments:
+          $ref: '#/components/schemas/RecurringPaymentRequestEnrichments'
+      required:
+      - requestId
+      - paymentMethod
+      - amount
+      title: RecurringPaymentRequest
+    Refund:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique ID required for safe retries. Max length 64 (varchar).
+        amount:
+          $ref: '#/components/schemas/Money'
+        merchantReference:
+          type: string
+          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
+        refundMerchantReference:
+          type: string
+          description: A unique reference for the individual refund event. Max length 128 (varchar).
+        refundId:
+          type: string
+          description: The unique, permanent, Afterpay-generated Refund ID.
+        refundedAt:
+          type: string
+      description: 'To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records
+
+
+        Unique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request.
+
+
+        The `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as "Payment Event Id". In most cases, this would hold the same value as the `merchantReference`.
+
+        '
+      title: Refund
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        pageUrl:
+          type: string
+        imageUrl:
+          type: string
+        quantity:
+          type: integer
+        price:
+          $ref: '#/components/schemas/Money'
+        categories:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        estimatedShipmentDate:
+          type: string
+          format: date
+        preorder:
+          type: boolean
+          default: false
+      required:
+      - name
+      - quantity
+      - price
+      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
+      title: Item
+    BillingAgreementResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Unique token identifying the agreement
+        type:
+          $ref: '#/components/schemas/BillingAgreementResponseType'
+          description: Type of agreement
+        status:
+          $ref: '#/components/schemas/BillingAgreementResponseStatus'
+          description: Current status of the agreement
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Merchant's reference for this agreement
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the agreement was created
+        cancelled:
+          type: string
+          format: date-time
+          description: If present, indicates when the agreement was cancelled
+        expires:
+          type: string
+          format: date-time
+          description: If present, indicates when the agreement's status will become EXPIRED, preventing a client from using it to create payments
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgreementEventResponse'
+          description: List of events associated with this agreement
+        requestId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier for the request
+        consumerReference:
+          type:
+          - string
+          - 'null'
+          description: Reference identifier for the consumer
+        email:
+          type:
+          - string
+          - 'null'
+          description: Masked email address of the consumer
+      required:
+      - token
+      - type
+      - status
+      - created
+      description: Response type for billing agreements
+      title: BillingAgreementResponse
+    BillingAgreementAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the billing agreement alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      description: Response containing the payment schedule token and its expiry
+      title: BillingAgreementAliasResponse
+    RecurringPaymentRequestPaymentMethod:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The billing agreement token
+        type:
+          $ref: '#/components/schemas/RecurringPaymentRequestPaymentMethodType'
+          description: The payment method type
+      required:
+      - token
+      - type
+      title: RecurringPaymentRequestPaymentMethod
+    Payment-Event:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        expires:
+          type: string
+        type:
+          $ref: '#/components/schemas/PaymentEventType'
+        amount:
+          $ref: '#/components/schemas/Money'
+        paymentEventMerchantReference:
+          type: string
+      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
+      title: Payment-Event
+    BillingAgreementAliasRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token of the billing agreement to create an alias for
+        duration:
+          type:
+          - string
+          - 'null'
+          format: duration
+          description: Duration of the billing agreement in ISO-8601 period format
+      required:
+      - token
+      description: Request to create an alias for a billing agreement
+      title: BillingAgreementAliasRequest
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
+    BillingAgreementResponseType:
+      type: string
+      enum:
+      - BILLING
+      description: Type of agreement
+      title: BillingAgreementResponseType
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    RecurringPaymentRequestEnrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiation'
+          description: Describes who initiated the transaction
+      title: RecurringPaymentRequestEnrichments
+    LinkStartResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying the billing agreement to be created
+        requestId:
+          type: string
+          description: The unique identifier from the request
+        expiresAt:
+          type: string
+          format: date-time
+          description: When this link attempt will expire
+        deliveryType:
+          $ref: '#/components/schemas/LinkStartResponseDeliveryType'
+          description: How the verification code was delivered to the consumer
+      required:
+      - token
+      - requestId
+      - expiresAt
+      - deliveryType
+      description: Response containing the billing agreement link details
+      title: LinkStartResponse
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    RecurringPaymentRequestMerchant:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The merchant name to display
+      title: RecurringPaymentRequestMerchant
+    AgreementEventResponseStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: Status of the agreement at the time of the event
+      title: AgreementEventResponseStatus
+    Shipping-Courier:
+      type: object
+      properties:
+        shippedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        tracking:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ShippingCourierPriority'
+      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
+
+
+        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
+
+
+        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
+
+
+        The `priority` field tracks the shipping speed or service level associated with the delivery. '
+      title: Shipping-Courier
+    PaymentAuthStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentAuthStatus
+    BillingAgreementApprovalResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying this billing agreement approval request
+        expires:
+          type: string
+          format: date-time
+          description: When this approval request expires
+        redirectCheckoutUrl:
+          type: string
+          format: uri
+          description: URL where the consumer should be redirected to complete approval
+      required:
+      - token
+      - expires
+      - redirectCheckoutUrl
+      description: Response from initiating a billing agreement approval process
+      title: BillingAgreementApprovalResponse
+    LinkStartResponseDeliveryType:
+      type: string
+      enum:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: LinkStartResponseDeliveryType
+    PaymentSchedule:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount for this payment installment
+        dueDate:
+          type: string
+          format: date
+          description: Due date for this installment
+      required:
+      - amount
+      - dueDate
+      description: Represents a scheduled payment installment
+      title: PaymentSchedule
+    OfferType:
+      type: string
+      enum:
+      - PAY_IN_4
+      description: Type of the offer
+      title: OfferType
+    AgreementEventResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgreementEventResponseType'
+          description: Type of event
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the event occurred
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount associated with the event
+        status:
+          $ref: '#/components/schemas/AgreementEventResponseStatus'
+          description: Status of the agreement at the time of the event
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Merchant's reference associated with this event
+        orderId:
+          type: number
+          format: double
+          description: Order ID associated with this event
+      description: Response type for agreement events
+      title: AgreementEventResponse
+    CancelBillingAgreementRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The billing agreement token to cancel
+      required:
+      - token
+      description: Request to cancel a billing agreement
+      title: CancelBillingAgreementRequest
+    BillingAgreementApprovalRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: This property is optional when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay approval flow.
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: BillingAgreementApprovalRequestMerchant
+    LinkStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's afterpay account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      description: Request to start a billing agreement link flow
+      title: LinkStartRequest
+    BillingAgreementResponseStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CANCELLED
+      - EXPIRED
+      - PENDING_RENEWAL
+      - PENDING_RENEWAL_EXPIRED
+      description: Current status of the agreement
+      title: BillingAgreementResponseStatus
+    OffersResponse:
+      type: object
+      properties:
+        consumerMaskedEmail:
+          type: string
+          description: Masked email address of the consumer
+        consumerAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount in consumer's currency
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+          description: List of available offers details
+      description: Response containing available offers for the consumer
+      title: OffersResponse
+    OffersRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique identifier for this request
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: The amount to check offers for
+        token:
+          type: string
+          description: The billing agreement token
+      required:
+      - requestId
+      - amount
+      - token
+      description: Request to retrieve available billing agreement offers
+      title: OffersRequest
+    BillingAgreementApprovalRequest:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the billing agreement
+        merchant:
+          $ref: '#/components/schemas/BillingAgreementApprovalRequestMerchant'
+        merchantReference:
+          type: string
+          description: Merchant's unique reference for this billing agreement
+        agreements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgreementApproval'
+          description: Agreement type for approval (only single agreement is supported)
+      required:
+      - merchant
+      description: Request body for initiating a billing agreement approval process
+      title: BillingAgreementApprovalRequest
+    RecurringPaymentRequestEnrichmentsInitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
+      title: RecurringPaymentRequestEnrichmentsInitiationActor
+    CheckoutRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: The URL location from which Afterpay is initiated (required for express checkout). Optional for standard checkout when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay checkout flow, confirmation & refund emails, and the consumer portal
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: CheckoutRequestMerchant
+    get-checkout_Response_200:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Checkout token to be used to complete payment.
+        expires:
+          type: string
+          description: The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
+        redirectCheckoutUrl:
+          type: string
+          description: A URL that can be used to redirect the customer to the Afterpay screenflow directly from the merchant backend.
+        amount:
+          $ref: '#/components/schemas/Money'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        merchantReference:
+          type: string
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        merchant:
+          $ref: '#/components/schemas/CheckoutRequestMerchant'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        description:
+          type: string
+        mode:
+          type: string
+          default: standard
+          description: 'Must be set to `express` to enable express checkout.
+
+            Allowed values: `express` `standard`'
+      required:
+      - amount
+      - consumer
+      title: get-checkout_Response_200
+    Checkout-Request:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        merchantReference:
+          type: string
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        merchant:
+          $ref: '#/components/schemas/CheckoutRequestMerchant'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        description:
+          type: string
+        mode:
+          type: string
+          default: standard
+          description: 'Must be set to `express` to enable express checkout.
+
+            Allowed values: `express` `standard`'
+      required:
+      - amount
+      - consumer
+      description: Individual Checkout
+      title: Checkout-Request
+    Checkout-Response:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Checkout token to be used to complete payment.
+        expires:
+          type: string
+          description: The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
+        redirectCheckoutUrl:
+          type: string
+          description: A URL that can be used to redirect the customer to the Afterpay screenflow directly from the merchant backend.
+      title: Checkout-Response
+    MerchantLimitConsumerLending:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether consumer lending is enabled for this merchant.
+        minimumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Minimum eligible order amount when consumer lending is enabled.
+        maximumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Maximum eligible order amount when consumer lending is enabled.
+      description: Returned only when `include=consumerlending` is requested. Indicates whether consumer lending is enabled for the merchant's online channel and, when enabled, the eligible order amount range.
+      title: MerchantLimitConsumerLending
+    MerchantLimitPayByInstallment:
+      type: object
+      properties:
+        minimumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Minimum eligible order amount for pay by installment.
+        maximumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Maximum eligible order amount for pay by installment.
+      description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
+      title: MerchantLimitPayByInstallment
+    Get-configuration-mappingsRequestForbiddenError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Get-configuration-mappingsRequestForbiddenError
+    Get-configurationRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Get-configurationRequestUnauthorizedError
+    Merchant-limit:
+      type: object
+      properties:
+        minimumAmount:
+          $ref: '#/components/schemas/Money'
+        maximumAmount:
+          $ref: '#/components/schemas/Money'
+        publicId:
+          type: string
+          description: Merchant public identifier (MPID). Returned only when `include=publicid` is requested and a public mapping exists for the merchant.
+        consumerLending:
+          $ref: '#/components/schemas/MerchantLimitConsumerLending'
+          description: Returned only when `include=consumerlending` is requested. Indicates whether consumer lending is enabled for the merchant's online channel and, when enabled, the eligible order amount range.
+        payByInstallment:
+          $ref: '#/components/schemas/MerchantLimitPayByInstallment'
+          description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
+      title: Merchant-limit
+    Get-configuration-mappingsRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Get-configuration-mappingsRequestUnauthorizedError
+    ConfigurationMappings:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the brand to be shown in Cash App next to payments.
+        externalBrandId:
+          type: string
+          description: The brand identifier for the Afterpay <> Cash App Pay merchant mapping.
+      required:
+      - name
+      - externalBrandId
+      title: ConfigurationMappings
+    upload-file_Response_200:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID token of the file.
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp indicating when the file was uploaded.
+        expiresAt:
+          type: string
+          format: date-time
+          description: 'The timestamp indicating when the uploaded file expires. '
+      title: upload-file_Response_200
+    evidence:
+      type: object
+      properties:
+        productDescription:
+          type: string
+          description: A description of the product or service and any relevant details on how this was presented to the customer at the time of purchase.
+        refundPolicy:
+          type: string
+          format: binary
+          description: Token of the file upload. The merchant’s refund policy, as shown or provided to the customer.
+        refundPolicyDisclosure:
+          type: string
+          description: An explanation of how and when the customer was shown or provided with the merchant’s refund policy prior to purchase.
+        refundRefusalExplanation:
+          type: string
+          description: The merchant’s explanation for why the customer is not entitled to a refund.
+        shippingDocumentation:
+          type: string
+          format: binary
+          description: Token of the file upload. A shipping label or receipt for the disputed payment.
+        shippingAddress:
+          type: string
+          description: The address to which a physical product was shipped.
+        shippingDate:
+          type: string
+          description: In cases of physical products, the date that a physical product began its route to the shipping address in a clear human-readable format. This date should be prior to the date of the dispute.
+        shippingCarrier:
+          type: string
+          description: In cases of physical products, the delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, separate them with commas.
+        shippingTrackingNumber:
+          type: string
+          description: The tracking number for a physical product, obtained from the delivery service.
+        uncategorizedFile:
+          type: string
+          format: binary
+          description: Token of the file upload. Additional file that’s not in any of the categories above.
+        uncategorizedText:
+          type: string
+          description: Any additional text deemed relevant by the merchant.
+      title: evidence
+    meta:
+      type: object
+      properties:
+        transactionAmount:
+          type: string
+          description: The transaction amount for the order.
+        network:
+          type: string
+          description: The payment network used by the customer. (For example, `Visa` or `MasterCard`)
+        networkReferenceId:
+          type: string
+          description: The identifier for the payment.
+        orderType:
+          type: string
+          description: The type of order. `ONLINE` or `INSTORE`
+      required:
+      - transactionAmount
+      - orderType
+      title: meta
+    DisputeStatus:
+      type: string
+      enum:
+      - needs_response
+      - under_review
+      - won
+      - lost
+      - merchant_refunded
+      - merchant_voided
+      description: The current state of the dispute. Values depend on how the dispute state machine is modeled.
+      title: DisputeStatus
+    retrieve-file_Response_200:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The link of the file to be retrieved.
+        expiresAt:
+          type: string
+          format: date-time
+          description: The timestamp indicating the expiration of the link.
+      title: retrieve-file_Response_200
+    DisputeClosingReason:
+      type: string
+      enum:
+      - merchant_accepted
+      - evidence_accepted
+      - evidence_rejected
+      - deadline_expired
+      - customer_cancelled
+      description: A reason indicating how the final decision on the dispute was reached. Recommended possible values listed in Closing Reasons.
+      title: DisputeClosingReason
+    DisputeReason:
+      type: string
+      enum:
+      - product_not_received
+      - product_unacceptable
+      - credit_not_processed
+      - order_canceled
+      - duplicate
+      - incorrect_amount
+      - paid_by_other_means
+      - fraudulent
+      - fraudulent_merchant
+      description: The reason for the dispute.
+      title: DisputeReason
+    dispute:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dispute identifier
+        order:
+          type: string
+          description: The token of the order that the dispute is for.
+        amount:
+          type: string
+          description: The amount of the dispute
+        reason:
+          $ref: '#/components/schemas/DisputeReason'
+          description: The reason for the dispute.
+        status:
+          $ref: '#/components/schemas/DisputeStatus'
+          description: The current state of the dispute. Values depend on how the dispute state machine is modeled.
+        open:
+          type: boolean
+          default: true
+          description: '`True` if a final decision on the dispute hasn''t been made yet.'
+        responseDueBy:
+          type: string
+          description: Deadline by which the merchant must respond to the dispute. (Epoch timestamp in seconds, timezone UTC +0.00)
+        createdAt:
+          type: string
+          description: A timestamp indicating when the dispute was created. (Epoch timestamp in seconds, timezone UTC +0.00)
+        openingNote:
+          type: string
+          description: Text from the customer describing why the dispute was opened or the reason for the complaint. While dispute category codes are helpful at informing what a merchant should present, it doesn’t provide reasoning behind the customer’s complaint. In some cases, this can help merchants troubleshoot the dispute directly with their customers.
+        openingNoteAttachments:
+          type: string
+          description: Attachments to supplement the `openingNote` if the customer provided photos or screenshots as part of their dispute description.
+        updatedAt:
+          type: string
+          description: Timestamp when the dispute was updated. (Epoch timestamp in seconds, timezone UTC +0.00)
+        closingReason:
+          $ref: '#/components/schemas/DisputeClosingReason'
+          description: A reason indicating how the final decision on the dispute was reached. Recommended possible values listed in Closing Reasons.
+        closingNote:
+          type: string
+          description: Text describing in detail how the final decision on the dispute was reached. This supplements the `closingReason`.
+        merchantOrderId:
+          type: string
+          description: The identifier for the transaction on the merchant side.
+        transactionDate:
+          type: string
+          description: The timestamp of the order created by the customer. (Epoch timestamp in seconds, timezone UTC +0.00)
+        settlementAmount:
+          type: string
+          description: The settlementAmount for audit usage.
+        meta:
+          $ref: '#/components/schemas/meta'
+          description: The extra information for merchants to match payment.
+      required:
+      - id
+      - order
+      - amount
+      - reason
+      - status
+      - open
+      - responseDueBy
+      - createdAt
+      - openingNote
+      - closingReason
+      - merchantOrderId
+      - transactionDate
+      - settlementAmount
+      description: Dispute object
+      title: dispute
+    retrieve-dispute_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/dispute'
+          description: An array of dispute objects that match the filter criteria in the request.
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+      title: retrieve-dispute_Response_200
+    GrantApprovalRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: This property is optional when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay approval flow.
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: GrantApprovalRequestMerchant
+    GrantStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      title: GrantStartRequest
+    GrantStartResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying the grant to be created
+        requestId:
+          type: string
+          description: The unique identifier from the request
+        expiresAt:
+          type: string
+          format: date-time
+          description: When this link attempt will expire
+        deliveryType:
+          $ref: '#/components/schemas/GrantStartResponseDeliveryType'
+          description: How the verification code was delivered to the consumer
+      required:
+      - token
+      - requestId
+      - expiresAt
+      - deliveryType
+      title: GrantStartResponse
+    GrantStartResponseDeliveryType:
+      type: string
+      enum:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: GrantStartResponseDeliveryType
+    GrantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CANCELLED
+      description: Current status of the grant
+      title: GrantStatus
+    GrantResponse:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      title: GrantResponse
+    GrantApprovalRequest:
+      type: object
+      properties:
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantApprovalType'
+          description: Grant type for approval (only single grant is supported)
+        merchant:
+          $ref: '#/components/schemas/GrantApprovalRequestMerchant'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the grant
+      required:
+      - grants
+      - merchant
+      title: GrantApprovalRequest
+    GrantAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the grant alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      title: GrantAliasResponse
+    Grant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique id identifying the grant
+        type:
+          $ref: '#/components/schemas/GrantType'
+          description: Type of grant
+        status:
+          $ref: '#/components/schemas/GrantStatus'
+          description: Current status of the grant
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the grant was created
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Merchant's reference for this grant
+        cancelled:
+          type: string
+          format: date-time
+          description: If present, indicates when the grant was cancelled
+        expires:
+          type: string
+          format: date-time
+          description: If present, indicates when the grant's status will become EXPIRED, preventing a client from using it to create payments
+        consumerReference:
+          type:
+          - string
+          - 'null'
+          description: Reference identifier for the consumer
+        email:
+          type:
+          - string
+          - 'null'
+          description: Masked email address of the consumer
+        requestId:
+          type:
+          - string
+          - 'null'
+          description: If present, unique identifier for the request
+      required:
+      - id
+      - type
+      - status
+      - created
+      title: Grant
+    GrantAliasRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token of the grant to create an alias for
+        duration:
+          type:
+          - string
+          - 'null'
+          format: duration
+          description: Duration of the grant in ISO-8601 period format
+      required:
+      - token
+      title: GrantAliasRequest
+    GrantApprovalResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying this grant approval request
+        expires:
+          type: string
+          format: date-time
+          description: When this approval request expires
+        redirectCheckoutUrl:
+          type: string
+          format: uri
+          description: URL where the consumer should be redirected to complete approval
+      required:
+      - token
+      - expires
+      - redirectCheckoutUrl
+      title: GrantApprovalResponse
+    GrantType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Type of grant
+      title: GrantType
+    GrantApprovalType:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GrantApprovalTypeType'
+          description: Grant Type for approval.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: A merchant-provided reference for the grant.
+      required:
+      - type
+      description: Details about the grant to be created.
+      title: GrantApprovalType
+    CreateGrantRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
+        code:
+          type: string
+          description: 'The one-time code received from the consumer.
+
+            Note: The code will only be sent with the headless integration.'
+      required:
+      - requestId
+      - token
+      title: CreateGrantRequest
+    GrantApprovalTypeType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Grant Type for approval.
+      title: GrantApprovalTypeType
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    RetrieveGrantRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: ID of the customer that approved the customer grant.
+        grantId:
+          type: string
+          description: ID of the customer grant to retrieve.
+      required:
+      - customerId
+      - grantId
+      title: RetrieveGrantRequest
+    Retrieve-grantRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Retrieve-grantRequestUnauthorizedError
+    CashGrantDetails:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/CashGrantDetailsStatus'
+          description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+            If `ACTIVE`, it can be used to perform the action.
+
+
+            If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+            If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+            If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+            '
+        cashapp:
+          $ref: '#/components/schemas/CashGrantDetailsCashapp'
+        createdAt:
+          type: string
+          description: When this grant was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updatedAt:
+          type: string
+          description: When this grant was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        expiresAt:
+          type: string
+          description: 'If present, indicates when the grant''s status will become EXPIRED, preventing a client from using it to create payments or refunds.
+
+
+            The timestamp is in the [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+            '
+      required:
+      - status
+      - cashapp
+      - createdAt
+      - updatedAt
+      - expiresAt
+      title: CashGrantDetails
+    CashGrant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this grant issued by Cash App.
+        intent:
+          $ref: '#/components/schemas/CashGrantIntent'
+          description: Either ON_FILE or ONE_TIME
+        type:
+          $ref: '#/components/schemas/CashGrantType'
+          description: CASHAPP for all Cash App Pay transactions
+        details:
+          $ref: '#/components/schemas/CashGrantDetails'
+      required:
+      - id
+      - intent
+      - type
+      - details
+      description: Describes a grant provided by Cash App.
+      title: CashGrant
+    CashGrantDetailsCashapp:
+      type: object
+      properties:
+        customerId:
+          type: string
+        cashtag:
+          type: string
+          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
+      required:
+      - customerId
+      - cashtag
+      title: CashGrantDetailsCashapp
+    CashGrantDetailsStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - EXPIRED
+      - CONSUMED
+      - REVOKED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+        '
+      title: CashGrantDetailsStatus
+    CashGrantIntent:
+      type: string
+      enum:
+      - ON_FILE
+      - ONE_TIME
+      description: Either ON_FILE or ONE_TIME
+      title: CashGrantIntent
+    retrieve-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: retrieve-grant_Response_200
+    Revoke-grantRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Revoke-grantRequestUnauthorizedError
+    revoke-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: revoke-grant_Response_200
+    Retrieve-grantRequestForbiddenError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Retrieve-grantRequestForbiddenError
+    Revoke-grantRequestForbiddenError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Revoke-grantRequestForbiddenError
+    CreateOrderResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentSchedule'
+          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
+      required:
+      - token
+      - expires
+      title: CreateOrderResponse
+    Initiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/InitiationActor'
+          description: The party who initiated the order
+      required:
+      - actor
+      title: Initiation
+    OrderRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          description: A unique identifier for the request, used for idempotency
+        grantId:
+          type: string
+          description: ID of the grant used to create this order
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: The total amount of the order
+        enrichments:
+          $ref: '#/components/schemas/Enrichments'
+          description: Describes additional fields beyond core payment information.
+        autopay:
+          type: boolean
+          description: Experimental. Indicates whether autopay should be enabled for the order.
+        paymentScheduleType:
+          $ref: '#/components/schemas/OrderRequestPaymentScheduleType'
+          description: The payment schedule type for the order.
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        merchantReference:
+          type: string
+          description: The reference/order ID in the merchant's system
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+          description: The shipping cost amount
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+          description: The tax amount
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+      required:
+      - requestId
+      - grantId
+      - amount
+      - enrichments
+      title: OrderRequest
+    SubscriptionInterval:
+      type: string
+      enum:
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      title: SubscriptionInterval
+    OrderRequestPaymentScheduleType:
+      type: string
+      enum:
+      - DEFAULT
+      description: The payment schedule type for the order.
+      title: OrderRequestPaymentScheduleType
+    SubscriptionType:
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+      title: SubscriptionType
+    Enrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+          description: Who initiated the order
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+          description: Metadata on the subscription details
+      required:
+      - initiation
+      title: Enrichments
+    Subscription:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubscriptionType'
+        interval:
+          $ref: '#/components/schemas/SubscriptionInterval'
+        intervalCount:
+          type: integer
+      title: Subscription
+    InitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The party who initiated the order
+      title: InitiationActor
+    CreateRefund:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique ID required for safe retries. Max length 64 (varchar).
+        amount:
+          $ref: '#/components/schemas/Money'
+        merchantReference:
+          type: string
+          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
+        refundMerchantReference:
+          type: string
+          description: A unique reference for the individual refund event. Max length 128 (varchar).
+      description: "To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records\n\nUnique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request. \n\nThe `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as \"Payment Event Id\". In most cases, this would hold the same value as the `merchantReference`.\n"
+      title: CreateRefund
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents:
+      type: object
+      properties: {}
+      description: Event list for for merchant's order. See Events.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents
+    CapturePayment:
+      type: object
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          description: A unique request ID, required for idempotent retries.
+        merchantReference:
+          type: string
+          description: 'The reference/order ID that this payment corresponds to in the merchant''s system.
+
+
+            Note: Providing a new value updates any value previously set in the Create Checkout request.'
+        amount:
+          $ref: '#/components/schemas/Money'
+        paymentEventMerchantReference:
+          type: string
+          description: 'A unique reference for the individual payment capture event. If provided, the value appears in the daily settlement file as "Payment Event ID"
+
+            '
+      title: CapturePayment
+    update-payment-by-order-id_Response_201:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique Afterpay (merchant payment) payment ID.
+        token:
+          type: string
+          description: Checkout token to be used to complete customer checkout and payment.
+        status:
+          type: string
+          description: \"APPROVED" (update is only valid for successful orders)
+        created:
+          description: The payment creation time [ISO 8601 UTC/Zulu time](https://www.iso.org/iso-8601-date-and-time-format.html).
+        originalAmount:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount'
+          description: Total amount for the order. See Money.
+        openToCaptureAmount:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount'
+          description: Total amount that can be captured for order. See Money.
+        paymentState:
+          type: string
+          description: 'Available states: "AUTH_APPROVED", "CAPTURED", "VOIDED", "EXPIRED", "AUTH_DECLINED", "PARTIALLY_CAPTURED", "CAPTURE_DECLINED""'
+        merchantReference:
+          description: Any type
+        refunds:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds'
+          description: The refund details for merchant's order. See Refund.
+        orderDetails:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails'
+          description: The order bound to the payment. See Order Details.
+        events:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents'
+          description: Event list for for merchant's order. See Events.
+      title: update-payment-by-order-id_Response_201
+    V2PaymentsOrderIdCourierPutParametersAccept:
+      type: string
+      enum:
+      - application/json
+      title: V2PaymentsOrderIdCourierPutParametersAccept
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount:
+      type: object
+      properties: {}
+      description: Total amount for the order. See Money.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount
+    reverse-payment-by-token_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: reverse-payment-by-token_Response_204
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount:
+      type: object
+      properties: {}
+      description: Total amount that can be captured for order. See Money.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails:
+      type: object
+      properties: {}
+      description: The order bound to the payment. See Order Details.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails
+    AuthorizePayment:
+      type: object
+      properties:
+        requestid:
+          type: string
+          format: uuid
+          description: A unique request ID, required for idempotent retries. We recommend that merchants generate a Universally Unique Identifier (UUID) for each unique request.
+        token:
+          type: string
+        merchantReference:
+          type: string
+          description: 'The reference/order ID that this payment corresponds to in the merchant''s system.
+
+
+            **Note:** Providing a new value updates any value previously set in the Create Checkout request.'
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: '**Required for express checkout only.** Amount to be checked against the value in the create checkout request. If the amounts do not match, then the request is rejected and an error specific to this scenario is returned.'
+        isCheckoutAdjusted:
+          type: boolean
+          description: '**Express checkout only.** The isCheckoutAdjusted field can be used to allow the order amount to be changed after the checkout flow. Used for express checkout.'
+        paymentScheduleChecksum:
+          type: string
+          description: '**Express checkout only.** A unique value representing the payment schedule that must be provided when there has been changes since the initial order creation (retrieved from checkout widget).'
+        items:
+          type: array
+          items:
+            description: Any type
+          description: '**Express checkout only.** An array of order items that have been updated to be provided if it has changed since the initial order creation.'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+          description: '**Express checkout only.** The shipping address if it has changed since the initial order creation.'
+        enrichments:
+          $ref: '#/components/schemas/Enrichments'
+        grantId:
+          type: string
+          description: The Afterpay or Cash App Pay on-file grant ID. Required when processing a payment using a previously stored on-file grant.
+      required:
+      - token
+      title: AuthorizePayment
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds:
+      type: object
+      properties: {}
+      description: The refund details for merchant's order. See Refund.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds
+    list-payments_Response_200:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+        offset:
+          type: integer
+          description: The offer of the pagination
+        limit:
+          type: integer
+          description: The number of payments to include in the results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+      title: list-payments_Response_200
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-refined-from:
+- cash-app-billing-agreements-deprecated-openapi.json
+- cash-app-checkouts-openapi.json
+- cash-app-configuration-openapi.json
+- cash-app-disputes-openapi.json
+- cash-app-grants-afterpay-openapi.json
+- cash-app-grants-cash-app-pay-openapi.json
+- cash-app-orders-openapi.json
+- cash-app-payments-openapi.json
+- cash-app-service-status-openapi.json

@@ -1,0 +1,608 @@
+openapi: 3.2.0
+info:
+  title: Network Payouts API
+  version: 1.0.0
+servers:
+- url: https://api.cash.app/network/v1
+  description: Production
+- url: https://sandbox.api.cash.app/network/v1
+  description: Sandbox
+tags:
+- name: payouts
+paths:
+  /payouts:
+    get:
+      operationId: list-payouts
+      summary: List payouts
+      description: '<Warning title="Early Access" icon="robot-astromech">
+
+        Payouts is an **early access** feature. We''re actively improving this API based on your feedback.
+
+
+        Early access features come with some caveats:
+
+
+        * May evolve rapidly, requiring integration updates
+
+        * Not subject to our 10 year version support policy
+
+        * Not subject to SLAs (unless specified in a contract)
+
+        </Warning>
+
+
+        Returns a list of payouts matching the given query parameters.
+
+
+        **This endpoint is rate limited to 100 QPS.**
+
+
+        Scopes: `PAYOUTS_READ`'
+      tags:
+      - payouts
+      parameters:
+      - name: cursor
+        in: query
+        description: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query.
+        required: false
+        schema:
+          type: string
+      - name: merchant_id
+        in: query
+        description: Filters results to include only payouts made to a merchant that matches the given ID.
+        required: false
+        schema:
+          type: string
+      - name: customer_id
+        in: query
+        description: Filters results to include only payouts made to a customer that matches the given ID.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of payouts to return.
+        required: false
+        schema:
+          type: integer
+          default: 50
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payouts_list-payouts_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-payout
+      summary: Create payout
+      description: '<Warning title="Early Access" icon="robot-astromech">
+
+        Payouts is an **early access** feature. We''re actively improving this API based on your feedback.
+
+
+        Early access features come with some caveats:
+
+
+        * May evolve rapidly, requiring integration updates
+
+        * Not subject to our 10 year version support policy
+
+        * Not subject to SLAs (unless specified in a contract)
+
+        </Warning>
+
+
+        Creates a payout to a customer. A payout allows a merchant to send money to a customer''s Cash App account.
+
+
+        **This endpoint is not rate-limited.**
+
+
+        Scopes: `PAYOUTS_WRITE`'
+      tags:
+      - payouts
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payouts_create-payout_Response_201'
+        '400':
+          description: "Bad Request\n\nIf a `PAYOUT_DECLINE_*` error is returned, the payout will still be created, but with a `DECLINED` status. This payout will then appear in the response payload.\n\n<Note>\n**`PAYOUT_DECLINE_*` errors consume one-time use grants.**\n This means you must repeat the Customer Request flow to get a new grant if you want to try taking the payout again. All other errors will not consume grants.\n </Note>"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-payoutRequestBadRequestError'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idempotency_key:
+                  $ref: '#/components/schemas/IdempotencyKey'
+                payout:
+                  $ref: '#/components/schemas/PayoutsPostRequestBodyContentApplicationJsonSchemaPayout'
+                  description: Data about the payout to create.
+              required:
+              - idempotency_key
+              - payout
+  /payouts/{payout_id}:
+    get:
+      operationId: retrieve-payout
+      summary: Retrieve payout
+      description: '<Warning title="Early Access" icon="robot-astromech">
+
+        Payouts is an **early access** feature. We''re actively improving this API based on your feedback.
+
+
+        Early access features come with some caveats:
+
+
+        * May evolve rapidly, requiring integration updates
+
+        * Not subject to our 10 year version support policy
+
+        * Not subject to SLAs (unless specified in a contract)
+
+        </Warning>
+
+
+        Retrieves a payout by its ID.
+
+
+        **This endpoint is not rate-limited.**
+
+
+        Scopes: `PAYOUTS_READ`'
+      tags:
+      - payouts
+      parameters:
+      - name: payout_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payouts_retrieve-payout_Response_200'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrieve-payoutRequestNotFoundError'
+components:
+  schemas:
+    PayoutStatus:
+      type: string
+      enum:
+      - CAPTURED
+      - DECLINED
+      - AUTHORIZED
+      - INITIATED
+      description: 'The step of the payout processing lifecycle that this payout is currently at.
+
+
+        - `CAPTURED` - Payout is captured and funds have been sent
+
+        - `DECLINED` - Payout was declined
+
+        - `AUTHORIZED` - Payout is authorized but not yet captured
+
+        - `INITIATED` - Payout has been created but no money movement has happened yet'
+      title: PayoutStatus
+    Payouts_retrieve-payout_Response_200:
+      type: object
+      properties:
+        payout:
+          $ref: '#/components/schemas/Payout'
+      required:
+      - payout
+      title: Payouts_retrieve-payout_Response_200
+    Retrieve-payoutRequestNotFoundError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      required:
+      - errors
+      title: Retrieve-payoutRequestNotFoundError
+    Create-payoutRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors indicating why the request failed.
+
+
+            Min number of items: `1`'
+        payout:
+          $ref: '#/components/schemas/Payout'
+      required:
+      - errors
+      title: Create-payoutRequestBadRequestError
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Payout:
+      type: object
+      properties:
+        payout_id:
+          type: string
+          description: 'Unique identifier for this payout issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        grant_id:
+          type: string
+          description: 'ID of the grant used to create this payout.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        amount:
+          type: integer
+          description: 'The amount of money to pay, in the lowest denomination of currency on the payout. This is the _original_ amount authorized when the payout was created.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        status:
+          $ref: '#/components/schemas/PayoutStatus'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant that made this payout.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        customer_id:
+          type: string
+          description: 'ID of the customer that received this payout.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        purpose:
+          $ref: '#/components/schemas/PayoutPurpose'
+        authorized_amount:
+          type: integer
+          description: 'The amount of money on this payout that has been authorized. The amount will be in the lowest denomination of the currency on the payout.
+
+
+            Min value: `0`'
+        captured_amount:
+          type: integer
+          description: 'The amount of money on this payout that has been allocated for settlement. The amount will be in the lowest denomination of the currency on the payout.
+
+
+            Min value: `0`'
+        declined_amount:
+          type: integer
+          description: 'The amount of money on this payout that was declined. The amount will be in the lowest denomination of the currency on the payout.
+
+
+            Min value: `0`'
+        voided_amount:
+          type: integer
+          description: 'The amount of money on this payout that is no longer authorized and has been released. The amount will be in the lowest denomination of the currency on the payout.
+
+
+            Min value: `0`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this payout, typically used to associate the payout with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        fee_amount:
+          type: number
+          format: double
+          description: The total fee amount that was charged to the merchant for processing this payout.
+        fee_rate:
+          $ref: '#/components/schemas/FeeRate'
+          description: The breakdown of the fee that was charged to the merchant for processing this payout.
+        note:
+          type: string
+          description: 'A note about the payout that will be shown to the customer.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        decline_errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'If the payout was declined, contains a list of the reasons why it was declined.
+
+
+            Min number of items: `1`'
+      required:
+      - payout_id
+      - grant_id
+      - amount
+      - currency
+      - status
+      - merchant_id
+      - purpose
+      title: Payout
+    Payouts_list-payouts_Response_200:
+      type: object
+      properties:
+        payouts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payout'
+          description: List of payouts matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - payouts
+      title: Payouts_list-payouts_Response_200
+    FeeRate:
+      type: object
+      properties:
+        basis_points:
+          type: integer
+          description: The variable fee charged for processing the payment expressed as 1/100th of a percentage.
+        fixed_amount:
+          type: integer
+          description: "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
+      description: A fee rate contains the components of a fee charged by Cash App to partners for a given payment.
+      title: FeeRate
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    PayoutsPostRequestBodyContentApplicationJsonSchemaPayout:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'The amount of money to pay the customer, in the lowest denomination of currency for the payout.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant making the payout.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        grant_id:
+          type: string
+          description: 'A grant ID from the Customer Request API that indicates permission to make the payout.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        purpose:
+          $ref: '#/components/schemas/PayoutPurpose'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this payout, typically used to associate the payout with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        capture:
+          type: boolean
+          default: true
+          description: 'Whether or not to automatically capture the payout once it''s created. Must be true until authorization and void payout states are supported.
+
+
+            Default: `true`'
+        note:
+          type: string
+          description: 'A note about the payout that will be shown to the customer.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - amount
+      - currency
+      - merchant_id
+      - grant_id
+      - purpose
+      - capture
+      - note
+      description: Data about the payout to create.
+      title: PayoutsPostRequestBodyContentApplicationJsonSchemaPayout
+    Payouts_create-payout_Response_201:
+      type: object
+      properties:
+        payout:
+          $ref: '#/components/schemas/Payout'
+      title: Payouts_create-payout_Response_201
+    PayoutPurpose:
+      type: string
+      enum:
+      - SERVICES
+      description: The purpose or intent of the payout.
+      title: PayoutPurpose
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey

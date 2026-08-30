@@ -1,0 +1,313 @@
+openapi: 3.2.0
+info:
+  title: Network Balances API
+  version: 1.0.0
+servers:
+- url: https://api.cash.app/network/v1
+  description: Production
+- url: https://sandbox.api.cash.app/network/v1
+  description: Sandbox
+tags:
+- name: balances
+paths:
+  /balances:
+    get:
+      operationId: list-balances
+      summary: List balances
+      description: '<Warning title="Beta" icon="robot-astromech">
+
+        Balances is a **beta** feature. We''re actively improving this API based on your feedback.
+
+        </Warning>
+
+
+        Returns a list of balances for a customer matching the given query parameters.
+
+
+        Scopes: `BALANCES_READ`'
+      tags:
+      - balances
+      parameters:
+      - name: customer_id
+        in: query
+        description: ID of the customer whose balances will be listed.
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: The type of balances to list.
+        required: true
+        schema:
+          $ref: '#/components/schemas/BalancesGetParametersType'
+      - name: grant_id
+        in: query
+        description: ID of the grant that authorizes reading the customer's balances. This grant is created when a customer approves a `CHECKING_BALANCE` action in the Customer Request API.
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of balances to return.
+        required: false
+        schema:
+          type: integer
+          default: 50
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balances_list-balances_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /balances/{balance_id}:
+    get:
+      operationId: retrieve-balance
+      summary: Retrieve balance
+      description: '<Warning title="Beta" icon="robot-astromech">
+
+        Balances is a **beta** feature. We''re actively improving this API based on your feedback.
+
+        </Warning>
+
+
+        Retrieves a balance by its ID.
+
+
+        Scopes: `BALANCES_READ`'
+      tags:
+      - balances
+      parameters:
+      - name: balance_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: grant_id
+        in: query
+        description: ID of the grant that authorizes reading the customer's balances. This grant is created when a customer approves a `CHECKING_BALANCE` action in the Customer Request API.
+        required: false
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Balances_retrieve-balance_Response_200'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrieve-balanceRequestNotFoundError'
+components:
+  schemas:
+    Balances_list-balances_Response_200:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+          description: List of balances matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - balances
+      title: Balances_list-balances_Response_200
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Retrieve-balanceRequestNotFoundError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      required:
+      - errors
+      title: Retrieve-balanceRequestNotFoundError
+    BalancesGetParametersType:
+      type: string
+      enum:
+      - CHECKING
+      title: BalancesGetParametersType
+    BalanceType:
+      type: string
+      enum:
+      - CHECKING
+      description: The type of balance.
+      title: BalanceType
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Balances_retrieve-balance_Response_200:
+      type: object
+      properties:
+        balance:
+          $ref: '#/components/schemas/Balance'
+      required:
+      - balance
+      title: Balances_retrieve-balance_Response_200
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    Balance:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this balance issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        customer_id:
+          type: string
+          description: 'ID of the customer associated with this balance.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        type:
+          $ref: '#/components/schemas/BalanceType'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        amount:
+          type: integer
+          description: The balance amount, in the lowest denomination of the currency (for example, cents for USD).
+        created_at:
+          type: string
+          format: date-time
+          description: When this balance was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this balance was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+      required:
+      - id
+      - customer_id
+      - type
+      - currency
+      - amount
+      title: Balance

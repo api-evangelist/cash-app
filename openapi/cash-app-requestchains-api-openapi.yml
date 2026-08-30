@@ -1,0 +1,308 @@
+openapi: 3.2.0
+info:
+  title: Management Request Chains API
+  version: 1.0.0
+servers:
+- url: https://api.cash.app/management/v1
+  description: Production
+- url: https://sandbox.api.cash.app/management/v1
+  description: Sandbox
+tags:
+- name: requestChains
+paths:
+  /request-chains:
+    post:
+      operationId: create-request-chain
+      summary: Create request chain
+      description: 'Executes multiple requests, grouped into "chains", in a single call. The API Client (Client) can use multiple chains and specify sub-requests within each chain to run sequentially or in parallel. However the chains, themselves, will only run sequentially.
+
+
+        ### Accessing a previous response''s value
+
+
+        Clients can access a previous response''s value by using the format: `$[previous request''s uid]:[key path]`. Clients can use this in the value fields of:
+
+        - `requests[].body`
+
+        - `requests[].path_params`
+
+        - `requests[].query_params`
+
+
+        The request''s path `requests[].path` has an extra step to access a previous response''s value. In the request''s path, the Client will first refer to a key in the `requests[].path_params` field using the format: `{[path_params key name]}`. From there `requests[].path_params` can use the pattern described in **Accessing a previous response''s value** to obtain a previous response''s value.
+
+
+        <Warning>
+
+        The initial security headers will be passed to all requests.
+
+
+        Scopes are not required for this endpoint. However, the API key must contain the appropriate scopes required by the individual requests to execute.
+
+        </Warning>
+
+
+        For FAQs and performance improvement details, visit [Optimizing Performance with Request Chaining](../docs/partner-onboarding/optimizing-performance-with-request-chaining.md).
+
+        '
+      tags:
+      - requestChains
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/requestChains_create-request-chain_Response_201'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requests:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems'
+                  description: Requests to execute
+                chains:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems'
+                  description: Chains control the order and execution modes of requests
+              required:
+              - requests
+              - chains
+components:
+  schemas:
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod:
+      type: string
+      enum:
+      - GET
+      - POST
+      - PATCH
+      - PUT
+      - DELETE
+      description: HTTP method of the request
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier for the request
+        method:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod'
+          description: HTTP method of the request
+        path:
+          type: string
+          description: URL path to call. Use format `{path_params key name}` to add variable path parameters.
+        path_params:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams'
+          description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
+        query_params:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams'
+          description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
+        body:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody'
+          description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
+      required:
+      - uid
+      - method
+      - path
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody:
+      type: object
+      properties: {}
+      description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody
+    ResponseMethod:
+      type: string
+      enum:
+      - GET
+      - POST
+      - PATCH
+      - PUT
+      - DELETE
+      description: HTTP method of the request
+      title: ResponseMethod
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. See the Error Code Reference for more information.
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    requestChains_create-request-chain_Response_201:
+      type: object
+      properties:
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Response'
+      required:
+      - responses
+      title: requestChains_create-request-chain_Response_201
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode:
+      type: string
+      enum:
+      - SEQUENTIAL
+      - PARALLEL
+      description: Execution mode of the requests in a chain
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams:
+      type: object
+      properties: {}
+      description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier for the request to execute
+      required:
+      - uid
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams:
+      type: object
+      properties: {}
+      description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams
+    Response:
+      type: object
+      properties:
+        request_uid:
+          type: string
+          description: Unique identifier for the request
+        execution_status:
+          $ref: '#/components/schemas/ResponseExecutionStatus'
+          description: Execution status of the request
+        path:
+          type: string
+          description: URL path that was called
+        method:
+          $ref: '#/components/schemas/ResponseMethod'
+          description: HTTP method of the request
+        status_code:
+          type: integer
+          description: Status code of the request
+        body:
+          $ref: '#/components/schemas/ResponseBody'
+          description: Response body of the requested endpoint
+        completed_at:
+          type: string
+          format: date-time
+          description: When the request was completed, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+      required:
+      - request_uid
+      - execution_status
+      - path
+      - method
+      title: Response
+    ResponseExecutionStatus:
+      type: string
+      enum:
+      - EXECUTED
+      - NOT_STARTED
+      description: Execution status of the request
+      title: ResponseExecutionStatus
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred
+      title: ErrorCategory
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems'
+        execution_mode:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode'
+          description: Execution mode of the requests in a chain
+      required:
+      - requests
+      - execution_mode
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems
+    ResponseBody:
+      type: object
+      properties: {}
+      description: Response body of the requested endpoint
+      title: ResponseBody

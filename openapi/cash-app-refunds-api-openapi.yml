@@ -1,0 +1,685 @@
+openapi: 3.2.0
+info:
+  title: Network Refunds API
+  version: 1.0.0
+servers:
+- url: https://api.cash.app/network/v1
+  description: Production
+- url: https://sandbox.api.cash.app/network/v1
+  description: Sandbox
+tags:
+- name: refunds
+paths:
+  /refunds:
+    get:
+      operationId: list-refunds
+      summary: List refunds
+      description: 'Returns a list of refunds matching the given query parameters.
+
+
+        **This endpoint is rate limited to 100 QPS.**
+
+
+        Scopes: `REFUNDS_READ`'
+      tags:
+      - refunds
+      parameters:
+      - name: cursor
+        in: query
+        description: A pagination cursor returned by a previous call to this endpoint. Provide this cursor to retrieve the next set of results for the original query.
+        required: false
+        schema:
+          type: string
+      - name: reference_id
+        in: query
+        description: Filters results to only include refunds with a `reference_id` matching the given value.
+        required: false
+        schema:
+          type: string
+      - name: customer_id
+        in: query
+        description: Filters results to only include refunds made to a customer that matches the the given ID.
+        required: false
+        schema:
+          type: string
+      - name: merchant_id
+        in: query
+        description: Filters results to only include refunds made by a merchant that matches the given ID.
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of refunds to return.
+        required: false
+        schema:
+          type: integer
+          default: 50
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds_list-refunds_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: create-refund
+      summary: Create refund
+      description: "Creates a refund from a merchant to a customer.\n\n- To issue a refund, provide a `payment_id` in the request. \n\nThe grant must be associated with the `ON_FILE_PAYMENT` actions.\n\nTo generate a grant to pass to this field, use the Customer Request API.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+      tags:
+      - refunds
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds_create-refund_Response_200'
+        '400':
+          description: "Bad Request\n\nIf a `REFUND_DECLINE_*` error is returned, the refund will still be created, but with a `DECLINED` status. This refund will then appear in the response payload.\n\n<Note> \n**`REFUND_DECLINE_*` errors consume one-time use grants.**\n This means you must repeat the Customer Request flow to get a new grant if you want to try issuing\n the refund again. All other errors will not consume grants.\n</Note>"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Create-refundRequestBadRequestError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idempotency_key:
+                  $ref: '#/components/schemas/IdempotencyKey'
+                refund:
+                  $ref: '#/components/schemas/RefundsPostRequestBodyContentApplicationJsonSchemaRefund'
+                  description: Details about the refund to create.
+              required:
+              - idempotency_key
+              - refund
+  /refunds/{refund_id}:
+    get:
+      operationId: retrieve-refund
+      summary: Retrieve refund
+      description: 'Retrieves a refund by its ID.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `REFUNDS_READ`'
+      tags:
+      - refunds
+      parameters:
+      - name: refund_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds_retrieve-refund_Response_200'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /refunds/{refund_id}/capture:
+    post:
+      operationId: capture-refund
+      summary: Capture refund
+      description: 'Finalizes a refund so that it can be allocated in the next nightly settlement batch.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `REFUNDS_WRITE`'
+      tags:
+      - refunds
+      parameters:
+      - name: refund_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds_capture-refund_Response_200'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idempotency_key:
+                  $ref: '#/components/schemas/IdempotencyKey'
+              required:
+              - idempotency_key
+  /refunds/{refund_id}/void:
+    post:
+      operationId: void-refund
+      summary: Void refund
+      description: "Moves an authorized refund to the voided state and removes the \"pending refund\" screen from a customer's Cash App account.\n\n<Note> \nYou can only void an authorized refund.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+      tags:
+      - refunds
+      parameters:
+      - name: refund_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds_void-refund_Response_200'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /refunds/void-by-idempotency-key:
+    post:
+      operationId: void-refund-by-idempotency-key
+      summary: Void refund by idempotency key
+      description: "Moves an authorized refund to the voided state using the idempotency key specified while creating the refund.\n\n<Note> \nYou can only void an authorized refund. If a refund is captured, there is no way to reverse it.\n</Note>\n\nIn rare cases, an issue with an integration, network connectivity, or the Cash App Pay API may cause an API client to end up in a state where a refund is created in Cash App Pay, but the API client doesn't know the ID of the refund. This endpoint allows an API client to void a refund using _only_ the idempotency key to recover from these situations.\n\nIf you don't have the idempotency key or ID of the refund you want to void, you can use the [list refunds](Network-API.v1.yaml/paths/~1refunds/get) endpoint to try to search for the refund you're looking for.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+      tags:
+      - refunds
+      parameters:
+      - name: Accept
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Region
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Signature
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds_void-refund-by-idempotency-key_Response_200'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idempotency_key:
+                  $ref: '#/components/schemas/IdempotencyKey'
+              required:
+              - idempotency_key
+components:
+  schemas:
+    RefundsPostRequestBodyContentApplicationJsonSchemaRefund:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'The amount of money to refund the customer, in the lowest denomination of currency for the refund.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant to make the refund from.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        payment_id:
+          type: string
+          description: 'For refunds, this is the ID of the payment to refund.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        capture:
+          type: boolean
+          default: true
+          description: 'Whether or not to automatically capture the refund once it''s created.
+
+
+            Default: `true`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - amount
+      - currency
+      - merchant_id
+      description: Details about the refund to create.
+      title: RefundsPostRequestBodyContentApplicationJsonSchemaRefund
+    Refunds_retrieve-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_retrieve-refund_Response_200
+    Refunds_void-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_void-refund_Response_200
+    RefundStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - DECLINED
+      description: 'The step of the refund processing lifecycle that this refund is currently at.
+
+
+        - `AUTHORIZED`
+
+        - `CAPTURED`
+
+        - `VOIDED`
+
+        - `DECLINED`'
+      title: RefundStatus
+    Refunds_capture-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_capture-refund_Response_200
+    Refunds_create-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_create-refund_Response_200
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Refunds_list-refunds_Response_200:
+      type: object
+      properties:
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+          description: List of refunds matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - refunds
+      title: Refunds_list-refunds_Response_200
+    Refund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this refund issued by Cash App.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        amount:
+          type: integer
+          description: 'Amount of money to refund, in the lowest denomination of currency on the refund.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        customer_id:
+          type: string
+          description: 'ID of the customer that received this refund.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant that issued this refund.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        status:
+          $ref: '#/components/schemas/RefundStatus'
+          description: 'The step of the refund processing lifecycle that this refund is currently at.
+
+
+            - `AUTHORIZED`
+
+            - `CAPTURED`
+
+            - `VOIDED`
+
+            - `DECLINED`'
+        created_at:
+          type: string
+          format: date-time
+          description: When this refund was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updated_at:
+          type: string
+          format: date-time
+          description: When this refund was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        grant_id:
+          type: string
+          description: 'This is currently unused and empty.
+
+
+            Min length: `1`
+
+            Max length: `256`'
+        payment_id:
+          type: string
+          description: 'This is currently unused and empty.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        decline_errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'If the refund was declined, contains a list of the reasons why it was declined.
+
+
+            Min number of items: `1`'
+      required:
+      - id
+      - amount
+      - currency
+      - customer_id
+      - merchant_id
+      - status
+      - created_at
+      - updated_at
+      title: Refund
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Refunds_void-refund-by-idempotency-key_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_void-refund-by-idempotency-key_Response_200
+    Create-refundRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: A list of errors that occurred while processing the request.
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - errors
+      title: Create-refundRequestBadRequestError
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey

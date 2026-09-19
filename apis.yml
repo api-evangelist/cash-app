@@ -514,6 +514,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - Network APIs
+  tags_raw:
   - Network API
   properties:
   - type: OpenAPI
@@ -826,6 +828,8 @@ apis:
   humanURL: https://developers.cash.app/cash-app-pay-partner-api/api-reference/network-api
   baseURL: https://api.cash.app/network/v1
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI

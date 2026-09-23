@@ -8,7 +8,7 @@ servers:
 - url: https://sandbox.api.cash.app/network/v1
   description: Sandbox
 tags:
-- name: brands
+- name: Brands
 paths:
   /brands:
     get:
@@ -22,7 +22,7 @@ paths:
 
         Scopes: `BRANDS_READ`'
       tags:
-      - brands
+      - Brands
       parameters:
       - name: cursor
         in: query
@@ -87,7 +87,7 @@ paths:
 
         Scopes: `BRANDS_WRITE`'
       tags:
-      - brands
+      - Brands
       parameters:
       - name: Accept
         in: header
@@ -140,9 +140,32 @@ paths:
     put:
       operationId: upsert-brand
       summary: Upsert brand
-      description: "Creates or updates a brand based on the brand's `reference_id`.\n\nIf a brand with a matching `reference_id` is found, \nit will be updated. Ensure proper mapping; if no matching brand is found, \na new one will be created. \n\nThe HTTP response code (`200 OK` or `201 Created`) indicates\nwhether the resource was updated or created, respectively.\n\n<Note>\n\n `brand_id` is the primary unique identifier for all Brand APIs.\n Be cautious when using `reference_id` as a unique identifier. \n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `BRANDS_WRITE`"
+      description: 'Creates or updates a brand based on the brand''s `reference_id`.
+
+
+        If a brand with a matching `reference_id` is found,
+
+        it will be updated. Ensure proper mapping; if no matching brand is found,
+
+        a new one will be created.
+
+
+        The HTTP response code (`200 OK` or `201 Created`) indicates
+
+        whether the resource was updated or created, respectively.
+
+
+        `brand_id` is the primary unique identifier for all Brand APIs.
+
+        Be cautious when using `reference_id` as a unique identifier.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `BRANDS_WRITE`'
       tags:
-      - brands
+      - Brands
       parameters:
       - name: Accept
         in: header
@@ -201,7 +224,7 @@ paths:
 
         Scopes: `BRANDS_READ`'
       tags:
-      - brands
+      - Brands
       parameters:
       - name: brand_id
         in: path
@@ -255,7 +278,7 @@ paths:
 
         Scopes: `BRANDS_WRITE`'
       tags:
-      - brands
+      - Brands
       parameters:
       - name: brand_id
         in: path
@@ -309,292 +332,6 @@ paths:
               - brand
 components:
   schemas:
-    Brands_create-brand_Response_201:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
-      title: Brands_create-brand_Response_201
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    Brands_list-brands_Response_200:
-      type: object
-      properties:
-        brands:
-          type: array
-          items:
-            $ref: '#/components/schemas/Brand'
-          description: List of brands matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - brands
-      title: Brands_list-brands_Response_200
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    Brands_upsert-brand_Response_200:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
-      title: Brands_upsert-brand_Response_200
-    BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand:
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Name of the brand to be shown in Cash App next to payments.
-
-
-            *This field cannot be cleared.*
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body).
-
-
-            *This field cannot be cleared, and must be unique across all brands.*
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        profile_image_url:
-          type: string
-          format: uri
-          description: 'URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand''s logo.
-
-
-            The image should be square and be at least 256x256. It must be less than 2MB in filesize.
-
-
-            Acceptable image formats:
-
-            - `png`
-
-            - `jpg`
-
-            - `jpeg`
-
-
-            *This field cannot be cleared.*
-
-
-            Min length: `8`
-
-            Max length: `8000`'
-        color:
-          type:
-          - string
-          - 'null'
-          description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
-
-
-            Pattern: `^#[a-fA-F0-9]{6}$`
-
-            Min length: `7`
-
-            Max length: `7`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      description: Details about the brand to update
-      title: BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand
-    Brands_retrieve-brand_Response_200:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
-      required:
-      - brand
-      title: Brands_retrieve-brand_Response_200
-    BrandsPutRequestBodyContentApplicationJsonSchemaBrand:
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Name of the brand to be shown in Cash App next to payments.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.
-
-
-            **Must be unique across all brands.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body)**
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        profile_image_url:
-          type: string
-          format: uri
-          description: 'URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand''s logo.
-
-
-            The image should be square and be at least 256x256. It must be less than 2MB in filesize.
-
-
-            Acceptable image formats:
-
-            - `png`
-
-            - `jpg`
-
-            - `jpeg`
-
-
-            Min length: `8`
-
-            Max length: `8000`'
-        color:
-          type: string
-          description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
-
-
-            Pattern: `^#[a-fA-F0-9]{6}$`
-
-            Min length: `7`
-
-            Max length: `7`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      required:
-      - name
-      - reference_id
-      description: Details about the brand to create or update.
-      title: BrandsPutRequestBodyContentApplicationJsonSchemaBrand
-    Brands_update-brand_Response_200:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
-      title: Brands_update-brand_Response_200
-    Metadata:
-      type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
-
-
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
-
-
-        Min keys: `0`
-
-        Max keys: `50`
-
-
-
-        > Note: Nested keys are not supported.'
-      title: Metadata
-    BrandsPostRequestBodyContentApplicationJsonSchemaBrand:
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Name of the brand to be shown in Cash App next to payments.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.
-
-
-            **Must be unique across all brands. Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body)**
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        profile_image_url:
-          type: string
-          format: uri
-          description: 'URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand''s logo.
-
-
-            The image should be square and be at least 256x256. It must be less than 2MB in filesize.
-
-
-            Acceptable image formats:
-
-            - `png`
-
-            - `jpg`
-
-            - `jpeg`
-
-
-            Min length: `8`
-
-            Max length: `8000`'
-        color:
-          type: string
-          description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
-
-
-            Pattern: `^#[a-fA-F0-9]{6}$`
-
-            Min length: `7`
-
-            Max length: `7`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      required:
-      - name
-      - reference_id
-      description: Details about the brand to create.
-      title: BrandsPostRequestBodyContentApplicationJsonSchemaBrand
     ErrorCategory:
       type: string
       enum:
@@ -686,7 +423,293 @@ components:
       - reference_id
       description: A brand is the entity a customer perceives that they are transacting with.
       title: Brand
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    Brands_list-brands_Response_200:
+      type: object
+      properties:
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+          description: List of brands matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - brands
+      title: Brands_list-brands_Response_200
     IdempotencyKey:
       type: string
       description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
       title: IdempotencyKey
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Brands_update-brand_Response_200:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+      title: Brands_update-brand_Response_200
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the brand to be shown in Cash App next to payments.
+
+
+            *This field cannot be cleared.*
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body).
+
+
+            *This field cannot be cleared, and must be unique across all brands.*
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        profile_image_url:
+          type: string
+          format: uri
+          description: 'URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand''s logo.
+
+
+            The image should be square and be at least 256x256. It must be less than 2MB in filesize.
+
+
+            Acceptable image formats:
+
+            - `png`
+
+            - `jpg`
+
+            - `jpeg`
+
+
+            *This field cannot be cleared.*
+
+
+            Min length: `8`
+
+            Max length: `8000`'
+        color:
+          type:
+          - string
+          - 'null'
+          description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
+
+
+            Pattern: `^#[a-fA-F0-9]{6}$`
+
+            Min length: `7`
+
+            Max length: `7`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      description: Details about the brand to update
+      title: BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand
+    BrandsPutRequestBodyContentApplicationJsonSchemaBrand:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the brand to be shown in Cash App next to payments.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.
+
+
+            **Must be unique across all brands.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body)**
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        profile_image_url:
+          type: string
+          format: uri
+          description: 'URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand''s logo.
+
+
+            The image should be square and be at least 256x256. It must be less than 2MB in filesize.
+
+
+            Acceptable image formats:
+
+            - `png`
+
+            - `jpg`
+
+            - `jpeg`
+
+
+            Min length: `8`
+
+            Max length: `8000`'
+        color:
+          type: string
+          description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
+
+
+            Pattern: `^#[a-fA-F0-9]{6}$`
+
+            Min length: `7`
+
+            Max length: `7`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - name
+      - reference_id
+      description: Details about the brand to create or update.
+      title: BrandsPutRequestBodyContentApplicationJsonSchemaBrand
+    Brands_upsert-brand_Response_200:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+      title: Brands_upsert-brand_Response_200
+    BrandsPostRequestBodyContentApplicationJsonSchemaBrand:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the brand to be shown in Cash App next to payments.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.
+
+
+            **Must be unique across all brands. Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body)**
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        profile_image_url:
+          type: string
+          format: uri
+          description: 'URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand''s logo.
+
+
+            The image should be square and be at least 256x256. It must be less than 2MB in filesize.
+
+
+            Acceptable image formats:
+
+            - `png`
+
+            - `jpg`
+
+            - `jpeg`
+
+
+            Min length: `8`
+
+            Max length: `8000`'
+        color:
+          type: string
+          description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
+
+
+            Pattern: `^#[a-fA-F0-9]{6}$`
+
+            Min length: `7`
+
+            Max length: `7`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - name
+      - reference_id
+      description: Details about the brand to create.
+      title: BrandsPostRequestBodyContentApplicationJsonSchemaBrand
+    Brands_retrieve-brand_Response_200:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+      required:
+      - brand
+      title: Brands_retrieve-brand_Response_200
+    Brands_create-brand_Response_201:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+      title: Brands_create-brand_Response_201

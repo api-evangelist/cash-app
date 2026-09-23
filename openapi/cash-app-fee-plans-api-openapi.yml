@@ -8,7 +8,7 @@ servers:
 - url: https://sandbox.api.cash.app/network/v1
   description: Sandbox
 tags:
-- name: feePlans
+- name: Fee Plans
 paths:
   /fee-plans/{fee_plan_id}:
     get:
@@ -22,7 +22,7 @@ paths:
 
         Scopes: `FEE_PLANS_READ`'
       tags:
-      - feePlans
+      - Fee Plans
       parameters:
       - name: fee_plan_id
         in: path
@@ -80,7 +80,7 @@ paths:
 
         Scopes: `FEE_PLANS_READ`'
       tags:
-      - feePlans
+      - Fee Plans
       parameters:
       - name: cursor
         in: query
@@ -148,76 +148,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Fee_Plans_retrieve-fee-plan_Response_200:
-      type: object
-      properties:
-        fee_plan:
-          $ref: '#/components/schemas/FeePlan'
-      required:
-      - fee_plan
-      title: Fee Plans_retrieve-fee-plan_Response_200
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    Fee_Plans_list-fee-plans_Response_200:
-      type: object
-      properties:
-        fee_plans:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeePlan'
-          description: List of fee plans matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      title: Fee Plans_list-fee-plans_Response_200
-    FeePlansGetParametersStatus:
+    ErrorCategory:
       type: string
       enum:
-      - ACTIVE
-      - DISABLED
-      default: ACTIVE
-      title: FeePlansGetParametersStatus
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
     Metadata:
       type: object
       additionalProperties:
@@ -236,34 +182,6 @@ components:
 
         > Note: Nested keys are not supported.'
       title: Metadata
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
     FeeRate:
       type: object
       properties:
@@ -275,6 +193,32 @@ components:
           description: "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
       description: A fee rate contains the components of a fee charged by Cash App to partners for a given payment.
       title: FeeRate
+    Fee_Plans_list-fee-plans_Response_200:
+      type: object
+      properties:
+        fee_plans:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeePlan'
+          description: List of fee plans matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      title: Fee Plans_list-fee-plans_Response_200
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
     FeePlan:
       type: object
       properties:
@@ -316,3 +260,59 @@ components:
       - updated_at
       description: The full fee plan that PSPs can use to set the buy rates for specific merchants.
       title: FeePlan
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Fee_Plans_retrieve-fee-plan_Response_200:
+      type: object
+      properties:
+        fee_plan:
+          $ref: '#/components/schemas/FeePlan'
+      required:
+      - fee_plan
+      title: Fee Plans_retrieve-fee-plan_Response_200
+    FeePlansGetParametersStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - DISABLED
+      default: ACTIVE
+      title: FeePlansGetParametersStatus

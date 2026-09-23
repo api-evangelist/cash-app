@@ -54,12 +54,29 @@ webhooks:
       - Add Cash App Pay To Your Site
 components:
   schemas:
-    CashGrantType:
+    CashGrantDetailsStatus:
       type: string
       enum:
-      - CASHAPP
-      description: CASHAPP for all Cash App Pay transactions
-      title: CashGrantType
+      - ACTIVE
+      - EXPIRED
+      - CONSUMED
+      - REVOKED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+        '
+      title: CashGrantDetailsStatus
     CashGrantDetails:
       type: object
       properties:
@@ -103,29 +120,6 @@ components:
       - updatedAt
       - expiresAt
       title: CashGrantDetails
-    CashGrantDetailsStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - EXPIRED
-      - CONSUMED
-      - REVOKED
-      description: 'Describes whether or not this grant can be used to perform the action associated with it.
-
-
-        If `ACTIVE`, it can be used to perform the action.
-
-
-        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
-
-
-        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
-
-
-        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
-
-        '
-      title: CashGrantDetailsStatus
     CashGrantIntent:
       type: string
       enum:
@@ -166,6 +160,12 @@ components:
       - customerId
       - cashtag
       title: CashGrantDetailsCashapp
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
   securitySchemes:
     sec0:
       type: http

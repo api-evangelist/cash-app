@@ -28,20 +28,23 @@ webhooks:
       - Grants Afterpay
 components:
   schemas:
-    OnFileGrantStatusUpdatedData:
+    OnFileGrantStatusUpdatedDataType:
+      type: string
+      enum:
+      - ON_FILE_GRANT
+      title: OnFileGrantStatusUpdatedDataType
+    OnFileGrantStatusUpdatedDataObject:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          $ref: '#/components/schemas/OnFileGrantStatusUpdatedDataType'
-        object:
-          $ref: '#/components/schemas/OnFileGrantStatusUpdatedDataObject'
-      required:
-      - id
-      - type
-      - object
-      title: OnFileGrantStatusUpdatedData
+        grant:
+          $ref: '#/components/schemas/Grant'
+      title: OnFileGrantStatusUpdatedDataObject
+    GrantType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Type of grant
+      title: GrantType
     GrantStatus:
       type: string
       enum:
@@ -118,23 +121,20 @@ components:
       - status
       - created
       title: Grant
-    OnFileGrantStatusUpdatedDataType:
-      type: string
-      enum:
-      - ON_FILE_GRANT
-      title: OnFileGrantStatusUpdatedDataType
-    GrantType:
-      type: string
-      enum:
-      - ON_FILE
-      description: Type of grant
-      title: GrantType
-    OnFileGrantStatusUpdatedDataObject:
+    OnFileGrantStatusUpdatedData:
       type: object
       properties:
-        grant:
-          $ref: '#/components/schemas/Grant'
-      title: OnFileGrantStatusUpdatedDataObject
+        id:
+          type: string
+        type:
+          $ref: '#/components/schemas/OnFileGrantStatusUpdatedDataType'
+        object:
+          $ref: '#/components/schemas/OnFileGrantStatusUpdatedDataObject'
+      required:
+      - id
+      - type
+      - object
+      title: OnFileGrantStatusUpdatedData
   securitySchemes:
     sec0:
       type: http

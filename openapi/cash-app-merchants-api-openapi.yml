@@ -8,7 +8,7 @@ servers:
 - url: https://sandbox.api.cash.app/network/v1
   description: Sandbox
 tags:
-- name: merchants
+- name: Merchants
 paths:
   /merchants:
     get:
@@ -22,7 +22,7 @@ paths:
 
         Scopes: `MERCHANTS_READ`'
       tags:
-      - merchants
+      - Merchants
       parameters:
       - name: reference_id
         in: query
@@ -87,7 +87,7 @@ paths:
 
         Scopes: `MERCHANTS_WRITE`'
       tags:
-      - merchants
+      - Merchants
       parameters:
       - name: Accept
         in: header
@@ -146,9 +146,35 @@ paths:
     put:
       operationId: upsert-merchant
       summary: Upsert merchant
-      description: "Creates or updates a merchant based on the merchant's `reference_id`.\n\nIf a merchant with a matching `reference_id` is found, \nit will be updated. If no matching merchant is found,\na new one will be created.\n\nThe HTTP response code (`200 OK` or `201 Created`) indicates\nwhether the resource was updated or created, respectively.\n\n<Info>\n\n `merchant_id` is the primary unique identifier for all Merchant APIs.\n Be cautious when using `reference_id` as a unique identifier.\n \n Merchants must have an `address` or `site_url` set.\n</Info>  \n\n**This endpoint is not rate limited.**\n\nScopes: `MERCHANTS_WRITE`"
+      description: 'Creates or updates a merchant based on the merchant''s `reference_id`.
+
+
+        If a merchant with a matching `reference_id` is found,
+
+        it will be updated. If no matching merchant is found,
+
+        a new one will be created.
+
+
+        The HTTP response code (`200 OK` or `201 Created`) indicates
+
+        whether the resource was updated or created, respectively.
+
+
+        `merchant_id` is the primary unique identifier for all Merchant APIs.
+
+        Be cautious when using `reference_id` as a unique identifier.
+
+
+        Merchants must have an `address` or `site_url` set.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `MERCHANTS_WRITE`'
       tags:
-      - merchants
+      - Merchants
       parameters:
       - name: Accept
         in: header
@@ -207,7 +233,7 @@ paths:
 
         Scopes: `MERCHANTS_READ`'
       tags:
-      - merchants
+      - Merchants
       parameters:
       - name: merchant_id
         in: path
@@ -261,7 +287,7 @@ paths:
 
         Scopes: `MERCHANTS_WRITE`'
       tags:
-      - merchants
+      - Merchants
       parameters:
       - name: merchant_id
         in: path
@@ -315,28 +341,43 @@ paths:
               - merchant
 components:
   schemas:
-    Merchants_create-merchant_Response_201:
-      type: object
-      properties:
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-      required:
-      - merchant
-      title: Merchants_create-merchant_Response_201
-    Category:
+    ErrorCategory:
       type: string
-      description: The merchant category code associated with the entity. Values are from the [ISO-18245 specification](https://www.iso.org/standard/33365.html).
-      title: Category
-    List-merchantsRequestBadRequestError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-      required:
-      - errors
-      title: List-merchantsRequestBadRequestError
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    MerchantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - RISK_DISABLED
+      - COMPLIANCE_DISABLED
+      - CLIENT_DISABLED
+      - PENDING
+      description: 'Whether or not this merchant can be used to accept payments or issue refunds.
+
+
+        - `ACTIVE`: The merchant can accept payments or issue refunds.
+
+        - `RISK_DISABLED`: Cash App Pay blocked this merchant due to them being high risk. There is no way to re-enable them programmaticaly.
+
+        - `COMPLIANCE_DISABLED`: Cash App Pay blocked this merchant due to them not following the terms of service, Program Rules, or local laws. There is no way to re-enable them programmaticaly.
+
+        - `CLIENT_DISABLED`: The client called the [UpdateMerchant](Network-API.v1.yaml/paths/~1merchants~1{merchant_id}/patch) endpoint and disabled this merchant, preventing it from being able to handle payments or refunds. To reverse this, call the endpoint again with the status field set to `ACTIVE`.
+
+        - `PENDING`: The merchant is not ready to accept payments or refunds yet; the registration process is still running.'
+      title: MerchantStatus
     MerchantsPutRequestBodyContentApplicationJsonSchemaMerchant:
       type: object
       properties:
@@ -398,18 +439,14 @@ components:
       - address
       description: Details about the merchant to create or update.
       title: MerchantsPutRequestBodyContentApplicationJsonSchemaMerchant
-    Country:
-      type: string
-      enum:
-      - US
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-3166 Alpha-2](https://www.iso.org/iso-3166-country-codes.html) specification.
-
-
-        Current values:
-
-
-        - `US`: United States of America'
-      title: Country
+    Merchants_upsert-merchant_Response_200:
+      type: object
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+      required:
+      - merchant
+      title: Merchants_upsert-merchant_Response_200
     Merchant:
       type: object
       properties:
@@ -502,6 +539,210 @@ components:
       - address
       description: A merchant represents a depository account when processing payments from Cash App customers. Merchants do not have direct access to Cash App, so processed payments are stored in this account until they are ready for settlement.
       title: Merchant
+    MerchantFeePlans:
+      type: object
+      properties:
+        in_app_fee_plan_id:
+          type: string
+          description: The fee plan ID identifying the fee plan that will be used for all in-app payments.
+        in_person_fee_plan_id:
+          type: string
+          description: The fee plan ID identifying the fee plan that will be used for all in-person payments.
+        online_fee_plan_id:
+          type: string
+          description: The fee plan ID identifying the fee plan that will be used for all online payments.
+      description: Merchant fee plans contains the IDs of the different fee plans for a merchant. These IDs represent the processing fees that merchants will be charged for processing payments for each channel. You can use the Fee Plans API to get all the fee information for each fee plan.
+      title: MerchantFeePlans
+    Country:
+      type: string
+      enum:
+      - US
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-3166 Alpha-2](https://www.iso.org/iso-3166-country-codes.html) specification.
+
+
+        Current values:
+
+
+        - `US`: United States of America'
+      title: Country
+    Merchants_update-merchant_Response_200:
+      type: object
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+      title: Merchants_update-merchant_Response_200
+    Merchants_retrieve-merchant_Response_200:
+      type: object
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+      required:
+      - merchant
+      title: Merchants_retrieve-merchant_Response_200
+    Merchants_create-merchant_Response_201:
+      type: object
+      properties:
+        merchant:
+          $ref: '#/components/schemas/Merchant'
+      required:
+      - merchant
+      title: Merchants_create-merchant_Response_201
+    MerchantsPostRequestBodyContentApplicationJsonSchemaMerchant:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'The name of the individual or business entity associated with the merchant.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        brand_id:
+          type: string
+          description: 'ID of the brand associated with this merchant.
+
+
+            Min length: `1`
+
+            Max length: `128`
+
+            '
+        country:
+          $ref: '#/components/schemas/Country'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        category:
+          $ref: '#/components/schemas/Category'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this merchant, typically used to associate the merchant with a record in an external system.
+
+
+            **Must be unique across all merchants. Independent from the [brand reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-brand#request-body)**
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        address:
+          $ref: '#/components/schemas/Address'
+        site_url:
+          type: string
+          format: uri
+          description: 'The URL of the website, if this merchant is for an eCommerce site.
+
+
+            Min length: `8`
+
+            Max length: `8000`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        default_fee_plans:
+          $ref: '#/components/schemas/MerchantFeePlans'
+      required:
+      - name
+      - brand_id
+      - country
+      - currency
+      - category
+      - reference_id
+      - address
+      description: Details about the merchant to create.
+      title: MerchantsPostRequestBodyContentApplicationJsonSchemaMerchant
+    List-merchantsRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      required:
+      - errors
+      title: List-merchantsRequestBadRequestError
+    Category:
+      type: string
+      description: The merchant category code associated with the entity. Values are from the [ISO-18245 specification](https://www.iso.org/standard/33365.html).
+      title: Category
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Address:
+      type: object
+      properties:
+        address_line_1:
+          type: string
+          description: 'First line of the street address, typically including street number, street name, and / or building name.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        address_line_2:
+          type: string
+          description: 'Second line of the address, if any.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        locality:
+          type: string
+          description: 'City or township where the entity is located.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        country:
+          $ref: '#/components/schemas/Country'
+        postal_code:
+          type: string
+          description: 'ZIP or postal code.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        administrative_district_level_1:
+          type: string
+          description: 'State or province.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+      required:
+      - country
+      description: Where this entity is located
+      title: Address
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
     Merchants_list-merchants_Response_200:
       type: object
       properties:
@@ -516,12 +757,70 @@ components:
       required:
       - merchants
       title: Merchants_list-merchants_Response_200
-    Merchants_update-merchant_Response_200:
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey
+    ErrorResponse:
       type: object
       properties:
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-      title: Merchants_update-merchant_Response_200
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    MerchantsMerchantIdPatchRequestBodyContentApplicationJsonSchemaMerchantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CLIENT_DISABLED
+      description: 'Whether or not this merchant can be used to accept payments or issue refunds.
+
+
+        **Note:** when the value is `PENDING`, `COMPLIANCE_DISABLED`, or `RISK_DISABLED`, the status of the merchant cannot be changed.
+
+
+        Current values:
+
+        - `ACTIVE`: The merchant can accept payments and issue refunds.
+
+        - `CLIENT_DISABLED`: The merchant has been disabled by the API client, and may be re-enabled by the API client at any time.'
+      title: MerchantsMerchantIdPatchRequestBodyContentApplicationJsonSchemaMerchantStatus
     MerchantsMerchantIdPatchRequestBodyContentApplicationJsonSchemaMerchant:
       type: object
       properties:
@@ -596,276 +895,3 @@ components:
           $ref: '#/components/schemas/MerchantFeePlans'
       description: Details about the merchant to update.
       title: MerchantsMerchantIdPatchRequestBodyContentApplicationJsonSchemaMerchant
-    MerchantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - RISK_DISABLED
-      - COMPLIANCE_DISABLED
-      - CLIENT_DISABLED
-      - PENDING
-      description: 'Whether or not this merchant can be used to accept payments or issue refunds.
-
-
-        - `ACTIVE`: The merchant can accept payments or issue refunds.
-
-        - `RISK_DISABLED`: Cash App Pay blocked this merchant due to them being high risk. There is no way to re-enable them programmaticaly.
-
-        - `COMPLIANCE_DISABLED`: Cash App Pay blocked this merchant due to them not following the terms of service, Program Rules, or local laws. There is no way to re-enable them programmaticaly.
-
-        - `CLIENT_DISABLED`: The client called the [UpdateMerchant](Network-API.v1.yaml/paths/~1merchants~1{merchant_id}/patch) endpoint and disabled this merchant, preventing it from being able to handle payments or refunds. To reverse this, call the endpoint again with the status field set to `ACTIVE`.
-
-        - `PENDING`: The merchant is not ready to accept payments or refunds yet; the registration process is still running.'
-      title: MerchantStatus
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    MerchantsMerchantIdPatchRequestBodyContentApplicationJsonSchemaMerchantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CLIENT_DISABLED
-      description: 'Whether or not this merchant can be used to accept payments or issue refunds.
-
-
-        **Note:** when the value is `PENDING`, `COMPLIANCE_DISABLED`, or `RISK_DISABLED`, the status of the merchant cannot be changed.
-
-
-        Current values:
-
-        - `ACTIVE`: The merchant can accept payments and issue refunds.
-
-        - `CLIENT_DISABLED`: The merchant has been disabled by the API client, and may be re-enabled by the API client at any time.'
-      title: MerchantsMerchantIdPatchRequestBodyContentApplicationJsonSchemaMerchantStatus
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
-      title: IdempotencyKey
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    Merchants_upsert-merchant_Response_200:
-      type: object
-      properties:
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-      required:
-      - merchant
-      title: Merchants_upsert-merchant_Response_200
-    Metadata:
-      type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
-
-
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
-
-
-        Min keys: `0`
-
-        Max keys: `50`
-
-
-
-        > Note: Nested keys are not supported.'
-      title: Metadata
-    MerchantsPostRequestBodyContentApplicationJsonSchemaMerchant:
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'The name of the individual or business entity associated with the merchant.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        brand_id:
-          type: string
-          description: 'ID of the brand associated with this merchant.
-
-
-            Min length: `1`
-
-            Max length: `128`
-
-            '
-        country:
-          $ref: '#/components/schemas/Country'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        category:
-          $ref: '#/components/schemas/Category'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this merchant, typically used to associate the merchant with a record in an external system.
-
-
-            **Must be unique across all merchants. Independent from the [brand reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-brand#request-body)**
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        address:
-          $ref: '#/components/schemas/Address'
-        site_url:
-          type: string
-          format: uri
-          description: 'The URL of the website, if this merchant is for an eCommerce site.
-
-
-            Min length: `8`
-
-            Max length: `8000`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        default_fee_plans:
-          $ref: '#/components/schemas/MerchantFeePlans'
-      required:
-      - name
-      - brand_id
-      - country
-      - currency
-      - category
-      - reference_id
-      - address
-      description: Details about the merchant to create.
-      title: MerchantsPostRequestBodyContentApplicationJsonSchemaMerchant
-    MerchantFeePlans:
-      type: object
-      properties:
-        in_app_fee_plan_id:
-          type: string
-          description: The fee plan ID identifying the fee plan that will be used for all in-app payments.
-        in_person_fee_plan_id:
-          type: string
-          description: The fee plan ID identifying the fee plan that will be used for all in-person payments.
-        online_fee_plan_id:
-          type: string
-          description: The fee plan ID identifying the fee plan that will be used for all online payments.
-      description: Merchant fee plans contains the IDs of the different fee plans for a merchant. These IDs represent the processing fees that merchants will be charged for processing payments for each channel. You can use the Fee Plans API to get all the fee information for each fee plan.
-      title: MerchantFeePlans
-    Merchants_retrieve-merchant_Response_200:
-      type: object
-      properties:
-        merchant:
-          $ref: '#/components/schemas/Merchant'
-      required:
-      - merchant
-      title: Merchants_retrieve-merchant_Response_200
-    Address:
-      type: object
-      properties:
-        address_line_1:
-          type: string
-          description: 'First line of the street address, typically including street number, street name, and / or building name.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        address_line_2:
-          type: string
-          description: 'Second line of the address, if any.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        locality:
-          type: string
-          description: 'City or township where the entity is located.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        country:
-          $ref: '#/components/schemas/Country'
-        postal_code:
-          type: string
-          description: 'ZIP or postal code.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        administrative_district_level_1:
-          type: string
-          description: 'State or province.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-      required:
-      - country
-      description: Where this entity is located
-      title: Address

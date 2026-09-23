@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Cash App API
   version: 1.0.0
-  description: 'Operations tagged  across 9 of this provider''s published API definitions: cash-app-billing-agreements-deprecated-openapi.json, cash-app-checkouts-openapi.json, cash-app-configuration-openapi.json, cash-app-disputes-openapi.json, cash-app-grants-afterpay-openapi.json, cash-app-grants-cash-app-pay-openapi.json, cash-app-orders-openapi.json, cash-app-payments-openapi.json, cash-app-service-status-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged across 9 of this provider''s published API definitions: cash-app-billing-agreements-deprecated-openapi.json, cash-app-checkouts-openapi.json, cash-app-configuration-openapi.json, cash-app-disputes-openapi.json, cash-app-grants-afterpay-openapi.json, cash-app-grants-cash-app-pay-openapi.json, cash-app-orders-openapi.json, cash-app-payments-openapi.json, cash-app-service-status-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://global-api-sandbox.afterpay.com
   description: Sandbox
@@ -18,7 +18,7 @@ paths:
       description: 'Initiates the approval process for a new billing agreement.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -111,9 +111,7 @@ paths:
       description: 'Creates a new billing agreement from an order token.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*
-
-        '
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -191,7 +189,7 @@ paths:
       description: 'Creates an alias for an existing billing agreement to help load payment schedule widget.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -257,7 +255,7 @@ paths:
         Functionally equivalent to DELETE /v2/billing-agreements/{token}.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -327,7 +325,7 @@ paths:
       description: 'Retrieves available offers for billing agreements based on amount and frequency.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -414,7 +412,7 @@ paths:
         Functionally equivalent to GET /v2/billing-agreements/{token}.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -478,7 +476,7 @@ paths:
       description: 'Initiates the headless billing agreement link flow process.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -560,7 +558,7 @@ paths:
       description: 'Retrieves the details of a billing agreement using its token.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -618,7 +616,7 @@ paths:
       description: 'Cancels an existing billing agreement using its token.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -684,7 +682,7 @@ paths:
         This endpoint combines authorization and capture into a single step.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -779,7 +777,7 @@ paths:
         This endpoint performs authorization only, requiring a separate capture step.
 
 
-        *Deprecated. For new integrations, see [Grants](https://afterpay.docs.buildwithfern.com/afterpay-online-developer/api-reference/reference/grants/start-grant-approval).*'
+        *Deprecated. For new integrations, see Grants.*'
       tags:
       - ''
       parameters:
@@ -873,9 +871,7 @@ paths:
     post:
       operationId: create-checkout-1
       summary: Create Checkout
-      description: 'The `checkouts` endpoint is responsible for creating a new checkout and returning the associated checkout token.
-
-        '
+      description: The `checkouts` endpoint is responsible for creating a new checkout and returning the associated checkout token.
       tags:
       - ''
       parameters:
@@ -945,9 +941,7 @@ paths:
 
         Checkout details are only retained in this temporary format for up to 60 minutes. If a checkout token expires or has an order created against it, it can no longer be retrieved from this endpoint.
 
-        To retrieve a [Payment](../docs/ONLINE-API/Payment-object.md) record (Afterpay Order) along with its associated checkout details, see Get Payment By Token.
-
-        '
+        To retrieve a Payment record (Afterpay Order) along with its associated checkout details, see Get Payment By Token.'
       tags:
       - ''
       parameters:
@@ -1007,7 +1001,7 @@ paths:
       description: 'Use this endpoint to retrieve the merchant''s applicable payment limits.
 
 
-        A request to [Create Checkout](Checkouts.v2.yaml/paths/~1v2~1checkouts/post) may be rejected if the order amount is not between the `minimumAmount` and `maximumAmount` (inclusive).
+        A request to Create Checkout may be rejected if the order amount is not between the `minimumAmount` and `maximumAmount` (inclusive).
 
 
         Afterpay merchant configuration does not change frequently. For this reason, the configuration response includes Cache-Control headers to minimise network round trips when using a modern HTTP client. You should call Get Configuration on a fixed schedule, preferably once per day.
@@ -1019,9 +1013,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 20             |
+        | Read | 20 |
 
 
         **Example request**
@@ -1153,9 +1147,7 @@ paths:
     get:
       operationId: retrieve-dispute
       summary: Retrieve Dispute
-      description: 'List disputes within a date range based on certain criteria. This endpoint can be used for debugging or synchronizing the disputes from Afterpay if/when you are unable to use the webhook method.
-
-        '
+      description: List disputes within a date range based on certain criteria. This endpoint can be used for debugging or synchronizing the disputes from Afterpay if/when you are unable to use the webhook method.
       tags:
       - ''
       parameters:
@@ -1520,9 +1512,7 @@ paths:
     post:
       operationId: start-grant-approval
       summary: Create Grant Approval
-      description: 'Initiates the approval process for a new grant.
-
-        '
+      description: Initiates the approval process for a new grant.
       tags:
       - ''
       parameters:
@@ -1606,7 +1596,7 @@ paths:
     post:
       operationId: create-grant
       summary: Create Grant
-      description: "Creates a new grant from a grant approval token. \n"
+      description: Creates a new grant from a grant approval token.
       tags:
       - ''
       parameters:
@@ -1673,9 +1663,7 @@ paths:
     get:
       operationId: get-grant
       summary: Retrieve Grant
-      description: 'Retrieves a grant by its ID.
-
-        '
+      description: Retrieves a grant by its ID.
       tags:
       - ''
       parameters:
@@ -1731,9 +1719,7 @@ paths:
     post:
       operationId: revoke-grant
       summary: Revoke Grant
-      description: 'Revokes a grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.
-
-        '
+      description: Revokes a grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.
       tags:
       - ''
       parameters:
@@ -1789,9 +1775,7 @@ paths:
     post:
       operationId: alias-grant
       summary: Create Grant Alias
-      description: 'Creates an alias for an existing grant to help load the payment schedule widget.
-
-        '
+      description: Creates an alias for an existing grant to help load the payment schedule widget.
       tags:
       - ''
       parameters:
@@ -1846,9 +1830,7 @@ paths:
     post:
       operationId: start-billing-agreement-link
       summary: Start Grant Link Flow
-      description: 'Initiates the headless grant link flow process.
-
-        '
+      description: Initiates the headless grant link flow process.
       tags:
       - ''
       parameters:
@@ -2033,9 +2015,7 @@ paths:
     post:
       operationId: create-grant
       summary: Create Order
-      description: 'This is the first step in the on file grant purchase process. Use the token in the response to initiate the payment
-
-        '
+      description: This is the first step in the on file grant purchase process. Use the token in the response to initiate the payment
       tags:
       - ''
       parameters:
@@ -2103,11 +2083,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 20             |
-
-        '
+        | Read | 20 |'
       tags:
       - ''
       parameters:
@@ -2241,11 +2219,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 70             |
-
-        '
+        | Read | 70 |'
       tags:
       - ''
       parameters:
@@ -2331,11 +2307,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 70             |
-
-        '
+        | Read | 70 |'
       tags:
       - ''
       parameters:
@@ -2441,11 +2415,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 20             |
-
-        '
+        | Read | 20 |'
       tags:
       - ''
       parameters:
@@ -2564,11 +2536,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 70             |
-
-        '
+        | Read | 70 |'
       tags:
       - ''
       parameters:
@@ -2670,11 +2640,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 20             |
-
-        '
+        | Read | 20 |'
       tags:
       - ''
       parameters:
@@ -2746,11 +2714,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 70             |
-
-        '
+        | Read | 70 |'
       tags:
       - ''
       parameters:
@@ -2832,7 +2798,24 @@ paths:
     post:
       operationId: void-payment
       summary: Void
-      description: "This endpoint voids the remaining `openToCapture` amount of the payment auth, and refunds the customer.\n\n<Info title=\"Note\">\n  To make a partial void, specify an amount in the request body.\n</Info>\n\nThis operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.\n\n\n\n\n**Connection Timeouts**\n| Timeout | Time (Seconds) |\n|---------|----------------|\n| Open    | 10             |\n| Read    | 70             |\n"
+      description: 'This endpoint voids the remaining `openToCapture` amount of the payment auth, and refunds the customer.
+
+
+        To make a partial void, specify an amount in the request body.
+
+
+        This operation is idempotent based on the `requestId` (if provided), which allows for the safe retry of multiple requests, guaranteeing the payment operation is only made once.
+
+
+        **Connection Timeouts**
+
+        | Timeout | Time (Seconds) |
+
+        |---------|----------------|
+
+        | Open | 10 |
+
+        | Read | 70 |'
       tags:
       - ''
       parameters:
@@ -2914,11 +2897,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 20             |
-
-        '
+        | Read | 20 |'
       tags:
       - ''
       parameters:
@@ -2976,11 +2957,9 @@ paths:
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 70             |
-
-        '
+        | Read | 70 |'
       tags:
       - ''
       parameters:
@@ -3053,18 +3032,15 @@ paths:
         Unlike all other endpoints, this endpoint does not require authentication, and responds with `text/plain` instead of `application/json`.
 
 
-
         **Connection Timeouts**
 
         | Timeout | Time (Seconds) |
 
         |---------|----------------|
 
-        | Open    | 10             |
+        | Open | 10 |
 
-        | Read    | 20             |
-
-        '
+        | Read | 20 |'
       tags:
       - ''
       parameters:
@@ -3095,6 +3071,124 @@ paths:
       description: Production
 components:
   schemas:
+    Payment-Event:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        expires:
+          type: string
+        type:
+          $ref: '#/components/schemas/PaymentEventType'
+        amount:
+          $ref: '#/components/schemas/Money'
+        paymentEventMerchantReference:
+          type: string
+      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
+      title: Payment-Event
+    PaymentAuthStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentAuthStatus
+    CancelBillingAgreementRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The billing agreement token to cancel
+      required:
+      - token
+      description: Request to cancel a billing agreement
+      title: CancelBillingAgreementRequest
+    BillingAgreementResponseType:
+      type: string
+      enum:
+      - BILLING
+      description: Type of agreement
+      title: BillingAgreementResponseType
+    RecurringPaymentRequestPaymentMethod:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The billing agreement token
+        type:
+          $ref: '#/components/schemas/RecurringPaymentRequestPaymentMethodType'
+          description: The payment method type
+      required:
+      - token
+      - type
+      title: RecurringPaymentRequestPaymentMethod
+    Money:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
+      required:
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
+    RecurringPaymentRequestMerchant:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The merchant name to display
+      title: RecurringPaymentRequestMerchant
+    OfferType:
+      type: string
+      enum:
+      - PAY_IN_4
+      description: Type of the offer
+      title: OfferType
+    PaymentStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentStatus
+    Shipping-Courier:
+      type: object
+      properties:
+        shippedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        tracking:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ShippingCourierPriority'
+      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
+
+
+        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
+
+
+        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
+
+
+        The `priority` field tracks the shipping speed or service level associated with the delivery. '
+      title: Shipping-Courier
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
     ConsumerOffersNoPaymentUpfront:
       type: object
       properties:
@@ -3109,6 +3203,191 @@ components:
       - eligibilityLimit
       description: Information about the no payment upfront feature eligibility
       title: ConsumerOffersNoPaymentUpfront
+    PaymentAuthPaymentState:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - PARTIALLY_CAPTURED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      description: is the current state for capturing payments
+      title: PaymentAuthPaymentState
+    GetBillingAgreementRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: The billing agreement token to retrieve
+      required:
+      - token
+      description: Request to retrieve a billing agreement by token
+      title: GetBillingAgreementRequest
+    Order-Details:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
+      title: Order-Details
+    AgreementEventResponseType:
+      type: string
+      enum:
+      - CAPTURE
+      - VOID
+      description: Type of event
+      title: AgreementEventResponseType
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        pageUrl:
+          type: string
+        imageUrl:
+          type: string
+        quantity:
+          type: integer
+        price:
+          $ref: '#/components/schemas/Money'
+        categories:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        estimatedShipmentDate:
+          type: string
+          format: date
+        preorder:
+          type: boolean
+          default: false
+      required:
+      - name
+      - quantity
+      - price
+      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
+      title: Item
+    BillingAgreementApprovalRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: This property is optional when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay approval flow.
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: BillingAgreementApprovalRequestMerchant
+    RecurringPaymentRequestEnrichmentsInitiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiationActor'
+          description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
+      description: Describes who initiated the transaction
+      title: RecurringPaymentRequestEnrichmentsInitiation
+    LinkStartResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying the billing agreement to be created
+        requestId:
+          type: string
+          description: The unique identifier from the request
+        expiresAt:
+          type: string
+          format: date-time
+          description: When this link attempt will expire
+        deliveryType:
+          $ref: '#/components/schemas/LinkStartResponseDeliveryType'
+          description: How the verification code was delivered to the consumer
+      required:
+      - token
+      - requestId
+      - expiresAt
+      - deliveryType
+      description: Response containing the billing agreement link details
+      title: LinkStartResponse
+    AgreementApproval:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgreementApprovalType'
+          description: Agreement Type for approval.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: A merchant-provided reference for the agreement.
+      required:
+      - type
+      description: Details about the agreement to be created.
+      title: AgreementApproval
+    AgreementApprovalType:
+      type: string
+      enum:
+      - BILLING
+      description: Agreement Type for approval.
+      title: AgreementApprovalType
+    PaymentPaymentState:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - PARTIALLY_CAPTURED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      description: is the current state for capturing payments
+      title: PaymentPaymentState
+    PaymentSchedule:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount for this payment installment
+        dueDate:
+          type: string
+          format: date
+          description: Due date for this installment
+      required:
+      - amount
+      - dueDate
+      description: Represents a scheduled payment installment
+      title: PaymentSchedule
+    RecurringPaymentRequestPaymentMethodType:
+      type: string
+      enum:
+      - BILLING_AGREEMENT
+      description: The payment method type
+      title: RecurringPaymentRequestPaymentMethodType
     Offer:
       type: object
       properties:
@@ -3141,65 +3420,24 @@ components:
           description: Consumer offer details
       description: Represents an offer with payment details
       title: Offer
-    PaymentAuth:
+    OffersRequest:
       type: object
       properties:
-        id:
+        requestId:
           type: string
-          description: The unique, permanent, Afterpay generated Order ID.
+          description: A unique identifier for this request
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: The amount to check offers for
         token:
           type: string
-          description: The token obtained from the checkout call
-        status:
-          $ref: '#/components/schemas/PaymentAuthStatus'
-          description: represents the status of the order
-        created:
-          type: string
-          description: ' is the UTC timestamp of when the payment was completed.'
-        originalAmount:
-          $ref: '#/components/schemas/Money'
-        openToCaptureAmount:
-          $ref: '#/components/schemas/Money'
-        paymentState:
-          $ref: '#/components/schemas/PaymentAuthPaymentState'
-          description: is the current state for capturing payments
-        merchantReference:
-          type: string
-          description: is the merchant's order id/reference that the payment corresponds to.
-        refunds:
-          type: array
-          items:
-            $ref: '#/components/schemas/Refund'
-        orderDetails:
-          $ref: '#/components/schemas/Order-Details'
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment-Event'
-      description: Describes the schema for a (read-only) payment object
-      title: PaymentAuth
-    PaymentAuthPaymentState:
-      type: string
-      enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - PARTIALLY_CAPTURED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      description: is the current state for capturing payments
-      title: PaymentAuthPaymentState
-    PaymentPaymentState:
-      type: string
-      enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - PARTIALLY_CAPTURED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      description: is the current state for capturing payments
-      title: PaymentPaymentState
+          description: The billing agreement token
+      required:
+      - requestId
+      - amount
+      - token
+      description: Request to retrieve available billing agreement offers
+      title: OffersRequest
     Payment:
       type: object
       properties:
@@ -3237,110 +3475,53 @@ components:
             $ref: '#/components/schemas/Payment-Event'
       description: Describes the schema for a (read-only) payment object
       title: Payment
-    GetBillingAgreementRequest:
+    BillingAgreementApprovalResponse:
       type: object
       properties:
         token:
           type: string
-          description: The billing agreement token to retrieve
+          description: Token identifying this billing agreement approval request
+        expires:
+          type: string
+          format: date-time
+          description: When this approval request expires
+        redirectCheckoutUrl:
+          type: string
+          format: uri
+          description: URL where the consumer should be redirected to complete approval
       required:
       - token
-      description: Request to retrieve a billing agreement by token
-      title: GetBillingAgreementRequest
-    Money:
+      - expires
+      - redirectCheckoutUrl
+      description: Response from initiating a billing agreement approval process
+      title: BillingAgreementApprovalResponse
+    CreateAgreementRequest:
       type: object
       properties:
-        amount:
+        requestId:
           type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
-    RecurringPaymentRequestPaymentMethodType:
-      type: string
-      enum:
-      - BILLING_AGREEMENT
-      description: The payment method type
-      title: RecurringPaymentRequestPaymentMethodType
-    ConsumerOffers:
-      type: object
-      properties:
-        noPaymentUpfront:
-          $ref: '#/components/schemas/ConsumerOffersNoPaymentUpfront'
-          description: Information about the no payment upfront feature eligibility
-      description: Consumer offers
-      title: ConsumerOffers
-    AgreementApproval:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AgreementApprovalType'
-          description: Agreement Type for approval.
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
         merchantReference:
-          type:
-          - string
-          - 'null'
-          description: A merchant-provided reference for the agreement.
+          type: string
+          description: 'The reference order id that this payment corresponds to in the merchant''s system.
+
+            Note: Providing a new value will update any value previously set in the Create Checkout request.'
       required:
-      - type
-      description: Details about the agreement to be created.
-      title: AgreementApproval
-    Contact:
-      type: object
-      properties:
-        name:
-          type: string
-        line1:
-          type: string
-          description: First line of the address
-        line2:
-          type: string
-          description: 'Second line of the address '
-        area1:
-          type: string
-          description: '- AU: Suburb
-
-            - NZ: Town or City
-
-            - UK: Postal Town
-
-            - US: City
-
-            - Canada: City'
-        area2:
-          type: string
-          description: '- NZ: suburb
-
-            - UK: village or local area.'
-        region:
-          type: string
-          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
-        postcode:
-          type: string
-        countryCode:
-          $ref: '#/components/schemas/ContactCountryCode'
-        phoneNumber:
-          type: string
-          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
-      required:
-      - name
-      - line1
-      - area1
-      - region
-      - postcode
-      - countryCode
-      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
-      title: Contact
-    AgreementApprovalType:
+      - token
+      title: CreateAgreementRequest
+    BillingAgreementResponseStatus:
       type: string
       enum:
-      - BILLING
-      description: Agreement Type for approval.
-      title: AgreementApprovalType
+      - ACTIVE
+      - CANCELLED
+      - EXPIRED
+      - PENDING_RENEWAL
+      - PENDING_RENEWAL_EXPIRED
+      description: Current status of the agreement
+      title: BillingAgreementResponseStatus
     Discount:
       type: object
       properties:
@@ -3350,16 +3531,73 @@ components:
           $ref: '#/components/schemas/Money'
       description: Discount applied to an order
       title: Discount
-    PaymentEventType:
+    RecurringPaymentRequestEnrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiation'
+          description: Describes who initiated the transaction
+      title: RecurringPaymentRequestEnrichments
+    AgreementEventResponseStatus:
       type: string
       enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      - EXPIRED
-      title: PaymentEventType
+      - APPROVED
+      - DECLINED
+      description: Status of the agreement at the time of the event
+      title: AgreementEventResponseStatus
+    LinkStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's afterpay account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      description: Request to start a billing agreement link flow
+      title: LinkStartRequest
+    BillingAgreementAliasRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token of the billing agreement to create an alias for
+        duration:
+          type:
+          - string
+          - 'null'
+          format: duration
+          description: Duration of the billing agreement in ISO-8601 period format
+      required:
+      - token
+      description: Request to create an alias for a billing agreement
+      title: BillingAgreementAliasRequest
+    RecurringPaymentRequestEnrichmentsInitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
+      title: RecurringPaymentRequestEnrichmentsInitiationActor
+    OffersResponse:
+      type: object
+      properties:
+        consumerMaskedEmail:
+          type: string
+          description: Masked email address of the consumer
+        consumerAmount:
+          $ref: '#/components/schemas/Money'
+          description: Amount in consumer's currency
+        offers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Offer'
+          description: List of available offers details
+      description: Response containing available offers for the consumer
+      title: OffersResponse
     Consumer:
       type: object
       properties:
@@ -3378,68 +3616,6 @@ components:
       - email
       description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
       title: Consumer
-    Order-Details:
-      type: object
-      properties:
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-        billing:
-          $ref: '#/components/schemas/Contact'
-        courier:
-          $ref: '#/components/schemas/Shipping-Courier'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Discount'
-        taxAmount:
-          $ref: '#/components/schemas/Money'
-        shippingAmount:
-          $ref: '#/components/schemas/Money'
-      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
-      title: Order-Details
-    PaymentStatus:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: represents the status of the order
-      title: PaymentStatus
-    CreateAgreementRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
-        token:
-          type: string
-          description: The token returned from the create approval request.
-        merchantReference:
-          type: string
-          description: 'The reference order id that this payment corresponds to in the merchant''s system.
-
-            Note: Providing a new value will update any value previously set in the Create Checkout request.'
-      required:
-      - token
-      title: CreateAgreementRequest
-    RecurringPaymentRequestEnrichmentsInitiation:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiationActor'
-          description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
-      description: Describes who initiated the transaction
-      title: RecurringPaymentRequestEnrichmentsInitiation
-    AgreementEventResponseType:
-      type: string
-      enum:
-      - CAPTURE
-      - VOID
-      description: Type of event
-      title: AgreementEventResponseType
     RecurringPaymentRequest:
       type: object
       properties:
@@ -3496,6 +3672,50 @@ components:
       - paymentMethod
       - amount
       title: RecurringPaymentRequest
+    LinkStartResponseDeliveryType:
+      type: string
+      enum:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: LinkStartResponseDeliveryType
+    PaymentAuth:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique, permanent, Afterpay generated Order ID.
+        token:
+          type: string
+          description: The token obtained from the checkout call
+        status:
+          $ref: '#/components/schemas/PaymentAuthStatus'
+          description: represents the status of the order
+        created:
+          type: string
+          description: ' is the UTC timestamp of when the payment was completed.'
+        originalAmount:
+          $ref: '#/components/schemas/Money'
+        openToCaptureAmount:
+          $ref: '#/components/schemas/Money'
+        paymentState:
+          $ref: '#/components/schemas/PaymentAuthPaymentState'
+          description: is the current state for capturing payments
+        merchantReference:
+          type: string
+          description: is the merchant's order id/reference that the payment corresponds to.
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+        orderDetails:
+          $ref: '#/components/schemas/Order-Details'
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment-Event'
+      description: Describes the schema for a (read-only) payment object
+      title: PaymentAuth
     Refund:
       type: object
       properties:
@@ -3525,39 +3745,120 @@ components:
 
         '
       title: Refund
-    Item:
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    Contact:
       type: object
       properties:
         name:
           type: string
-        sku:
+        line1:
           type: string
-        pageUrl:
+          description: First line of the address
+        line2:
           type: string
-        imageUrl:
+          description: 'Second line of the address '
+        area1:
           type: string
-        quantity:
-          type: integer
-        price:
-          $ref: '#/components/schemas/Money'
-        categories:
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-        estimatedShipmentDate:
+          description: '- AU: Suburb
+
+            - NZ: Town or City
+
+            - UK: Postal Town
+
+            - US: City
+
+            - Canada: City'
+        area2:
           type: string
-          format: date
-        preorder:
-          type: boolean
-          default: false
+          description: '- NZ: suburb
+
+            - UK: village or local area.'
+        region:
+          type: string
+          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+        postcode:
+          type: string
+        countryCode:
+          $ref: '#/components/schemas/ContactCountryCode'
+        phoneNumber:
+          type: string
+          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
       required:
       - name
-      - quantity
-      - price
-      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
-      title: Item
+      - line1
+      - area1
+      - region
+      - postcode
+      - countryCode
+      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
+      title: Contact
+    PaymentEventType:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      - EXPIRED
+      title: PaymentEventType
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    BillingAgreementAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the billing agreement alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      description: Response containing the payment schedule token and its expiry
+      title: BillingAgreementAliasResponse
+    BillingAgreementApprovalRequest:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the billing agreement
+        merchant:
+          $ref: '#/components/schemas/BillingAgreementApprovalRequestMerchant'
+        merchantReference:
+          type: string
+          description: Merchant's unique reference for this billing agreement
+        agreements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgreementApproval'
+          description: Agreement type for approval (only single agreement is supported)
+      required:
+      - merchant
+      description: Request body for initiating a billing agreement approval process
+      title: BillingAgreementApprovalRequest
+    ConsumerOffers:
+      type: object
+      properties:
+        noPaymentUpfront:
+          $ref: '#/components/schemas/ConsumerOffersNoPaymentUpfront'
+          description: Information about the no payment upfront feature eligibility
+      description: Consumer offers
+      title: ConsumerOffers
     BillingAgreementResponse:
       type: object
       properties:
@@ -3614,219 +3915,6 @@ components:
       - created
       description: Response type for billing agreements
       title: BillingAgreementResponse
-    BillingAgreementAliasResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token representing the billing agreement alias
-        expiry:
-          type: string
-          format: date-time
-          description: Timestamp when the alias token expires
-      required:
-      - token
-      - expiry
-      description: Response containing the payment schedule token and its expiry
-      title: BillingAgreementAliasResponse
-    RecurringPaymentRequestPaymentMethod:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The billing agreement token
-        type:
-          $ref: '#/components/schemas/RecurringPaymentRequestPaymentMethodType'
-          description: The payment method type
-      required:
-      - token
-      - type
-      title: RecurringPaymentRequestPaymentMethod
-    Payment-Event:
-      type: object
-      properties:
-        id:
-          type: string
-        created:
-          type: string
-        expires:
-          type: string
-        type:
-          $ref: '#/components/schemas/PaymentEventType'
-        amount:
-          $ref: '#/components/schemas/Money'
-        paymentEventMerchantReference:
-          type: string
-      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
-      title: Payment-Event
-    BillingAgreementAliasRequest:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token of the billing agreement to create an alias for
-        duration:
-          type:
-          - string
-          - 'null'
-          format: duration
-          description: Duration of the billing agreement in ISO-8601 period format
-      required:
-      - token
-      description: Request to create an alias for a billing agreement
-      title: BillingAgreementAliasRequest
-    ContactCountryCode:
-      type: string
-      enum:
-      - AU
-      - NZ
-      - US
-      - CA
-      - GB
-      title: ContactCountryCode
-    BillingAgreementResponseType:
-      type: string
-      enum:
-      - BILLING
-      description: Type of agreement
-      title: BillingAgreementResponseType
-    ShippingCourierPriority:
-      type: string
-      enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
-    RecurringPaymentRequestEnrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiation'
-          description: Describes who initiated the transaction
-      title: RecurringPaymentRequestEnrichments
-    LinkStartResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token identifying the billing agreement to be created
-        requestId:
-          type: string
-          description: The unique identifier from the request
-        expiresAt:
-          type: string
-          format: date-time
-          description: When this link attempt will expire
-        deliveryType:
-          $ref: '#/components/schemas/LinkStartResponseDeliveryType'
-          description: How the verification code was delivered to the consumer
-      required:
-      - token
-      - requestId
-      - expiresAt
-      - deliveryType
-      description: Response containing the billing agreement link details
-      title: LinkStartResponse
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    RecurringPaymentRequestMerchant:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The merchant name to display
-      title: RecurringPaymentRequestMerchant
-    AgreementEventResponseStatus:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: Status of the agreement at the time of the event
-      title: AgreementEventResponseStatus
-    Shipping-Courier:
-      type: object
-      properties:
-        shippedAt:
-          type: string
-          format: date-time
-        name:
-          type: string
-        tracking:
-          type: string
-        priority:
-          $ref: '#/components/schemas/ShippingCourierPriority'
-      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
-
-
-        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
-
-
-        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
-
-
-        The `priority` field tracks the shipping speed or service level associated with the delivery. '
-      title: Shipping-Courier
-    PaymentAuthStatus:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: represents the status of the order
-      title: PaymentAuthStatus
-    BillingAgreementApprovalResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token identifying this billing agreement approval request
-        expires:
-          type: string
-          format: date-time
-          description: When this approval request expires
-        redirectCheckoutUrl:
-          type: string
-          format: uri
-          description: URL where the consumer should be redirected to complete approval
-      required:
-      - token
-      - expires
-      - redirectCheckoutUrl
-      description: Response from initiating a billing agreement approval process
-      title: BillingAgreementApprovalResponse
-    LinkStartResponseDeliveryType:
-      type: string
-      enum:
-      - SMS
-      - EMAIL
-      description: How the verification code was delivered to the consumer
-      title: LinkStartResponseDeliveryType
-    PaymentSchedule:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: Amount for this payment installment
-        dueDate:
-          type: string
-          format: date
-          description: Due date for this installment
-      required:
-      - amount
-      - dueDate
-      description: Represents a scheduled payment installment
-      title: PaymentSchedule
-    OfferType:
-      type: string
-      enum:
-      - PAY_IN_4
-      description: Type of the offer
-      title: OfferType
     AgreementEventResponse:
       type: object
       properties:
@@ -3854,118 +3942,61 @@ components:
           description: Order ID associated with this event
       description: Response type for agreement events
       title: AgreementEventResponse
-    CancelBillingAgreementRequest:
+    Checkout-Response:
       type: object
       properties:
         token:
           type: string
-          description: The billing agreement token to cancel
-      required:
-      - token
-      description: Request to cancel a billing agreement
-      title: CancelBillingAgreementRequest
-    BillingAgreementApprovalRequestMerchant:
+          description: Checkout token to be used to complete payment.
+        expires:
+          type: string
+          description: The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
+        redirectCheckoutUrl:
+          type: string
+          description: A URL that can be used to redirect the customer to the Afterpay screenflow directly from the merchant backend.
+      title: Checkout-Response
+    Checkout-Request:
       type: object
       properties:
-        redirectConfirmUrl:
-          type: string
-        redirectCancelUrl:
-          type: string
-        popupOriginUrl:
-          type: string
-          description: This property is optional when a `redirectConfirmURL` is provided.
-        name:
-          type: string
-          description: The merchant name displayed in the Afterpay approval flow.
-      required:
-      - redirectConfirmUrl
-      - redirectCancelUrl
-      title: BillingAgreementApprovalRequestMerchant
-    LinkStartRequest:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Email or phone number associated with the consumer's afterpay account
-        requestId:
-          type: string
-          description: A unique identifier for this request
-      required:
-      - alias
-      - requestId
-      description: Request to start a billing agreement link flow
-      title: LinkStartRequest
-    BillingAgreementResponseStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CANCELLED
-      - EXPIRED
-      - PENDING_RENEWAL
-      - PENDING_RENEWAL_EXPIRED
-      description: Current status of the agreement
-      title: BillingAgreementResponseStatus
-    OffersResponse:
-      type: object
-      properties:
-        consumerMaskedEmail:
-          type: string
-          description: Masked email address of the consumer
-        consumerAmount:
-          $ref: '#/components/schemas/Money'
-          description: Amount in consumer's currency
-        offers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Offer'
-          description: List of available offers details
-      description: Response containing available offers for the consumer
-      title: OffersResponse
-    OffersRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: A unique identifier for this request
         amount:
           $ref: '#/components/schemas/Money'
-          description: The amount to check offers for
-        token:
-          type: string
-          description: The billing agreement token
-      required:
-      - requestId
-      - amount
-      - token
-      description: Request to retrieve available billing agreement offers
-      title: OffersRequest
-    BillingAgreementApprovalRequest:
-      type: object
-      properties:
         consumer:
           $ref: '#/components/schemas/Consumer'
-          description: Consumer details for the billing agreement
-        merchant:
-          $ref: '#/components/schemas/BillingAgreementApprovalRequestMerchant'
         merchantReference:
           type: string
-          description: Merchant's unique reference for this billing agreement
-        agreements:
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        merchant:
+          $ref: '#/components/schemas/CheckoutRequestMerchant'
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/AgreementApproval'
-          description: Agreement type for approval (only single agreement is supported)
+            $ref: '#/components/schemas/Item'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        description:
+          type: string
+        mode:
+          type: string
+          default: standard
+          description: 'Must be set to `express` to enable express checkout.
+
+            Allowed values: `express` `standard`'
       required:
-      - merchant
-      description: Request body for initiating a billing agreement approval process
-      title: BillingAgreementApprovalRequest
-    RecurringPaymentRequestEnrichmentsInitiationActor:
-      type: string
-      enum:
-      - CUSTOMER
-      - MERCHANT
-      description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
-      title: RecurringPaymentRequestEnrichmentsInitiationActor
+      - amount
+      - consumer
+      description: Individual Checkout
+      title: Checkout-Request
     CheckoutRequestMerchant:
       type: object
       properties:
@@ -4033,61 +4064,54 @@ components:
       - amount
       - consumer
       title: get-checkout_Response_200
-    Checkout-Request:
+    Get-configuration-mappingsRequestForbiddenError:
       type: object
       properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-        merchantReference:
+        errorCode:
           type: string
-        billing:
-          $ref: '#/components/schemas/Contact'
-        shipping:
-          $ref: '#/components/schemas/Contact'
-        merchant:
-          $ref: '#/components/schemas/CheckoutRequestMerchant'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        courier:
-          $ref: '#/components/schemas/Shipping-Courier'
-        taxAmount:
-          $ref: '#/components/schemas/Money'
-        shippingAmount:
-          $ref: '#/components/schemas/Money'
-        discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Discount'
-        description:
+        errorId:
           type: string
-        mode:
+        message:
           type: string
-          default: standard
-          description: 'Must be set to `express` to enable express checkout.
-
-            Allowed values: `express` `standard`'
+        httpStatusCode:
+          type: integer
+      title: Get-configuration-mappingsRequestForbiddenError
+    ConfigurationMappings:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the brand to be shown in Cash App next to payments.
+        externalBrandId:
+          type: string
+          description: The brand identifier for the Afterpay <> Cash App Pay merchant mapping.
       required:
-      - amount
-      - consumer
-      description: Individual Checkout
-      title: Checkout-Request
-    Checkout-Response:
+      - name
+      - externalBrandId
+      title: ConfigurationMappings
+    Get-configuration-mappingsRequestUnauthorizedError:
       type: object
       properties:
-        token:
+        errorCode:
           type: string
-          description: Checkout token to be used to complete payment.
-        expires:
+        errorId:
           type: string
-          description: The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
-        redirectCheckoutUrl:
+        message:
           type: string
-          description: A URL that can be used to redirect the customer to the Afterpay screenflow directly from the merchant backend.
-      title: Checkout-Response
+        httpStatusCode:
+          type: integer
+      title: Get-configuration-mappingsRequestUnauthorizedError
+    MerchantLimitPayByInstallment:
+      type: object
+      properties:
+        minimumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Minimum eligible order amount for pay by installment.
+        maximumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Maximum eligible order amount for pay by installment.
+      description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
+      title: MerchantLimitPayByInstallment
     MerchantLimitConsumerLending:
       type: object
       properties:
@@ -4102,41 +4126,6 @@ components:
           description: Maximum eligible order amount when consumer lending is enabled.
       description: Returned only when `include=consumerlending` is requested. Indicates whether consumer lending is enabled for the merchant's online channel and, when enabled, the eligible order amount range.
       title: MerchantLimitConsumerLending
-    MerchantLimitPayByInstallment:
-      type: object
-      properties:
-        minimumAmount:
-          $ref: '#/components/schemas/Money'
-          description: Minimum eligible order amount for pay by installment.
-        maximumAmount:
-          $ref: '#/components/schemas/Money'
-          description: Maximum eligible order amount for pay by installment.
-      description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
-      title: MerchantLimitPayByInstallment
-    Get-configuration-mappingsRequestForbiddenError:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorId:
-          type: string
-        message:
-          type: string
-        httpStatusCode:
-          type: integer
-      title: Get-configuration-mappingsRequestForbiddenError
-    Get-configurationRequestUnauthorizedError:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorId:
-          type: string
-        message:
-          type: string
-        httpStatusCode:
-          type: integer
-      title: Get-configurationRequestUnauthorizedError
     Merchant-limit:
       type: object
       properties:
@@ -4154,7 +4143,7 @@ components:
           $ref: '#/components/schemas/MerchantLimitPayByInstallment'
           description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
       title: Merchant-limit
-    Get-configuration-mappingsRequestUnauthorizedError:
+    Get-configurationRequestUnauthorizedError:
       type: object
       properties:
         errorCode:
@@ -4165,75 +4154,7 @@ components:
           type: string
         httpStatusCode:
           type: integer
-      title: Get-configuration-mappingsRequestUnauthorizedError
-    ConfigurationMappings:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the brand to be shown in Cash App next to payments.
-        externalBrandId:
-          type: string
-          description: The brand identifier for the Afterpay <> Cash App Pay merchant mapping.
-      required:
-      - name
-      - externalBrandId
-      title: ConfigurationMappings
-    upload-file_Response_200:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID token of the file.
-        createdAt:
-          type: string
-          format: date-time
-          description: The timestamp indicating when the file was uploaded.
-        expiresAt:
-          type: string
-          format: date-time
-          description: 'The timestamp indicating when the uploaded file expires. '
-      title: upload-file_Response_200
-    evidence:
-      type: object
-      properties:
-        productDescription:
-          type: string
-          description: A description of the product or service and any relevant details on how this was presented to the customer at the time of purchase.
-        refundPolicy:
-          type: string
-          format: binary
-          description: Token of the file upload. The merchant’s refund policy, as shown or provided to the customer.
-        refundPolicyDisclosure:
-          type: string
-          description: An explanation of how and when the customer was shown or provided with the merchant’s refund policy prior to purchase.
-        refundRefusalExplanation:
-          type: string
-          description: The merchant’s explanation for why the customer is not entitled to a refund.
-        shippingDocumentation:
-          type: string
-          format: binary
-          description: Token of the file upload. A shipping label or receipt for the disputed payment.
-        shippingAddress:
-          type: string
-          description: The address to which a physical product was shipped.
-        shippingDate:
-          type: string
-          description: In cases of physical products, the date that a physical product began its route to the shipping address in a clear human-readable format. This date should be prior to the date of the dispute.
-        shippingCarrier:
-          type: string
-          description: In cases of physical products, the delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, separate them with commas.
-        shippingTrackingNumber:
-          type: string
-          description: The tracking number for a physical product, obtained from the delivery service.
-        uncategorizedFile:
-          type: string
-          format: binary
-          description: Token of the file upload. Additional file that’s not in any of the categories above.
-        uncategorizedText:
-          type: string
-          description: Any additional text deemed relevant by the merchant.
-      title: evidence
+      title: Get-configurationRequestUnauthorizedError
     meta:
       type: object
       properties:
@@ -4253,52 +4174,6 @@ components:
       - transactionAmount
       - orderType
       title: meta
-    DisputeStatus:
-      type: string
-      enum:
-      - needs_response
-      - under_review
-      - won
-      - lost
-      - merchant_refunded
-      - merchant_voided
-      description: The current state of the dispute. Values depend on how the dispute state machine is modeled.
-      title: DisputeStatus
-    retrieve-file_Response_200:
-      type: object
-      properties:
-        url:
-          type: string
-          description: The link of the file to be retrieved.
-        expiresAt:
-          type: string
-          format: date-time
-          description: The timestamp indicating the expiration of the link.
-      title: retrieve-file_Response_200
-    DisputeClosingReason:
-      type: string
-      enum:
-      - merchant_accepted
-      - evidence_accepted
-      - evidence_rejected
-      - deadline_expired
-      - customer_cancelled
-      description: A reason indicating how the final decision on the dispute was reached. Recommended possible values listed in Closing Reasons.
-      title: DisputeClosingReason
-    DisputeReason:
-      type: string
-      enum:
-      - product_not_received
-      - product_unacceptable
-      - credit_not_processed
-      - order_canceled
-      - duplicate
-      - incorrect_amount
-      - paid_by_other_means
-      - fraudulent
-      - fraudulent_merchant
-      description: The reason for the dispute.
-      title: DisputeReason
     dispute:
       type: object
       properties:
@@ -4370,6 +4245,107 @@ components:
       - settlementAmount
       description: Dispute object
       title: dispute
+    DisputeStatus:
+      type: string
+      enum:
+      - needs_response
+      - under_review
+      - won
+      - lost
+      - merchant_refunded
+      - merchant_voided
+      description: The current state of the dispute. Values depend on how the dispute state machine is modeled.
+      title: DisputeStatus
+    upload-file_Response_200:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID token of the file.
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp indicating when the file was uploaded.
+        expiresAt:
+          type: string
+          format: date-time
+          description: 'The timestamp indicating when the uploaded file expires. '
+      title: upload-file_Response_200
+    DisputeReason:
+      type: string
+      enum:
+      - product_not_received
+      - product_unacceptable
+      - credit_not_processed
+      - order_canceled
+      - duplicate
+      - incorrect_amount
+      - paid_by_other_means
+      - fraudulent
+      - fraudulent_merchant
+      description: The reason for the dispute.
+      title: DisputeReason
+    evidence:
+      type: object
+      properties:
+        productDescription:
+          type: string
+          description: A description of the product or service and any relevant details on how this was presented to the customer at the time of purchase.
+        refundPolicy:
+          type: string
+          format: binary
+          description: Token of the file upload. The merchant’s refund policy, as shown or provided to the customer.
+        refundPolicyDisclosure:
+          type: string
+          description: An explanation of how and when the customer was shown or provided with the merchant’s refund policy prior to purchase.
+        refundRefusalExplanation:
+          type: string
+          description: The merchant’s explanation for why the customer is not entitled to a refund.
+        shippingDocumentation:
+          type: string
+          format: binary
+          description: Token of the file upload. A shipping label or receipt for the disputed payment.
+        shippingAddress:
+          type: string
+          description: The address to which a physical product was shipped.
+        shippingDate:
+          type: string
+          description: In cases of physical products, the date that a physical product began its route to the shipping address in a clear human-readable format. This date should be prior to the date of the dispute.
+        shippingCarrier:
+          type: string
+          description: In cases of physical products, the delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, separate them with commas.
+        shippingTrackingNumber:
+          type: string
+          description: The tracking number for a physical product, obtained from the delivery service.
+        uncategorizedFile:
+          type: string
+          format: binary
+          description: Token of the file upload. Additional file that’s not in any of the categories above.
+        uncategorizedText:
+          type: string
+          description: Any additional text deemed relevant by the merchant.
+      title: evidence
+    DisputeClosingReason:
+      type: string
+      enum:
+      - merchant_accepted
+      - evidence_accepted
+      - evidence_rejected
+      - deadline_expired
+      - customer_cancelled
+      description: A reason indicating how the final decision on the dispute was reached. Recommended possible values listed in Closing Reasons.
+      title: DisputeClosingReason
+    retrieve-file_Response_200:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The link of the file to be retrieved.
+        expiresAt:
+          type: string
+          format: date-time
+          description: The timestamp indicating the expiration of the link.
+      title: retrieve-file_Response_200
     retrieve-dispute_Response_200:
       type: object
       properties:
@@ -4385,111 +4361,12 @@ components:
         total:
           type: integer
       title: retrieve-dispute_Response_200
-    GrantApprovalRequestMerchant:
-      type: object
-      properties:
-        redirectConfirmUrl:
-          type: string
-        redirectCancelUrl:
-          type: string
-        popupOriginUrl:
-          type: string
-          description: This property is optional when a `redirectConfirmURL` is provided.
-        name:
-          type: string
-          description: The merchant name displayed in the Afterpay approval flow.
-      required:
-      - redirectConfirmUrl
-      - redirectCancelUrl
-      title: GrantApprovalRequestMerchant
-    GrantStartRequest:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Email or phone number associated with the consumer's account
-        requestId:
-          type: string
-          description: A unique identifier for this request
-      required:
-      - alias
-      - requestId
-      title: GrantStartRequest
-    GrantStartResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token identifying the grant to be created
-        requestId:
-          type: string
-          description: The unique identifier from the request
-        expiresAt:
-          type: string
-          format: date-time
-          description: When this link attempt will expire
-        deliveryType:
-          $ref: '#/components/schemas/GrantStartResponseDeliveryType'
-          description: How the verification code was delivered to the consumer
-      required:
-      - token
-      - requestId
-      - expiresAt
-      - deliveryType
-      title: GrantStartResponse
-    GrantStartResponseDeliveryType:
+    GrantApprovalTypeType:
       type: string
       enum:
-      - SMS
-      - EMAIL
-      description: How the verification code was delivered to the consumer
-      title: GrantStartResponseDeliveryType
-    GrantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CANCELLED
-      description: Current status of the grant
-      title: GrantStatus
-    GrantResponse:
-      type: object
-      properties:
-        grant:
-          $ref: '#/components/schemas/Grant'
-      required:
-      - grant
-      title: GrantResponse
-    GrantApprovalRequest:
-      type: object
-      properties:
-        grants:
-          type: array
-          items:
-            $ref: '#/components/schemas/GrantApprovalType'
-          description: Grant type for approval (only single grant is supported)
-        merchant:
-          $ref: '#/components/schemas/GrantApprovalRequestMerchant'
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-          description: Consumer details for the grant
-      required:
-      - grants
-      - merchant
-      title: GrantApprovalRequest
-    GrantAliasResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token representing the grant alias
-        expiry:
-          type: string
-          format: date-time
-          description: Timestamp when the alias token expires
-      required:
-      - token
-      - expiry
-      title: GrantAliasResponse
+      - ON_FILE
+      description: Grant Type for approval.
+      title: GrantApprovalTypeType
     Grant:
       type: object
       properties:
@@ -4540,6 +4417,84 @@ components:
       - status
       - created
       title: Grant
+    GrantResponse:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      title: GrantResponse
+    GrantStartResponseDeliveryType:
+      type: string
+      enum:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: GrantStartResponseDeliveryType
+    CreateGrantRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
+        code:
+          type: string
+          description: 'The one-time code received from the consumer.
+
+            Note: The code will only be sent with the headless integration.'
+      required:
+      - requestId
+      - token
+      title: CreateGrantRequest
+    GrantApprovalRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: This property is optional when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay approval flow.
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: GrantApprovalRequestMerchant
+    GrantStartResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying the grant to be created
+        requestId:
+          type: string
+          description: The unique identifier from the request
+        expiresAt:
+          type: string
+          format: date-time
+          description: When this link attempt will expire
+        deliveryType:
+          $ref: '#/components/schemas/GrantStartResponseDeliveryType'
+          description: How the verification code was delivered to the consumer
+      required:
+      - token
+      - requestId
+      - expiresAt
+      - deliveryType
+      title: GrantStartResponse
+    GrantType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Type of grant
+      title: GrantType
     GrantAliasRequest:
       type: object
       properties:
@@ -4555,6 +4510,72 @@ components:
       required:
       - token
       title: GrantAliasRequest
+    GrantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CANCELLED
+      description: Current status of the grant
+      title: GrantStatus
+    GrantStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      title: GrantStartRequest
+    GrantAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the grant alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      title: GrantAliasResponse
+    GrantApprovalRequest:
+      type: object
+      properties:
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantApprovalType'
+          description: Grant type for approval (only single grant is supported)
+        merchant:
+          $ref: '#/components/schemas/GrantApprovalRequestMerchant'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the grant
+      required:
+      - grants
+      - merchant
+      title: GrantApprovalRequest
+    GrantApprovalType:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GrantApprovalTypeType'
+          description: Grant Type for approval.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: A merchant-provided reference for the grant.
+      required:
+      - type
+      description: Details about the grant to be created.
+      title: GrantApprovalType
     GrantApprovalResponse:
       type: object
       properties:
@@ -4574,71 +4595,15 @@ components:
       - expires
       - redirectCheckoutUrl
       title: GrantApprovalResponse
-    GrantType:
-      type: string
-      enum:
-      - ON_FILE
-      description: Type of grant
-      title: GrantType
-    GrantApprovalType:
+    revoke-grant_Response_200:
       type: object
       properties:
-        type:
-          $ref: '#/components/schemas/GrantApprovalTypeType'
-          description: Grant Type for approval.
-        merchantReference:
-          type:
-          - string
-          - 'null'
-          description: A merchant-provided reference for the grant.
+        grant:
+          $ref: '#/components/schemas/CashGrant'
       required:
-      - type
-      description: Details about the grant to be created.
-      title: GrantApprovalType
-    CreateGrantRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
-        token:
-          type: string
-          description: The token returned from the create approval request.
-        code:
-          type: string
-          description: 'The one-time code received from the consumer.
-
-            Note: The code will only be sent with the headless integration.'
-      required:
-      - requestId
-      - token
-      title: CreateGrantRequest
-    GrantApprovalTypeType:
-      type: string
-      enum:
-      - ON_FILE
-      description: Grant Type for approval.
-      title: GrantApprovalTypeType
-    CashGrantType:
-      type: string
-      enum:
-      - CASHAPP
-      description: CASHAPP for all Cash App Pay transactions
-      title: CashGrantType
-    RetrieveGrantRequest:
-      type: object
-      properties:
-        customerId:
-          type: string
-          description: ID of the customer that approved the customer grant.
-        grantId:
-          type: string
-          description: ID of the customer grant to retrieve.
-      required:
-      - customerId
-      - grantId
-      title: RetrieveGrantRequest
-    Retrieve-grantRequestUnauthorizedError:
+      - grant
+      title: revoke-grant_Response_200
+    Revoke-grantRequestUnauthorizedError:
       type: object
       properties:
         errorCode:
@@ -4649,7 +4614,15 @@ components:
           type: string
         httpStatusCode:
           type: integer
-      title: Retrieve-grantRequestUnauthorizedError
+      title: Revoke-grantRequestUnauthorizedError
+    retrieve-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: retrieve-grant_Response_200
     CashGrantDetails:
       type: object
       properties:
@@ -4693,39 +4666,6 @@ components:
       - updatedAt
       - expiresAt
       title: CashGrantDetails
-    CashGrant:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this grant issued by Cash App.
-        intent:
-          $ref: '#/components/schemas/CashGrantIntent'
-          description: Either ON_FILE or ONE_TIME
-        type:
-          $ref: '#/components/schemas/CashGrantType'
-          description: CASHAPP for all Cash App Pay transactions
-        details:
-          $ref: '#/components/schemas/CashGrantDetails'
-      required:
-      - id
-      - intent
-      - type
-      - details
-      description: Describes a grant provided by Cash App.
-      title: CashGrant
-    CashGrantDetailsCashapp:
-      type: object
-      properties:
-        customerId:
-          type: string
-        cashtag:
-          type: string
-          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
-      required:
-      - customerId
-      - cashtag
-      title: CashGrantDetailsCashapp
     CashGrantDetailsStatus:
       type: string
       enum:
@@ -4756,34 +4696,27 @@ components:
       - ONE_TIME
       description: Either ON_FILE or ONE_TIME
       title: CashGrantIntent
-    retrieve-grant_Response_200:
+    CashGrant:
       type: object
       properties:
-        grant:
-          $ref: '#/components/schemas/CashGrant'
+        id:
+          type: string
+          description: Unique identifier for this grant issued by Cash App.
+        intent:
+          $ref: '#/components/schemas/CashGrantIntent'
+          description: Either ON_FILE or ONE_TIME
+        type:
+          $ref: '#/components/schemas/CashGrantType'
+          description: CASHAPP for all Cash App Pay transactions
+        details:
+          $ref: '#/components/schemas/CashGrantDetails'
       required:
-      - grant
-      title: retrieve-grant_Response_200
-    Revoke-grantRequestUnauthorizedError:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorId:
-          type: string
-        message:
-          type: string
-        httpStatusCode:
-          type: integer
-      title: Revoke-grantRequestUnauthorizedError
-    revoke-grant_Response_200:
-      type: object
-      properties:
-        grant:
-          $ref: '#/components/schemas/CashGrant'
-      required:
-      - grant
-      title: revoke-grant_Response_200
+      - id
+      - intent
+      - type
+      - details
+      description: Describes a grant provided by Cash App.
+      title: CashGrant
     Retrieve-grantRequestForbiddenError:
       type: object
       properties:
@@ -4808,32 +4741,67 @@ components:
         httpStatusCode:
           type: integer
       title: Revoke-grantRequestForbiddenError
-    CreateOrderResponse:
+    CashGrantDetailsCashapp:
       type: object
       properties:
-        token:
+        customerId:
           type: string
-        expires:
+        cashtag:
           type: string
-          format: date-time
-        paymentSchedule:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentSchedule'
-          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
+          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
       required:
-      - token
-      - expires
-      title: CreateOrderResponse
-    Initiation:
+      - customerId
+      - cashtag
+      title: CashGrantDetailsCashapp
+    Retrieve-grantRequestUnauthorizedError:
       type: object
       properties:
-        actor:
-          $ref: '#/components/schemas/InitiationActor'
-          description: The party who initiated the order
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Retrieve-grantRequestUnauthorizedError
+    RetrieveGrantRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: ID of the customer that approved the customer grant.
+        grantId:
+          type: string
+          description: ID of the customer grant to retrieve.
       required:
-      - actor
-      title: Initiation
+      - customerId
+      - grantId
+      title: RetrieveGrantRequest
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    SubscriptionType:
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+      title: SubscriptionType
+    Enrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+          description: Who initiated the order
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+          description: Metadata on the subscription details
+      required:
+      - initiation
+      title: Enrichments
     OrderRequest:
       type: object
       properties:
@@ -4887,38 +4855,6 @@ components:
       - amount
       - enrichments
       title: OrderRequest
-    SubscriptionInterval:
-      type: string
-      enum:
-      - DAY
-      - WEEK
-      - MONTH
-      - YEAR
-      title: SubscriptionInterval
-    OrderRequestPaymentScheduleType:
-      type: string
-      enum:
-      - DEFAULT
-      description: The payment schedule type for the order.
-      title: OrderRequestPaymentScheduleType
-    SubscriptionType:
-      type: string
-      enum:
-      - FIXED
-      - VARIABLE
-      title: SubscriptionType
-    Enrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/Initiation'
-          description: Who initiated the order
-        subscription:
-          $ref: '#/components/schemas/Subscription'
-          description: Metadata on the subscription details
-      required:
-      - initiation
-      title: Enrichments
     Subscription:
       type: object
       properties:
@@ -4929,6 +4865,23 @@ components:
         intervalCount:
           type: integer
       title: Subscription
+    CreateOrderResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentSchedule'
+          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
+      required:
+      - token
+      - expires
+      title: CreateOrderResponse
     InitiationActor:
       type: string
       enum:
@@ -4936,108 +4889,29 @@ components:
       - MERCHANT
       description: The party who initiated the order
       title: InitiationActor
-    CreateRefund:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique ID required for safe retries. Max length 64 (varchar).
-        amount:
-          $ref: '#/components/schemas/Money'
-        merchantReference:
-          type: string
-          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
-        refundMerchantReference:
-          type: string
-          description: A unique reference for the individual refund event. Max length 128 (varchar).
-      description: "To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records\n\nUnique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request. \n\nThe `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as \"Payment Event Id\". In most cases, this would hold the same value as the `merchantReference`.\n"
-      title: CreateRefund
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents:
-      type: object
-      properties: {}
-      description: Event list for for merchant's order. See Events.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents
-    CapturePayment:
-      type: object
-      properties:
-        requestId:
-          type: string
-          format: uuid
-          description: A unique request ID, required for idempotent retries.
-        merchantReference:
-          type: string
-          description: 'The reference/order ID that this payment corresponds to in the merchant''s system.
-
-
-            Note: Providing a new value updates any value previously set in the Create Checkout request.'
-        amount:
-          $ref: '#/components/schemas/Money'
-        paymentEventMerchantReference:
-          type: string
-          description: 'A unique reference for the individual payment capture event. If provided, the value appears in the daily settlement file as "Payment Event ID"
-
-            '
-      title: CapturePayment
-    update-payment-by-order-id_Response_201:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The unique Afterpay (merchant payment) payment ID.
-        token:
-          type: string
-          description: Checkout token to be used to complete customer checkout and payment.
-        status:
-          type: string
-          description: \"APPROVED" (update is only valid for successful orders)
-        created:
-          description: The payment creation time [ISO 8601 UTC/Zulu time](https://www.iso.org/iso-8601-date-and-time-format.html).
-        originalAmount:
-          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount'
-          description: Total amount for the order. See Money.
-        openToCaptureAmount:
-          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount'
-          description: Total amount that can be captured for order. See Money.
-        paymentState:
-          type: string
-          description: 'Available states: "AUTH_APPROVED", "CAPTURED", "VOIDED", "EXPIRED", "AUTH_DECLINED", "PARTIALLY_CAPTURED", "CAPTURE_DECLINED""'
-        merchantReference:
-          description: Any type
-        refunds:
-          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds'
-          description: The refund details for merchant's order. See Refund.
-        orderDetails:
-          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails'
-          description: The order bound to the payment. See Order Details.
-        events:
-          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents'
-          description: Event list for for merchant's order. See Events.
-      title: update-payment-by-order-id_Response_201
-    V2PaymentsOrderIdCourierPutParametersAccept:
+    OrderRequestPaymentScheduleType:
       type: string
       enum:
-      - application/json
-      title: V2PaymentsOrderIdCourierPutParametersAccept
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount:
+      - DEFAULT
+      description: The payment schedule type for the order.
+      title: OrderRequestPaymentScheduleType
+    SubscriptionInterval:
+      type: string
+      enum:
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      title: SubscriptionInterval
+    Initiation:
       type: object
-      properties: {}
-      description: Total amount for the order. See Money.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount
-    reverse-payment-by-token_Response_204:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: reverse-payment-by-token_Response_204
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount:
-      type: object
-      properties: {}
-      description: Total amount that can be captured for order. See Money.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails:
-      type: object
-      properties: {}
-      description: The order bound to the payment. See Order Details.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails
+      properties:
+        actor:
+          $ref: '#/components/schemas/InitiationActor'
+          description: The party who initiated the order
+      required:
+      - actor
+      title: Initiation
     AuthorizePayment:
       type: object
       properties:
@@ -5078,11 +4952,6 @@ components:
       required:
       - token
       title: AuthorizePayment
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds:
-      type: object
-      properties: {}
-      description: The refund details for merchant's order. See Refund.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds
     list-payments_Response_200:
       type: object
       properties:
@@ -5100,6 +4969,113 @@ components:
           items:
             $ref: '#/components/schemas/Payment'
       title: list-payments_Response_200
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds:
+      type: object
+      properties: {}
+      description: The refund details for merchant's order. See Refund.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount:
+      type: object
+      properties: {}
+      description: Total amount for the order. See Money.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount:
+      type: object
+      properties: {}
+      description: Total amount that can be captured for order. See Money.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount
+    update-payment-by-order-id_Response_201:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The unique Afterpay (merchant payment) payment ID.
+        token:
+          type: string
+          description: Checkout token to be used to complete customer checkout and payment.
+        status:
+          type: string
+          description: \"APPROVED" (update is only valid for successful orders)
+        created:
+          description: The payment creation time [ISO 8601 UTC/Zulu time](https://www.iso.org/iso-8601-date-and-time-format.html).
+        originalAmount:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount'
+          description: Total amount for the order. See Money.
+        openToCaptureAmount:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount'
+          description: Total amount that can be captured for order. See Money.
+        paymentState:
+          type: string
+          description: 'Available states: "AUTH_APPROVED", "CAPTURED", "VOIDED", "EXPIRED", "AUTH_DECLINED", "PARTIALLY_CAPTURED", "CAPTURE_DECLINED""'
+        merchantReference:
+          description: Any type
+        refunds:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds'
+          description: The refund details for merchant's order. See Refund.
+        orderDetails:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails'
+          description: The order bound to the payment. See Order Details.
+        events:
+          $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents'
+          description: Event list for for merchant's order. See Events.
+      title: update-payment-by-order-id_Response_201
+    CapturePayment:
+      type: object
+      properties:
+        requestId:
+          type: string
+          format: uuid
+          description: A unique request ID, required for idempotent retries.
+        merchantReference:
+          type: string
+          description: 'The reference/order ID that this payment corresponds to in the merchant''s system.
+
+
+            Note: Providing a new value updates any value previously set in the Create Checkout request.'
+        amount:
+          $ref: '#/components/schemas/Money'
+        paymentEventMerchantReference:
+          type: string
+          description: 'A unique reference for the individual payment capture event. If provided, the value appears in the daily settlement file as "Payment Event ID"
+
+            '
+      title: CapturePayment
+    reverse-payment-by-token_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: reverse-payment-by-token_Response_204
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails:
+      type: object
+      properties: {}
+      description: The order bound to the payment. See Order Details.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails
+    V2PaymentsOrderIdCourierPutParametersAccept:
+      type: string
+      enum:
+      - application/json
+      title: V2PaymentsOrderIdCourierPutParametersAccept
+    CreateRefund:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: Unique ID required for safe retries. Max length 64 (varchar).
+        amount:
+          $ref: '#/components/schemas/Money'
+        merchantReference:
+          type: string
+          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
+        refundMerchantReference:
+          type: string
+          description: A unique reference for the individual refund event. Max length 128 (varchar).
+      description: "To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records\n\nUnique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request. \n\nThe `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as \"Payment Event Id\". In most cases, this would hold the same value as the `merchantReference`.\n"
+      title: CreateRefund
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents:
+      type: object
+      properties: {}
+      description: Event list for for merchant's order. See Events.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents
   securitySchemes:
     sec0:
       type: http

@@ -8,7 +8,7 @@ servers:
 - url: https://sandbox.api.cash.app/network/v1
   description: Sandbox
 tags:
-- name: payments
+- name: Payments
 paths:
   /payments:
     get:
@@ -22,7 +22,7 @@ paths:
 
         Scopes: `PAYMENTS_READ`'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: cursor
         in: query
@@ -91,9 +91,18 @@ paths:
     post:
       operationId: create-payment
       summary: Create payment
-      description: "Creates a payment from a customer to a merchant.\n\n\n<Note>\n  Creating a payment requires a grant that is associated with the `ON_FILE_PAYMENT` or `ONE_TIME_PAYMENT` actions. To generate a grant, use the Customer Request API.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `PAYMENTS_WRITE`"
+      description: 'Creates a payment from a customer to a merchant.
+
+
+        Creating a payment requires a grant that is associated with the `ON_FILE_PAYMENT` or `ONE_TIME_PAYMENT` actions. To generate a grant, use the Customer Request API.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `PAYMENTS_WRITE`'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: Accept
         in: header
@@ -155,7 +164,7 @@ paths:
 
         Scopes: `PAYMENTS_READ`'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: payment_id
         in: path
@@ -199,9 +208,18 @@ paths:
     post:
       operationId: create-payment-authorization
       summary: Create incremental authorization
-      description: "Creates an authorization update for a payment. The authorization amount must be greater than or equal to the current authorized amount.\n\nUse this endpoint for incremental authorization instead of overcapturing using the Capture payment endpoint. By creating additional payment authorizations exceeding the current authorized amount, you can request additional funds without risking the original amount being declined.\n\n**This endpoint is not rate limited.** \n\nScopes: `PAYMENTS_WRITE`"
+      description: 'Creates an authorization update for a payment. The authorization amount must be greater than or equal to the current authorized amount.
+
+
+        Use this endpoint for incremental authorization instead of overcapturing using the Capture payment endpoint. By creating additional payment authorizations exceeding the current authorized amount, you can request additional funds without risking the original amount being declined.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `PAYMENTS_WRITE`'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: payment_id
         in: path
@@ -276,7 +294,7 @@ paths:
 
         Scopes: `PAYMENTS_WRITE`'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: payment_id
         in: path
@@ -340,9 +358,24 @@ paths:
     post:
       operationId: void-payment
       summary: Void payment
-      description: "Moves an authorized payment to the voided state and releases the payment authorization from the customer's Cash App account.\n\n<Note> \nYou can only void an authorized payment. If a payment is captured, refund it instead. You cannot void any payment that has had an attempted capture. Authorizations not captured within seven days are automatically voided.\n</Note>\n\nThis endpoint will return a success message if the payment was successfully voided _or_ if the payment was previously voided.\n\n**This endpoint is not rate limited.**\n\nScopes: `PAYMENTS_WRITE`\n\nPayment voids can be processed synchronously or asynchronously depending on payment type. The majority of voids are made synchronously."
+      description: 'Moves an authorized payment to the voided state and releases the payment authorization from the customer''s Cash App account.
+
+
+        You can only void an authorized payment. If a payment is captured, refund it instead. You cannot void any payment that has had an attempted capture. Authorizations not captured within seven days are automatically voided.
+
+
+        This endpoint will return a success message if the payment was successfully voided _or_ if the payment was previously voided.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `PAYMENTS_WRITE`
+
+
+        Payment voids can be processed synchronously or asynchronously depending on payment type. The majority of voids are made synchronously.'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: payment_id
         in: path
@@ -392,9 +425,24 @@ paths:
     post:
       operationId: void-payment-by-idempotency-key
       summary: Void payment by idempotency key
-      description: "Moves an authorized payment to the voided state and releases the payment authorization from the customer's Cash App account.\n\n  <Note>\n  You can only void an authorized payment. If a payment is captured, refund the payment instead.\n  \n   You cannot void any payment that has had an attempted capture. Authorizations not captured within seven days are automatically voided.\n  </Note> \n\nThis endpoint will return a success message if the payment was successfully voided _or_ if the payment was previously voided.\n\n**This endpoint is not rate limited.**\n\nScopes: `PAYMENTS_WRITE`"
+      description: 'Moves an authorized payment to the voided state and releases the payment authorization from the customer''s Cash App account.
+
+
+        You can only void an authorized payment. If a payment is captured, refund the payment instead.
+
+
+        You cannot void any payment that has had an attempted capture. Authorizations not captured within seven days are automatically voided.
+
+
+        This endpoint will return a success message if the payment was successfully voided _or_ if the payment was previously voided.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `PAYMENTS_WRITE`'
       tags:
-      - payments
+      - Payments
       parameters:
       - name: Accept
         in: header
@@ -442,84 +490,96 @@ paths:
               - idempotency_key
 components:
   schemas:
-    PaymentEnrichmentsInitiationActor:
+    ErrorCategory:
       type: string
       enum:
-      - CUSTOMER
-      - MERCHANT
-      description: 'The party who initiated the payment.
-
-
-        - `CUSTOMER`
-
-        - `MERCHANT`'
-      title: PaymentEnrichmentsInitiationActor
-    Create-payment-authorizationRequestBadRequestError:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    Payments_create-payment-authorization_Response_201:
+      type: object
+      properties:
+        authorization:
+          $ref: '#/components/schemas/Authorization'
+      required:
+      - authorization
+      title: Payments_create-payment-authorization_Response_201
+    Retrieve-paymentRequestNotFoundError:
       type: object
       properties:
         errors:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-          description: "A list of errors indicating why the request failed.\n \nMin number of items: `1`"
-        authorization:
-          $ref: '#/components/schemas/Authorization'
       required:
       - errors
-      title: Create-payment-authorizationRequestBadRequestError
-    PaymentsPostRequestBodyContentApplicationJsonSchemaPayment:
+      title: Retrieve-paymentRequestNotFoundError
+    Payments_void-payment_Response_200:
       type: object
       properties:
-        amount:
-          type: integer
-          description: 'The amount of money to charge the customer, in the lowest denomination of currency for the payment.
-
-
-            Min value: `1`'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        merchant_id:
-          type: string
-          description: 'ID of the merchant to make the payment to.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        grant_id:
-          type: string
-          description: 'A grant ID from the Customer Request API that indicates permission to take the payment.
-
-
-            Min length: `1`
-
-            Max length: `256`'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this payment, typically used to associate the payment with a record in an external system.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        capture:
-          type: boolean
-          default: true
-          description: 'Whether or not to automatically capture the payment once it''s created.
-
-
-            Default: `true`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        enrichments:
-          $ref: '#/components/schemas/PaymentEnrichments'
+        payment:
+          $ref: '#/components/schemas/Payment'
       required:
-      - amount
-      - currency
-      - merchant_id
-      - grant_id
-      description: Data about the payment to create.
-      title: PaymentsPostRequestBodyContentApplicationJsonSchemaPayment
+      - payment
+      title: Payments_void-payment_Response_200
+    PaymentStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - DECLINED
+      description: 'The step of the payment processing lifecycle that this payment is currently at.
+
+
+        - `AUTHORIZED`
+
+        - `CAPTURED`
+
+        - `VOIDED`
+
+        - `DECLINED`'
+      title: PaymentStatus
+    Create-paymentRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors indicating why the request failed.
+
+
+            Min number of items: `1`'
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - errors
+      title: Create-paymentRequestBadRequestError
+    Payments_list-payments_Response_200:
+      type: object
+      properties:
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+          description: List of payments matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - payments
+      title: Payments_list-payments_Response_200
     Payment:
       type: object
       properties:
@@ -673,173 +733,50 @@ components:
       - created_at
       - updated_at
       title: Payment
-    Payments_retrieve-payment_Response_200:
+    PaymentEnrichmentsInitiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/PaymentEnrichmentsInitiationActor'
+          description: 'The party who initiated the payment.
+
+
+            - `CUSTOMER`
+
+            - `MERCHANT`'
+      required:
+      - actor
+      description: If present, provides information about transaction initiation.
+      title: PaymentEnrichmentsInitiation
+    Payments_void-payment-by-idempotency-key_Response_200:
       type: object
       properties:
         payment:
           $ref: '#/components/schemas/Payment'
       required:
       - payment
-      title: Payments_retrieve-payment_Response_200
-    FeeRate:
-      type: object
-      properties:
-        basis_points:
-          type: integer
-          description: The variable fee charged for processing the payment expressed as 1/100th of a percentage.
-        fixed_amount:
-          type: integer
-          description: "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
-      description: A fee rate contains the components of a fee charged by Cash App to partners for a given payment.
-      title: FeeRate
-    PaymentEnrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/PaymentEnrichmentsInitiation'
-          description: If present, provides information about transaction initiation.
-        recurring_series_id:
-          type: string
-          description: 'If present, indicates that this payment is part of a recurring series of payments, such as a subscription.
-
-
-            The value should contain a unique identifier for the recurring series that is constant across all of its payments, so it can be used to group them together.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        statement_descriptor:
-          type: string
-          description: 'If present, adds the descriptor as line item on to a customer''s payment receipt in their in-app Activity page.
-
-            The descriptor will be present under the header "On statement as".
-
-
-            Statement descriptor requirements vary by platform. If the input for this field exceeds the character limit, it will be truncated to the limit, then suffixed with an ellipsis (...).
-
-
-            Min length: `1`
-
-            Max length: `22`'
-        restricted_categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentEnrichmentsRestrictedCategoriesItems'
-          description: If present, indicates that this payment is associated with one or more restricted categories. Contact the Cash App Pay support team to use this field.
-      description: "Describes optional fields beyond core payment information to supplement payment processing.\n\nEnrichments provide additional context about a payment, which can improve the overall payment experience including, but not limited to: \n  - Increased approval rates\n  - Enhanced transaction insights\n  - Better payment flows in Cash App"
-      title: PaymentEnrichments
-    Payments_void-payment_Response_200:
+      title: Payments_void-payment-by-idempotency-key_Response_200
+    Payments_capture-payment_Response_200:
       type: object
       properties:
         payment:
           $ref: '#/components/schemas/Payment'
       required:
       - payment
-      title: Payments_void-payment_Response_200
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    PaymentStatus:
-      type: string
-      enum:
-      - AUTHORIZED
-      - CAPTURED
-      - VOIDED
-      - DECLINED
-      description: 'The step of the payment processing lifecycle that this payment is currently at.
-
-
-        - `AUTHORIZED`
-
-        - `CAPTURED`
-
-        - `VOIDED`
-
-        - `DECLINED`'
-      title: PaymentStatus
-    Retrieve-paymentRequestNotFoundError:
+      title: Payments_capture-payment_Response_200
+    Create-payment-authorizationRequestBadRequestError:
       type: object
       properties:
         errors:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-      required:
-      - errors
-      title: Retrieve-paymentRequestNotFoundError
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    Payments_create-payment-authorization_Response_201:
-      type: object
-      properties:
+          description: "A list of errors indicating why the request failed.\n \nMin number of items: `1`"
         authorization:
           $ref: '#/components/schemas/Authorization'
       required:
-      - authorization
-      title: Payments_create-payment-authorization_Response_201
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    Payments_create-payment_Response_201:
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      title: Payments_create-payment_Response_201
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
-      title: IdempotencyKey
+      - errors
+      title: Create-payment-authorizationRequestBadRequestError
     PaymentEnrichmentsRestrictedCategoriesItems:
       type: string
       enum:
@@ -847,66 +784,71 @@ components:
       - FINANCIAL_SERVICES
       - CANNABIS
       title: PaymentEnrichmentsRestrictedCategoriesItems
-    Payments_list-payments_Response_200:
-      type: object
-      properties:
-        payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-          description: List of payments matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - payments
-      title: Payments_list-payments_Response_200
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    AuthorizationStatus:
+    PaymentEnrichmentsInitiationActor:
       type: string
       enum:
-      - AUTHORIZED
-      - DECLINED
-      description: 'The step of the authorization processing lifecycle that this authorization is currently at.
+      - CUSTOMER
+      - MERCHANT
+      description: 'The party who initiated the payment.
 
 
-        Allowed values:
+        - `CUSTOMER`
 
-        - AUTHORIZED
-
-        - DECLINED'
-      title: AuthorizationStatus
-    Metadata:
+        - `MERCHANT`'
+      title: PaymentEnrichmentsInitiationActor
+    PaymentsPostRequestBodyContentApplicationJsonSchemaPayment:
       type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+      properties:
+        amount:
+          type: integer
+          description: 'The amount of money to charge the customer, in the lowest denomination of currency for the payment.
 
 
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant to make the payment to.
 
 
-        Min keys: `0`
+            Min length: `1`
 
-        Max keys: `50`
+            Max length: `128`'
+        grant_id:
+          type: string
+          description: 'A grant ID from the Customer Request API that indicates permission to take the payment.
 
 
+            Min length: `1`
 
-        > Note: Nested keys are not supported.'
-      title: Metadata
+            Max length: `256`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this payment, typically used to associate the payment with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        capture:
+          type: boolean
+          default: true
+          description: 'Whether or not to automatically capture the payment once it''s created.
+
+
+            Default: `true`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        enrichments:
+          $ref: '#/components/schemas/PaymentEnrichments'
+      required:
+      - amount
+      - currency
+      - merchant_id
+      - grant_id
+      description: Data about the payment to create.
+      title: PaymentsPostRequestBodyContentApplicationJsonSchemaPayment
     Authorization:
       type: object
       properties:
@@ -971,53 +913,104 @@ components:
       - previous_amount
       description: Represents an authorization update for a payment
       title: Authorization
-    Payments_void-payment-by-idempotency-key_Response_200:
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Payments_create-payment_Response_201:
       type: object
       properties:
         payment:
           $ref: '#/components/schemas/Payment'
-      required:
-      - payment
-      title: Payments_void-payment-by-idempotency-key_Response_200
-    Payments_capture-payment_Response_200:
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      required:
-      - payment
-      title: Payments_capture-payment_Response_200
-    PaymentEnrichmentsInitiation:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/PaymentEnrichmentsInitiationActor'
-          description: 'The party who initiated the payment.
+      title: Payments_create-payment_Response_201
+    AuthorizationStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - DECLINED
+      description: 'The step of the authorization processing lifecycle that this authorization is currently at.
 
 
-            - `CUSTOMER`
+        Allowed values:
 
-            - `MERCHANT`'
-      required:
-      - actor
-      description: If present, provides information about transaction initiation.
-      title: PaymentEnrichmentsInitiation
-    Create-paymentRequestBadRequestError:
+        - AUTHORIZED
+
+        - DECLINED'
+      title: AuthorizationStatus
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    PaymentEnrichments:
       type: object
       properties:
-        errors:
+        initiation:
+          $ref: '#/components/schemas/PaymentEnrichmentsInitiation'
+          description: If present, provides information about transaction initiation.
+        recurring_series_id:
+          type: string
+          description: 'If present, indicates that this payment is part of a recurring series of payments, such as a subscription.
+
+
+            The value should contain a unique identifier for the recurring series that is constant across all of its payments, so it can be used to group them together.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        statement_descriptor:
+          type: string
+          description: 'If present, adds the descriptor as line item on to a customer''s payment receipt in their in-app Activity page.
+
+            The descriptor will be present under the header "On statement as".
+
+
+            Statement descriptor requirements vary by platform. If the input for this field exceeds the character limit, it will be truncated to the limit, then suffixed with an ellipsis (...).
+
+
+            Min length: `1`
+
+            Max length: `22`'
+        restricted_categories:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors indicating why the request failed.
-
-
-            Min number of items: `1`'
-        payment:
-          $ref: '#/components/schemas/Payment'
-      required:
-      - errors
-      title: Create-paymentRequestBadRequestError
+            $ref: '#/components/schemas/PaymentEnrichmentsRestrictedCategoriesItems'
+          description: If present, indicates that this payment is associated with one or more restricted categories. Contact the Cash App Pay support team to use this field.
+      description: "Describes optional fields beyond core payment information to supplement payment processing.\n\nEnrichments provide additional context about a payment, which can improve the overall payment experience including, but not limited to: \n  - Increased approval rates\n  - Enhanced transaction insights\n  - Better payment flows in Cash App"
+      title: PaymentEnrichments
+    FeeRate:
+      type: object
+      properties:
+        basis_points:
+          type: integer
+          description: The variable fee charged for processing the payment expressed as 1/100th of a percentage.
+        fixed_amount:
+          type: integer
+          description: "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
+      description: A fee rate contains the components of a fee charged by Cash App to partners for a given payment.
+      title: FeeRate
     PaymentsPaymentIdAuthorizationsPostRequestBodyContentApplicationJsonSchemaAuthorization:
       type: object
       properties:
@@ -1043,3 +1036,58 @@ components:
       - currency
       description: Details about the authorization to create.
       title: PaymentsPaymentIdAuthorizationsPostRequestBodyContentApplicationJsonSchemaAuthorization
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Payments_retrieve-payment_Response_200:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - payment
+      title: Payments_retrieve-payment_Response_200

@@ -8,7 +8,7 @@ servers:
 - url: https://sandbox.api.cash.app/network/v1
   description: Sandbox
 tags:
-- name: refunds
+- name: Refunds
 paths:
   /refunds:
     get:
@@ -22,7 +22,7 @@ paths:
 
         Scopes: `REFUNDS_READ`'
       tags:
-      - refunds
+      - Refunds
       parameters:
       - name: cursor
         in: query
@@ -91,9 +91,24 @@ paths:
     post:
       operationId: create-refund
       summary: Create refund
-      description: "Creates a refund from a merchant to a customer.\n\n- To issue a refund, provide a `payment_id` in the request. \n\nThe grant must be associated with the `ON_FILE_PAYMENT` actions.\n\nTo generate a grant to pass to this field, use the Customer Request API.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+      description: 'Creates a refund from a merchant to a customer.
+
+
+        - To issue a refund, provide a `payment_id` in the request.
+
+
+        The grant must be associated with the `ON_FILE_PAYMENT` actions.
+
+
+        To generate a grant to pass to this field, use the Customer Request API.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `REFUNDS_WRITE`'
       tags:
-      - refunds
+      - Refunds
       parameters:
       - name: Accept
         in: header
@@ -155,7 +170,7 @@ paths:
 
         Scopes: `REFUNDS_READ`'
       tags:
-      - refunds
+      - Refunds
       parameters:
       - name: refund_id
         in: path
@@ -207,7 +222,7 @@ paths:
 
         Scopes: `REFUNDS_WRITE`'
       tags:
-      - refunds
+      - Refunds
       parameters:
       - name: refund_id
         in: path
@@ -261,9 +276,18 @@ paths:
     post:
       operationId: void-refund
       summary: Void refund
-      description: "Moves an authorized refund to the voided state and removes the \"pending refund\" screen from a customer's Cash App account.\n\n<Note> \nYou can only void an authorized refund.\n</Note>\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+      description: 'Moves an authorized refund to the voided state and removes the "pending refund" screen from a customer''s Cash App account.
+
+
+        You can only void an authorized refund.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `REFUNDS_WRITE`'
       tags:
-      - refunds
+      - Refunds
       parameters:
       - name: refund_id
         in: path
@@ -307,9 +331,24 @@ paths:
     post:
       operationId: void-refund-by-idempotency-key
       summary: Void refund by idempotency key
-      description: "Moves an authorized refund to the voided state using the idempotency key specified while creating the refund.\n\n<Note> \nYou can only void an authorized refund. If a refund is captured, there is no way to reverse it.\n</Note>\n\nIn rare cases, an issue with an integration, network connectivity, or the Cash App Pay API may cause an API client to end up in a state where a refund is created in Cash App Pay, but the API client doesn't know the ID of the refund. This endpoint allows an API client to void a refund using _only_ the idempotency key to recover from these situations.\n\nIf you don't have the idempotency key or ID of the refund you want to void, you can use the [list refunds](Network-API.v1.yaml/paths/~1refunds/get) endpoint to try to search for the refund you're looking for.\n\n**This endpoint is not rate limited.**\n\nScopes: `REFUNDS_WRITE`"
+      description: 'Moves an authorized refund to the voided state using the idempotency key specified while creating the refund.
+
+
+        You can only void an authorized refund. If a refund is captured, there is no way to reverse it.
+
+
+        In rare cases, an issue with an integration, network connectivity, or the Cash App Pay API may cause an API client to end up in a state where a refund is created in Cash App Pay, but the API client doesn''t know the ID of the refund. This endpoint allows an API client to void a refund using _only_ the idempotency key to recover from these situations.
+
+
+        If you don''t have the idempotency key or ID of the refund you want to void, you can use the list refunds endpoint to try to search for the refund you''re looking for.
+
+
+        **This endpoint is not rate limited.**
+
+
+        Scopes: `REFUNDS_WRITE`'
       tags:
-      - refunds
+      - Refunds
       parameters:
       - name: Accept
         in: header
@@ -356,6 +395,22 @@ paths:
               - idempotency_key
 components:
   schemas:
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
     RefundsPostRequestBodyContentApplicationJsonSchemaRefund:
       type: object
       properties:
@@ -406,113 +461,37 @@ components:
       - merchant_id
       description: Details about the refund to create.
       title: RefundsPostRequestBodyContentApplicationJsonSchemaRefund
-    Refunds_retrieve-refund_Response_200:
+    Metadata:
       type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_retrieve-refund_Response_200
-    Refunds_void-refund_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_void-refund_Response_200
-    RefundStatus:
-      type: string
-      enum:
-      - AUTHORIZED
-      - CAPTURED
-      - VOIDED
-      - DECLINED
-      description: 'The step of the refund processing lifecycle that this refund is currently at.
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
 
 
-        - `AUTHORIZED`
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
 
-        - `CAPTURED`
 
-        - `VOIDED`
+        Min keys: `0`
 
-        - `DECLINED`'
-      title: RefundStatus
-    Refunds_capture-refund_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_capture-refund_Response_200
-    Refunds_create-refund_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_create-refund_Response_200
-    ErrorResponse:
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    Create-refundRequestBadRequestError:
       type: object
       properties:
         errors:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
+          description: A list of errors that occurred while processing the request.
+        refund:
+          $ref: '#/components/schemas/Refund'
       required:
       - errors
-      title: ErrorResponse
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    Refunds_list-refunds_Response_200:
-      type: object
-      properties:
-        refunds:
-          type: array
-          items:
-            $ref: '#/components/schemas/Refund'
-          description: List of refunds matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - refunds
-      title: Refunds_list-refunds_Response_200
+      title: Create-refundRequestBadRequestError
     Refund:
       type: object
       properties:
@@ -612,24 +591,103 @@ components:
       - created_at
       - updated_at
       title: Refund
-    Metadata:
+    RefundStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - DECLINED
+      description: 'The step of the refund processing lifecycle that this refund is currently at.
+
+
+        - `AUTHORIZED`
+
+        - `CAPTURED`
+
+        - `VOIDED`
+
+        - `DECLINED`'
+      title: RefundStatus
+    ErrorResponse:
       type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
 
 
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey
+    Refunds_retrieve-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_retrieve-refund_Response_200
+    Refunds_capture-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_capture-refund_Response_200
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
 
 
-        Min keys: `0`
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
 
-        Max keys: `50`
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
 
 
-
-        > Note: Nested keys are not supported.'
-      title: Metadata
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Refunds_void-refund-by-idempotency-key_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_void-refund-by-idempotency-key_Response_200
+    Refunds_create-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_create-refund_Response_200
     Currency:
       type: string
       enum:
@@ -642,44 +700,25 @@ components:
 
         - `USD`: United States Dollar'
       title: Currency
-    Refunds_void-refund-by-idempotency-key_Response_200:
+    Refunds_list-refunds_Response_200:
+      type: object
+      properties:
+        refunds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Refund'
+          description: List of refunds matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - refunds
+      title: Refunds_list-refunds_Response_200
+    Refunds_void-refund_Response_200:
       type: object
       properties:
         refund:
           $ref: '#/components/schemas/Refund'
       required:
       - refund
-      title: Refunds_void-refund-by-idempotency-key_Response_200
-    Create-refundRequestBadRequestError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: A list of errors that occurred while processing the request.
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - errors
-      title: Create-refundRequestBadRequestError
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
-      title: IdempotencyKey
+      title: Refunds_void-refund_Response_200

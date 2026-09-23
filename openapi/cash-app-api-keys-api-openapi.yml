@@ -8,7 +8,7 @@ servers:
 - url: https://sandbox.api.cash.app/management/v1
   description: Sandbox
 tags:
-- name: apiKeys
+- name: API Keys
 paths:
   /api-keys:
     get:
@@ -22,7 +22,7 @@ paths:
 
         Scopes: `API_KEYS_READ`'
       tags:
-      - apiKeys
+      - API Keys
       parameters:
       - name: cursor
         in: query
@@ -73,9 +73,20 @@ paths:
     post:
       operationId: create-api-key
       summary: Create API key
-      description: "Creates a new API key and secret to use in the `Authorization` and `X-Signature` headers for requests to the Cash App Pay API. This key will automatically expire at the date and time specified in the `expires_at` field in the response payload.\n\n<Note title=\"Note\">\n The `secret` returned in the response payload is what you use to calculate the `X-Signature` header. The API key ID is only used to keep track of which API keys are active, and isn't considered secret.\n Keep in mind that the `secret` can never be retrieved in subsequent requests to the API, so make sure to store it immediately!\n</Note>\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_WRITE`"
+      description: 'Creates a new API key and secret to use in the `Authorization` and `X-Signature` headers for requests to the Cash App Pay API. This key will automatically expire at the date and time specified in the `expires_at` field in the response payload.
+
+
+        The `secret` returned in the response payload is what you use to calculate the `X-Signature` header. The API key ID is only used to keep track of which API keys are active, and isn''t considered secret.
+
+        Keep in mind that the `secret` can never be retrieved in subsequent requests to the API, so make sure to store it immediately!
+
+
+        **This endpoint is rate limited to 5 QPS.**
+
+
+        Scopes: `API_KEYS_WRITE`'
       tags:
-      - apiKeys
+      - API Keys
       parameters:
       - name: Accept
         in: header
@@ -137,7 +148,7 @@ paths:
 
         Scopes: `API_KEYS_READ`'
       tags:
-      - apiKeys
+      - API Keys
       parameters:
       - name: api_key_id
         in: path
@@ -180,9 +191,18 @@ paths:
     delete:
       operationId: delete-api-key
       summary: Delete API key
-      description: "Deletes an API key. After an API key is deleted, it can no longer be used for authentication. All API clients using the secret associated with this API key  will immediately be forbidden from talking to the Cash App Pay API.\n\n<Note title=\"Note\">\n There is no way to un-delete an API key, so treat this endpoint with caution in production environments.\n</Note>\n\n**This endpoint is rate limited to 5 QPS.**\n\nScopes: `API_KEYS_WRITE`"
+      description: 'Deletes an API key. After an API key is deleted, it can no longer be used for authentication. All API clients using the secret associated with this API key will immediately be forbidden from talking to the Cash App Pay API.
+
+
+        There is no way to un-delete an API key, so treat this endpoint with caution in production environments.
+
+
+        **This endpoint is rate limited to 5 QPS.**
+
+
+        Scopes: `API_KEYS_WRITE`'
       tags:
-      - apiKeys
+      - API Keys
       parameters:
       - name: api_key_id
         in: path
@@ -218,6 +238,132 @@ paths:
                 $ref: '#/components/schemas/apiKeys_delete-api-key_Response_200'
 components:
   schemas:
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred
+      title: ErrorCategory
+    ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey:
+      type: object
+      properties:
+        scopes:
+          $ref: '#/components/schemas/Scopes'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+      required:
+      - scopes
+      description: Details about the API key to create.
+      title: ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey
+    apiKeys_create-api-key_Response_201:
+      type: object
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKey'
+        secret:
+          type: string
+          description: 'Secret value to use when calculating the `X-Signature` header of requests.
+
+
+            This value is not returned when retrieving an API key, so make sure to store it immediately.
+
+
+            Min length: `32`
+
+            Max length: `256`'
+      required:
+      - api_key
+      - secret
+      title: apiKeys_create-api-key_Response_201
+    ApiKey:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this API key issued by Cash App. This is the API key value that is passed in the `Authorization` header.
+        created_at:
+          type: string
+          format: date-time
+          description: When this API key was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        expires_at:
+          type: string
+          format: date-time
+          description: When this API key will be automatically deleted and become unusable, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        scopes:
+          $ref: '#/components/schemas/Scopes'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+      required:
+      - id
+      - created_at
+      - expires_at
+      - scopes
+      title: ApiKey
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. Learn more about [idempotency](../docs/api/technical-documentation/api-fundamentals/idempotency) in the API.
+      title: IdempotencyKey
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    ScopesItems:
+      type: string
+      enum:
+      - PAYMENTS_READ
+      - PAYMENTS_WRITE
+      - PAYOUTS_READ
+      - PAYOUTS_WRITE
+      - REFUNDS_READ
+      - REFUNDS_WRITE
+      - DISPUTES_READ
+      - DISPUTES_WRITE
+      - CUSTOMERS_READ
+      - FEE_PLANS_READ
+      - GRANTS_READ
+      - GRANTS_WRITE
+      - API_KEYS_READ
+      - API_KEYS_WRITE
+      - BRANDS_READ
+      - BRANDS_WRITE
+      - MERCHANTS_READ
+      - MERCHANTS_WRITE
+      - WEBHOOK_CONFIG_READ
+      - WEBHOOK_CONFIG_WRITE
+      - WEBHOOK_EVENTS_READ
+      title: ScopesItems
     Scopes:
       type: array
       items:
@@ -273,6 +419,11 @@ components:
 
         Min number of items: `1`'
       title: Scopes
+    apiKeys_delete-api-key_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: apiKeys_delete-api-key_Response_200
     apiKeys_list-api-keys_Response_200:
       type: object
       properties:
@@ -287,28 +438,6 @@ components:
       required:
       - api_keys
       title: apiKeys_list-api-keys_Response_200
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    apiKeys_retrieve-api-key_Response_200:
-      type: object
-      properties:
-        api_key:
-          $ref: '#/components/schemas/ApiKey'
-      required:
-      - api_key
-      title: apiKeys_retrieve-api-key_Response_200
     Error:
       type: object
       properties:
@@ -338,120 +467,11 @@ components:
       - code
       description: Represents an error encountered during a request to the API.
       title: Error
-    ScopesItems:
-      type: string
-      enum:
-      - PAYMENTS_READ
-      - PAYMENTS_WRITE
-      - PAYOUTS_READ
-      - PAYOUTS_WRITE
-      - REFUNDS_READ
-      - REFUNDS_WRITE
-      - DISPUTES_READ
-      - DISPUTES_WRITE
-      - CUSTOMERS_READ
-      - FEE_PLANS_READ
-      - GRANTS_READ
-      - GRANTS_WRITE
-      - API_KEYS_READ
-      - API_KEYS_WRITE
-      - BRANDS_READ
-      - BRANDS_WRITE
-      - MERCHANTS_READ
-      - MERCHANTS_WRITE
-      - WEBHOOK_CONFIG_READ
-      - WEBHOOK_CONFIG_WRITE
-      - WEBHOOK_EVENTS_READ
-      title: ScopesItems
-    apiKeys_create-api-key_Response_201:
+    apiKeys_retrieve-api-key_Response_200:
       type: object
       properties:
         api_key:
           $ref: '#/components/schemas/ApiKey'
-        secret:
-          type: string
-          description: 'Secret value to use when calculating the `X-Signature` header of requests.
-
-
-            This value is not returned when retrieving an API key, so make sure to store it immediately.
-
-
-            Min length: `32`
-
-            Max length: `256`'
       required:
       - api_key
-      - secret
-      title: apiKeys_create-api-key_Response_201
-    ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey:
-      type: object
-      properties:
-        scopes:
-          $ref: '#/components/schemas/Scopes'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-      required:
-      - scopes
-      description: Details about the API key to create.
-      title: ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey
-    apiKeys_delete-api-key_Response_200:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: apiKeys_delete-api-key_Response_200
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred
-      title: ErrorCategory
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. Learn more about [idempotency](../docs/api/technical-documentation/api-fundamentals/idempotency) in the API.
-      title: IdempotencyKey
-    ApiKey:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this API key issued by Cash App. This is the API key value that is passed in the `Authorization` header.
-        created_at:
-          type: string
-          format: date-time
-          description: When this API key was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
-        expires_at:
-          type: string
-          format: date-time
-          description: When this API key will be automatically deleted and become unusable, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
-        scopes:
-          $ref: '#/components/schemas/Scopes'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-      required:
-      - id
-      - created_at
-      - expires_at
-      - scopes
-      title: ApiKey
+      title: apiKeys_retrieve-api-key_Response_200

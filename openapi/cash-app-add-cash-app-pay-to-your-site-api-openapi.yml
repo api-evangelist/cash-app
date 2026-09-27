@@ -54,29 +54,52 @@ webhooks:
       - Add Cash App Pay To Your Site
 components:
   schemas:
-    CashGrantDetailsStatus:
+    CashGrantType:
       type: string
       enum:
-      - ACTIVE
-      - EXPIRED
-      - CONSUMED
-      - REVOKED
-      description: 'Describes whether or not this grant can be used to perform the action associated with it.
-
-
-        If `ACTIVE`, it can be used to perform the action.
-
-
-        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
-
-
-        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
-
-
-        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
-
-        '
-      title: CashGrantDetailsStatus
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    CashGrant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this grant issued by Cash App.
+        intent:
+          $ref: '#/components/schemas/CashGrantIntent'
+          description: Either ON_FILE or ONE_TIME
+        type:
+          $ref: '#/components/schemas/CashGrantType'
+          description: CASHAPP for all Cash App Pay transactions
+        details:
+          $ref: '#/components/schemas/CashGrantDetails'
+      required:
+      - id
+      - intent
+      - type
+      - details
+      description: Describes a grant provided by Cash App.
+      title: CashGrant
+    CashGrantIntent:
+      type: string
+      enum:
+      - ON_FILE
+      - ONE_TIME
+      description: Either ON_FILE or ONE_TIME
+      title: CashGrantIntent
+    CashGrantDetailsCashapp:
+      type: object
+      properties:
+        customerId:
+          type: string
+        cashtag:
+          type: string
+          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
+      required:
+      - customerId
+      - cashtag
+      title: CashGrantDetailsCashapp
     CashGrantDetails:
       type: object
       properties:
@@ -120,52 +143,29 @@ components:
       - updatedAt
       - expiresAt
       title: CashGrantDetails
-    CashGrantIntent:
+    CashGrantDetailsStatus:
       type: string
       enum:
-      - ON_FILE
-      - ONE_TIME
-      description: Either ON_FILE or ONE_TIME
-      title: CashGrantIntent
-    CashGrant:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this grant issued by Cash App.
-        intent:
-          $ref: '#/components/schemas/CashGrantIntent'
-          description: Either ON_FILE or ONE_TIME
-        type:
-          $ref: '#/components/schemas/CashGrantType'
-          description: CASHAPP for all Cash App Pay transactions
-        details:
-          $ref: '#/components/schemas/CashGrantDetails'
-      required:
-      - id
-      - intent
-      - type
-      - details
-      description: Describes a grant provided by Cash App.
-      title: CashGrant
-    CashGrantDetailsCashapp:
-      type: object
-      properties:
-        customerId:
-          type: string
-        cashtag:
-          type: string
-          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
-      required:
-      - customerId
-      - cashtag
-      title: CashGrantDetailsCashapp
-    CashGrantType:
-      type: string
-      enum:
-      - CASHAPP
-      description: CASHAPP for all Cash App Pay transactions
-      title: CashGrantType
+      - ACTIVE
+      - EXPIRED
+      - CONSUMED
+      - REVOKED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+        '
+      title: CashGrantDetailsStatus
   securitySchemes:
     sec0:
       type: http

@@ -28,23 +28,6 @@ webhooks:
       - Grants Afterpay
 components:
   schemas:
-    OnFileGrantStatusUpdatedDataType:
-      type: string
-      enum:
-      - ON_FILE_GRANT
-      title: OnFileGrantStatusUpdatedDataType
-    OnFileGrantStatusUpdatedDataObject:
-      type: object
-      properties:
-        grant:
-          $ref: '#/components/schemas/Grant'
-      title: OnFileGrantStatusUpdatedDataObject
-    GrantType:
-      type: string
-      enum:
-      - ON_FILE
-      description: Type of grant
-      title: GrantType
     GrantStatus:
       type: string
       enum:
@@ -52,25 +35,12 @@ components:
       - CANCELLED
       description: Current status of the grant
       title: GrantStatus
-    OnFileGrantStatusUpdated:
-      type: object
-      properties:
-        type:
-          type: string
-        eventId:
-          type: string
-          format: uuid
-        createdAt:
-          type: string
-          format: date-time
-        data:
-          $ref: '#/components/schemas/OnFileGrantStatusUpdatedData'
-      required:
-      - type
-      - eventId
-      - createdAt
-      - data
-      title: OnFileGrantStatusUpdated
+    GrantType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Type of grant
+      title: GrantType
     Grant:
       type: object
       properties:
@@ -135,6 +105,36 @@ components:
       - type
       - object
       title: OnFileGrantStatusUpdatedData
+    OnFileGrantStatusUpdated:
+      type: object
+      properties:
+        type:
+          type: string
+        eventId:
+          type: string
+          format: uuid
+        createdAt:
+          type: string
+          format: date-time
+        data:
+          $ref: '#/components/schemas/OnFileGrantStatusUpdatedData'
+      required:
+      - type
+      - eventId
+      - createdAt
+      - data
+      title: OnFileGrantStatusUpdated
+    OnFileGrantStatusUpdatedDataObject:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      title: OnFileGrantStatusUpdatedDataObject
+    OnFileGrantStatusUpdatedDataType:
+      type: string
+      enum:
+      - ON_FILE_GRANT
+      title: OnFileGrantStatusUpdatedDataType
   securitySchemes:
     sec0:
       type: http

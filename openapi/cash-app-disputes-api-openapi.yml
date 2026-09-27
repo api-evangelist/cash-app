@@ -1,8 +1,13 @@
 openapi: 3.2.0
 info:
-  title: Network Disputes API
+  title: Cash App Disputes API
   version: 1.0.0
+  description: 'Operations tagged Disputes across 2 of this provider''s published API definitions: cash-app-disputes-openapi.json, cash-app-network-api-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
+- url: https://global-api-sandbox.afterpay.com
+  description: Sandbox
+- url: https://global-api.afterpay.com
+  description: Production
 - url: https://api.cash.app/network/v1
   description: Production
 - url: https://sandbox.api.cash.app/network/v1
@@ -10,6 +15,371 @@ servers:
 tags:
 - name: Disputes
 paths:
+  /v2/disputes:
+    get:
+      operationId: retrieve-dispute
+      summary: Retrieve Dispute
+      description: List disputes within a date range based on certain criteria. This endpoint can be used for debugging or synchronizing the disputes from Afterpay if/when you are unable to use the webhook method.
+      tags:
+      - Disputes
+      parameters:
+      - name: order
+        in: query
+        description: Payment or Order token using which you can filter the list.
+        required: false
+        schema:
+          type: integer
+      - name: merchant
+        in: query
+        description: Merchant token using which you can filter the list.
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Dispute status using which you can filter the list.
+        required: false
+        schema:
+          type: string
+      - name: openedAfter
+        in: query
+        description: Filter disputes that were created on or after this timestamp (inclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: openedBefore
+        in: query
+        description: Filter disputes that were created on or before this timestamp (inclusive).
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: offset
+        in: query
+        description: Offset for the search results.
+        required: false
+        schema:
+          type: integer
+      - name: limit
+        in: query
+        description: The maximum number of records that you want returned from this request.
+        required: false
+        schema:
+          type: integer
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve-dispute_Response_200'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/{dispute_id}:
+    get:
+      operationId: receive-dispute
+      summary: Receive Dispute
+      description: Get detailed information about a dispute.
+      tags:
+      - Disputes
+      parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dispute'
+    post:
+      operationId: respond-to-dispute
+      summary: Respond to Dispute
+      description: 'The Respond to the Dispute endpoint allows a merchant to submit evidence for the dispute. This is only allowed if the dispute is the state `needs_response`.
+
+
+        Merchants only have one opportunity to submit evidence. Once a 200 response is received, this information cannot be updated or changed.'
+      tags:
+      - Disputes
+      parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: When successful, returns the updated dispute object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dispute'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: A unique ID given to a dispute.
+                evidence:
+                  $ref: '#/components/schemas/evidence'
+                  description: Evidence for the dispute. Note that there should be at least one valid field.
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/{dispute_id}/accept:
+    get:
+      operationId: accept-dispute
+      summary: Accept Dispute
+      description: 'Merchants can call this endpoint to accept a dispute case. The endpoint only works if the dispute is in a non-terminal state (the status is not `won` or `lost`).
+
+
+        > **Note:** Calling the API changes the dispute status to lost.'
+      tags:
+      - Disputes
+      parameters:
+      - name: dispute_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - in: query
+        required: false
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: If successful, returns the updated dispute object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dispute'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/files:
+    post:
+      operationId: upload-file
+      summary: Upload File
+      description: Use this endpoint to upload files for disputes.
+      tags:
+      - Disputes
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Indicates a successful file upload.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/upload-file_Response_200'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: The file you want to upload.
+                fileType:
+                  type: string
+                  description: The type of file. Only `dispute_evidence` is supported.
+              required:
+              - file
+              - fileType
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/disputes/files/{id}:
+    get:
+      operationId: retrieve-file
+      summary: Retrieve file
+      description: Use this endpoint to retrieve files for disputes.
+      tags:
+      - Disputes
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: query
+        description: ID of the file to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: application/json
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Indicates that the file has been retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve-file_Response_200'
+        '401':
+          description: Unauthorized. Invalid merchant credentials.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: Not Found. The corresponding entity can't be found for the merchant.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: Precondition Failed. Invalid action for the dispute case, or the refund amount is larger than the refundable amount.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '413':
+          description: Request Entity Too Large. The uploaded file is too large. It must be less than 10 MB.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: 'Unsupported Media Type. Afterpay does not support the filetype of the uploaded file. It must be: GIF, PDF, JPEG, or PNG.'
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: Unprocessable Entity. Invalid parameter in the Dispute API request.
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '429':
+          description: Too Many Requests. Too many requests in a short period of time, retry later.
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
   /disputes:
     get:
       operationId: list-disputes
@@ -76,9 +446,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}:
     get:
-      operationId: retrieve-dispute
+      operationId: getDisputesByDisputeId
       summary: Retrieve dispute
       description: 'Retrieves a dispute by its ID.
 
@@ -128,9 +503,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-operation-id-source: normalized
+      x-operation-id-original: retrieve-dispute
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}/accept:
     post:
-      operationId: accept-dispute
+      operationId: postDisputesByDisputeIdAccept
       summary: Accept dispute
       description: 'Resolves a dispute by having the merchant accept responsibility for it. This leads to a "loss" of the dispute from the merchant''s perspective, and a "win" of the dispute from the customer''s perspective.
 
@@ -189,6 +571,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      x-operation-id-source: normalized
+      x-operation-id-original: accept-dispute
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}/challenge:
     post:
       operationId: challenge-dispute
@@ -253,6 +642,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}/evidence:
     get:
       operationId: list-dispute-evidence
@@ -318,6 +712,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}/evidence-text:
     post:
       operationId: create-dispute-evidence-text
@@ -397,6 +796,11 @@ paths:
               required:
               - idempotency_key
               - evidence
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}/evidence-file:
     post:
       operationId: create-dispute-evidence-file
@@ -555,6 +959,11 @@ paths:
               required:
               - request
               - file
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
   /disputes/{dispute_id}/evidence/{evidence_id}:
     delete:
       operationId: delete-dispute-evidence
@@ -668,59 +1077,273 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    servers:
+    - url: https://api.cash.app/network/v1
+      description: Production
+    - url: https://sandbox.api.cash.app/network/v1
+      description: Sandbox
 components:
   schemas:
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    DisputeState:
-      type: string
-      enum:
-      - RESPONSE_REQUIRED
-      - NO_RESPONSE_REQUIRED
-      - PROCESSING
-      - ACCEPTED
-      - WON
-      - PARTIALLY_WON
-      - LOST
-      description: 'The step in the dispute lifecycle that this dispute is currently at:
-
-
-        - `RESPONSE_REQUIRED`
-
-        - `NO_RESPONSE_REQUIRED`
-
-        - `PROCESSING`
-
-        - `ACCEPTED`
-
-        - `WON`
-
-        - `PARTIALLY_WON`
-
-        - `LOST`'
-      title: DisputeState
-    Disputes_retrieve-dispute_Response_200:
+    upload-file_Response_200:
       type: object
       properties:
-        dispute:
-          $ref: '#/components/schemas/Dispute'
+        id:
+          type: string
+          description: The ID token of the file.
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp indicating when the file was uploaded.
+        expiresAt:
+          type: string
+          format: date-time
+          description: 'The timestamp indicating when the uploaded file expires. '
+      title: upload-file_Response_200
+    DisputeStatus:
+      type: string
+      enum:
+      - needs_response
+      - under_review
+      - won
+      - lost
+      - merchant_refunded
+      - merchant_voided
+      description: The current state of the dispute. Values depend on how the dispute state machine is modeled.
+      title: DisputeStatus
+    evidence:
+      type: object
+      properties:
+        productDescription:
+          type: string
+          description: A description of the product or service and any relevant details on how this was presented to the customer at the time of purchase.
+        refundPolicy:
+          type: string
+          format: binary
+          description: Token of the file upload. The merchant’s refund policy, as shown or provided to the customer.
+        refundPolicyDisclosure:
+          type: string
+          description: An explanation of how and when the customer was shown or provided with the merchant’s refund policy prior to purchase.
+        refundRefusalExplanation:
+          type: string
+          description: The merchant’s explanation for why the customer is not entitled to a refund.
+        shippingDocumentation:
+          type: string
+          format: binary
+          description: Token of the file upload. A shipping label or receipt for the disputed payment.
+        shippingAddress:
+          type: string
+          description: The address to which a physical product was shipped.
+        shippingDate:
+          type: string
+          description: In cases of physical products, the date that a physical product began its route to the shipping address in a clear human-readable format. This date should be prior to the date of the dispute.
+        shippingCarrier:
+          type: string
+          description: In cases of physical products, the delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, separate them with commas.
+        shippingTrackingNumber:
+          type: string
+          description: The tracking number for a physical product, obtained from the delivery service.
+        uncategorizedFile:
+          type: string
+          format: binary
+          description: Token of the file upload. Additional file that’s not in any of the categories above.
+        uncategorizedText:
+          type: string
+          description: Any additional text deemed relevant by the merchant.
+      title: evidence
+    retrieve-file_Response_200:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The link of the file to be retrieved.
+        expiresAt:
+          type: string
+          format: date-time
+          description: The timestamp indicating the expiration of the link.
+      title: retrieve-file_Response_200
+    dispute:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Dispute identifier
+        order:
+          type: string
+          description: The token of the order that the dispute is for.
+        amount:
+          type: string
+          description: The amount of the dispute
+        reason:
+          $ref: '#/components/schemas/DisputeReason'
+          description: The reason for the dispute.
+        status:
+          $ref: '#/components/schemas/DisputeStatus'
+          description: The current state of the dispute. Values depend on how the dispute state machine is modeled.
+        open:
+          type: boolean
+          default: true
+          description: '`True` if a final decision on the dispute hasn''t been made yet.'
+        responseDueBy:
+          type: string
+          description: Deadline by which the merchant must respond to the dispute. (Epoch timestamp in seconds, timezone UTC +0.00)
+        createdAt:
+          type: string
+          description: A timestamp indicating when the dispute was created. (Epoch timestamp in seconds, timezone UTC +0.00)
+        openingNote:
+          type: string
+          description: Text from the customer describing why the dispute was opened or the reason for the complaint. While dispute category codes are helpful at informing what a merchant should present, it doesn’t provide reasoning behind the customer’s complaint. In some cases, this can help merchants troubleshoot the dispute directly with their customers.
+        openingNoteAttachments:
+          type: string
+          description: Attachments to supplement the `openingNote` if the customer provided photos or screenshots as part of their dispute description.
+        updatedAt:
+          type: string
+          description: Timestamp when the dispute was updated. (Epoch timestamp in seconds, timezone UTC +0.00)
+        closingReason:
+          $ref: '#/components/schemas/DisputeClosingReason'
+          description: A reason indicating how the final decision on the dispute was reached. Recommended possible values listed in Closing Reasons.
+        closingNote:
+          type: string
+          description: Text describing in detail how the final decision on the dispute was reached. This supplements the `closingReason`.
+        merchantOrderId:
+          type: string
+          description: The identifier for the transaction on the merchant side.
+        transactionDate:
+          type: string
+          description: The timestamp of the order created by the customer. (Epoch timestamp in seconds, timezone UTC +0.00)
+        settlementAmount:
+          type: string
+          description: The settlementAmount for audit usage.
+        meta:
+          $ref: '#/components/schemas/meta'
+          description: The extra information for merchants to match payment.
       required:
-      - dispute
-      title: Disputes_retrieve-dispute_Response_200
+      - id
+      - order
+      - amount
+      - reason
+      - status
+      - open
+      - responseDueBy
+      - createdAt
+      - openingNote
+      - closingReason
+      - merchantOrderId
+      - transactionDate
+      - settlementAmount
+      description: Dispute object
+      title: dispute
+    meta:
+      type: object
+      properties:
+        transactionAmount:
+          type: string
+          description: The transaction amount for the order.
+        network:
+          type: string
+          description: The payment network used by the customer. (For example, `Visa` or `MasterCard`)
+        networkReferenceId:
+          type: string
+          description: The identifier for the payment.
+        orderType:
+          type: string
+          description: The type of order. `ONLINE` or `INSTORE`
+      required:
+      - transactionAmount
+      - orderType
+      title: meta
+    DisputeClosingReason:
+      type: string
+      enum:
+      - merchant_accepted
+      - evidence_accepted
+      - evidence_rejected
+      - deadline_expired
+      - customer_cancelled
+      description: A reason indicating how the final decision on the dispute was reached. Recommended possible values listed in Closing Reasons.
+      title: DisputeClosingReason
+    DisputeReason:
+      type: string
+      enum:
+      - product_not_received
+      - product_unacceptable
+      - credit_not_processed
+      - order_canceled
+      - duplicate
+      - incorrect_amount
+      - paid_by_other_means
+      - fraudulent
+      - fraudulent_merchant
+      description: The reason for the dispute.
+      title: DisputeReason
+    retrieve-dispute_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/dispute'
+          description: An array of dispute objects that match the filter criteria in the request.
+        offset:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+      title: retrieve-dispute_Response_200
+    DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidenceCategory:
+      type: string
+      enum:
+      - GENERIC_EVIDENCE
+      - ONLINE_OR_APP_ACCESS_LOG
+      - AUTHORIZATION_DOCUMENTATION
+      - CANCELLATION_OR_REFUND_DOCUMENTATION
+      - CARDHOLDER_COMMUNICATION
+      - CARDHOLDER_INFORMATION
+      - PURCHASE_ACKNOWLEDGEMENT
+      - DUPLICATE_CHARGE_DOCUMENTATION
+      - PRODUCT_OR_SERVICE_DESCRIPTION
+      - RECEIPT
+      - SERVICE_RECEIVED_DOCUMENTATION
+      - PROOF_OF_DELIVERY_DOCUMENTATION
+      - RELATED_TRANSACTION_DOCUMENTATION
+      - REBUTTAL_EXPLANATION
+      - TRACKING_NUMBER
+      description: 'Describes what type of information is contained in this piece of evidence.
+
+
+        Current values:
+
+
+        - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
+
+        - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
+
+        - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
+
+        - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
+
+        - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
+
+        - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
+
+        - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
+
+        - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
+
+        - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
+
+        - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
+
+        - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
+
+        - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
+
+        - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
+
+        - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
+
+        - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
+      title: DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidenceCategory
     Disputes_create-dispute-evidence-file_Response_201:
       type: object
       properties:
@@ -729,36 +1352,6 @@ components:
       required:
       - evidence
       title: Disputes_create-dispute-evidence-file_Response_201
-    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFile:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: Name of the uploaded file. It should be descriptive enough to indicate what type of information is contained in the uploaded file.
-        content_type:
-          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFileContentType'
-          description: 'The MIME type of the uploaded file.
-
-
-            Current values:
-
-
-            - `application/pdf`
-
-            - `image/heic`
-
-            - `image/heif`
-
-            - `image/jpeg`
-
-            - `image/png`
-
-            - `image/tiff`'
-      required:
-      - filename
-      - content_type
-      description: Metadata about the uploaded file.
-      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFile
     Dispute:
       type: object
       properties:
@@ -790,7 +1383,7 @@ components:
           - 'null'
           description: "The amount credited to the Customer after resolving the dispute. \n\nNote: The amount will be in the lowest denomination of the currency used on the associated payment.\n\nMin value: `0`"
         reason:
-          $ref: '#/components/schemas/DisputeReason'
+          $ref: '#/components/schemas/DisputeReason_2'
           description: '4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.
 
 
@@ -878,49 +1471,6 @@ components:
       - merchant_id
       description: Represents a dispute initiated by a customer within Cash App or the customer's linked bank
       title: Dispute
-    Disputes_retrieve-dispute-evidence_Response_200:
-      type: object
-      properties:
-        evidence:
-          $ref: '#/components/schemas/DisputeEvidence'
-      required:
-      - evidence
-      title: Disputes_retrieve-dispute-evidence_Response_200
-    DisputeEvidenceFileContentType:
-      type: string
-      enum:
-      - application/pdf
-      - image/heic
-      - image/heif
-      - image/jpeg
-      - image/png
-      - image/tiff
-      description: 'The MIME type of the uploaded file.
-
-
-        Current values:
-
-
-        - `application/pdf`
-
-        - `image/heic`
-
-        - `image/heif`
-
-        - `image/jpeg`
-
-        - `image/png`
-
-        - `image/tiff`'
-      title: DisputeEvidenceFileContentType
-    Disputes_challenge-dispute_Response_200:
-      type: object
-      properties:
-        dispute:
-          $ref: '#/components/schemas/Dispute'
-      required:
-      - dispute
-      title: Disputes_challenge-dispute_Response_200
     DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceCategory:
       type: string
       enum:
@@ -975,451 +1525,33 @@ components:
 
         - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
       title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceCategory
-    Disputes_accept-dispute_Response_200:
-      type: object
-      properties:
-        dispute:
-          $ref: '#/components/schemas/Dispute'
-      title: Disputes_accept-dispute_Response_200
-    Disputes_list-disputes_Response_200:
-      type: object
-      properties:
-        disputes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Dispute'
-          description: List of disputes matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - disputes
-      title: Disputes_list-disputes_Response_200
-    DisputeEvidenceType:
+    DisputeState:
       type: string
       enum:
-      - FILE
-      - TEXT
-      description: 'Indicates if the evidence is a file or plain text.
+      - RESPONSE_REQUIRED
+      - NO_RESPONSE_REQUIRED
+      - PROCESSING
+      - ACCEPTED
+      - WON
+      - PARTIALLY_WON
+      - LOST
+      description: 'The step in the dispute lifecycle that this dispute is currently at:
 
 
-        Current values:
+        - `RESPONSE_REQUIRED`
 
-        - `TEXT`: The evidence is a blob of text under 500 characters.
+        - `NO_RESPONSE_REQUIRED`
 
-        - `FILE`: The evidence is an uploaded binary file.'
-      title: DisputeEvidenceType
-    Disputes_list-dispute-evidence_Response_200:
-      type: object
-      properties:
-        evidence:
-          type: array
-          items:
-            $ref: '#/components/schemas/DisputeEvidence'
-          description: List of pieces of evidence for the dispute matching the given query parameters
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - evidence
-      title: Disputes_list-dispute-evidence_Response_200
-    DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidence:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidenceCategory'
-          description: 'Describes what type of information is contained in this piece of evidence.
+        - `PROCESSING`
 
+        - `ACCEPTED`
 
-            Current values:
+        - `WON`
 
+        - `PARTIALLY_WON`
 
-            - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
-
-            - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
-
-            - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
-
-            - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
-
-            - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
-
-            - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
-
-            - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
-
-            - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
-
-            - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
-
-            - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
-
-            - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
-
-            - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
-
-            - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
-
-            - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
-
-            - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
-        text:
-          type: string
-          description: The blob of text to upload as evidence.
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      required:
-      - category
-      - text
-      description: Details about the evidence to create.
-      title: DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidence
-    DisputeReason:
-      type: string
-      enum:
-      - FR10
-      - FR11
-      - PE10
-      - PE11
-      - PE12
-      - CD10
-      - CD11
-      - CD13
-      description: '4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.
-
-
-        Current values:
-
-
-        - `FR10`: Customer has no knowledge of the payment.
-
-        - `FR11`: Customer has no knowledge of the payment and liability has shifted to the merchant due to collusion, fraud monitoring program thresholds, or any other reason.
-
-        - `PE10`: Payment was processed twice.
-
-        - `PE11`: Payment amount differs from agreed amount.
-
-        - `PE12`: Payment was paid for by another means.
-
-        - `CD10`: Cancelled services.
-
-        - `CD11`: Goods or services differ from what was agreed upon for the payment.
-
-        - `CD12`: The goods or services were not received.
-
-        - `CD13`: The purchase was cancelled or returned, but the refund has not been processed.'
-      title: DisputeReason
-    DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidenceCategory:
-      type: string
-      enum:
-      - GENERIC_EVIDENCE
-      - ONLINE_OR_APP_ACCESS_LOG
-      - AUTHORIZATION_DOCUMENTATION
-      - CANCELLATION_OR_REFUND_DOCUMENTATION
-      - CARDHOLDER_COMMUNICATION
-      - CARDHOLDER_INFORMATION
-      - PURCHASE_ACKNOWLEDGEMENT
-      - DUPLICATE_CHARGE_DOCUMENTATION
-      - PRODUCT_OR_SERVICE_DESCRIPTION
-      - RECEIPT
-      - SERVICE_RECEIVED_DOCUMENTATION
-      - PROOF_OF_DELIVERY_DOCUMENTATION
-      - RELATED_TRANSACTION_DOCUMENTATION
-      - REBUTTAL_EXPLANATION
-      - TRACKING_NUMBER
-      description: 'Describes what type of information is contained in this piece of evidence.
-
-
-        Current values:
-
-
-        - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
-
-        - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
-
-        - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
-
-        - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
-
-        - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
-
-        - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
-
-        - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
-
-        - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
-
-        - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
-
-        - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
-
-        - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
-
-        - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
-
-        - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
-
-        - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
-
-        - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
-      title: DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidenceCategory
-    DisputeEvidenceCategory:
-      type: string
-      enum:
-      - GENERIC_EVIDENCE
-      - ONLINE_OR_APP_ACCESS_LOG
-      - AUTHORIZATION_DOCUMENTATION
-      - CANCELLATION_OR_REFUND_DOCUMENTATION
-      - CARDHOLDER_COMMUNICATION
-      - CARDHOLDER_INFORMATION
-      - PURCHASE_ACKNOWLEDGEMENT
-      - DUPLICATE_CHARGE_DOCUMENTATION
-      - PRODUCT_OR_SERVICE_DESCRIPTION
-      - RECEIPT
-      - SERVICE_RECEIVED_DOCUMENTATION
-      - PROOF_OF_DELIVERY_DOCUMENTATION
-      - RELATED_TRANSACTION_DOCUMENTATION
-      - REBUTTAL_EXPLANATION
-      - TRACKING_NUMBER
-      description: 'Describes what type of information is contained in this piece of evidence.
-
-
-        Current values:
-
-
-        - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
-
-        - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
-
-        - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
-
-        - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
-
-        - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
-
-        - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
-
-        - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
-
-        - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
-
-        - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
-
-        - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
-
-        - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
-
-        - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
-
-        - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
-
-        - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
-
-        - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
-      title: DisputeEvidenceCategory
-    Metadata:
-      type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
-
-
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
-
-
-        Min keys: `0`
-
-        Max keys: `50`
-
-
-
-        > Note: Nested keys are not supported.'
-      title: Metadata
-    DisputeEvidenceFile:
-      type: object
-      properties:
-        filename:
-          type: string
-          description: Name of the uploaded file. It should be descriptive enough to indicate what type of information is contained in the uploaded file.
-        content_type:
-          $ref: '#/components/schemas/DisputeEvidenceFileContentType'
-          description: 'The MIME type of the uploaded file.
-
-
-            Current values:
-
-
-            - `application/pdf`
-
-            - `image/heic`
-
-            - `image/heif`
-
-            - `image/jpeg`
-
-            - `image/png`
-
-            - `image/tiff`'
-      required:
-      - filename
-      - content_type
-      description: If the evidence is of type `FILE`, contains metadata about the binary file uploaded as evidence.
-      title: DisputeEvidenceFile
-    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequest:
-      type: object
-      properties:
-        idempotency_key:
-          $ref: '#/components/schemas/IdempotencyKey'
-        evidence:
-          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidence'
-          description: Details about the evidence to create.
-      description: JSON-encoded payload describing the contents of the file uploaded
-      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequest
-    DisputeSettlementWithholding:
-      type: string
-      enum:
-      - NOT_WITHHELD
-      - WITHHELD_ALREADY
-      description: 'Indicates if the disputed amount has already been withheld from a settlement or not.
-
-
-        Current values:
-
-
-        - `NOT_WITHHELD`: The disputed amount has not yet been withheld in a settlement. It may impact future settlements if the dispute is "lost" by the merchant.
-
-
-        - `WITHHELD_ALREADY`: The disputed amount was withheld in a prior settlement. This dispute will not impact future settlements.'
-      title: DisputeSettlementWithholding
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
-      title: IdempotencyKey
-    Disputes_create-dispute-evidence-text_Response_201:
-      type: object
-      properties:
-        evidence:
-          $ref: '#/components/schemas/DisputeEvidence'
-      title: Disputes_create-dispute-evidence-text_Response_201
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFileContentType:
-      type: string
-      enum:
-      - application/pdf
-      - image/png
-      - image/jpeg
-      - image/heic
-      - image/heif
-      - image/tiff
-      description: 'The MIME type of the uploaded file.
-
-
-        Current values:
-
-
-        - `application/pdf`
-
-        - `image/heic`
-
-        - `image/heif`
-
-        - `image/jpeg`
-
-        - `image/png`
-
-        - `image/tiff`'
-      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFileContentType
-    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidence:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceCategory'
-          description: 'Describes what type of information is contained in this piece of evidence.
-
-
-            Current values:
-
-
-            - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
-
-            - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
-
-            - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
-
-            - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
-
-            - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
-
-            - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
-
-            - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
-
-            - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
-
-            - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
-
-            - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
-
-            - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
-
-            - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
-
-            - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
-
-            - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
-
-            - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
-        file:
-          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFile'
-          description: Metadata about the uploaded file.
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      required:
-      - category
-      - file
-      description: Details about the evidence to create.
-      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidence
+        - `LOST`'
+      title: DisputeState
     DisputeEvidence:
       type: object
       properties:
@@ -1510,8 +1642,503 @@ components:
       - type
       - created_at
       title: DisputeEvidence
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey
+    Disputes_list-disputes_Response_200:
+      type: object
+      properties:
+        disputes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dispute'
+          description: List of disputes matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - disputes
+      title: Disputes_list-disputes_Response_200
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFileContentType:
+      type: string
+      enum:
+      - application/pdf
+      - image/png
+      - image/jpeg
+      - image/heic
+      - image/heif
+      - image/tiff
+      description: 'The MIME type of the uploaded file.
+
+
+        Current values:
+
+
+        - `application/pdf`
+
+        - `image/heic`
+
+        - `image/heif`
+
+        - `image/jpeg`
+
+        - `image/png`
+
+        - `image/tiff`'
+      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFileContentType
+    DisputeReason_2:
+      type: string
+      enum:
+      - FR10
+      - FR11
+      - PE10
+      - PE11
+      - PE12
+      - CD10
+      - CD11
+      - CD13
+      description: '4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.
+
+
+        Current values:
+
+
+        - `FR10`: Customer has no knowledge of the payment.
+
+        - `FR11`: Customer has no knowledge of the payment and liability has shifted to the merchant due to collusion, fraud monitoring program thresholds, or any other reason.
+
+        - `PE10`: Payment was processed twice.
+
+        - `PE11`: Payment amount differs from agreed amount.
+
+        - `PE12`: Payment was paid for by another means.
+
+        - `CD10`: Cancelled services.
+
+        - `CD11`: Goods or services differ from what was agreed upon for the payment.
+
+        - `CD12`: The goods or services were not received.
+
+        - `CD13`: The purchase was cancelled or returned, but the refund has not been processed.'
+      title: DisputeReason
+    DisputeEvidenceFileContentType:
+      type: string
+      enum:
+      - application/pdf
+      - image/heic
+      - image/heif
+      - image/jpeg
+      - image/png
+      - image/tiff
+      description: 'The MIME type of the uploaded file.
+
+
+        Current values:
+
+
+        - `application/pdf`
+
+        - `image/heic`
+
+        - `image/heif`
+
+        - `image/jpeg`
+
+        - `image/png`
+
+        - `image/tiff`'
+      title: DisputeEvidenceFileContentType
+    Disputes_challenge-dispute_Response_200:
+      type: object
+      properties:
+        dispute:
+          $ref: '#/components/schemas/Dispute'
+      required:
+      - dispute
+      title: Disputes_challenge-dispute_Response_200
+    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequest:
+      type: object
+      properties:
+        idempotency_key:
+          $ref: '#/components/schemas/IdempotencyKey'
+        evidence:
+          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidence'
+          description: Details about the evidence to create.
+      description: JSON-encoded payload describing the contents of the file uploaded
+      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequest
+    DisputeEvidenceType:
+      type: string
+      enum:
+      - FILE
+      - TEXT
+      description: 'Indicates if the evidence is a file or plain text.
+
+
+        Current values:
+
+        - `TEXT`: The evidence is a blob of text under 500 characters.
+
+        - `FILE`: The evidence is an uploaded binary file.'
+      title: DisputeEvidenceType
+    DisputeEvidenceCategory:
+      type: string
+      enum:
+      - GENERIC_EVIDENCE
+      - ONLINE_OR_APP_ACCESS_LOG
+      - AUTHORIZATION_DOCUMENTATION
+      - CANCELLATION_OR_REFUND_DOCUMENTATION
+      - CARDHOLDER_COMMUNICATION
+      - CARDHOLDER_INFORMATION
+      - PURCHASE_ACKNOWLEDGEMENT
+      - DUPLICATE_CHARGE_DOCUMENTATION
+      - PRODUCT_OR_SERVICE_DESCRIPTION
+      - RECEIPT
+      - SERVICE_RECEIVED_DOCUMENTATION
+      - PROOF_OF_DELIVERY_DOCUMENTATION
+      - RELATED_TRANSACTION_DOCUMENTATION
+      - REBUTTAL_EXPLANATION
+      - TRACKING_NUMBER
+      description: 'Describes what type of information is contained in this piece of evidence.
+
+
+        Current values:
+
+
+        - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
+
+        - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
+
+        - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
+
+        - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
+
+        - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
+
+        - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
+
+        - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
+
+        - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
+
+        - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
+
+        - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
+
+        - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
+
+        - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
+
+        - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
+
+        - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
+
+        - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
+      title: DisputeEvidenceCategory
+    Disputes_accept-dispute_Response_200:
+      type: object
+      properties:
+        dispute:
+          $ref: '#/components/schemas/Dispute'
+      title: Disputes_accept-dispute_Response_200
+    DisputeSettlementWithholding:
+      type: string
+      enum:
+      - NOT_WITHHELD
+      - WITHHELD_ALREADY
+      description: 'Indicates if the disputed amount has already been withheld from a settlement or not.
+
+
+        Current values:
+
+
+        - `NOT_WITHHELD`: The disputed amount has not yet been withheld in a settlement. It may impact future settlements if the dispute is "lost" by the merchant.
+
+
+        - `WITHHELD_ALREADY`: The disputed amount was withheld in a prior settlement. This dispute will not impact future settlements.'
+      title: DisputeSettlementWithholding
+    DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidence:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidenceCategory'
+          description: 'Describes what type of information is contained in this piece of evidence.
+
+
+            Current values:
+
+
+            - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
+
+            - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
+
+            - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
+
+            - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
+
+            - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
+
+            - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
+
+            - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
+
+            - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
+
+            - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
+
+            - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
+
+            - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
+
+            - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
+
+            - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
+
+            - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
+
+            - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
+        text:
+          type: string
+          description: The blob of text to upload as evidence.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - category
+      - text
+      description: Details about the evidence to create.
+      title: DisputesDisputeIdEvidenceTextPostRequestBodyContentApplicationJsonSchemaEvidence
+    Disputes_list-dispute-evidence_Response_200:
+      type: object
+      properties:
+        evidence:
+          type: array
+          items:
+            $ref: '#/components/schemas/DisputeEvidence'
+          description: List of pieces of evidence for the dispute matching the given query parameters
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - evidence
+      title: Disputes_list-dispute-evidence_Response_200
+    Disputes_create-dispute-evidence-text_Response_201:
+      type: object
+      properties:
+        evidence:
+          $ref: '#/components/schemas/DisputeEvidence'
+      title: Disputes_create-dispute-evidence-text_Response_201
+    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Name of the uploaded file. It should be descriptive enough to indicate what type of information is contained in the uploaded file.
+        content_type:
+          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFileContentType'
+          description: 'The MIME type of the uploaded file.
+
+
+            Current values:
+
+
+            - `application/pdf`
+
+            - `image/heic`
+
+            - `image/heif`
+
+            - `image/jpeg`
+
+            - `image/png`
+
+            - `image/tiff`'
+      required:
+      - filename
+      - content_type
+      description: Metadata about the uploaded file.
+      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFile
     Disputes_delete-dispute-evidence_Response_200:
       type: object
       properties: {}
       description: Empty response body
       title: Disputes_delete-dispute-evidence_Response_200
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidence:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceCategory'
+          description: 'Describes what type of information is contained in this piece of evidence.
+
+
+            Current values:
+
+
+            - `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.
+
+            - `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.
+
+            - `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.
+
+            - `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.
+
+            - `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.
+
+            - `CARDHOLDER_INFORMATION`: Evidence that validates the customer''s identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.
+
+            - `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.
+
+            - `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.
+
+            - `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.
+
+            - `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.
+
+            - `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.
+
+            - `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.
+
+            - `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.
+
+            - `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.
+
+            - `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.'
+        file:
+          $ref: '#/components/schemas/DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidenceFile'
+          description: Metadata about the uploaded file.
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - category
+      - file
+      description: Details about the evidence to create.
+      title: DisputesDisputeIdEvidenceFilePostRequestBodyContentMultipartFormDataSchemaRequestEvidence
+    Disputes_retrieve-dispute-evidence_Response_200:
+      type: object
+      properties:
+        evidence:
+          $ref: '#/components/schemas/DisputeEvidence'
+      required:
+      - evidence
+      title: Disputes_retrieve-dispute-evidence_Response_200
+    Disputes_retrieve-dispute_Response_200:
+      type: object
+      properties:
+        dispute:
+          $ref: '#/components/schemas/Dispute'
+      required:
+      - dispute
+      title: Disputes_retrieve-dispute_Response_200
+    DisputeEvidenceFile:
+      type: object
+      properties:
+        filename:
+          type: string
+          description: Name of the uploaded file. It should be descriptive enough to indicate what type of information is contained in the uploaded file.
+        content_type:
+          $ref: '#/components/schemas/DisputeEvidenceFileContentType'
+          description: 'The MIME type of the uploaded file.
+
+
+            Current values:
+
+
+            - `application/pdf`
+
+            - `image/heic`
+
+            - `image/heif`
+
+            - `image/jpeg`
+
+            - `image/png`
+
+            - `image/tiff`'
+      required:
+      - filename
+      - content_type
+      description: If the evidence is of type `FILE`, contains metadata about the binary file uploaded as evidence.
+      title: DisputeEvidenceFile
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-refined-from:
+- cash-app-disputes-openapi.json
+- cash-app-network-api-openapi.json

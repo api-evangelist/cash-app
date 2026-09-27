@@ -97,22 +97,6 @@ paths:
               - chains
 components:
   schemas:
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred
-      title: ErrorCategory
     RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems:
       type: object
       properties:
@@ -139,6 +123,16 @@ components:
       - method
       - path
       title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod:
+      type: string
+      enum:
+      - GET
+      - POST
+      - PATCH
+      - PUT
+      - DELETE
+      description: HTTP method of the request
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod
     requestChains_create-request-chain_Response_201:
       type: object
       properties:
@@ -149,6 +143,18 @@ components:
       required:
       - responses
       title: requestChains_create-request-chain_Response_201
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams:
+      type: object
+      properties: {}
+      description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams
+    ResponseExecutionStatus:
+      type: string
+      enum:
+      - EXECUTED
+      - NOT_STARTED
+      description: Execution status of the request
+      title: ResponseExecutionStatus
     RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems:
       type: object
       properties:
@@ -163,18 +169,35 @@ components:
       - requests
       - execution_mode
       title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody:
+    Error:
       type: object
-      properties: {}
-      description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode:
-      type: string
-      enum:
-      - SEQUENTIAL
-      - PARALLEL
-      description: Execution mode of the requests in a chain
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. See the Error Code Reference for more information.
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
     ErrorResponse:
       type: object
       properties:
@@ -189,6 +212,43 @@ components:
       required:
       - errors
       title: ErrorResponse
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred
+      title: ErrorCategory
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode:
+      type: string
+      enum:
+      - SEQUENTIAL
+      - PARALLEL
+      description: Execution mode of the requests in a chain
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier for the request to execute
+      required:
+      - uid
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams:
+      type: object
+      properties: {}
+      description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams
     Response:
       type: object
       properties:
@@ -220,76 +280,16 @@ components:
       - path
       - method
       title: Response
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams:
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody:
       type: object
       properties: {}
-      description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams:
-      type: object
-      properties: {}
-      description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. See the Error Code Reference for more information.
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    ResponseExecutionStatus:
-      type: string
-      enum:
-      - EXECUTED
-      - NOT_STARTED
-      description: Execution status of the request
-      title: ResponseExecutionStatus
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod:
-      type: string
-      enum:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      description: HTTP method of the request
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod
+      description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody
     ResponseBody:
       type: object
       properties: {}
       description: Response body of the requested endpoint
       title: ResponseBody
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier for the request to execute
-      required:
-      - uid
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems
     ResponseMethod:
       type: string
       enum:

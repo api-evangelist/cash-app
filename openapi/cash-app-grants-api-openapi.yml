@@ -1,0 +1,968 @@
+openapi: 3.2.0
+info:
+  title: Cash App Grants API
+  version: 1.0.0
+  description: 'Operations tagged Grants across 2 of this provider''s published API definitions: cash-app-grants-afterpay-openapi.json, cash-app-grants-cash-app-pay-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://global-api-sandbox.afterpay.com
+  description: Sandbox
+- url: https://global-api.afterpay.com
+  description: Production
+tags:
+- name: Grants
+paths:
+  /v2/grants/approvals:
+    post:
+      operationId: start-grant-approval
+      summary: Create Grant Approval
+      description: Initiates the approval process for a new grant.
+      tags:
+      - Grants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantApprovalResponse'
+        '401':
+          description: 'Authentication failed or insufficient permissions.
+
+
+            | errorCode | Description |
+
+            | --- | --- |
+
+            | unauthorized | The API credentials are invalid or missing. |
+
+            | insufficient_permissions | The merchant lacks the required ''merchant_api_v2/initiate'' permission. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '422':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_object | One or more required fields in the request body were missing or invalid. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantApprovalRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants:
+    post:
+      operationId: create-grant
+      summary: Create Grant
+      description: Creates a new grant from a grant approval token.
+      tags:
+      - Grants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | consumer_ineligible | Consumer not eligible |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGrantRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/{grantId}:
+    get:
+      operationId: get-grant
+      summary: Retrieve Grant
+      description: Retrieves a grant by its ID.
+      tags:
+      - Grants
+      parameters:
+      - name: grantId
+        in: path
+        description: ID of the grant to retrieve.
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | grant_not_found | The specified grant id was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/{grantId}/revoke:
+    post:
+      operationId: revoke-grant
+      summary: Revoke Grant
+      description: Revokes a grant, rendering it unusable. Other endpoints will no longer be able to use the grant to perform its associated action.
+      tags:
+      - Grants
+      parameters:
+      - name: grantId
+        in: path
+        description: The unique identifier id of the grant to revoke
+        required: true
+        schema:
+          type: string
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | grant_not_found | The specified grant was not found. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/alias:
+    post:
+      operationId: alias-grant
+      summary: Create Grant Alias
+      description: Creates an alias for an existing grant to help load the payment schedule widget.
+      tags:
+      - Grants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantAliasResponse'
+        '403':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | feature_not_enabled | On file payments are not enabled for this merchant. |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '415':
+          description: Unsupported Media Type - Content-Type header is missing or invalid
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantAliasRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/start:
+    post:
+      operationId: start-billing-agreement-link
+      summary: Start Grant Link Flow
+      description: Initiates the headless grant link flow process.
+      tags:
+      - Grants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GrantStartResponse'
+        '404':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | not_found | Afterpay consumer account does not exist |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '412':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | invalid_state | Failed to send code |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+        '429':
+          description: '| errorCode | Description |
+
+            | --- | --- |
+
+            | too_many_requests | Too many requests |
+
+            '
+          content:
+            application/json:
+              schema:
+                description: Any type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantStartRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/retrieve:
+    post:
+      operationId: retrieve-grant
+      summary: Retrieve Grant
+      description: Retrieves a Cash App Pay customer grant by the ID of the customer that approved it and its own ID.
+      tags:
+      - Grants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Accept
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/retrieve-grant_Response_200'
+        '401':
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrieve-grantRequestUnauthorizedError'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Retrieve-grantRequestForbiddenError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveGrantRequest'
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+  /v2/grants/revoke:
+    post:
+      operationId: postV2GrantsRevoke
+      summary: Revoke Grant
+      description: Revokes a Cash App Pay customer grant by the ID of the customer that approved it and its own ID.
+      tags:
+      - Grants
+      parameters:
+      - name: Authorization
+        in: header
+        description: Basic authentication
+        required: true
+        schema:
+          type: string
+      - name: User-Agent
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Accept
+        in: header
+        description: Accept
+        required: false
+        schema:
+          type: string
+          default: application/json
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/revoke-grant_Response_200'
+        '401':
+          description: Unauthenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-grantRequestUnauthorizedError'
+        '403':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Revoke-grantRequestForbiddenError'
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrieveGrantRequest'
+      x-operation-id-source: normalized
+      x-operation-id-original: revoke-grant
+    servers:
+    - url: https://global-api-sandbox.afterpay.com
+      description: Sandbox
+    - url: https://global-api.afterpay.com
+      description: Production
+components:
+  schemas:
+    GrantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CANCELLED
+      description: Current status of the grant
+      title: GrantStatus
+    GrantType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Type of grant
+      title: GrantType
+    Grant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique id identifying the grant
+        type:
+          $ref: '#/components/schemas/GrantType'
+          description: Type of grant
+        status:
+          $ref: '#/components/schemas/GrantStatus'
+          description: Current status of the grant
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the grant was created
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Merchant's reference for this grant
+        cancelled:
+          type: string
+          format: date-time
+          description: If present, indicates when the grant was cancelled
+        expires:
+          type: string
+          format: date-time
+          description: If present, indicates when the grant's status will become EXPIRED, preventing a client from using it to create payments
+        consumerReference:
+          type:
+          - string
+          - 'null'
+          description: Reference identifier for the consumer
+        email:
+          type:
+          - string
+          - 'null'
+          description: Masked email address of the consumer
+        requestId:
+          type:
+          - string
+          - 'null'
+          description: If present, unique identifier for the request
+      required:
+      - id
+      - type
+      - status
+      - created
+      title: Grant
+    GrantApprovalType:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/GrantApprovalTypeType'
+          description: Grant Type for approval.
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: A merchant-provided reference for the grant.
+      required:
+      - type
+      description: Details about the grant to be created.
+      title: GrantApprovalType
+    GrantStartResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying the grant to be created
+        requestId:
+          type: string
+          description: The unique identifier from the request
+        expiresAt:
+          type: string
+          format: date-time
+          description: When this link attempt will expire
+        deliveryType:
+          $ref: '#/components/schemas/GrantStartResponseDeliveryType'
+          description: How the verification code was delivered to the consumer
+      required:
+      - token
+      - requestId
+      - expiresAt
+      - deliveryType
+      title: GrantStartResponse
+    GrantApprovalRequest:
+      type: object
+      properties:
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantApprovalType'
+          description: Grant type for approval (only single grant is supported)
+        merchant:
+          $ref: '#/components/schemas/GrantApprovalRequestMerchant'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the grant
+      required:
+      - grants
+      - merchant
+      title: GrantApprovalRequest
+    GrantApprovalResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying this grant approval request
+        expires:
+          type: string
+          format: date-time
+          description: When this approval request expires
+        redirectCheckoutUrl:
+          type: string
+          format: uri
+          description: URL where the consumer should be redirected to complete approval
+      required:
+      - token
+      - expires
+      - redirectCheckoutUrl
+      title: GrantApprovalResponse
+    GrantApprovalTypeType:
+      type: string
+      enum:
+      - ON_FILE
+      description: Grant Type for approval.
+      title: GrantApprovalTypeType
+    GrantAliasRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token of the grant to create an alias for
+        duration:
+          type:
+          - string
+          - 'null'
+          format: duration
+          description: Duration of the grant in ISO-8601 period format
+      required:
+      - token
+      title: GrantAliasRequest
+    GrantStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      title: GrantStartRequest
+    GrantAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the grant alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      title: GrantAliasResponse
+    GrantStartResponseDeliveryType:
+      type: string
+      enum:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: GrantStartResponseDeliveryType
+    Consumer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        givenNames:
+          type: string
+          description: The consumer's first name
+        surname:
+          type: string
+          description: The consumer's last name
+        phoneNumber:
+          type: string
+      required:
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
+    CreateGrantRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
+        code:
+          type: string
+          description: 'The one-time code received from the consumer.
+
+            Note: The code will only be sent with the headless integration.'
+      required:
+      - requestId
+      - token
+      title: CreateGrantRequest
+    GrantResponse:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      title: GrantResponse
+    GrantApprovalRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: This property is optional when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay approval flow.
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: GrantApprovalRequestMerchant
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    CashGrant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this grant issued by Cash App.
+        intent:
+          $ref: '#/components/schemas/CashGrantIntent'
+          description: Either ON_FILE or ONE_TIME
+        type:
+          $ref: '#/components/schemas/CashGrantType'
+          description: CASHAPP for all Cash App Pay transactions
+        details:
+          $ref: '#/components/schemas/CashGrantDetails'
+      required:
+      - id
+      - intent
+      - type
+      - details
+      description: Describes a grant provided by Cash App.
+      title: CashGrant
+    CashGrantDetailsStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - EXPIRED
+      - CONSUMED
+      - REVOKED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+        '
+      title: CashGrantDetailsStatus
+    revoke-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: revoke-grant_Response_200
+    Revoke-grantRequestForbiddenError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Revoke-grantRequestForbiddenError
+    CashGrantIntent:
+      type: string
+      enum:
+      - ON_FILE
+      - ONE_TIME
+      description: Either ON_FILE or ONE_TIME
+      title: CashGrantIntent
+    RetrieveGrantRequest:
+      type: object
+      properties:
+        customerId:
+          type: string
+          description: ID of the customer that approved the customer grant.
+        grantId:
+          type: string
+          description: ID of the customer grant to retrieve.
+      required:
+      - customerId
+      - grantId
+      title: RetrieveGrantRequest
+    CashGrantDetailsCashapp:
+      type: object
+      properties:
+        customerId:
+          type: string
+        cashtag:
+          type: string
+          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
+      required:
+      - customerId
+      - cashtag
+      title: CashGrantDetailsCashapp
+    retrieve-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: retrieve-grant_Response_200
+    CashGrantDetails:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/CashGrantDetailsStatus'
+          description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+            If `ACTIVE`, it can be used to perform the action.
+
+
+            If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+            If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+            If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+            '
+        cashapp:
+          $ref: '#/components/schemas/CashGrantDetailsCashapp'
+        createdAt:
+          type: string
+          description: When this grant was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        updatedAt:
+          type: string
+          description: When this grant was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+        expiresAt:
+          type: string
+          description: 'If present, indicates when the grant''s status will become EXPIRED, preventing a client from using it to create payments or refunds.
+
+
+            The timestamp is in the [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC).
+
+            '
+      required:
+      - status
+      - cashapp
+      - createdAt
+      - updatedAt
+      - expiresAt
+      title: CashGrantDetails
+    Revoke-grantRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Revoke-grantRequestUnauthorizedError
+    Retrieve-grantRequestForbiddenError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Retrieve-grantRequestForbiddenError
+    Retrieve-grantRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Retrieve-grantRequestUnauthorizedError
+  securitySchemes:
+    sec0:
+      type: http
+      scheme: basic
+x-refined-from:
+- cash-app-grants-afterpay-openapi.json
+- cash-app-grants-cash-app-pay-openapi.json

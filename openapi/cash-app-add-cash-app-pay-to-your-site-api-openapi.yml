@@ -54,40 +54,6 @@ webhooks:
       - Add Cash App Pay To Your Site
 components:
   schemas:
-    CashGrantType:
-      type: string
-      enum:
-      - CASHAPP
-      description: CASHAPP for all Cash App Pay transactions
-      title: CashGrantType
-    CashGrant:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this grant issued by Cash App.
-        intent:
-          $ref: '#/components/schemas/CashGrantIntent'
-          description: Either ON_FILE or ONE_TIME
-        type:
-          $ref: '#/components/schemas/CashGrantType'
-          description: CASHAPP for all Cash App Pay transactions
-        details:
-          $ref: '#/components/schemas/CashGrantDetails'
-      required:
-      - id
-      - intent
-      - type
-      - details
-      description: Describes a grant provided by Cash App.
-      title: CashGrant
-    CashGrantIntent:
-      type: string
-      enum:
-      - ON_FILE
-      - ONE_TIME
-      description: Either ON_FILE or ONE_TIME
-      title: CashGrantIntent
     CashGrantDetailsCashapp:
       type: object
       properties:
@@ -166,6 +132,40 @@ components:
 
         '
       title: CashGrantDetailsStatus
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    CashGrant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this grant issued by Cash App.
+        intent:
+          $ref: '#/components/schemas/CashGrantIntent'
+          description: Either ON_FILE or ONE_TIME
+        type:
+          $ref: '#/components/schemas/CashGrantType'
+          description: CASHAPP for all Cash App Pay transactions
+        details:
+          $ref: '#/components/schemas/CashGrantDetails'
+      required:
+      - id
+      - intent
+      - type
+      - details
+      description: Describes a grant provided by Cash App.
+      title: CashGrant
+    CashGrantIntent:
+      type: string
+      enum:
+      - ON_FILE
+      - ONE_TIME
+      description: Either ON_FILE or ONE_TIME
+      title: CashGrantIntent
   securitySchemes:
     sec0:
       type: http

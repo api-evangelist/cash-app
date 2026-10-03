@@ -395,10 +395,14 @@ paths:
               - idempotency_key
 components:
   schemas:
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
-      title: IdempotencyKey
+    Refunds_retrieve-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_retrieve-refund_Response_200
     Metadata:
       type: object
       additionalProperties:
@@ -417,76 +421,28 @@ components:
 
         > Note: Nested keys are not supported.'
       title: Metadata
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    RefundsPostRequestBodyContentApplicationJsonSchemaRefund:
+    ErrorResponse:
       type: object
       properties:
-        amount:
-          type: integer
-          description: 'The amount of money to refund the customer, in the lowest denomination of currency for the refund.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
 
 
-            Min value: `1`'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        merchant_id:
-          type: string
-          description: 'ID of the merchant to make the refund from.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        payment_id:
-          type: string
-          description: 'For refunds, this is the ID of the payment to refund.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        capture:
-          type: boolean
-          default: true
-          description: 'Whether or not to automatically capture the refund once it''s created.
-
-
-            Default: `true`'
-        reference_id:
-          type: string
-          description: 'A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
+            Min number of items: `1`'
       required:
-      - amount
-      - currency
-      - merchant_id
-      description: Details about the refund to create.
-      title: RefundsPostRequestBodyContentApplicationJsonSchemaRefund
-    Refunds_retrieve-refund_Response_200:
+      - errors
+      title: ErrorResponse
+    Refunds_capture-refund_Response_200:
       type: object
       properties:
         refund:
           $ref: '#/components/schemas/Refund'
       required:
       - refund
-      title: Refunds_retrieve-refund_Response_200
+      title: Refunds_capture-refund_Response_200
     Error:
       type: object
       properties:
@@ -516,70 +472,6 @@ components:
       - code
       description: Represents an error encountered during a request to the API.
       title: Error
-    Refunds_void-refund-by-idempotency-key_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_void-refund-by-idempotency-key_Response_200
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    RefundStatus:
-      type: string
-      enum:
-      - AUTHORIZED
-      - CAPTURED
-      - VOIDED
-      - DECLINED
-      description: 'The step of the refund processing lifecycle that this refund is currently at.
-
-
-        - `AUTHORIZED`
-
-        - `CAPTURED`
-
-        - `VOIDED`
-
-        - `DECLINED`'
-      title: RefundStatus
-    Refunds_void-refund_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_void-refund_Response_200
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
     Refunds_list-refunds_Response_200:
       type: object
       properties:
@@ -594,22 +486,6 @@ components:
       required:
       - refunds
       title: Refunds_list-refunds_Response_200
-    Refunds_capture-refund_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_capture-refund_Response_200
-    Refunds_create-refund_Response_200:
-      type: object
-      properties:
-        refund:
-          $ref: '#/components/schemas/Refund'
-      required:
-      - refund
-      title: Refunds_create-refund_Response_200
     Refund:
       type: object
       properties:
@@ -709,6 +585,126 @@ components:
       - created_at
       - updated_at
       title: Refund
+    RefundStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - CAPTURED
+      - VOIDED
+      - DECLINED
+      description: 'The step of the refund processing lifecycle that this refund is currently at.
+
+
+        - `AUTHORIZED`
+
+        - `CAPTURED`
+
+        - `VOIDED`
+
+        - `DECLINED`'
+      title: RefundStatus
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    Refunds_void-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_void-refund_Response_200
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Refunds_create-refund_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_create-refund_Response_200
+    Refunds_void-refund-by-idempotency-key_Response_200:
+      type: object
+      properties:
+        refund:
+          $ref: '#/components/schemas/Refund'
+      required:
+      - refund
+      title: Refunds_void-refund-by-idempotency-key_Response_200
+    RefundsPostRequestBodyContentApplicationJsonSchemaRefund:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'The amount of money to refund the customer, in the lowest denomination of currency for the refund.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        merchant_id:
+          type: string
+          description: 'ID of the merchant to make the refund from.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        payment_id:
+          type: string
+          description: 'For refunds, this is the ID of the payment to refund.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        capture:
+          type: boolean
+          default: true
+          description: 'Whether or not to automatically capture the refund once it''s created.
+
+
+            Default: `true`'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - amount
+      - currency
+      - merchant_id
+      description: Details about the refund to create.
+      title: RefundsPostRequestBodyContentApplicationJsonSchemaRefund
     Create-refundRequestBadRequestError:
       type: object
       properties:
@@ -722,3 +718,7 @@ components:
       required:
       - errors
       title: Create-refundRequestBadRequestError
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey

@@ -238,55 +238,33 @@ paths:
                 $ref: '#/components/schemas/apiKeys_delete-api-key_Response_200'
 components:
   schemas:
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. Learn more about [idempotency](../docs/api/technical-documentation/api-fundamentals/idempotency) in the API.
-      title: IdempotencyKey
-    ScopesItems:
-      type: string
-      enum:
-      - PAYMENTS_READ
-      - PAYMENTS_WRITE
-      - PAYOUTS_READ
-      - PAYOUTS_WRITE
-      - REFUNDS_READ
-      - REFUNDS_WRITE
-      - DISPUTES_READ
-      - DISPUTES_WRITE
-      - CUSTOMERS_READ
-      - FEE_PLANS_READ
-      - GRANTS_READ
-      - GRANTS_WRITE
-      - API_KEYS_READ
-      - API_KEYS_WRITE
-      - BRANDS_READ
-      - BRANDS_WRITE
-      - MERCHANTS_READ
-      - MERCHANTS_WRITE
-      - WEBHOOK_CONFIG_READ
-      - WEBHOOK_CONFIG_WRITE
-      - WEBHOOK_EVENTS_READ
-      title: ScopesItems
-    apiKeys_create-api-key_Response_201:
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    apiKeys_retrieve-api-key_Response_200:
       type: object
       properties:
         api_key:
           $ref: '#/components/schemas/ApiKey'
-        secret:
-          type: string
-          description: 'Secret value to use when calculating the `X-Signature` header of requests.
-
-
-            This value is not returned when retrieving an API key, so make sure to store it immediately.
-
-
-            Min length: `32`
-
-            Max length: `256`'
       required:
       - api_key
-      - secret
-      title: apiKeys_create-api-key_Response_201
+      title: apiKeys_retrieve-api-key_Response_200
+    apiKeys_delete-api-key_Response_200:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: apiKeys_delete-api-key_Response_200
     Error:
       type: object
       properties:
@@ -316,20 +294,84 @@ components:
       - code
       description: Represents an error encountered during a request to the API.
       title: Error
-    apiKeys_list-api-keys_Response_200:
+    apiKeys_create-api-key_Response_201:
       type: object
       properties:
-        api_keys:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiKey'
-          description: List of API keys for the given query parameters.
-        cursor:
+        api_key:
+          $ref: '#/components/schemas/ApiKey'
+        secret:
           type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+          description: 'Secret value to use when calculating the `X-Signature` header of requests.
+
+
+            This value is not returned when retrieving an API key, so make sure to store it immediately.
+
+
+            Min length: `32`
+
+            Max length: `256`'
       required:
-      - api_keys
-      title: apiKeys_list-api-keys_Response_200
+      - api_key
+      - secret
+      title: apiKeys_create-api-key_Response_201
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred
+      title: ErrorCategory
+    ScopesItems:
+      type: string
+      enum:
+      - PAYMENTS_READ
+      - PAYMENTS_WRITE
+      - PAYOUTS_READ
+      - PAYOUTS_WRITE
+      - REFUNDS_READ
+      - REFUNDS_WRITE
+      - DISPUTES_READ
+      - DISPUTES_WRITE
+      - CUSTOMERS_READ
+      - FEE_PLANS_READ
+      - GRANTS_READ
+      - GRANTS_WRITE
+      - API_KEYS_READ
+      - API_KEYS_WRITE
+      - BRANDS_READ
+      - BRANDS_WRITE
+      - MERCHANTS_READ
+      - MERCHANTS_WRITE
+      - WEBHOOK_CONFIG_READ
+      - WEBHOOK_CONFIG_WRITE
+      - WEBHOOK_EVENTS_READ
+      title: ScopesItems
+    ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey:
+      type: object
+      properties:
+        scopes:
+          $ref: '#/components/schemas/Scopes'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+      required:
+      - scopes
+      description: Details about the API key to create.
+      title: ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey
     Scopes:
       type: array
       items:
@@ -385,58 +427,20 @@ components:
 
         Min number of items: `1`'
       title: Scopes
-    ErrorResponse:
+    apiKeys_list-api-keys_Response_200:
       type: object
       properties:
-        errors:
+        api_keys:
           type: array
           items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred
-      title: ErrorCategory
-    apiKeys_delete-api-key_Response_200:
-      type: object
-      properties: {}
-      description: Empty response body
-      title: apiKeys_delete-api-key_Response_200
-    ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey:
-      type: object
-      properties:
-        scopes:
-          $ref: '#/components/schemas/Scopes'
-        reference_id:
+            $ref: '#/components/schemas/ApiKey'
+          description: List of API keys for the given query parameters.
+        cursor:
           type: string
-          description: 'A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
       required:
-      - scopes
-      description: Details about the API key to create.
-      title: ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey
+      - api_keys
+      title: apiKeys_list-api-keys_Response_200
     ApiKey:
       type: object
       properties:
@@ -467,11 +471,7 @@ components:
       - expires_at
       - scopes
       title: ApiKey
-    apiKeys_retrieve-api-key_Response_200:
-      type: object
-      properties:
-        api_key:
-          $ref: '#/components/schemas/ApiKey'
-      required:
-      - api_key
-      title: apiKeys_retrieve-api-key_Response_200
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. Learn more about [idempotency](../docs/api/technical-documentation/api-fundamentals/idempotency) in the API.
+      title: IdempotencyKey

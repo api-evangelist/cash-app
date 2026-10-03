@@ -97,107 +97,11 @@ paths:
               - chains
 components:
   schemas:
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier for the request
-        method:
-          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod'
-          description: HTTP method of the request
-        path:
-          type: string
-          description: URL path to call. Use format `{path_params key name}` to add variable path parameters.
-        path_params:
-          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams'
-          description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
-        query_params:
-          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams'
-          description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
-        body:
-          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody'
-          description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
-      required:
-      - uid
-      - method
-      - path
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod:
-      type: string
-      enum:
-      - GET
-      - POST
-      - PATCH
-      - PUT
-      - DELETE
-      description: HTTP method of the request
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod
-    requestChains_create-request-chain_Response_201:
-      type: object
-      properties:
-        responses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Response'
-      required:
-      - responses
-      title: requestChains_create-request-chain_Response_201
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams:
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody:
       type: object
       properties: {}
-      description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams
-    ResponseExecutionStatus:
-      type: string
-      enum:
-      - EXECUTED
-      - NOT_STARTED
-      description: Execution status of the request
-      title: ResponseExecutionStatus
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems:
-      type: object
-      properties:
-        requests:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems'
-        execution_mode:
-          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode'
-          description: Execution mode of the requests in a chain
-      required:
-      - requests
-      - execution_mode
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. See the Error Code Reference for more information.
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
+      description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody
     ErrorResponse:
       type: object
       properties:
@@ -212,43 +116,21 @@ components:
       required:
       - errors
       title: ErrorResponse
-    ErrorCategory:
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod:
       type: string
       enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred
-      title: ErrorCategory
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode:
-      type: string
-      enum:
-      - SEQUENTIAL
-      - PARALLEL
-      description: Execution mode of the requests in a chain
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems:
-      type: object
-      properties:
-        uid:
-          type: string
-          description: Unique identifier for the request to execute
-      required:
-      - uid
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams:
+      - GET
+      - POST
+      - PATCH
+      - PUT
+      - DELETE
+      description: HTTP method of the request
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams:
       type: object
       properties: {}
-      description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams
+      description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams
     Response:
       type: object
       properties:
@@ -280,16 +162,74 @@ components:
       - path
       - method
       title: Response
-    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody:
-      type: object
-      properties: {}
-      description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
-      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode:
+      type: string
+      enum:
+      - SEQUENTIAL
+      - PARALLEL
+      description: Execution mode of the requests in a chain
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode
     ResponseBody:
       type: object
       properties: {}
       description: Response body of the requested endpoint
       title: ResponseBody
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier for the request
+        method:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod'
+          description: HTTP method of the request
+        path:
+          type: string
+          description: URL path to call. Use format `{path_params key name}` to add variable path parameters.
+        path_params:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams'
+          description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
+        query_params:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams'
+          description: A map of query parameters. The value fields allow for **Accessing a previous response's value**.
+        body:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody'
+          description: The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.
+      required:
+      - uid
+      - method
+      - path
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred
+      title: ErrorCategory
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams:
+      type: object
+      properties: {}
+      description: A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: Unique identifier for the request to execute
+      required:
+      - uid
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems
     ResponseMethod:
       type: string
       enum:
@@ -300,3 +240,63 @@ components:
       - DELETE
       description: HTTP method of the request
       title: ResponseMethod
+    RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems:
+      type: object
+      properties:
+        requests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsRequestsItems'
+        execution_mode:
+          $ref: '#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItemsExecutionMode'
+          description: Execution mode of the requests in a chain
+      required:
+      - requests
+      - execution_mode
+      title: RequestChainsPostRequestBodyContentApplicationJsonSchemaChainsItems
+    requestChains_create-request-chain_Response_201:
+      type: object
+      properties:
+        responses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Response'
+      required:
+      - responses
+      title: requestChains_create-request-chain_Response_201
+    ResponseExecutionStatus:
+      type: string
+      enum:
+      - EXECUTED
+      - NOT_STARTED
+      description: Execution status of the request
+      title: ResponseExecutionStatus
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. See the Error Code Reference for more information.
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error

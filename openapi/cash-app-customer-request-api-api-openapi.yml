@@ -64,6 +64,16 @@ webhooks:
       - Customer Request API
 components:
   schemas:
+    LinkAccountAction:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/LinkAccountActionType'
+          description: The type of the action (`LINK_ACCOUNT`).
+      required:
+      - type
+      description: Describes an intent for a client to manage a customer's merchant profiles in Cash App.
+      title: LinkAccountAction
     Grant:
       type: object
       properties:
@@ -140,16 +150,12 @@ components:
       - updated_at
       description: Describes a grant that can be used to perform actions specified in a customer request using the Network API.
       title: Grant
-    LinkAccountAction:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/LinkAccountActionType'
-          description: The type of the action (`LINK_ACCOUNT`).
-      required:
-      - type
-      description: Describes an intent for a client to manage a customer's merchant profiles in Cash App.
-      title: LinkAccountAction
+    OneTimePaymentActionType:
+      type: string
+      enum:
+      - ONE_TIME_PAYMENT
+      description: The type of the action (`ONE_TIME_PAYMENT`).
+      title: OneTimePaymentActionType
     OnFileDepositAction:
       type: object
       properties:
@@ -178,6 +184,86 @@ components:
       - account_reference_id
       description: Describes an intent for a client to deposit funds into the Cash App account balances in perpetuity until the Cash App account revokes the grant.
       title: OnFileDepositAction
+    OnFileDepositActionType:
+      type: string
+      enum:
+      - ON_FILE_DEPOSIT
+      description: The type of the action (`ON_FILE_DEPOSIT`).
+      title: OnFileDepositActionType
+    WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject:
+      type: object
+      properties:
+        request:
+          $ref: '#/components/schemas/Request'
+      required:
+      - request
+      description: A snapshot of the customer request data immediately after the customer request's state was updated.
+      title: WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject
+    RequestAuthFlowTriggers:
+      type: object
+      properties:
+        qr_code_image_url:
+          type: string
+          format: uri
+          description: 'Link to a QR code customers can scan with Cash App to authorize the given action, encoded as a PNG file.
+
+
+            Min length: `8`
+
+            Max length: `1024`'
+        qr_code_svg_url:
+          type: string
+          format: uri
+          description: 'Link to a QR code customers can scan with Cash App to authorize the given action, encoded as an SVG file.
+
+
+            Min length: `8`
+
+            Max length: `1024`'
+        mobile_url:
+          type: string
+          format: uri
+          description: 'If on an Android or iOS device, the URL to redirect customers to in order to authorize the given action.
+
+
+            Min length: `8`
+
+            Max length: `1024`'
+        refreshes_at:
+          type: string
+          format: date-time
+          description: When the QR code image URL will be rotated. Generally, it will rotate every ~20 seconds and become invalid after 30 seconds.
+        desktop_url:
+          type: string
+          format: uri
+          description: 'If on a desktop browser, the URL to redirect customers to in order to authorize the given action.
+
+
+            Min length: `8`
+
+            Max length: `1024`'
+      required:
+      - qr_code_image_url
+      - qr_code_svg_url
+      - mobile_url
+      - refreshes_at
+      description: 'While the request is `PENDING`, contains different methods that can be used to start
+
+        the authorization flow in the Cash App mobile application. Its contents refresh each time
+
+        the `refreshes_at` timestamp passes. When the
+
+        data refreshes, you should update any buttons
+
+        or QR codes referring to it immediately.
+
+
+        After a request has been scanned (and is no
+
+        longer in the `PENDING` status), this
+
+        field will no longer be returned.'
+      title: RequestAuthFlowTriggers
     Request:
       type: object
       properties:
@@ -299,21 +385,69 @@ components:
       - channel
       description: Describes a request from a client to perform a given action on a customer's account.
       title: Request
-    CheckingBalanceAction:
+    LinkAccountActionType:
+      type: string
+      enum:
+      - LINK_ACCOUNT
+      description: The type of the action (`LINK_ACCOUNT`).
+      title: LinkAccountActionType
+    OnFilePaymentActionType:
+      type: string
+      enum:
+      - ON_FILE_PAYMENT
+      default: ON_FILE_PAYMENT
+      description: The type of the action (`ON_FILE_PAYMENT`).
+      title: OnFilePaymentActionType
+    RequestOrigin:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/CheckingBalanceActionType'
-          description: The type of the action (`CHECKING_BALANCE`).
+          $ref: '#/components/schemas/RequestOriginType'
+          description: 'The method used to create the customer request.
+
+
+            - `DIRECT` - the client or SDKs created this customer request by calling the "CreateCustomerRequest" endpoint
+
+            - `REQUEST_INITIATOR` - a customer interacted with a request initiator and caused Cash App to create a customer request.'
+        id:
+          type: string
+          description: 'If present, is the ID of the initiator used to create this request.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+      required:
+      - type
+      description: Metadata describing how the customer request was created.
+      title: RequestOrigin
+    Channel:
+      type: string
+      enum:
+      - IN_PERSON
+      - ONLINE
+      - IN_APP
+      description: 'How the customer is expected to interact with the request.
+
+
+        - `IN_PERSON`: The customer presents or scans a QR code at a physical location to approve the request.
+
+        - `ONLINE`: The customer scans a QR code or is redirected to Cash App from a browser context.
+
+        - `IN_APP`: The customer scans a QR code or is redirected to Cash App from a native mobile application context.'
+      title: Channel
+    OnFilePaymentAction:
+      type: object
+      properties:
         scope_id:
           type: string
-          description: 'ID of the client or brand requesting access to read the customer''s balances.
+          description: 'ID of the client or brand that will charge customers.
 
 
-            If a client ID is passed, the grant from this action can be used to read balances on behalf of the client.
+            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
 
 
-            If a brand ID is passed, the grant from this action can be used to read balances on behalf of any merchant that has a matching brand ID.
+            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
 
 
             Merchant IDs may *not* be passed.
@@ -322,103 +456,17 @@ components:
             Min length: `1`
 
             Max length: `128`'
+        type:
+          $ref: '#/components/schemas/OnFilePaymentActionType'
+          description: The type of the action (`ON_FILE_PAYMENT`).
+        account_reference_id:
+          type: string
+          description: Identifier of the account or customer associated to the on file action.
       required:
-      - type
       - scope_id
-      description: 'Describes an intent for a client to read a customer''s Cash App checking balance until the customer revokes the grant.
-
-
-        **Beta:** This action is in beta.'
-      title: CheckingBalanceAction
-    RequestRequesterProfile:
-      type: object
-      properties:
-        name:
-          type: string
-          description: 'Name of the brand to be shown in Cash App next to payments.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        logo_url:
-          type: string
-          format: uri
-          description: 'URL to the image of the entity (brand or client) that is requesting permission to perform the actions on the customer request.
-
-
-            Formats:
-
-            - `.jpg`
-
-            - `.jpeg`
-
-            - `.png`
-
-
-            Min length: `8`
-
-            Max length: `8000`'
-      required:
-      - name
-      - logo_url
-      description: Details about the brand or client that are requesting permission to perform the actions on the customer request.
-      title: RequestRequesterProfile
-    GrantType:
-      type: string
-      enum:
-      - ONE_TIME
-      - EXTENDED
-      description: Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).
-      title: GrantType
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    OnFileDepositActionType:
-      type: string
-      enum:
-      - ON_FILE_DEPOSIT
-      description: The type of the action (`ON_FILE_DEPOSIT`).
-      title: OnFileDepositActionType
-    RequestCustomerProfile:
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'Unique identifier for this customer issued by Cash App.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        cashtag:
-          type: string
-          description: 'Public identifier for the customer on Cash App. [Learn more](https://cash.app/help/us/en-us/3123-cashtags).
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-      required:
-      - id
-      - cashtag
-      description: If the customer request was approved, contains the identity of the Cash App customer that approved it.
-      title: RequestCustomerProfile
-    LinkAccountActionType:
-      type: string
-      enum:
-      - LINK_ACCOUNT
-      description: The type of the action (`LINK_ACCOUNT`).
-      title: LinkAccountActionType
+      - type
+      description: Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.
+      title: OnFilePaymentAction
     OneTimePaymentAction:
       type: object
       properties:
@@ -463,85 +511,24 @@ components:
 
         - If `amount` is provided, `currency` must be provided too (and vice versa).'
       title: OneTimePaymentAction
-    RequestAuthFlowTriggers:
+    WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaData:
       type: object
       properties:
-        qr_code_image_url:
+        id:
           type: string
-          format: uri
-          description: 'Link to a QR code customers can scan with Cash App to authorize the given action, encoded as a PNG file.
-
-
-            Min length: `8`
-
-            Max length: `1024`'
-        qr_code_svg_url:
+          description: A unique identifier provided by Cash App for the customer request.
+        object:
+          $ref: '#/components/schemas/WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject'
+          description: A snapshot of the customer request data immediately after the customer request's state was updated.
+        type:
           type: string
-          format: uri
-          description: 'Link to a QR code customers can scan with Cash App to authorize the given action, encoded as an SVG file.
-
-
-            Min length: `8`
-
-            Max length: `1024`'
-        mobile_url:
-          type: string
-          format: uri
-          description: 'If on an Android or iOS device, the URL to redirect customers to in order to authorize the given action.
-
-
-            Min length: `8`
-
-            Max length: `1024`'
-        refreshes_at:
-          type: string
-          format: date-time
-          description: When the QR code image URL will be rotated. Generally, it will rotate every ~20 seconds and become invalid after 30 seconds.
-        desktop_url:
-          type: string
-          format: uri
-          description: 'If on a desktop browser, the URL to redirect customers to in order to authorize the given action.
-
-
-            Min length: `8`
-
-            Max length: `1024`'
+          description: The resource type contained in the `object` field. For this event, it is `customer_request`.
       required:
-      - qr_code_image_url
-      - qr_code_svg_url
-      - mobile_url
-      - refreshes_at
-      description: 'While the request is `PENDING`, contains different methods that can be used to start
-
-        the authorization flow in the Cash App mobile application. Its contents refresh each time
-
-        the `refreshes_at` timestamp passes. When the
-
-        data refreshes, you should update any buttons
-
-        or QR codes referring to it immediately.
-
-
-        After a request has been scanned (and is no
-
-        longer in the `PENDING` status), this
-
-        field will no longer be returned.'
-      title: RequestAuthFlowTriggers
-    CustomerMetadata:
-      type: object
-      properties:
-        reference_id:
-          type: string
-          description: The `reference_id` of the customer approving this request. When a customer approves this request, that customer will be associated with this `reference_id`.
-      description: Metadata to associate with the customer that approves this request.
-      title: CustomerMetadata
-    OnFilePayoutActionType:
-      type: string
-      enum:
-      - ON_FILE_PAYOUT
-      description: The type of the action (`ON_FILE_PAYOUT`).
-      title: OnFilePayoutActionType
+      - id
+      - object
+      - type
+      description: Data about the customer request that was updated.
+      title: WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaData
     Action:
       oneOf:
       - $ref: '#/components/schemas/OneTimePaymentAction'
@@ -552,13 +539,27 @@ components:
       - $ref: '#/components/schemas/CheckingBalanceAction'
       description: Represents what the client intends to do to a customer if given authorization.
       title: Action
-    OnFilePaymentActionType:
+    GrantStatus:
       type: string
       enum:
-      - ON_FILE_PAYMENT
-      default: ON_FILE_PAYMENT
-      description: The type of the action (`ON_FILE_PAYMENT`).
-      title: OnFilePaymentActionType
+      - ACTIVE
+      - CONSUMED
+      - REVOKED
+      - EXPIRED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.'
+      title: GrantStatus
     RequestOriginType:
       type: string
       enum:
@@ -571,6 +572,46 @@ components:
 
         - `REQUEST_INITIATOR` - a customer interacted with a request initiator and caused Cash App to create a customer request.'
       title: RequestOriginType
+    CheckingBalanceActionType:
+      type: string
+      enum:
+      - CHECKING_BALANCE
+      description: The type of the action (`CHECKING_BALANCE`).
+      title: CheckingBalanceActionType
+    RequestRequesterProfile:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 'Name of the brand to be shown in Cash App next to payments.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        logo_url:
+          type: string
+          format: uri
+          description: 'URL to the image of the entity (brand or client) that is requesting permission to perform the actions on the customer request.
+
+
+            Formats:
+
+            - `.jpg`
+
+            - `.jpeg`
+
+            - `.png`
+
+
+            Min length: `8`
+
+            Max length: `8000`'
+      required:
+      - name
+      - logo_url
+      description: Details about the brand or client that are requesting permission to perform the actions on the customer request.
+      title: RequestRequesterProfile
     RequestStatus:
       type: string
       enum:
@@ -593,33 +634,45 @@ components:
 
         - `DECLINED`: The request was denied by the customer. No grants were created.'
       title: RequestStatus
-    OneTimePaymentActionType:
+    GrantType:
       type: string
       enum:
-      - ONE_TIME_PAYMENT
-      description: The type of the action (`ONE_TIME_PAYMENT`).
-      title: OneTimePaymentActionType
-    GrantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CONSUMED
-      - REVOKED
-      - EXPIRED
-      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+      - ONE_TIME
+      - EXTENDED
+      description: Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).
+      title: GrantType
+    RequestCustomerProfile:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Unique identifier for this customer issued by Cash App.
 
 
-        If `ACTIVE`, it can be used to perform the action.
+            Min length: `1`
+
+            Max length: `128`'
+        cashtag:
+          type: string
+          description: 'Public identifier for the customer on Cash App. [Learn more](https://cash.app/help/us/en-us/3123-cashtags).
 
 
-        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+            Min length: `1`
 
-
-        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
-
-
-        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.'
-      title: GrantStatus
+            Max length: `1024`'
+      required:
+      - id
+      - cashtag
+      description: If the customer request was approved, contains the identity of the Cash App customer that approved it.
+      title: RequestCustomerProfile
+    CustomerMetadata:
+      type: object
+      properties:
+        reference_id:
+          type: string
+          description: The `reference_id` of the customer approving this request. When a customer approves this request, that customer will be associated with this `reference_id`.
+      description: Metadata to associate with the customer that approves this request.
+      title: CustomerMetadata
     Metadata:
       type: object
       additionalProperties:
@@ -637,77 +690,24 @@ components:
 
         > Note: Nested keys are not supported.'
       title: Metadata
-    WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject:
-      type: object
-      properties:
-        request:
-          $ref: '#/components/schemas/Request'
-      required:
-      - request
-      description: A snapshot of the customer request data immediately after the customer request's state was updated.
-      title: WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject
-    Channel:
+    OnFilePayoutActionType:
       type: string
       enum:
-      - IN_PERSON
-      - ONLINE
-      - IN_APP
-      description: 'How the customer is expected to interact with the request.
-
-
-        - `IN_PERSON`: The customer presents or scans a QR code at a physical location to approve the request.
-
-        - `ONLINE`: The customer scans a QR code or is redirected to Cash App from a browser context.
-
-        - `IN_APP`: The customer scans a QR code or is redirected to Cash App from a native mobile application context.'
-      title: Channel
-    WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: A unique identifier provided by Cash App for the customer request.
-        object:
-          $ref: '#/components/schemas/WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject'
-          description: A snapshot of the customer request data immediately after the customer request's state was updated.
-        type:
-          type: string
-          description: The resource type contained in the `object` field. For this event, it is `customer_request`.
-      required:
-      - id
-      - object
-      - type
-      description: Data about the customer request that was updated.
-      title: WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaData
-    RequestOrigin:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/RequestOriginType'
-          description: 'The method used to create the customer request.
-
-
-            - `DIRECT` - the client or SDKs created this customer request by calling the "CreateCustomerRequest" endpoint
-
-            - `REQUEST_INITIATOR` - a customer interacted with a request initiator and caused Cash App to create a customer request.'
-        id:
-          type: string
-          description: 'If present, is the ID of the initiator used to create this request.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-      required:
-      - type
-      description: Metadata describing how the customer request was created.
-      title: RequestOrigin
-    CheckingBalanceActionType:
+      - ON_FILE_PAYOUT
+      description: The type of the action (`ON_FILE_PAYOUT`).
+      title: OnFilePayoutActionType
+    Currency:
       type: string
       enum:
-      - CHECKING_BALANCE
-      description: The type of the action (`CHECKING_BALANCE`).
-      title: CheckingBalanceActionType
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
     OnFilePayoutAction:
       type: object
       properties:
@@ -739,18 +739,21 @@ components:
       - scope_id
       description: Describes an intent for a client to payout funds from the Cash App account balances in perpetuity until the Cash App account revokes the grant.
       title: OnFilePayoutAction
-    OnFilePaymentAction:
+    CheckingBalanceAction:
       type: object
       properties:
+        type:
+          $ref: '#/components/schemas/CheckingBalanceActionType'
+          description: The type of the action (`CHECKING_BALANCE`).
         scope_id:
           type: string
-          description: 'ID of the client or brand that will charge customers.
+          description: 'ID of the client or brand requesting access to read the customer''s balances.
 
 
-            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
+            If a client ID is passed, the grant from this action can be used to read balances on behalf of the client.
 
 
-            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
+            If a brand ID is passed, the grant from this action can be used to read balances on behalf of any merchant that has a matching brand ID.
 
 
             Merchant IDs may *not* be passed.
@@ -759,14 +762,11 @@ components:
             Min length: `1`
 
             Max length: `128`'
-        type:
-          $ref: '#/components/schemas/OnFilePaymentActionType'
-          description: The type of the action (`ON_FILE_PAYMENT`).
-        account_reference_id:
-          type: string
-          description: Identifier of the account or customer associated to the on file action.
       required:
-      - scope_id
       - type
-      description: Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.
-      title: OnFilePaymentAction
+      - scope_id
+      description: 'Describes an intent for a client to read a customer''s Cash App checking balance until the customer revokes the grant.
+
+
+        **Beta:** This action is in beta.'
+      title: CheckingBalanceAction

@@ -179,89 +179,19 @@ components:
       - amount
       - consumer
       title: get-checkout_Response_200
-    Checkout-Request:
+    Money:
       type: object
       properties:
         amount:
-          $ref: '#/components/schemas/Money'
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-        merchantReference:
           type: string
-        billing:
-          $ref: '#/components/schemas/Contact'
-        shipping:
-          $ref: '#/components/schemas/Contact'
-        merchant:
-          $ref: '#/components/schemas/CheckoutRequestMerchant'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        courier:
-          $ref: '#/components/schemas/Shipping-Courier'
-        taxAmount:
-          $ref: '#/components/schemas/Money'
-        shippingAmount:
-          $ref: '#/components/schemas/Money'
-        discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Discount'
-        description:
-          type: string
-        mode:
-          type: string
-          default: standard
-          description: 'Must be set to `express` to enable express checkout.
-
-            Allowed values: `express` `standard`'
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
       required:
       - amount
-      - consumer
-      description: Individual Checkout
-      title: Checkout-Request
-    ContactCountryCode:
-      type: string
-      enum:
-      - AU
-      - NZ
-      - US
-      - CA
-      - GB
-      title: ContactCountryCode
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    Shipping-Courier:
-      type: object
-      properties:
-        shippedAt:
-          type: string
-          format: date-time
-        name:
-          type: string
-        tracking:
-          type: string
-        priority:
-          $ref: '#/components/schemas/ShippingCourierPriority'
-      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
-
-
-        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
-
-
-        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
-
-
-        The `priority` field tracks the shipping speed or service level associated with the delivery. '
-      title: Shipping-Courier
+      - currency
+      description: Object containing amount and currency
+      title: Money
     CheckoutRequestMerchant:
       type: object
       properties:
@@ -356,34 +286,24 @@ components:
       - email
       description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
       title: Consumer
-    ShippingCourierPriority:
+    MoneyCurrency:
       type: string
       enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
-    Money:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
-    Discount:
-      type: object
-      properties:
-        displayName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
     Item:
       type: object
       properties:
@@ -417,6 +337,86 @@ components:
       - price
       description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
       title: Item
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    Checkout-Request:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        merchantReference:
+          type: string
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        merchant:
+          $ref: '#/components/schemas/CheckoutRequestMerchant'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        description:
+          type: string
+        mode:
+          type: string
+          default: standard
+          description: 'Must be set to `express` to enable express checkout.
+
+            Allowed values: `express` `standard`'
+      required:
+      - amount
+      - consumer
+      description: Individual Checkout
+      title: Checkout-Request
+    Shipping-Courier:
+      type: object
+      properties:
+        shippedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        tracking:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ShippingCourierPriority'
+      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
+
+
+        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
+
+
+        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
+
+
+        The `priority` field tracks the shipping speed or service level associated with the delivery. '
+      title: Shipping-Courier
   securitySchemes:
     sec0:
       type: http

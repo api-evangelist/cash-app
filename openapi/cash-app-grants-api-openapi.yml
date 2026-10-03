@@ -518,19 +518,92 @@ paths:
       description: Production
 components:
   schemas:
-    GrantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CANCELLED
-      description: Current status of the grant
-      title: GrantStatus
-    GrantType:
+    GrantApprovalTypeType:
       type: string
       enum:
       - ON_FILE
-      description: Type of grant
-      title: GrantType
+      description: Grant Type for approval.
+      title: GrantApprovalTypeType
+    GrantApprovalRequest:
+      type: object
+      properties:
+        grants:
+          type: array
+          items:
+            $ref: '#/components/schemas/GrantApprovalType'
+          description: Grant type for approval (only single grant is supported)
+        merchant:
+          $ref: '#/components/schemas/GrantApprovalRequestMerchant'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the grant
+      required:
+      - grants
+      - merchant
+      title: GrantApprovalRequest
+    GrantStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      title: GrantStartRequest
+    CreateGrantRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
+        code:
+          type: string
+          description: 'The one-time code received from the consumer.
+
+            Note: The code will only be sent with the headless integration.'
+      required:
+      - requestId
+      - token
+      title: CreateGrantRequest
+    GrantAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the grant alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      title: GrantAliasResponse
+    Consumer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        givenNames:
+          type: string
+          description: The consumer's first name
+        surname:
+          type: string
+          description: The consumer's last name
+        phoneNumber:
+          type: string
+      required:
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
     Grant:
       type: object
       properties:
@@ -581,6 +654,55 @@ components:
       - status
       - created
       title: Grant
+    GrantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CANCELLED
+      description: Current status of the grant
+      title: GrantStatus
+    GrantAliasRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token of the grant to create an alias for
+        duration:
+          type:
+          - string
+          - 'null'
+          format: duration
+          description: Duration of the grant in ISO-8601 period format
+      required:
+      - token
+      title: GrantAliasRequest
+    GrantApprovalResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying this grant approval request
+        expires:
+          type: string
+          format: date-time
+          description: When this approval request expires
+        redirectCheckoutUrl:
+          type: string
+          format: uri
+          description: URL where the consumer should be redirected to complete approval
+      required:
+      - token
+      - expires
+      - redirectCheckoutUrl
+      title: GrantApprovalResponse
+    GrantResponse:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      title: GrantResponse
     GrantApprovalType:
       type: object
       properties:
@@ -618,141 +740,6 @@ components:
       - expiresAt
       - deliveryType
       title: GrantStartResponse
-    GrantApprovalRequest:
-      type: object
-      properties:
-        grants:
-          type: array
-          items:
-            $ref: '#/components/schemas/GrantApprovalType'
-          description: Grant type for approval (only single grant is supported)
-        merchant:
-          $ref: '#/components/schemas/GrantApprovalRequestMerchant'
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-          description: Consumer details for the grant
-      required:
-      - grants
-      - merchant
-      title: GrantApprovalRequest
-    GrantApprovalResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token identifying this grant approval request
-        expires:
-          type: string
-          format: date-time
-          description: When this approval request expires
-        redirectCheckoutUrl:
-          type: string
-          format: uri
-          description: URL where the consumer should be redirected to complete approval
-      required:
-      - token
-      - expires
-      - redirectCheckoutUrl
-      title: GrantApprovalResponse
-    GrantApprovalTypeType:
-      type: string
-      enum:
-      - ON_FILE
-      description: Grant Type for approval.
-      title: GrantApprovalTypeType
-    GrantAliasRequest:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token of the grant to create an alias for
-        duration:
-          type:
-          - string
-          - 'null'
-          format: duration
-          description: Duration of the grant in ISO-8601 period format
-      required:
-      - token
-      title: GrantAliasRequest
-    GrantStartRequest:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Email or phone number associated with the consumer's account
-        requestId:
-          type: string
-          description: A unique identifier for this request
-      required:
-      - alias
-      - requestId
-      title: GrantStartRequest
-    GrantAliasResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token representing the grant alias
-        expiry:
-          type: string
-          format: date-time
-          description: Timestamp when the alias token expires
-      required:
-      - token
-      - expiry
-      title: GrantAliasResponse
-    GrantStartResponseDeliveryType:
-      type: string
-      enum:
-      - SMS
-      - EMAIL
-      description: How the verification code was delivered to the consumer
-      title: GrantStartResponseDeliveryType
-    Consumer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        givenNames:
-          type: string
-          description: The consumer's first name
-        surname:
-          type: string
-          description: The consumer's last name
-        phoneNumber:
-          type: string
-      required:
-      - email
-      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
-      title: Consumer
-    CreateGrantRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
-        token:
-          type: string
-          description: The token returned from the create approval request.
-        code:
-          type: string
-          description: 'The one-time code received from the consumer.
-
-            Note: The code will only be sent with the headless integration.'
-      required:
-      - requestId
-      - token
-      title: CreateGrantRequest
-    GrantResponse:
-      type: object
-      properties:
-        grant:
-          $ref: '#/components/schemas/Grant'
-      required:
-      - grant
-      title: GrantResponse
     GrantApprovalRequestMerchant:
       type: object
       properties:
@@ -770,64 +757,19 @@ components:
       - redirectConfirmUrl
       - redirectCancelUrl
       title: GrantApprovalRequestMerchant
-    CashGrantType:
+    GrantStartResponseDeliveryType:
       type: string
       enum:
-      - CASHAPP
-      description: CASHAPP for all Cash App Pay transactions
-      title: CashGrantType
-    CashGrant:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for this grant issued by Cash App.
-        intent:
-          $ref: '#/components/schemas/CashGrantIntent'
-          description: Either ON_FILE or ONE_TIME
-        type:
-          $ref: '#/components/schemas/CashGrantType'
-          description: CASHAPP for all Cash App Pay transactions
-        details:
-          $ref: '#/components/schemas/CashGrantDetails'
-      required:
-      - id
-      - intent
-      - type
-      - details
-      description: Describes a grant provided by Cash App.
-      title: CashGrant
-    CashGrantDetailsStatus:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: GrantStartResponseDeliveryType
+    GrantType:
       type: string
       enum:
-      - ACTIVE
-      - EXPIRED
-      - CONSUMED
-      - REVOKED
-      description: 'Describes whether or not this grant can be used to perform the action associated with it.
-
-
-        If `ACTIVE`, it can be used to perform the action.
-
-
-        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
-
-
-        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
-
-
-        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
-
-        '
-      title: CashGrantDetailsStatus
-    revoke-grant_Response_200:
-      type: object
-      properties:
-        grant:
-          $ref: '#/components/schemas/CashGrant'
-      required:
-      - grant
-      title: revoke-grant_Response_200
+      - ON_FILE
+      description: Type of grant
+      title: GrantType
     Revoke-grantRequestForbiddenError:
       type: object
       properties:
@@ -840,13 +782,6 @@ components:
         httpStatusCode:
           type: integer
       title: Revoke-grantRequestForbiddenError
-    CashGrantIntent:
-      type: string
-      enum:
-      - ON_FILE
-      - ONE_TIME
-      description: Either ON_FILE or ONE_TIME
-      title: CashGrantIntent
     RetrieveGrantRequest:
       type: object
       properties:
@@ -872,14 +807,18 @@ components:
       - customerId
       - cashtag
       title: CashGrantDetailsCashapp
-    retrieve-grant_Response_200:
+    Retrieve-grantRequestUnauthorizedError:
       type: object
       properties:
-        grant:
-          $ref: '#/components/schemas/CashGrant'
-      required:
-      - grant
-      title: retrieve-grant_Response_200
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Retrieve-grantRequestUnauthorizedError
     CashGrantDetails:
       type: object
       properties:
@@ -935,6 +874,79 @@ components:
         httpStatusCode:
           type: integer
       title: Revoke-grantRequestUnauthorizedError
+    CashGrantDetailsStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - EXPIRED
+      - CONSUMED
+      - REVOKED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+        '
+      title: CashGrantDetailsStatus
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    CashGrant:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for this grant issued by Cash App.
+        intent:
+          $ref: '#/components/schemas/CashGrantIntent'
+          description: Either ON_FILE or ONE_TIME
+        type:
+          $ref: '#/components/schemas/CashGrantType'
+          description: CASHAPP for all Cash App Pay transactions
+        details:
+          $ref: '#/components/schemas/CashGrantDetails'
+      required:
+      - id
+      - intent
+      - type
+      - details
+      description: Describes a grant provided by Cash App.
+      title: CashGrant
+    revoke-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: revoke-grant_Response_200
+    CashGrantIntent:
+      type: string
+      enum:
+      - ON_FILE
+      - ONE_TIME
+      description: Either ON_FILE or ONE_TIME
+      title: CashGrantIntent
+    retrieve-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/CashGrant'
+      required:
+      - grant
+      title: retrieve-grant_Response_200
     Retrieve-grantRequestForbiddenError:
       type: object
       properties:
@@ -947,18 +959,6 @@ components:
         httpStatusCode:
           type: integer
       title: Retrieve-grantRequestForbiddenError
-    Retrieve-grantRequestUnauthorizedError:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorId:
-          type: string
-        message:
-          type: string
-        httpStatusCode:
-          type: integer
-      title: Retrieve-grantRequestUnauthorizedError
   securitySchemes:
     sec0:
       type: http

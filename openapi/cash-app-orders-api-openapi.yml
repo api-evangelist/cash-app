@@ -66,54 +66,37 @@ paths:
               $ref: '#/components/schemas/OrderRequest'
 components:
   schemas:
-    OrderRequestPaymentScheduleType:
-      type: string
-      enum:
-      - DEFAULT
-      description: The payment schedule type for the order.
-      title: OrderRequestPaymentScheduleType
-    ContactCountryCode:
-      type: string
-      enum:
-      - AU
-      - NZ
-      - US
-      - CA
-      - GB
-      title: ContactCountryCode
-    PaymentSchedule:
+    CreateOrderResponse:
       type: object
       properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: Amount for this payment installment
-        dueDate:
+        token:
           type: string
-          format: date
-          description: Due date for this installment
+        expires:
+          type: string
+          format: date-time
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentSchedule'
+          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
       required:
-      - amount
-      - dueDate
-      description: Represents a scheduled payment installment
-      title: PaymentSchedule
-    MoneyCurrency:
+      - token
+      - expires
+      title: CreateOrderResponse
+    ShippingCourierPriority:
       type: string
       enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    Initiation:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/InitiationActor'
-          description: The party who initiated the order
-      required:
-      - actor
-      title: Initiation
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    SubscriptionInterval:
+      type: string
+      enum:
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      title: SubscriptionInterval
     Shipping-Courier:
       type: object
       properties:
@@ -137,6 +120,15 @@ components:
 
         The `priority` field tracks the shipping speed or service level associated with the delivery. '
       title: Shipping-Courier
+    Initiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/InitiationActor'
+          description: The party who initiated the order
+      required:
+      - actor
+      title: Initiation
     Contact:
       type: object
       properties:
@@ -183,21 +175,6 @@ components:
       - countryCode
       description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
       title: Contact
-    Discount:
-      type: object
-      properties:
-        displayName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
-    SubscriptionType:
-      type: string
-      enum:
-      - FIXED
-      - VARIABLE
-      title: SubscriptionType
     Consumer:
       type: object
       properties:
@@ -249,23 +226,64 @@ components:
       - price
       description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
       title: Item
-    CreateOrderResponse:
+    Enrichments:
       type: object
       properties:
-        token:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        paymentSchedule:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentSchedule'
-          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+          description: Who initiated the order
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+          description: Metadata on the subscription details
       required:
-      - token
-      - expires
-      title: CreateOrderResponse
+      - initiation
+      title: Enrichments
+    Money:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
+      required:
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
+    OrderRequestPaymentScheduleType:
+      type: string
+      enum:
+      - DEFAULT
+      description: The payment schedule type for the order.
+      title: OrderRequestPaymentScheduleType
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
     OrderRequest:
       type: object
       properties:
@@ -319,39 +337,6 @@ components:
       - amount
       - enrichments
       title: OrderRequest
-    Enrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/Initiation'
-          description: Who initiated the order
-        subscription:
-          $ref: '#/components/schemas/Subscription'
-          description: Metadata on the subscription details
-      required:
-      - initiation
-      title: Enrichments
-    Money:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
-    SubscriptionInterval:
-      type: string
-      enum:
-      - DAY
-      - WEEK
-      - MONTH
-      - YEAR
-      title: SubscriptionInterval
     Subscription:
       type: object
       properties:
@@ -362,12 +347,6 @@ components:
         intervalCount:
           type: integer
       title: Subscription
-    ShippingCourierPriority:
-      type: string
-      enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
     InitiationActor:
       type: string
       enum:
@@ -375,6 +354,27 @@ components:
       - MERCHANT
       description: The party who initiated the order
       title: InitiationActor
+    SubscriptionType:
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+      title: SubscriptionType
+    PaymentSchedule:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount for this payment installment
+        dueDate:
+          type: string
+          format: date
+          description: Due date for this installment
+      required:
+      - amount
+      - dueDate
+      description: Represents a scheduled payment installment
+      title: PaymentSchedule
   securitySchemes:
     sec0:
       type: http

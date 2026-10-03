@@ -634,209 +634,76 @@ paths:
                 description: Any type
 components:
   schemas:
-    BillingAgreementAliasRequest:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token of the billing agreement to create an alias for
-        duration:
-          type:
-          - string
-          - 'null'
-          format: duration
-          description: Duration of the billing agreement in ISO-8601 period format
-      required:
-      - token
-      description: Request to create an alias for a billing agreement
-      title: BillingAgreementAliasRequest
-    AgreementApprovalType:
-      type: string
-      enum:
-      - BILLING
-      description: Agreement Type for approval.
-      title: AgreementApprovalType
-    PaymentSchedule:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: Amount for this payment installment
-        dueDate:
-          type: string
-          format: date
-          description: Due date for this installment
-      required:
-      - amount
-      - dueDate
-      description: Represents a scheduled payment installment
-      title: PaymentSchedule
-    OffersRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: A unique identifier for this request
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: The amount to check offers for
-        token:
-          type: string
-          description: The billing agreement token
-      required:
-      - requestId
-      - amount
-      - token
-      description: Request to retrieve available billing agreement offers
-      title: OffersRequest
-    BillingAgreementApprovalRequest:
-      type: object
-      properties:
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-          description: Consumer details for the billing agreement
-        merchant:
-          $ref: '#/components/schemas/BillingAgreementApprovalRequestMerchant'
-        merchantReference:
-          type: string
-          description: Merchant's unique reference for this billing agreement
-        agreements:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgreementApproval'
-          description: Agreement type for approval (only single agreement is supported)
-      required:
-      - merchant
-      description: Request body for initiating a billing agreement approval process
-      title: BillingAgreementApprovalRequest
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    CreateAgreementRequest:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
-        token:
-          type: string
-          description: The token returned from the create approval request.
-        merchantReference:
-          type: string
-          description: 'The reference order id that this payment corresponds to in the merchant''s system.
-
-            Note: Providing a new value will update any value previously set in the Create Checkout request.'
-      required:
-      - token
-      title: CreateAgreementRequest
-    AgreementApproval:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/AgreementApprovalType'
-          description: Agreement Type for approval.
-        merchantReference:
-          type:
-          - string
-          - 'null'
-          description: A merchant-provided reference for the agreement.
-      required:
-      - type
-      description: Details about the agreement to be created.
-      title: AgreementApproval
-    GetBillingAgreementRequest:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The billing agreement token to retrieve
-      required:
-      - token
-      description: Request to retrieve a billing agreement by token
-      title: GetBillingAgreementRequest
     OfferType:
       type: string
       enum:
       - PAY_IN_4
       description: Type of the offer
       title: OfferType
-    AgreementEventResponseStatus:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: Status of the agreement at the time of the event
-      title: AgreementEventResponseStatus
-    BillingAgreementAliasResponse:
+    LinkStartResponse:
       type: object
       properties:
         token:
           type: string
-          description: Token representing the billing agreement alias
-        expiry:
-          type: string
-          format: date-time
-          description: Timestamp when the alias token expires
-      required:
-      - token
-      - expiry
-      description: Response containing the payment schedule token and its expiry
-      title: BillingAgreementAliasResponse
-    Consumer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        givenNames:
-          type: string
-          description: The consumer's first name
-        surname:
-          type: string
-          description: The consumer's last name
-        phoneNumber:
-          type: string
-      required:
-      - email
-      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
-      title: Consumer
-    BillingAgreementResponseStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CANCELLED
-      - EXPIRED
-      - PENDING_RENEWAL
-      - PENDING_RENEWAL_EXPIRED
-      description: Current status of the agreement
-      title: BillingAgreementResponseStatus
-    LinkStartRequest:
-      type: object
-      properties:
-        alias:
-          type: string
-          description: Email or phone number associated with the consumer's afterpay account
+          description: Token identifying the billing agreement to be created
         requestId:
           type: string
-          description: A unique identifier for this request
+          description: The unique identifier from the request
+        expiresAt:
+          type: string
+          format: date-time
+          description: When this link attempt will expire
+        deliveryType:
+          $ref: '#/components/schemas/LinkStartResponseDeliveryType'
+          description: How the verification code was delivered to the consumer
       required:
-      - alias
+      - token
       - requestId
-      description: Request to start a billing agreement link flow
-      title: LinkStartRequest
-    LinkStartResponseDeliveryType:
-      type: string
-      enum:
-      - SMS
-      - EMAIL
-      description: How the verification code was delivered to the consumer
-      title: LinkStartResponseDeliveryType
+      - expiresAt
+      - deliveryType
+      description: Response containing the billing agreement link details
+      title: LinkStartResponse
+    ConsumerOffersNoPaymentUpfront:
+      type: object
+      properties:
+        eligible:
+          type: boolean
+          description: Indicates if the consumer is eligible for no payment upfront
+        eligibilityLimit:
+          $ref: '#/components/schemas/Money'
+          description: The maximum amount eligible for no payment upfront
+      required:
+      - eligible
+      - eligibilityLimit
+      description: Information about the no payment upfront feature eligibility
+      title: ConsumerOffersNoPaymentUpfront
+    AgreementEventResponse:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/AgreementEventResponseType'
+          description: Type of event
+        created:
+          type: string
+          format: date-time
+          description: Timestamp when the event occurred
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount associated with the event
+        status:
+          $ref: '#/components/schemas/AgreementEventResponseStatus'
+          description: Status of the agreement at the time of the event
+        merchantReference:
+          type:
+          - string
+          - 'null'
+          description: Merchant's reference associated with this event
+        orderId:
+          type: number
+          format: double
+          description: Order ID associated with this event
+      description: Response type for agreement events
+      title: AgreementEventResponse
     BillingAgreementResponse:
       type: object
       properties:
@@ -893,12 +760,35 @@ components:
       - created
       description: Response type for billing agreements
       title: BillingAgreementResponse
-    BillingAgreementResponseType:
+    LinkStartRequest:
+      type: object
+      properties:
+        alias:
+          type: string
+          description: Email or phone number associated with the consumer's afterpay account
+        requestId:
+          type: string
+          description: A unique identifier for this request
+      required:
+      - alias
+      - requestId
+      description: Request to start a billing agreement link flow
+      title: LinkStartRequest
+    AgreementEventResponseType:
       type: string
       enum:
-      - BILLING
-      description: Type of agreement
-      title: BillingAgreementResponseType
+      - CAPTURE
+      - VOID
+      description: Type of event
+      title: AgreementEventResponseType
+    ConsumerOffers:
+      type: object
+      properties:
+        noPaymentUpfront:
+          $ref: '#/components/schemas/ConsumerOffersNoPaymentUpfront'
+          description: Information about the no payment upfront feature eligibility
+      description: Consumer offers
+      title: ConsumerOffers
     CancelBillingAgreementRequest:
       type: object
       properties:
@@ -909,33 +799,104 @@ components:
       - token
       description: Request to cancel a billing agreement
       title: CancelBillingAgreementRequest
-    AgreementEventResponse:
+    BillingAgreementAliasRequest:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token of the billing agreement to create an alias for
+        duration:
+          type:
+          - string
+          - 'null'
+          format: duration
+          description: Duration of the billing agreement in ISO-8601 period format
+      required:
+      - token
+      description: Request to create an alias for a billing agreement
+      title: BillingAgreementAliasRequest
+    AgreementApproval:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/AgreementEventResponseType'
-          description: Type of event
-        created:
-          type: string
-          format: date-time
-          description: Timestamp when the event occurred
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: Amount associated with the event
-        status:
-          $ref: '#/components/schemas/AgreementEventResponseStatus'
-          description: Status of the agreement at the time of the event
+          $ref: '#/components/schemas/AgreementApprovalType'
+          description: Agreement Type for approval.
         merchantReference:
           type:
           - string
           - 'null'
-          description: Merchant's reference associated with this event
-        orderId:
-          type: number
-          format: double
-          description: Order ID associated with this event
-      description: Response type for agreement events
-      title: AgreementEventResponse
+          description: A merchant-provided reference for the agreement.
+      required:
+      - type
+      description: Details about the agreement to be created.
+      title: AgreementApproval
+    Consumer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        givenNames:
+          type: string
+          description: The consumer's first name
+        surname:
+          type: string
+          description: The consumer's last name
+        phoneNumber:
+          type: string
+      required:
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
+    BillingAgreementApprovalResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token identifying this billing agreement approval request
+        expires:
+          type: string
+          format: date-time
+          description: When this approval request expires
+        redirectCheckoutUrl:
+          type: string
+          format: uri
+          description: URL where the consumer should be redirected to complete approval
+      required:
+      - token
+      - expires
+      - redirectCheckoutUrl
+      description: Response from initiating a billing agreement approval process
+      title: BillingAgreementApprovalResponse
+    AgreementApprovalType:
+      type: string
+      enum:
+      - BILLING
+      description: Agreement Type for approval.
+      title: AgreementApprovalType
+    BillingAgreementResponseType:
+      type: string
+      enum:
+      - BILLING
+      description: Type of agreement
+      title: BillingAgreementResponseType
+    CreateAgreementRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request.
+        token:
+          type: string
+          description: The token returned from the create approval request.
+        merchantReference:
+          type: string
+          description: 'The reference order id that this payment corresponds to in the merchant''s system.
+
+            Note: Providing a new value will update any value previously set in the Create Checkout request.'
+      required:
+      - token
+      title: CreateAgreementRequest
     Money:
       type: object
       properties:
@@ -949,6 +910,77 @@ components:
       - currency
       description: Object containing amount and currency
       title: Money
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    BillingAgreementApprovalRequestMerchant:
+      type: object
+      properties:
+        redirectConfirmUrl:
+          type: string
+        redirectCancelUrl:
+          type: string
+        popupOriginUrl:
+          type: string
+          description: This property is optional when a `redirectConfirmURL` is provided.
+        name:
+          type: string
+          description: The merchant name displayed in the Afterpay approval flow.
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: BillingAgreementApprovalRequestMerchant
+    BillingAgreementApprovalRequest:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+          description: Consumer details for the billing agreement
+        merchant:
+          $ref: '#/components/schemas/BillingAgreementApprovalRequestMerchant'
+        merchantReference:
+          type: string
+          description: Merchant's unique reference for this billing agreement
+        agreements:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgreementApproval'
+          description: Agreement type for approval (only single agreement is supported)
+      required:
+      - merchant
+      description: Request body for initiating a billing agreement approval process
+      title: BillingAgreementApprovalRequest
+    BillingAgreementResponseStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CANCELLED
+      - EXPIRED
+      - PENDING_RENEWAL
+      - PENDING_RENEWAL_EXPIRED
+      description: Current status of the agreement
+      title: BillingAgreementResponseStatus
+    BillingAgreementAliasResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Token representing the billing agreement alias
+        expiry:
+          type: string
+          format: date-time
+          description: Timestamp when the alias token expires
+      required:
+      - token
+      - expiry
+      description: Response containing the payment schedule token and its expiry
+      title: BillingAgreementAliasResponse
     Offer:
       type: object
       properties:
@@ -981,6 +1013,38 @@ components:
           description: Consumer offer details
       description: Represents an offer with payment details
       title: Offer
+    OffersRequest:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: A unique identifier for this request
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: The amount to check offers for
+        token:
+          type: string
+          description: The billing agreement token
+      required:
+      - requestId
+      - amount
+      - token
+      description: Request to retrieve available billing agreement offers
+      title: OffersRequest
+    AgreementEventResponseStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: Status of the agreement at the time of the event
+      title: AgreementEventResponseStatus
+    LinkStartResponseDeliveryType:
+      type: string
+      enum:
+      - SMS
+      - EMAIL
+      description: How the verification code was delivered to the consumer
+      title: LinkStartResponseDeliveryType
     OffersResponse:
       type: object
       properties:
@@ -997,95 +1061,31 @@ components:
           description: List of available offers details
       description: Response containing available offers for the consumer
       title: OffersResponse
-    ConsumerOffers:
+    PaymentSchedule:
       type: object
       properties:
-        noPaymentUpfront:
-          $ref: '#/components/schemas/ConsumerOffersNoPaymentUpfront'
-          description: Information about the no payment upfront feature eligibility
-      description: Consumer offers
-      title: ConsumerOffers
-    ConsumerOffersNoPaymentUpfront:
-      type: object
-      properties:
-        eligible:
-          type: boolean
-          description: Indicates if the consumer is eligible for no payment upfront
-        eligibilityLimit:
+        amount:
           $ref: '#/components/schemas/Money'
-          description: The maximum amount eligible for no payment upfront
+          description: Amount for this payment installment
+        dueDate:
+          type: string
+          format: date
+          description: Due date for this installment
       required:
-      - eligible
-      - eligibilityLimit
-      description: Information about the no payment upfront feature eligibility
-      title: ConsumerOffersNoPaymentUpfront
-    LinkStartResponse:
+      - amount
+      - dueDate
+      description: Represents a scheduled payment installment
+      title: PaymentSchedule
+    GetBillingAgreementRequest:
       type: object
       properties:
         token:
           type: string
-          description: Token identifying the billing agreement to be created
-        requestId:
-          type: string
-          description: The unique identifier from the request
-        expiresAt:
-          type: string
-          format: date-time
-          description: When this link attempt will expire
-        deliveryType:
-          $ref: '#/components/schemas/LinkStartResponseDeliveryType'
-          description: How the verification code was delivered to the consumer
+          description: The billing agreement token to retrieve
       required:
       - token
-      - requestId
-      - expiresAt
-      - deliveryType
-      description: Response containing the billing agreement link details
-      title: LinkStartResponse
-    AgreementEventResponseType:
-      type: string
-      enum:
-      - CAPTURE
-      - VOID
-      description: Type of event
-      title: AgreementEventResponseType
-    BillingAgreementApprovalRequestMerchant:
-      type: object
-      properties:
-        redirectConfirmUrl:
-          type: string
-        redirectCancelUrl:
-          type: string
-        popupOriginUrl:
-          type: string
-          description: This property is optional when a `redirectConfirmURL` is provided.
-        name:
-          type: string
-          description: The merchant name displayed in the Afterpay approval flow.
-      required:
-      - redirectConfirmUrl
-      - redirectCancelUrl
-      title: BillingAgreementApprovalRequestMerchant
-    BillingAgreementApprovalResponse:
-      type: object
-      properties:
-        token:
-          type: string
-          description: Token identifying this billing agreement approval request
-        expires:
-          type: string
-          format: date-time
-          description: When this approval request expires
-        redirectCheckoutUrl:
-          type: string
-          format: uri
-          description: URL where the consumer should be redirected to complete approval
-      required:
-      - token
-      - expires
-      - redirectCheckoutUrl
-      description: Response from initiating a billing agreement approval process
-      title: BillingAgreementApprovalResponse
+      description: Request to retrieve a billing agreement by token
+      title: GetBillingAgreementRequest
   securitySchemes:
     sec0:
       type: http

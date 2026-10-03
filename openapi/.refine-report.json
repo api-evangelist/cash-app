@@ -42,7 +42,7 @@
     "cash-app-ping-api-openapi.yml"
   ],
   "archived": [
-    "deleted 3 superseded output(s) from the previous generation"
+    "deleted 2 superseded output(s) from the previous generation"
   ],
   "errors": [],
   "warnings": [],
@@ -147,25 +147,31 @@
     "tag 'Disputes' spans 2 source specs (cash-app-disputes-openapi.json, cash-app-network-api-openapi.json): per-path servers applied",
     "tag 'Grants' spans 2 source specs (cash-app-grants-afterpay-openapi.json, cash-app-grants-cash-app-pay-openapi.json): per-path servers applied",
     "tag 'payments' spans 2 source specs (cash-app-network-api-openapi.json, cash-app-payments-openapi.json): per-path servers applied",
-    "superseded outputs removed: cash-app-api-keys-api-openapi.yml, cash-app-default-api-openapi.yml, cash-app-fee-plans-api-openapi.yml",
-    "apis.yml register: written (+9 apis, 25 total)"
+    "superseded outputs removed: cash-app-api-keys-api-openapi.yml, cash-app-fee-plans-api-openapi.yml",
+    "apis.yml register: written (+2 apis, 25 total)"
   ],
   "skipped": [
     "cash-app-add-cash-app-pay-to-your-site-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-balances-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-billing-agreements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-billing-agreements-deprecated-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-brands-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-checkouts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-configuration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-customer-request-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "cash-app-default-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-disputes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-fee-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-grants-afterpay-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-grants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-merchants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-network-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-payouts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-ping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "cash-app-recurring-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-refunds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-requestchains-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "cash-app-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",

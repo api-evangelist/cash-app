@@ -66,37 +66,6 @@ paths:
               $ref: '#/components/schemas/OrderRequest'
 components:
   schemas:
-    CreateOrderResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        paymentSchedule:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentSchedule'
-          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
-      required:
-      - token
-      - expires
-      title: CreateOrderResponse
-    ShippingCourierPriority:
-      type: string
-      enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
-    SubscriptionInterval:
-      type: string
-      enum:
-      - DAY
-      - WEEK
-      - MONTH
-      - YEAR
-      title: SubscriptionInterval
     Shipping-Courier:
       type: object
       properties:
@@ -120,61 +89,30 @@ components:
 
         The `priority` field tracks the shipping speed or service level associated with the delivery. '
       title: Shipping-Courier
-    Initiation:
+    InitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The party who initiated the order
+      title: InitiationActor
+    CreateOrderResponse:
       type: object
       properties:
-        actor:
-          $ref: '#/components/schemas/InitiationActor'
-          description: The party who initiated the order
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentSchedule'
+          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
       required:
-      - actor
-      title: Initiation
-    Contact:
-      type: object
-      properties:
-        name:
-          type: string
-        line1:
-          type: string
-          description: First line of the address
-        line2:
-          type: string
-          description: 'Second line of the address '
-        area1:
-          type: string
-          description: '- AU: Suburb
-
-            - NZ: Town or City
-
-            - UK: Postal Town
-
-            - US: City
-
-            - Canada: City'
-        area2:
-          type: string
-          description: '- NZ: suburb
-
-            - UK: village or local area.'
-        region:
-          type: string
-          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
-        postcode:
-          type: string
-        countryCode:
-          $ref: '#/components/schemas/ContactCountryCode'
-        phoneNumber:
-          type: string
-          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
-      required:
-      - name
-      - line1
-      - area1
-      - region
-      - postcode
-      - countryCode
-      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
-      title: Contact
+      - token
+      - expires
+      title: CreateOrderResponse
     Consumer:
       type: object
       properties:
@@ -193,97 +131,6 @@ components:
       - email
       description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
       title: Consumer
-    Item:
-      type: object
-      properties:
-        name:
-          type: string
-        sku:
-          type: string
-        pageUrl:
-          type: string
-        imageUrl:
-          type: string
-        quantity:
-          type: integer
-        price:
-          $ref: '#/components/schemas/Money'
-        categories:
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-        estimatedShipmentDate:
-          type: string
-          format: date
-        preorder:
-          type: boolean
-          default: false
-      required:
-      - name
-      - quantity
-      - price
-      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
-      title: Item
-    Enrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/Initiation'
-          description: Who initiated the order
-        subscription:
-          $ref: '#/components/schemas/Subscription'
-          description: Metadata on the subscription details
-      required:
-      - initiation
-      title: Enrichments
-    Money:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
-    OrderRequestPaymentScheduleType:
-      type: string
-      enum:
-      - DEFAULT
-      description: The payment schedule type for the order.
-      title: OrderRequestPaymentScheduleType
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    ContactCountryCode:
-      type: string
-      enum:
-      - AU
-      - NZ
-      - US
-      - CA
-      - GB
-      title: ContactCountryCode
-    Discount:
-      type: object
-      properties:
-        displayName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
     OrderRequest:
       type: object
       properties:
@@ -337,6 +184,39 @@ components:
       - amount
       - enrichments
       title: OrderRequest
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        pageUrl:
+          type: string
+        imageUrl:
+          type: string
+        quantity:
+          type: integer
+        price:
+          $ref: '#/components/schemas/Money'
+        categories:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        estimatedShipmentDate:
+          type: string
+          format: date
+        preorder:
+          type: boolean
+          default: false
+      required:
+      - name
+      - quantity
+      - price
+      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
+      title: Item
     Subscription:
       type: object
       properties:
@@ -347,19 +227,18 @@ components:
         intervalCount:
           type: integer
       title: Subscription
-    InitiationActor:
-      type: string
-      enum:
-      - CUSTOMER
-      - MERCHANT
-      description: The party who initiated the order
-      title: InitiationActor
-    SubscriptionType:
-      type: string
-      enum:
-      - FIXED
-      - VARIABLE
-      title: SubscriptionType
+    Enrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+          description: Who initiated the order
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+          description: Metadata on the subscription details
+      required:
+      - initiation
+      title: Enrichments
     PaymentSchedule:
       type: object
       properties:
@@ -375,6 +254,127 @@ components:
       - dueDate
       description: Represents a scheduled payment installment
       title: PaymentSchedule
+    Initiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/InitiationActor'
+          description: The party who initiated the order
+      required:
+      - actor
+      title: Initiation
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
+    Money:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
+      required:
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
+    OrderRequestPaymentScheduleType:
+      type: string
+      enum:
+      - DEFAULT
+      description: The payment schedule type for the order.
+      title: OrderRequestPaymentScheduleType
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+          description: First line of the address
+        line2:
+          type: string
+          description: 'Second line of the address '
+        area1:
+          type: string
+          description: '- AU: Suburb
+
+            - NZ: Town or City
+
+            - UK: Postal Town
+
+            - US: City
+
+            - Canada: City'
+        area2:
+          type: string
+          description: '- NZ: suburb
+
+            - UK: village or local area.'
+        region:
+          type: string
+          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+        postcode:
+          type: string
+        countryCode:
+          $ref: '#/components/schemas/ContactCountryCode'
+        phoneNumber:
+          type: string
+          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
+      required:
+      - name
+      - line1
+      - area1
+      - region
+      - postcode
+      - countryCode
+      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
+      title: Contact
+    SubscriptionInterval:
+      type: string
+      enum:
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      title: SubscriptionInterval
+    SubscriptionType:
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+      title: SubscriptionType
   securitySchemes:
     sec0:
       type: http

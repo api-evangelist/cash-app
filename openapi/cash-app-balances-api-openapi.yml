@@ -148,6 +148,92 @@ paths:
                 $ref: '#/components/schemas/Retrieve-balanceRequestNotFoundError'
 components:
   schemas:
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Retrieve-balanceRequestNotFoundError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      required:
+      - errors
+      title: Retrieve-balanceRequestNotFoundError
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    Balances_list-balances_Response_200:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+          description: List of balances matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - balances
+      title: Balances_list-balances_Response_200
+    BalancesGetParametersType:
+      type: string
+      enum:
+      - CHECKING
+      title: BalancesGetParametersType
     ErrorResponse:
       type: object
       properties:
@@ -162,12 +248,14 @@ components:
       required:
       - errors
       title: ErrorResponse
-    BalanceType:
-      type: string
-      enum:
-      - CHECKING
-      description: The type of balance.
-      title: BalanceType
+    Balances_retrieve-balance_Response_200:
+      type: object
+      properties:
+        balance:
+          $ref: '#/components/schemas/Balance'
+      required:
+      - balance
+      title: Balances_retrieve-balance_Response_200
     Balance:
       type: object
       properties:
@@ -209,97 +297,9 @@ components:
       - currency
       - amount
       title: Balance
-    Balances_retrieve-balance_Response_200:
-      type: object
-      properties:
-        balance:
-          $ref: '#/components/schemas/Balance'
-      required:
-      - balance
-      title: Balances_retrieve-balance_Response_200
-    Balances_list-balances_Response_200:
-      type: object
-      properties:
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Balance'
-          description: List of balances matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - balances
-      title: Balances_list-balances_Response_200
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    BalancesGetParametersType:
+    BalanceType:
       type: string
       enum:
       - CHECKING
-      title: BalancesGetParametersType
-    Retrieve-balanceRequestNotFoundError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-      required:
-      - errors
-      title: Retrieve-balanceRequestNotFoundError
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
+      description: The type of balance.
+      title: BalanceType

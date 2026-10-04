@@ -332,7 +332,72 @@ paths:
               - brand
 components:
   schemas:
-    BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand:
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    Brands_list-brands_Response_200:
+      type: object
+      properties:
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+          description: List of brands matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - brands
+      title: Brands_list-brands_Response_200
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    Brands_update-brand_Response_200:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+      title: Brands_update-brand_Response_200
+    BrandsPutRequestBodyContentApplicationJsonSchemaBrand:
       type: object
       properties:
         name:
@@ -340,18 +405,15 @@ components:
           description: 'Name of the brand to be shown in Cash App next to payments.
 
 
-            *This field cannot be cleared.*
-
-
             Min length: `1`
 
             Max length: `1024`'
         reference_id:
           type: string
-          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body).
+          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.
 
 
-            *This field cannot be cleared, and must be unique across all brands.*
+            **Must be unique across all brands.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body)**
 
 
             Min length: `1`
@@ -375,16 +437,11 @@ components:
             - `jpeg`
 
 
-            *This field cannot be cleared.*
-
-
             Min length: `8`
 
             Max length: `8000`'
         color:
-          type:
-          - string
-          - 'null'
+          type: string
           description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
 
 
@@ -395,52 +452,11 @@ components:
             Max length: `7`'
         metadata:
           $ref: '#/components/schemas/Metadata'
-      description: Details about the brand to update
-      title: BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand
-    Metadata:
-      type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
-
-
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
-
-
-        Min keys: `0`
-
-        Max keys: `50`
-
-
-
-        > Note: Nested keys are not supported.'
-      title: Metadata
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
       required:
-      - errors
-      title: ErrorResponse
-    Brands_update-brand_Response_200:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
-      title: Brands_update-brand_Response_200
-    Brands_create-brand_Response_201:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
-      title: Brands_create-brand_Response_201
+      - name
+      - reference_id
+      description: Details about the brand to create or update.
+      title: BrandsPutRequestBodyContentApplicationJsonSchemaBrand
     Brand:
       type: object
       properties:
@@ -516,66 +532,7 @@ components:
       - reference_id
       description: A brand is the entity a customer perceives that they are transacting with.
       title: Brand
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    Brands_list-brands_Response_200:
-      type: object
-      properties:
-        brands:
-          type: array
-          items:
-            $ref: '#/components/schemas/Brand'
-          description: List of brands matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - brands
-      title: Brands_list-brands_Response_200
-    BrandsPutRequestBodyContentApplicationJsonSchemaBrand:
+    BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand:
       type: object
       properties:
         name:
@@ -583,15 +540,18 @@ components:
           description: 'Name of the brand to be shown in Cash App next to payments.
 
 
+            *This field cannot be cleared.*
+
+
             Min length: `1`
 
             Max length: `1024`'
         reference_id:
           type: string
-          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.
+          description: 'A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body).
 
 
-            **Must be unique across all brands.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body)**
+            *This field cannot be cleared, and must be unique across all brands.*
 
 
             Min length: `1`
@@ -615,11 +575,16 @@ components:
             - `jpeg`
 
 
+            *This field cannot be cleared.*
+
+
             Min length: `8`
 
             Max length: `8000`'
         color:
-          type: string
+          type:
+          - string
+          - 'null'
           description: 'Primary color associated with this brand and its logo, in 6-digit hex code format.
 
 
@@ -630,11 +595,8 @@ components:
             Max length: `7`'
         metadata:
           $ref: '#/components/schemas/Metadata'
-      required:
-      - name
-      - reference_id
-      description: Details about the brand to create or update.
-      title: BrandsPutRequestBodyContentApplicationJsonSchemaBrand
+      description: Details about the brand to update
+      title: BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand
     BrandsPostRequestBodyContentApplicationJsonSchemaBrand:
       type: object
       properties:
@@ -695,16 +657,48 @@ components:
       - reference_id
       description: Details about the brand to create.
       title: BrandsPostRequestBodyContentApplicationJsonSchemaBrand
-    Brands_upsert-brand_Response_200:
+    Brands_create-brand_Response_201:
       type: object
       properties:
         brand:
           $ref: '#/components/schemas/Brand'
-      title: Brands_upsert-brand_Response_200
+      title: Brands_create-brand_Response_201
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
     IdempotencyKey:
       type: string
       description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
       title: IdempotencyKey
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
     Brands_retrieve-brand_Response_200:
       type: object
       properties:
@@ -713,3 +707,9 @@ components:
       required:
       - brand
       title: Brands_retrieve-brand_Response_200
+    Brands_upsert-brand_Response_200:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+      title: Brands_upsert-brand_Response_200

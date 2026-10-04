@@ -129,6 +129,19 @@ paths:
                 description: Any type
 components:
   schemas:
+    Money:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
+      required:
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
     get-checkout_Response_200:
       type: object
       properties:
@@ -179,36 +192,113 @@ components:
       - amount
       - consumer
       title: get-checkout_Response_200
-    Money:
+    Shipping-Courier:
+      type: object
+      properties:
+        shippedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        tracking:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ShippingCourierPriority'
+      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
+
+
+        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
+
+
+        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
+
+
+        The `priority` field tracks the shipping speed or service level associated with the delivery. '
+      title: Shipping-Courier
+    Checkout-Request:
       type: object
       properties:
         amount:
+          $ref: '#/components/schemas/Money'
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        merchantReference:
           type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+        merchant:
+          $ref: '#/components/schemas/CheckoutRequestMerchant'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        description:
+          type: string
+        mode:
+          type: string
+          default: standard
+          description: 'Must be set to `express` to enable express checkout.
+
+            Allowed values: `express` `standard`'
       required:
       - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
-    CheckoutRequestMerchant:
+      - consumer
+      description: Individual Checkout
+      title: Checkout-Request
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
+    Consumer:
       type: object
       properties:
-        redirectConfirmUrl:
+        email:
           type: string
-        redirectCancelUrl:
+          format: email
+        givenNames:
           type: string
-        popupOriginUrl:
+          description: The consumer's first name
+        surname:
           type: string
-          description: The URL location from which Afterpay is initiated (required for express checkout). Optional for standard checkout when a `redirectConfirmURL` is provided.
-        name:
+          description: The consumer's last name
+        phoneNumber:
           type: string
-          description: The merchant name displayed in the Afterpay checkout flow, confirmation & refund emails, and the consumer portal
       required:
-      - redirectConfirmUrl
-      - redirectCancelUrl
-      title: CheckoutRequestMerchant
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
     Contact:
       type: object
       properties:
@@ -255,55 +345,15 @@ components:
       - countryCode
       description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
       title: Contact
-    Checkout-Response:
+    Discount:
       type: object
       properties:
-        token:
+        displayName:
           type: string
-          description: Checkout token to be used to complete payment.
-        expires:
-          type: string
-          description: The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
-        redirectCheckoutUrl:
-          type: string
-          description: A URL that can be used to redirect the customer to the Afterpay screenflow directly from the merchant backend.
-      title: Checkout-Response
-    Consumer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        givenNames:
-          type: string
-          description: The consumer's first name
-        surname:
-          type: string
-          description: The consumer's last name
-        phoneNumber:
-          type: string
-      required:
-      - email
-      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
-      title: Consumer
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    ContactCountryCode:
-      type: string
-      enum:
-      - AU
-      - NZ
-      - US
-      - CA
-      - GB
-      title: ContactCountryCode
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
     Item:
       type: object
       properties:
@@ -337,86 +387,36 @@ components:
       - price
       description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
       title: Item
-    Discount:
+    CheckoutRequestMerchant:
       type: object
       properties:
-        displayName:
+        redirectConfirmUrl:
           type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
-    ShippingCourierPriority:
-      type: string
-      enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
-    Checkout-Request:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-        merchantReference:
+        redirectCancelUrl:
           type: string
-        billing:
-          $ref: '#/components/schemas/Contact'
-        shipping:
-          $ref: '#/components/schemas/Contact'
-        merchant:
-          $ref: '#/components/schemas/CheckoutRequestMerchant'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        courier:
-          $ref: '#/components/schemas/Shipping-Courier'
-        taxAmount:
-          $ref: '#/components/schemas/Money'
-        shippingAmount:
-          $ref: '#/components/schemas/Money'
-        discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Discount'
-        description:
+        popupOriginUrl:
           type: string
-        mode:
-          type: string
-          default: standard
-          description: 'Must be set to `express` to enable express checkout.
-
-            Allowed values: `express` `standard`'
-      required:
-      - amount
-      - consumer
-      description: Individual Checkout
-      title: Checkout-Request
-    Shipping-Courier:
-      type: object
-      properties:
-        shippedAt:
-          type: string
-          format: date-time
+          description: The URL location from which Afterpay is initiated (required for express checkout). Optional for standard checkout when a `redirectConfirmURL` is provided.
         name:
           type: string
-        tracking:
+          description: The merchant name displayed in the Afterpay checkout flow, confirmation & refund emails, and the consumer portal
+      required:
+      - redirectConfirmUrl
+      - redirectCancelUrl
+      title: CheckoutRequestMerchant
+    Checkout-Response:
+      type: object
+      properties:
+        token:
           type: string
-        priority:
-          $ref: '#/components/schemas/ShippingCourierPriority'
-      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
-
-
-        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
-
-
-        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
-
-
-        The `priority` field tracks the shipping speed or service level associated with the delivery. '
-      title: Shipping-Courier
+          description: Checkout token to be used to complete payment.
+        expires:
+          type: string
+          description: The UTC timestamp of when the checkout token will expire, in ISO 8601 format.
+        redirectCheckoutUrl:
+          type: string
+          description: A URL that can be used to redirect the customer to the Afterpay screenflow directly from the merchant backend.
+      title: Checkout-Response
   securitySchemes:
     sec0:
       type: http

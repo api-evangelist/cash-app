@@ -151,18 +151,6 @@ paths:
                 $ref: '#/components/schemas/Get-configuration-mappingsRequestForbiddenError'
 components:
   schemas:
-    Get-configuration-mappingsRequestForbiddenError:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorId:
-          type: string
-        message:
-          type: string
-        httpStatusCode:
-          type: integer
-      title: Get-configuration-mappingsRequestForbiddenError
     Money:
       type: object
       properties:
@@ -176,6 +164,54 @@ components:
       - currency
       description: Object containing amount and currency
       title: Money
+    ConfigurationMappings:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the brand to be shown in Cash App next to payments.
+        externalBrandId:
+          type: string
+          description: The brand identifier for the Afterpay <> Cash App Pay merchant mapping.
+      required:
+      - name
+      - externalBrandId
+      title: ConfigurationMappings
+    Get-configuration-mappingsRequestUnauthorizedError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Get-configuration-mappingsRequestUnauthorizedError
+    MerchantLimitPayByInstallment:
+      type: object
+      properties:
+        minimumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Minimum eligible order amount for pay by installment.
+        maximumAmount:
+          $ref: '#/components/schemas/Money'
+          description: Maximum eligible order amount for pay by installment.
+      description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
+      title: MerchantLimitPayByInstallment
+    Get-configuration-mappingsRequestForbiddenError:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorId:
+          type: string
+        message:
+          type: string
+        httpStatusCode:
+          type: integer
+      title: Get-configuration-mappingsRequestForbiddenError
     MerchantLimitConsumerLending:
       type: object
       properties:
@@ -199,7 +235,7 @@ components:
       - CAD
       - GBP
       title: MoneyCurrency
-    Get-configuration-mappingsRequestUnauthorizedError:
+    Get-configurationRequestUnauthorizedError:
       type: object
       properties:
         errorCode:
@@ -210,31 +246,7 @@ components:
           type: string
         httpStatusCode:
           type: integer
-      title: Get-configuration-mappingsRequestUnauthorizedError
-    ConfigurationMappings:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name of the brand to be shown in Cash App next to payments.
-        externalBrandId:
-          type: string
-          description: The brand identifier for the Afterpay <> Cash App Pay merchant mapping.
-      required:
-      - name
-      - externalBrandId
-      title: ConfigurationMappings
-    MerchantLimitPayByInstallment:
-      type: object
-      properties:
-        minimumAmount:
-          $ref: '#/components/schemas/Money'
-          description: Minimum eligible order amount for pay by installment.
-        maximumAmount:
-          $ref: '#/components/schemas/Money'
-          description: Maximum eligible order amount for pay by installment.
-      description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
-      title: MerchantLimitPayByInstallment
+      title: Get-configurationRequestUnauthorizedError
     Merchant-limit:
       type: object
       properties:
@@ -252,18 +264,6 @@ components:
           $ref: '#/components/schemas/MerchantLimitPayByInstallment'
           description: Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.
       title: Merchant-limit
-    Get-configurationRequestUnauthorizedError:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        errorId:
-          type: string
-        message:
-          type: string
-        httpStatusCode:
-          type: integer
-      title: Get-configurationRequestUnauthorizedError
   securitySchemes:
     sec0:
       type: http

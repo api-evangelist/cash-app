@@ -324,6 +324,56 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    OneTimePaymentActionType:
+      type: string
+      enum:
+      - ONE_TIME_PAYMENT
+      description: The type of the action (`ONE_TIME_PAYMENT`).
+      title: OneTimePaymentActionType
+    OnFilePaymentActionType:
+      type: string
+      enum:
+      - ON_FILE_PAYMENT
+      default: ON_FILE_PAYMENT
+      description: The type of the action (`ON_FILE_PAYMENT`).
+      title: OnFilePaymentActionType
+    Channel:
+      type: string
+      enum:
+      - IN_PERSON
+      - ONLINE
+      - IN_APP
+      description: 'How the customer is expected to interact with the request.
+
+
+        - `IN_PERSON`: The customer presents or scans a QR code at a physical location to approve the request.
+
+        - `ONLINE`: The customer scans a QR code or is redirected to Cash App from a browser context.
+
+        - `IN_APP`: The customer scans a QR code or is redirected to Cash App from a native mobile application context.'
+      title: Channel
+    LinkAccountActionType:
+      type: string
+      enum:
+      - LINK_ACCOUNT
+      description: The type of the action (`LINK_ACCOUNT`).
+      title: LinkAccountActionType
+    Customers_revoke-customer-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      title: Customers_revoke-customer-grant_Response_200
+    Customers_retrieve-customer-grant_Response_200:
+      type: object
+      properties:
+        grant:
+          $ref: '#/components/schemas/Grant'
+      required:
+      - grant
+      title: Customers_retrieve-customer-grant_Response_200
     Customers_list-customer-grants_Response_200:
       type: object
       properties:
@@ -338,14 +388,232 @@ components:
       required:
       - grants
       title: Customers_list-customer-grants_Response_200
-    Customers_retrieve-customer-grant_Response_200:
+    Action:
+      oneOf:
+      - $ref: '#/components/schemas/OneTimePaymentAction'
+      - $ref: '#/components/schemas/OnFilePaymentAction'
+      - $ref: '#/components/schemas/OnFileDepositAction'
+      - $ref: '#/components/schemas/LinkAccountAction'
+      description: Represents what the client intends to do to a customer if given authorization.
+      title: Action
+    Customers_retrieve-customer_Response_200:
       type: object
       properties:
-        grant:
-          $ref: '#/components/schemas/Grant'
+        customer:
+          $ref: '#/components/schemas/Customer'
       required:
-      - grant
-      title: Customers_retrieve-customer-grant_Response_200
+      - customer
+      title: Customers_retrieve-customer_Response_200
+    OneTimePaymentAction:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'Amount to charge the customer, in the lowest unit of the associated currency.
+
+
+            Min value: `1`'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        scope_id:
+          type: string
+          description: 'ID of the client, brand, or merchant that will charge the customer.
+
+
+            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
+
+
+            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
+
+
+            If a merchant ID is passed, the grant from this action can be used to create a payment for the merchant with a matching ID.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        type:
+          $ref: '#/components/schemas/OneTimePaymentActionType'
+          description: The type of the action (`ONE_TIME_PAYMENT`).
+      required:
+      - scope_id
+      - type
+      description: 'Describes an intent for a client to charge a customer a given amount.
+
+
+        Note the following restrictions when using this action:
+
+
+        - If no amount is provided to the action, the payment charged may be **any** amount.
+
+        - If `amount` is provided, `currency` must be provided too (and vice versa).'
+      title: OneTimePaymentAction
+    ErrorCategory:
+      type: string
+      enum:
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
+      required:
+      - errors
+      title: ErrorResponse
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
+    OnFileDepositActionType:
+      type: string
+      enum:
+      - ON_FILE_DEPOSIT
+      description: The type of the action (`ON_FILE_DEPOSIT`).
+      title: OnFileDepositActionType
+    Customers_list-customers_Response_200:
+      type: object
+      properties:
+        customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+          description: List of customers matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - customers
+      title: Customers_list-customers_Response_200
+    OnFilePaymentAction:
+      type: object
+      properties:
+        scope_id:
+          type: string
+          description: 'ID of the client or brand that will charge customers.
+
+
+            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
+
+
+            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
+
+
+            Merchant IDs may *not* be passed.
+
+
+            Min length: `1`
+
+            Max length: `128`'
+        type:
+          $ref: '#/components/schemas/OnFilePaymentActionType'
+          description: The type of the action (`ON_FILE_PAYMENT`).
+        account_reference_id:
+          type: string
+          description: Identifier of the account or customer associated to the on file action.
+      required:
+      - scope_id
+      - type
+      description: Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.
+      title: OnFilePaymentAction
+    GrantType:
+      type: string
+      enum:
+      - ONE_TIME
+      - EXTENDED
+      description: Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).
+      title: GrantType
+    OnFileDepositAction:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/OnFileDepositActionType'
+          description: The type of the action (`ON_FILE_DEPOSIT`).
+        scope_id:
+          type: string
+          description: 'ID of the client or brand that indicates the set of merchants that will deposit to customers.
+
+
+            If a client ID is passed, the grant from this action can be used to create a deposit for any merchant owned by the client.
+
+
+            If a brand ID is passed, the grant from this action can be used to create a deposit for any merchant that has a matching brand ID.
+
+            Min length: `1`
+
+            Max length: `128`'
+        account_reference_id:
+          type: string
+          description: Identifier of the account or customer associated to the on file action.
+      required:
+      - type
+      - scope_id
+      - account_reference_id
+      description: Describes an intent for a client to deposit funds into the Cash App account balances in perpetuity until the Cash App account revokes the grant.
+      title: OnFileDepositAction
+    GrantStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - CONSUMED
+      - REVOKED
+      - EXPIRED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.'
+      title: GrantStatus
     LinkAccountAction:
       type: object
       properties:
@@ -432,260 +700,18 @@ components:
       - updated_at
       description: Describes a grant that can be used to perform actions specified in a customer request using the Network API.
       title: Grant
-    OneTimePaymentActionType:
+    Currency:
       type: string
       enum:
-      - ONE_TIME_PAYMENT
-      description: The type of the action (`ONE_TIME_PAYMENT`).
-      title: OneTimePaymentActionType
-    OnFileDepositAction:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/OnFileDepositActionType'
-          description: The type of the action (`ON_FILE_DEPOSIT`).
-        scope_id:
-          type: string
-          description: 'ID of the client or brand that indicates the set of merchants that will deposit to customers.
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
 
 
-            If a client ID is passed, the grant from this action can be used to create a deposit for any merchant owned by the client.
+        Current values:
 
 
-            If a brand ID is passed, the grant from this action can be used to create a deposit for any merchant that has a matching brand ID.
-
-            Min length: `1`
-
-            Max length: `128`'
-        account_reference_id:
-          type: string
-          description: Identifier of the account or customer associated to the on file action.
-      required:
-      - type
-      - scope_id
-      - account_reference_id
-      description: Describes an intent for a client to deposit funds into the Cash App account balances in perpetuity until the Cash App account revokes the grant.
-      title: OnFileDepositAction
-    OnFileDepositActionType:
-      type: string
-      enum:
-      - ON_FILE_DEPOSIT
-      description: The type of the action (`ON_FILE_DEPOSIT`).
-      title: OnFileDepositActionType
-    LinkAccountActionType:
-      type: string
-      enum:
-      - LINK_ACCOUNT
-      description: The type of the action (`LINK_ACCOUNT`).
-      title: LinkAccountActionType
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    OnFilePaymentActionType:
-      type: string
-      enum:
-      - ON_FILE_PAYMENT
-      default: ON_FILE_PAYMENT
-      description: The type of the action (`ON_FILE_PAYMENT`).
-      title: OnFilePaymentActionType
-    Customers_retrieve-customer_Response_200:
-      type: object
-      properties:
-        customer:
-          $ref: '#/components/schemas/Customer'
-      required:
-      - customer
-      title: Customers_retrieve-customer_Response_200
-    ErrorResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
-      required:
-      - errors
-      title: ErrorResponse
-    Channel:
-      type: string
-      enum:
-      - IN_PERSON
-      - ONLINE
-      - IN_APP
-      description: 'How the customer is expected to interact with the request.
-
-
-        - `IN_PERSON`: The customer presents or scans a QR code at a physical location to approve the request.
-
-        - `ONLINE`: The customer scans a QR code or is redirected to Cash App from a browser context.
-
-        - `IN_APP`: The customer scans a QR code or is redirected to Cash App from a native mobile application context.'
-      title: Channel
-    OnFilePaymentAction:
-      type: object
-      properties:
-        scope_id:
-          type: string
-          description: 'ID of the client or brand that will charge customers.
-
-
-            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
-
-
-            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
-
-
-            Merchant IDs may *not* be passed.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        type:
-          $ref: '#/components/schemas/OnFilePaymentActionType'
-          description: The type of the action (`ON_FILE_PAYMENT`).
-        account_reference_id:
-          type: string
-          description: Identifier of the account or customer associated to the on file action.
-      required:
-      - scope_id
-      - type
-      description: Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.
-      title: OnFilePaymentAction
-    OneTimePaymentAction:
-      type: object
-      properties:
-        amount:
-          type: integer
-          description: 'Amount to charge the customer, in the lowest unit of the associated currency.
-
-
-            Min value: `1`'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        scope_id:
-          type: string
-          description: 'ID of the client, brand, or merchant that will charge the customer.
-
-
-            If a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.
-
-
-            If a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.
-
-
-            If a merchant ID is passed, the grant from this action can be used to create a payment for the merchant with a matching ID.
-
-
-            Min length: `1`
-
-            Max length: `128`'
-        type:
-          $ref: '#/components/schemas/OneTimePaymentActionType'
-          description: The type of the action (`ONE_TIME_PAYMENT`).
-      required:
-      - scope_id
-      - type
-      description: 'Describes an intent for a client to charge a customer a given amount.
-
-
-        Note the following restrictions when using this action:
-
-
-        - If no amount is provided to the action, the payment charged may be **any** amount.
-
-        - If `amount` is provided, `currency` must be provided too (and vice versa).'
-      title: OneTimePaymentAction
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    Action:
-      oneOf:
-      - $ref: '#/components/schemas/OneTimePaymentAction'
-      - $ref: '#/components/schemas/OnFilePaymentAction'
-      - $ref: '#/components/schemas/OnFileDepositAction'
-      - $ref: '#/components/schemas/LinkAccountAction'
-      description: Represents what the client intends to do to a customer if given authorization.
-      title: Action
-    GrantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - CONSUMED
-      - REVOKED
-      - EXPIRED
-      description: 'Describes whether or not this grant can be used to perform the action associated with it.
-
-
-        If `ACTIVE`, it can be used to perform the action.
-
-
-        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
-
-
-        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
-
-
-        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.'
-      title: GrantStatus
-    Customers_revoke-customer-grant_Response_200:
-      type: object
-      properties:
-        grant:
-          $ref: '#/components/schemas/Grant'
-      required:
-      - grant
-      title: Customers_revoke-customer-grant_Response_200
-    GrantType:
-      type: string
-      enum:
-      - ONE_TIME
-      - EXTENDED
-      description: Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).
-      title: GrantType
+        - `USD`: United States Dollar'
+      title: Currency
     Customer:
       type: object
       properties:
@@ -712,29 +738,3 @@ components:
       - id
       - cashtag
       title: Customer
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    Customers_list-customers_Response_200:
-      type: object
-      properties:
-        customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-          description: List of customers matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - customers
-      title: Customers_list-customers_Response_200

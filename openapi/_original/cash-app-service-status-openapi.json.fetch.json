@@ -1,0 +1,12 @@
+{
+ "url": "https://developers.cash.app/openapi/service-status.yaml",
+ "requested_url": "https://developers.cash.app/openapi/service-status.yaml",
+ "status": 200,
+ "content_type": "application/x-yaml; charset=utf-8",
+ "bytes": 1392,
+ "sha256": "a5d8db3c035c0d07384f783d313f8117f2aa7df8c70d88ade19db1c384ffb687",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

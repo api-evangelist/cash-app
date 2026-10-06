@@ -67,7 +67,7 @@ tags_raw:
 - Financial-Services
 - Consumer Finance
 created: '2026-07-23'
-modified: '2026-09-16'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: cash-app:cash-app-add-cash-app-pay-to-your-site-api
@@ -1177,6 +1177,8 @@ apis:
     url: >-
       https://developers.cash.app/afterpay/api-reference/reference/billing-agreements-deprecated/create-billing-agreement
 common:
+- url: https://cash.app/press
+  type: Blog
 - type: CapabilityMap
   url: capabilities/cash-app-capability-edges.yml
   name: Cash App Business Capability Map

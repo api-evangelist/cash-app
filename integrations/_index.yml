@@ -34,8 +34,8 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/big-commerce.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-bigcommerce-afterpay-checkout.yml
+  status: arazzo
 - slug: cash-app-ecwid
   label: Ecwid
   partner: ecwid
@@ -45,8 +45,8 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/ecwid.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-ecwid-afterpay-checkout.yml
+  status: arazzo
 - slug: cash-app-prestashop
   label: PrestaShop
   partner: prestashop
@@ -67,8 +67,8 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/salesforce-commerce-cloud.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-salesforce-commerce-cloud-afterpay-checkout.yml
+  status: arazzo
 - slug: cash-app-shopify
   label: Shopify
   partner: shopify
@@ -78,8 +78,8 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/shopify.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-shopify-afterpay-checkout.yml
+  status: arazzo
 - slug: cash-app-stripe
   label: Stripe
   partner: stripe
@@ -100,8 +100,8 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/wix.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-wix-afterpay-checkout.yml
+  status: arazzo
 - slug: cash-app-woocommerce
   label: WooCommerce
   partner: woocommerce
@@ -111,5 +111,5 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/woo-commerce.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-woocommerce-afterpay-checkout.yml
+  status: arazzo

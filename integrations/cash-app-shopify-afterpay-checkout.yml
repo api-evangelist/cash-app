@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Cash App Afterpay checkout for Shopify orders
+  summary: Offer Afterpay (Cash App) at checkout for a Shopify order.
+  description: Reads an order from Shopify, creates an Afterpay checkout on the Cash App Afterpay API for its total, and hands the shopper the Afterpay redirect URL. Recreates the Afterpay Shopify platform
+    integration as a forkable workflow.
+  version: 1.0.0
+sourceDescriptions:
+- name: cashAppCheckoutsApi
+  url: https://raw.githubusercontent.com/api-evangelist/cash-app/refs/heads/main/openapi/cash-app-checkouts-api-openapi.yml
+  type: openapi
+- name: shopifyOrdersApi
+  url: https://raw.githubusercontent.com/api-evangelist/shopify/refs/heads/main/openapi/shopify-orders-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cash-app-shopify-afterpay-checkout
+  summary: Shopify order to Afterpay checkout
+  description: Fetch the Shopify order, create an Afterpay checkout for it, and record the checkout token back where the platform allows.
+  inputs:
+    type: object
+    properties:
+      orderId:
+        type: integer
+      afterpayAuthorization:
+        type: string
+        description: Basic auth header for the Afterpay merchant account
+      userAgent:
+        type: string
+      redirectConfirmUrl:
+        type: string
+      redirectCancelUrl:
+        type: string
+  steps:
+  - stepId: get-shopify-order
+    description: Retrieve the Shopify order.
+    operationId: $sourceDescriptions.shopifyOrdersApi.getOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/order/id
+      totalPrice: $response.body#/order/total_price
+      currency: $response.body#/order/currency
+      email: $response.body#/order/email
+  - stepId: create-afterpay-checkout
+    description: Create an Afterpay checkout for the order total and get the redirect URL.
+    operationId: $sourceDescriptions.cashAppCheckoutsApi.create-checkout-1
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.afterpayAuthorization
+    - name: User-Agent
+      in: header
+      value: $inputs.userAgent
+    requestBody:
+      contentType: application/json
+      payload:
+        amount:
+          amount: $steps.get-shopify-order.outputs.totalPrice
+          currency: $steps.get-shopify-order.outputs.currency
+        consumer:
+          email: $steps.get-shopify-order.outputs.email
+        merchantReference: $steps.get-shopify-order.outputs.orderId
+        merchant:
+          redirectConfirmUrl: $inputs.redirectConfirmUrl
+          redirectCancelUrl: $inputs.redirectCancelUrl
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      checkoutToken: $response.body#/token
+      redirectCheckoutUrl: $response.body#/redirectCheckoutUrl
+      expires: $response.body#/expires
+  - stepId: tag-shopify-order
+    description: Record the Afterpay checkout token on the order.
+    operationId: $sourceDescriptions.shopifyOrdersApi.updateOrder
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    requestBody:
+      contentType: application/json
+      payload:
+        order:
+          note: $steps.create-afterpay-checkout.outputs.checkoutToken
+          tags: afterpay
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $statusCode
+  outputs:
+    checkoutToken: $steps.create-afterpay-checkout.outputs.checkoutToken
+    redirectCheckoutUrl: $steps.create-afterpay-checkout.outputs.redirectCheckoutUrl
+    writebackStatus: $steps.tag-shopify-order.outputs.status
+x-integration:
+  partner: shopify
+  template: null
+  edge_evidence: https://developers.cash.app/afterpay/guides/platforms/shopify.md
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)

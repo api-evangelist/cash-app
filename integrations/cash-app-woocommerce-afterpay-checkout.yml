@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Cash App Afterpay checkout for WooCommerce orders
+  summary: Offer Afterpay (Cash App) at checkout for a WooCommerce order.
+  description: Reads an order from WooCommerce, creates an Afterpay checkout on the Cash App Afterpay API for its total, and hands the shopper the Afterpay redirect URL. Recreates the Afterpay WooCommerce
+    platform integration as a forkable workflow.
+  version: 1.0.0
+sourceDescriptions:
+- name: cashAppCheckoutsApi
+  url: https://raw.githubusercontent.com/api-evangelist/cash-app/refs/heads/main/openapi/cash-app-checkouts-api-openapi.yml
+  type: openapi
+- name: wooOrdersApi
+  url: https://raw.githubusercontent.com/api-evangelist/woocommerce/refs/heads/main/openapi/woocommerce-orders-api-openapi.yml
+  type: openapi
+- name: wooOrderNotesApi
+  url: https://raw.githubusercontent.com/api-evangelist/woocommerce/refs/heads/main/openapi/woocommerce-order-notes-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cash-app-woocommerce-afterpay-checkout
+  summary: WooCommerce order to Afterpay checkout
+  description: Fetch the WooCommerce order, create an Afterpay checkout for it, and record the checkout token back where the platform allows.
+  inputs:
+    type: object
+    properties:
+      orderId:
+        type: integer
+      afterpayAuthorization:
+        type: string
+        description: Basic auth header for the Afterpay merchant account
+      userAgent:
+        type: string
+      redirectConfirmUrl:
+        type: string
+      redirectCancelUrl:
+        type: string
+  steps:
+  - stepId: get-woo-order
+    description: Retrieve the WooCommerce order.
+    operationId: $sourceDescriptions.wooOrdersApi.getOrder
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.orderId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      orderId: $response.body#/id
+      total: $response.body#/total
+      currency: $response.body#/currency
+      email: $response.body#/billing/email
+  - stepId: create-afterpay-checkout
+    description: Create an Afterpay checkout for the order total and get the redirect URL.
+    operationId: $sourceDescriptions.cashAppCheckoutsApi.create-checkout-1
+    parameters:
+    - name: Authorization
+      in: header
+      value: $inputs.afterpayAuthorization
+    - name: User-Agent
+      in: header
+      value: $inputs.userAgent
+    requestBody:
+      contentType: application/json
+      payload:
+        amount:
+          amount: $steps.get-woo-order.outputs.total
+          currency: $steps.get-woo-order.outputs.currency
+        consumer:
+          email: $steps.get-woo-order.outputs.email
+        merchantReference: $steps.get-woo-order.outputs.orderId
+        merchant:
+          redirectConfirmUrl: $inputs.redirectConfirmUrl
+          redirectCancelUrl: $inputs.redirectCancelUrl
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      checkoutToken: $response.body#/token
+      redirectCheckoutUrl: $response.body#/redirectCheckoutUrl
+      expires: $response.body#/expires
+  - stepId: note-woo-order
+    description: Record the Afterpay checkout token on the order.
+    operationId: $sourceDescriptions.wooOrderNotesApi.createOrderNote
+    parameters:
+    - name: order_id
+      in: path
+      value: $inputs.orderId
+    requestBody:
+      contentType: application/json
+      payload:
+        note: $steps.create-afterpay-checkout.outputs.checkoutToken
+        customer_note: false
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      status: $statusCode
+  outputs:
+    checkoutToken: $steps.create-afterpay-checkout.outputs.checkoutToken
+    redirectCheckoutUrl: $steps.create-afterpay-checkout.outputs.redirectCheckoutUrl
+    writebackStatus: $steps.note-woo-order.outputs.status
+x-integration:
+  partner: woocommerce
+  template: null
+  edge_evidence: https://developers.cash.app/afterpay/guides/platforms/woo-commerce.md
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-12'
+  generator: pipeline step 25b (payments-integration-arazzo)

@@ -1,5 +1,5 @@
 ---
-name: Provision scoped API keys and subscribe to webhooks
+name: cash-app-provision-keys-and-webhooks
 description: Bootstrap least-privilege API keys and register a signed webhook endpoint on the Management API.
 api: openapi/cash-app-management-api-openapi.json
 operations: [create-api-key, list-api-keys, create-webhook-endpoint, list-webhook-events, retrieve-webhook-endpoint]

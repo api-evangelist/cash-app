@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-create-agreement-request-schema.json",
+  "title": "CreateAgreementRequest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-billing-agreements-api-openapi.yml#/components/schemas/CreateAgreementRequest",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request."
+    },
+    "token": {
+      "type": "string",
+      "description": "The token returned from the create approval request."
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "The reference order id that this payment corresponds to in the merchant's system.\nNote: Providing a new value will update any value previously set in the Create Checkout request."
+    }
+  },
+  "required": [
+    "token"
+  ]
+}

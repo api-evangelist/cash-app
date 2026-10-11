@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-create-grant-request-schema.json",
+  "title": "CreateGrantRequest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-grants-api-openapi.yml#/components/schemas/CreateGrantRequest",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "A unique request ID, required for idempotent retries. It is recommended that the merchant generate a UUID for each unique request."
+    },
+    "token": {
+      "type": "string",
+      "description": "The token returned from the create approval request."
+    },
+    "code": {
+      "type": "string",
+      "description": "The one-time code received from the consumer.\nNote: The code will only be sent with the headless integration."
+    }
+  },
+  "required": [
+    "requestId",
+    "token"
+  ]
+}

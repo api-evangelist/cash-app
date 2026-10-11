@@ -1,0 +1,255 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-customers-retrieve-customer-grant-response-200-schema.json",
+  "title": "Customers_retrieve-customer-grant_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-customers-api-openapi.yml#/components/schemas/Customers_retrieve-customer-grant_Response_200",
+  "type": "object",
+  "properties": {
+    "grant": {
+      "$ref": "#/$defs/Grant"
+    }
+  },
+  "required": [
+    "grant"
+  ],
+  "$defs": {
+    "Action": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/OneTimePaymentAction"
+        },
+        {
+          "$ref": "#/$defs/OnFilePaymentAction"
+        },
+        {
+          "$ref": "#/$defs/OnFileDepositAction"
+        },
+        {
+          "$ref": "#/$defs/LinkAccountAction"
+        }
+      ],
+      "description": "Represents what the client intends to do to a customer if given authorization.",
+      "title": "Action"
+    },
+    "Channel": {
+      "type": "string",
+      "enum": [
+        "IN_PERSON",
+        "ONLINE",
+        "IN_APP"
+      ],
+      "description": "How the customer is expected to interact with the request.\n\n- `IN_PERSON`: The customer presents or scans a QR code at a physical location to approve the request.\n- `ONLINE`: The customer scans a QR code or is redirected to Cash App from a browser context.\n- `IN_APP`: The customer scans a QR code or is redirected to Cash App from a native mobile application context.",
+      "title": "Channel"
+    },
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "Grant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this grant issued by Cash App.\n\nMin length: `1`\nMax length: `256`"
+        },
+        "customer_id": {
+          "type": "string",
+          "description": "ID of the customer that approved this grant.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "request_id": {
+          "type": "string",
+          "description": "A unique identifier issued by Cash App for the customer request that resulted in the creation of this grant.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "action": {
+          "$ref": "#/$defs/Action"
+        },
+        "status": {
+          "$ref": "#/$defs/GrantStatus",
+          "description": "Describes whether or not this grant can be used to perform the action associated with it.\n\nIf `ACTIVE`, it can be used to perform the action.\n\nIf `EXPIRED`, it may no longer be used to perform the action due to the current time being past the \"expires_at\" time.\n\nIf `CONSUMED`, it was already redeemed to perform the action and cannot be used again.\n\nIf `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action."
+        },
+        "type": {
+          "$ref": "#/$defs/GrantType",
+          "description": "Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`)."
+        },
+        "channel": {
+          "$ref": "#/$defs/Channel"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this grant was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this grant was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "If present, indicates when the grant's status will become `EXPIRED`, preventing a client from using it to create payments or refunds.\n\nThe timestamp is in the [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        }
+      },
+      "required": [
+        "id",
+        "customer_id",
+        "request_id",
+        "action",
+        "status",
+        "type",
+        "channel",
+        "created_at",
+        "updated_at"
+      ],
+      "description": "Describes a grant that can be used to perform actions specified in a customer request using the Network API.",
+      "title": "Grant"
+    },
+    "GrantStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CONSUMED",
+        "REVOKED",
+        "EXPIRED"
+      ],
+      "description": "Describes whether or not this grant can be used to perform the action associated with it.\n\nIf `ACTIVE`, it can be used to perform the action.\n\nIf `EXPIRED`, it may no longer be used to perform the action due to the current time being past the \"expires_at\" time.\n\nIf `CONSUMED`, it was already redeemed to perform the action and cannot be used again.\n\nIf `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.",
+      "title": "GrantStatus"
+    },
+    "GrantType": {
+      "type": "string",
+      "enum": [
+        "ONE_TIME",
+        "EXTENDED"
+      ],
+      "description": "Describes whether this grant can be only be used once (`ONE_TIME`) or repeatedly (`EXTENDED`).",
+      "title": "GrantType"
+    },
+    "LinkAccountAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/LinkAccountActionType",
+          "description": "The type of the action (`LINK_ACCOUNT`)."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Describes an intent for a client to manage a customer's merchant profiles in Cash App.",
+      "title": "LinkAccountAction"
+    },
+    "LinkAccountActionType": {
+      "type": "string",
+      "enum": [
+        "LINK_ACCOUNT"
+      ],
+      "description": "The type of the action (`LINK_ACCOUNT`).",
+      "title": "LinkAccountActionType"
+    },
+    "OnFileDepositAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/OnFileDepositActionType",
+          "description": "The type of the action (`ON_FILE_DEPOSIT`)."
+        },
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client or brand that indicates the set of merchants that will deposit to customers.\n\nIf a client ID is passed, the grant from this action can be used to create a deposit for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a deposit for any merchant that has a matching brand ID.\nMin length: `1`\nMax length: `128`"
+        },
+        "account_reference_id": {
+          "type": "string",
+          "description": "Identifier of the account or customer associated to the on file action."
+        }
+      },
+      "required": [
+        "type",
+        "scope_id",
+        "account_reference_id"
+      ],
+      "description": "Describes an intent for a client to deposit funds into the Cash App account balances in perpetuity until the Cash App account revokes the grant.",
+      "title": "OnFileDepositAction"
+    },
+    "OnFileDepositActionType": {
+      "type": "string",
+      "enum": [
+        "ON_FILE_DEPOSIT"
+      ],
+      "description": "The type of the action (`ON_FILE_DEPOSIT`).",
+      "title": "OnFileDepositActionType"
+    },
+    "OnFilePaymentAction": {
+      "type": "object",
+      "properties": {
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client or brand that will charge customers.\n\nIf a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.\n\nMerchant IDs may *not* be passed.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "type": {
+          "$ref": "#/$defs/OnFilePaymentActionType",
+          "description": "The type of the action (`ON_FILE_PAYMENT`)."
+        },
+        "account_reference_id": {
+          "type": "string",
+          "description": "Identifier of the account or customer associated to the on file action."
+        }
+      },
+      "required": [
+        "scope_id",
+        "type"
+      ],
+      "description": "Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.",
+      "title": "OnFilePaymentAction"
+    },
+    "OnFilePaymentActionType": {
+      "type": "string",
+      "enum": [
+        "ON_FILE_PAYMENT"
+      ],
+      "default": "ON_FILE_PAYMENT",
+      "description": "The type of the action (`ON_FILE_PAYMENT`).",
+      "title": "OnFilePaymentActionType"
+    },
+    "OneTimePaymentAction": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "description": "Amount to charge the customer, in the lowest unit of the associated currency.\n\nMin value: `1`"
+        },
+        "currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client, brand, or merchant that will charge the customer.\n\nIf a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.\n\nIf a merchant ID is passed, the grant from this action can be used to create a payment for the merchant with a matching ID.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "type": {
+          "$ref": "#/$defs/OneTimePaymentActionType",
+          "description": "The type of the action (`ONE_TIME_PAYMENT`)."
+        }
+      },
+      "required": [
+        "scope_id",
+        "type"
+      ],
+      "description": "Describes an intent for a client to charge a customer a given amount.\n\nNote the following restrictions when using this action:\n\n- If no amount is provided to the action, the payment charged may be **any** amount.\n- If `amount` is provided, `currency` must be provided too (and vice versa).",
+      "title": "OneTimePaymentAction"
+    },
+    "OneTimePaymentActionType": {
+      "type": "string",
+      "enum": [
+        "ONE_TIME_PAYMENT"
+      ],
+      "description": "The type of the action (`ONE_TIME_PAYMENT`).",
+      "title": "OneTimePaymentActionType"
+    }
+  }
+}

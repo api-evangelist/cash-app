@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-refund-schema.json",
+  "title": "Refund",
+  "description": "To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records\n\nUnique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request.\n\nThe `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as \"Payment Event Id\". In most cases, this would hold the same value as the `merchantReference`.\n",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-payments-api-openapi.yml#/components/schemas/Refund",
+  "type": "object",
+  "properties": {
+    "requestId": {
+      "type": "string",
+      "description": "Unique ID required for safe retries. Max length 64 (varchar)."
+    },
+    "amount": {
+      "$ref": "#/$defs/Money"
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar)."
+    },
+    "refundMerchantReference": {
+      "type": "string",
+      "description": "A unique reference for the individual refund event. Max length 128 (varchar)."
+    },
+    "refundId": {
+      "type": "string",
+      "description": "The unique, permanent, Afterpay-generated Refund ID."
+    },
+    "refundedAt": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "The amount as a string representation of a decimal number, rounded to 2 decimal places."
+        },
+        "currency": {
+          "$ref": "#/$defs/MoneyCurrency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "description": "Object containing amount and currency",
+      "title": "Money"
+    },
+    "MoneyCurrency": {
+      "type": "string",
+      "enum": [
+        "AUD",
+        "NZD",
+        "USD",
+        "CAD",
+        "GBP"
+      ],
+      "title": "MoneyCurrency"
+    }
+  }
+}

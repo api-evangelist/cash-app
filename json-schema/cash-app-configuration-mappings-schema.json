@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-configuration-mappings-schema.json",
+  "title": "ConfigurationMappings",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-configuration-api-openapi.yml#/components/schemas/ConfigurationMappings",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the brand to be shown in Cash App next to payments."
+    },
+    "externalBrandId": {
+      "type": "string",
+      "description": "The brand identifier for the Afterpay <> Cash App Pay merchant mapping."
+    }
+  },
+  "required": [
+    "name",
+    "externalBrandId"
+  ]
+}

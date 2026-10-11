@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-disputes-list-disputes-response-200-schema.json",
+  "title": "Disputes_list-disputes_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-disputes-api-openapi.yml#/components/schemas/Disputes_list-disputes_Response_200",
+  "type": "object",
+  "properties": {
+    "disputes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Dispute"
+      },
+      "description": "List of disputes matching the given query parameters."
+    },
+    "cursor": {
+      "type": "string",
+      "description": "The pagination cursor to be used in a subsequent request. If empty, this is the final response."
+    }
+  },
+  "required": [
+    "disputes"
+  ],
+  "$defs": {
+    "Dispute": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the dispute issued by Cash App.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "payment_id": {
+          "type": "string",
+          "description": "ID of the disputed payment.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Amount of disputed money, in the lowest denomination of currency on the associated payment.\n\nMin value: `1`"
+        },
+        "customer_credited_amount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The amount credited to the Customer after resolving the dispute. \n\nNote: The amount will be in the lowest denomination of the currency used on the associated payment.\n\nMin value: `0`"
+        },
+        "reason": {
+          "$ref": "#/$defs/DisputeReason_2",
+          "description": "4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.\n\nCurrent values:\n\n- `FR10`: Customer has no knowledge of the payment.\n- `FR11`: Customer has no knowledge of the payment and liability has shifted to the merchant due to collusion, fraud monitoring program thresholds, or any other reason.\n- `PE10`: Payment was processed twice.\n- `PE11`: Payment amount differs from agreed amount.\n- `PE12`: Payment was paid for by another means.\n- `CD10`: Cancelled services.\n- `CD11`: Goods or services differ from what was agreed upon for the payment.\n- `CD12`: The goods or services were not received.\n- `CD13`: The purchase was cancelled or returned, but the refund has not been processed."
+        },
+        "settlement_withholding": {
+          "$ref": "#/$defs/DisputeSettlementWithholding",
+          "description": "Indicates if the disputed amount has already been withheld from a settlement or not.\n\nCurrent values:\n\n- `NOT_WITHHELD`: The disputed amount has not yet been withheld in a settlement. It may impact future settlements if the dispute is \"lost\" by the merchant.\n\n- `WITHHELD_ALREADY`: The disputed amount was withheld in a prior settlement. This dispute will not impact future settlements."
+        },
+        "state": {
+          "$ref": "#/$defs/DisputeState",
+          "description": "The step in the dispute lifecycle that this dispute is currently at:\n\n- `RESPONSE_REQUIRED`\n- `NO_RESPONSE_REQUIRED`\n- `PROCESSING`\n- `ACCEPTED`\n- `WON`\n- `PARTIALLY_WON`\n- `LOST`"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this dispute was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "response_due_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "When the dispute must be challenged by, after which it will be automatically accepted, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this dispute was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "merchant_id": {
+          "type": "string",
+          "description": "ID of the merchant that collected the disputed payment.\n\nMin length: `1`\nMax length: `128`"
+        }
+      },
+      "required": [
+        "id",
+        "payment_id",
+        "amount",
+        "reason",
+        "settlement_withholding",
+        "state",
+        "created_at",
+        "updated_at",
+        "merchant_id"
+      ],
+      "description": "Represents a dispute initiated by a customer within Cash App or the customer's linked bank",
+      "title": "Dispute"
+    },
+    "DisputeReason_2": {
+      "type": "string",
+      "enum": [
+        "FR10",
+        "FR11",
+        "PE10",
+        "PE11",
+        "PE12",
+        "CD10",
+        "CD11",
+        "CD13"
+      ],
+      "description": "4-digit code consisting of 2 letters followed by 2 numbers that indicates why the dispute was created, at a high level.\n\nCurrent values:\n\n- `FR10`: Customer has no knowledge of the payment.\n- `FR11`: Customer has no knowledge of the payment and liability has shifted to the merchant due to collusion, fraud monitoring program thresholds, or any other reason.\n- `PE10`: Payment was processed twice.\n- `PE11`: Payment amount differs from agreed amount.\n- `PE12`: Payment was paid for by another means.\n- `CD10`: Cancelled services.\n- `CD11`: Goods or services differ from what was agreed upon for the payment.\n- `CD12`: The goods or services were not received.\n- `CD13`: The purchase was cancelled or returned, but the refund has not been processed.",
+      "title": "DisputeReason"
+    },
+    "DisputeSettlementWithholding": {
+      "type": "string",
+      "enum": [
+        "NOT_WITHHELD",
+        "WITHHELD_ALREADY"
+      ],
+      "description": "Indicates if the disputed amount has already been withheld from a settlement or not.\n\nCurrent values:\n\n- `NOT_WITHHELD`: The disputed amount has not yet been withheld in a settlement. It may impact future settlements if the dispute is \"lost\" by the merchant.\n\n- `WITHHELD_ALREADY`: The disputed amount was withheld in a prior settlement. This dispute will not impact future settlements.",
+      "title": "DisputeSettlementWithholding"
+    },
+    "DisputeState": {
+      "type": "string",
+      "enum": [
+        "RESPONSE_REQUIRED",
+        "NO_RESPONSE_REQUIRED",
+        "PROCESSING",
+        "ACCEPTED",
+        "WON",
+        "PARTIALLY_WON",
+        "LOST"
+      ],
+      "description": "The step in the dispute lifecycle that this dispute is currently at:\n\n- `RESPONSE_REQUIRED`\n- `NO_RESPONSE_REQUIRED`\n- `PROCESSING`\n- `ACCEPTED`\n- `WON`\n- `PARTIALLY_WON`\n- `LOST`",
+      "title": "DisputeState"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-request-chains-create-request-chain-response-201-schema.json",
+  "title": "requestChains_create-request-chain_Response_201",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-requestchains-api-openapi.yml#/components/schemas/requestChains_create-request-chain_Response_201",
+  "type": "object",
+  "properties": {
+    "responses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Response"
+      }
+    }
+  },
+  "required": [
+    "responses"
+  ],
+  "$defs": {
+    "Response": {
+      "type": "object",
+      "properties": {
+        "request_uid": {
+          "type": "string",
+          "description": "Unique identifier for the request"
+        },
+        "execution_status": {
+          "$ref": "#/$defs/ResponseExecutionStatus",
+          "description": "Execution status of the request"
+        },
+        "path": {
+          "type": "string",
+          "description": "URL path that was called"
+        },
+        "method": {
+          "$ref": "#/$defs/ResponseMethod",
+          "description": "HTTP method of the request"
+        },
+        "status_code": {
+          "type": "integer",
+          "description": "Status code of the request"
+        },
+        "body": {
+          "$ref": "#/$defs/ResponseBody",
+          "description": "Response body of the requested endpoint"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the request was completed, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        }
+      },
+      "required": [
+        "request_uid",
+        "execution_status",
+        "path",
+        "method"
+      ],
+      "title": "Response"
+    },
+    "ResponseBody": {
+      "type": "object",
+      "properties": {},
+      "description": "Response body of the requested endpoint",
+      "title": "ResponseBody"
+    },
+    "ResponseExecutionStatus": {
+      "type": "string",
+      "enum": [
+        "EXECUTED",
+        "NOT_STARTED"
+      ],
+      "description": "Execution status of the request",
+      "title": "ResponseExecutionStatus"
+    },
+    "ResponseMethod": {
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "description": "HTTP method of the request",
+      "title": "ResponseMethod"
+    }
+  }
+}

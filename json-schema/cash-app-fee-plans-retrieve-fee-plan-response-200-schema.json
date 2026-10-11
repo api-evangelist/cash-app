@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-fee-plans-retrieve-fee-plan-response-200-schema.json",
+  "title": "Fee Plans_retrieve-fee-plan_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-fee-plans-api-openapi.yml#/components/schemas/Fee_Plans_retrieve-fee-plan_Response_200",
+  "type": "object",
+  "properties": {
+    "fee_plan": {
+      "$ref": "#/$defs/FeePlan"
+    }
+  },
+  "required": [
+    "fee_plan"
+  ],
+  "$defs": {
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "FeePlan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the fee plan issued by Cash App."
+        },
+        "rate": {
+          "$ref": "#/$defs/FeeRate"
+        },
+        "currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "status": {
+          "type": "string",
+          "description": "The state is used to determine whether or not this fee plan is currently in use.\n- `ACTIVE`\n- `DISABLED`"
+        },
+        "reference_id": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        },
+        "description": {
+          "type": "string",
+          "description": "A free-form text field that stores information associated with the fee plan."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this fee plan was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this fee plan was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        }
+      },
+      "required": [
+        "id",
+        "rate",
+        "currency",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "description": "The full fee plan that PSPs can use to set the buy rates for specific merchants.",
+      "title": "FeePlan"
+    },
+    "FeeRate": {
+      "type": "object",
+      "properties": {
+        "basis_points": {
+          "type": "integer",
+          "description": "The variable fee charged for processing the payment expressed as 1/100th of a percentage."
+        },
+        "fixed_amount": {
+          "type": "integer",
+          "description": "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
+        }
+      },
+      "description": "A fee rate contains the components of a fee charged by Cash App to partners for a given payment.",
+      "title": "FeeRate"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    }
+  }
+}

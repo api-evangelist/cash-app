@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-authorize-payment-schema.json",
+  "title": "AuthorizePayment",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-payments-api-openapi.yml#/components/schemas/AuthorizePayment",
+  "type": "object",
+  "properties": {
+    "requestid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A unique request ID, required for idempotent retries. We recommend that merchants generate a Universally Unique Identifier (UUID) for each unique request."
+    },
+    "token": {
+      "type": "string"
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "The reference/order ID that this payment corresponds to in the merchant's system.\n\n**Note:** Providing a new value updates any value previously set in the Create Checkout request."
+    },
+    "amount": {
+      "$ref": "#/$defs/Money",
+      "description": "**Required for express checkout only.** Amount to be checked against the value in the create checkout request. If the amounts do not match, then the request is rejected and an error specific to this scenario is returned."
+    },
+    "isCheckoutAdjusted": {
+      "type": "boolean",
+      "description": "**Express checkout only.** The isCheckoutAdjusted field can be used to allow the order amount to be changed after the checkout flow. Used for express checkout."
+    },
+    "paymentScheduleChecksum": {
+      "type": "string",
+      "description": "**Express checkout only.** A unique value representing the payment schedule that must be provided when there has been changes since the initial order creation (retrieved from checkout widget)."
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "description": "Any type"
+      },
+      "description": "**Express checkout only.** An array of order items that have been updated to be provided if it has changed since the initial order creation."
+    },
+    "shipping": {
+      "$ref": "#/$defs/Contact",
+      "description": "**Express checkout only.** The shipping address if it has changed since the initial order creation."
+    },
+    "enrichments": {
+      "$ref": "#/$defs/Enrichments"
+    },
+    "grantId": {
+      "type": "string",
+      "description": "The Afterpay or Cash App Pay on-file grant ID. Required when processing a payment using a previously stored on-file grant."
+    }
+  },
+  "required": [
+    "token"
+  ],
+  "$defs": {
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "line1": {
+          "type": "string",
+          "description": "First line of the address"
+        },
+        "line2": {
+          "type": "string",
+          "description": "Second line of the address "
+        },
+        "area1": {
+          "type": "string",
+          "description": "- AU: Suburb\n- NZ: Town or City\n- UK: Postal Town\n- US: City\n- Canada: City"
+        },
+        "area2": {
+          "type": "string",
+          "description": "- NZ: suburb\n- UK: village or local area."
+        },
+        "region": {
+          "type": "string",
+          "description": "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+        },
+        "postcode": {
+          "type": "string"
+        },
+        "countryCode": {
+          "$ref": "#/$defs/ContactCountryCode"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format."
+        }
+      },
+      "required": [
+        "name",
+        "line1",
+        "area1",
+        "region",
+        "postcode",
+        "countryCode"
+      ],
+      "description": "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n",
+      "title": "Contact"
+    },
+    "ContactCountryCode": {
+      "type": "string",
+      "enum": [
+        "AU",
+        "NZ",
+        "US",
+        "CA",
+        "GB"
+      ],
+      "title": "ContactCountryCode"
+    },
+    "Enrichments": {
+      "type": "object",
+      "properties": {
+        "initiation": {
+          "$ref": "#/$defs/Initiation",
+          "description": "Who initiated the order"
+        },
+        "subscription": {
+          "$ref": "#/$defs/Subscription",
+          "description": "Metadata on the subscription details"
+        }
+      },
+      "required": [
+        "initiation"
+      ],
+      "title": "Enrichments"
+    },
+    "Initiation": {
+      "type": "object",
+      "properties": {
+        "actor": {
+          "$ref": "#/$defs/InitiationActor",
+          "description": "The party who initiated the order"
+        }
+      },
+      "required": [
+        "actor"
+      ],
+      "title": "Initiation"
+    },
+    "InitiationActor": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER",
+        "MERCHANT"
+      ],
+      "description": "The party who initiated the order",
+      "title": "InitiationActor"
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "The amount as a string representation of a decimal number, rounded to 2 decimal places."
+        },
+        "currency": {
+          "$ref": "#/$defs/MoneyCurrency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "description": "Object containing amount and currency",
+      "title": "Money"
+    },
+    "MoneyCurrency": {
+      "type": "string",
+      "enum": [
+        "AUD",
+        "NZD",
+        "USD",
+        "CAD",
+        "GBP"
+      ],
+      "title": "MoneyCurrency"
+    },
+    "Subscription": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/SubscriptionType"
+        },
+        "interval": {
+          "$ref": "#/$defs/SubscriptionInterval"
+        },
+        "intervalCount": {
+          "type": "integer"
+        }
+      },
+      "title": "Subscription"
+    },
+    "SubscriptionInterval": {
+      "type": "string",
+      "enum": [
+        "DAY",
+        "WEEK",
+        "MONTH",
+        "YEAR"
+      ],
+      "title": "SubscriptionInterval"
+    },
+    "SubscriptionType": {
+      "type": "string",
+      "enum": [
+        "FIXED",
+        "VARIABLE"
+      ],
+      "title": "SubscriptionType"
+    }
+  }
+}

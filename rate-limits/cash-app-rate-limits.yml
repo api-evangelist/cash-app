@@ -1,0 +1,7 @@
+name: Cash App Rate Limits
+generated: '2026-10-12'
+method: none
+source: https://developers.cash.app/cash-app-pay-partner-api/llms.txt
+limit_count: 0
+limits: []
+note: Neither the Cash App Pay Partner API nor the Afterpay docs index (llms.txt) lists a rate-limit page; no numeric limits are published.

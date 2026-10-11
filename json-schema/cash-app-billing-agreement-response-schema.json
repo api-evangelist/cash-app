@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-billing-agreement-response-schema.json",
+  "title": "BillingAgreementResponse",
+  "description": "Response type for billing agreements",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-billing-agreements-api-openapi.yml#/components/schemas/BillingAgreementResponse",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "Unique token identifying the agreement"
+    },
+    "type": {
+      "$ref": "#/$defs/BillingAgreementResponseType",
+      "description": "Type of agreement"
+    },
+    "status": {
+      "$ref": "#/$defs/BillingAgreementResponseStatus",
+      "description": "Current status of the agreement"
+    },
+    "merchantReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Merchant's reference for this agreement"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the agreement was created"
+    },
+    "cancelled": {
+      "type": "string",
+      "format": "date-time",
+      "description": "If present, indicates when the agreement was cancelled"
+    },
+    "expires": {
+      "type": "string",
+      "format": "date-time",
+      "description": "If present, indicates when the agreement's status will become EXPIRED, preventing a client from using it to create payments"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AgreementEventResponse"
+      },
+      "description": "List of events associated with this agreement"
+    },
+    "requestId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Unique identifier for the request"
+    },
+    "consumerReference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Reference identifier for the consumer"
+    },
+    "email": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Masked email address of the consumer"
+    }
+  },
+  "required": [
+    "token",
+    "type",
+    "status",
+    "created"
+  ],
+  "$defs": {
+    "AgreementEventResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/AgreementEventResponseType",
+          "description": "Type of event"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the event occurred"
+        },
+        "amount": {
+          "$ref": "#/$defs/Money",
+          "description": "Amount associated with the event"
+        },
+        "status": {
+          "$ref": "#/$defs/AgreementEventResponseStatus",
+          "description": "Status of the agreement at the time of the event"
+        },
+        "merchantReference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Merchant's reference associated with this event"
+        },
+        "orderId": {
+          "type": "number",
+          "format": "double",
+          "description": "Order ID associated with this event"
+        }
+      },
+      "description": "Response type for agreement events",
+      "title": "AgreementEventResponse"
+    },
+    "AgreementEventResponseStatus": {
+      "type": "string",
+      "enum": [
+        "APPROVED",
+        "DECLINED"
+      ],
+      "description": "Status of the agreement at the time of the event",
+      "title": "AgreementEventResponseStatus"
+    },
+    "AgreementEventResponseType": {
+      "type": "string",
+      "enum": [
+        "CAPTURE",
+        "VOID"
+      ],
+      "description": "Type of event",
+      "title": "AgreementEventResponseType"
+    },
+    "BillingAgreementResponseStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CANCELLED",
+        "EXPIRED",
+        "PENDING_RENEWAL",
+        "PENDING_RENEWAL_EXPIRED"
+      ],
+      "description": "Current status of the agreement",
+      "title": "BillingAgreementResponseStatus"
+    },
+    "BillingAgreementResponseType": {
+      "type": "string",
+      "enum": [
+        "BILLING"
+      ],
+      "description": "Type of agreement",
+      "title": "BillingAgreementResponseType"
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "The amount as a string representation of a decimal number, rounded to 2 decimal places."
+        },
+        "currency": {
+          "$ref": "#/$defs/MoneyCurrency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "description": "Object containing amount and currency",
+      "title": "Money"
+    },
+    "MoneyCurrency": {
+      "type": "string",
+      "enum": [
+        "AUD",
+        "NZD",
+        "USD",
+        "CAD",
+        "GBP"
+      ],
+      "title": "MoneyCurrency"
+    }
+  }
+}

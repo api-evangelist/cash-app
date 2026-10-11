@@ -1,0 +1,91 @@
+generated: '2026-10-12'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 6
+  own: 4
+  other_domain: 0
+  platform: 2
+  roles:
+  - api
+  - other
+  - portal
+  - source
+  - status
+  - website
+hosts:
+- host: api.cash.app
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: cash.app
+  role: api
+  relation: own
+- host: cash.app
+  found_by:
+  - pointer
+  - vendor-detect
+  types:
+  - Newsroom
+  - Login
+  - Blog
+  - Website
+  - TermsOfService
+  - PrivacyPolicy
+  - Support
+  serves:
+  - cdn
+  vendor: cloudflare
+  registrable_domain: cash.app
+  role: website
+  relation: own
+- host: developers.cash.app
+  found_by:
+  - pointer
+  - apis[]
+  - vendor-detect
+  types:
+  - APIReference
+  - DeveloperPortal
+  - Documentation
+  - DeprecationPolicy
+  - GettingStarted
+  - Signup
+  - PostmanCollection
+  serves:
+  - docs
+  - hosting
+  vendor: vercel
+  registrable_domain: cash.app
+  role: portal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: status.cash.app
+  found_by:
+  - pointer
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: cash.app
+  role: status
+  relation: own
+- host: www.postman.com
+  found_by:
+  - pointer
+  types:
+  - PostmanWorkspace
+  serves: []
+  registrable_domain: postman.com
+  role: other
+  relation: platform

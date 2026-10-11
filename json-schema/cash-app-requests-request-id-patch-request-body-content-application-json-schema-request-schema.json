@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-requests-request-id-patch-request-body-content-application-json-schema-request-schema.json",
+  "title": "RequestsRequestIdPatchRequestBodyContentApplicationJsonSchemaRequest",
+  "description": "Details about the request to update",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-requests-api-openapi.yml#/components/schemas/RequestsRequestIdPatchRequestBodyContentApplicationJsonSchemaRequest",
+  "type": "object",
+  "properties": {
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Action"
+      },
+      "description": "A list of the different actions a client intends to take on the customer if the request is approved.\n\nNo duplicate action types allowed.\n\nMin number of items: `1`\nMax number of items: `5`"
+    },
+    "reference_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A user-defined identifier for this request, typically used to associate the resource with a record in an external system.\n\nMin length: `1`\nMax length: `1024`"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    }
+  },
+  "$defs": {
+    "Action": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/OneTimePaymentAction"
+        },
+        {
+          "$ref": "#/$defs/OnFilePaymentAction"
+        },
+        {
+          "$ref": "#/$defs/OnFileDepositAction"
+        },
+        {
+          "$ref": "#/$defs/OnFilePayoutAction"
+        },
+        {
+          "$ref": "#/$defs/LinkAccountAction"
+        },
+        {
+          "$ref": "#/$defs/CheckingBalanceAction"
+        }
+      ],
+      "description": "Represents what the client intends to do to a customer if given authorization.",
+      "title": "Action"
+    },
+    "CheckingBalanceAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/CheckingBalanceActionType",
+          "description": "The type of the action (`CHECKING_BALANCE`)."
+        },
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client or brand requesting access to read the customer's balances.\n\nIf a client ID is passed, the grant from this action can be used to read balances on behalf of the client.\n\nIf a brand ID is passed, the grant from this action can be used to read balances on behalf of any merchant that has a matching brand ID.\n\nMerchant IDs may *not* be passed.\n\nMin length: `1`\nMax length: `128`"
+        }
+      },
+      "required": [
+        "type",
+        "scope_id"
+      ],
+      "description": "Describes an intent for a client to read a customer's Cash App checking balance until the customer revokes the grant.\n\n**Beta:** This action is in beta.",
+      "title": "CheckingBalanceAction"
+    },
+    "CheckingBalanceActionType": {
+      "type": "string",
+      "enum": [
+        "CHECKING_BALANCE"
+      ],
+      "description": "The type of the action (`CHECKING_BALANCE`).",
+      "title": "CheckingBalanceActionType"
+    },
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "LinkAccountAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/LinkAccountActionType",
+          "description": "The type of the action (`LINK_ACCOUNT`)."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Describes an intent for a client to manage a customer's merchant profiles in Cash App.",
+      "title": "LinkAccountAction"
+    },
+    "LinkAccountActionType": {
+      "type": "string",
+      "enum": [
+        "LINK_ACCOUNT"
+      ],
+      "description": "The type of the action (`LINK_ACCOUNT`).",
+      "title": "LinkAccountActionType"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    },
+    "OnFileDepositAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/OnFileDepositActionType",
+          "description": "The type of the action (`ON_FILE_DEPOSIT`)."
+        },
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client or brand that indicates the set of merchants that will deposit to customers.\n\nIf a client ID is passed, the grant from this action can be used to create a deposit for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a deposit for any merchant that has a matching brand ID.\nMin length: `1`\nMax length: `128`"
+        },
+        "account_reference_id": {
+          "type": "string",
+          "description": "Identifier of the account or customer associated to the on file action."
+        }
+      },
+      "required": [
+        "type",
+        "scope_id",
+        "account_reference_id"
+      ],
+      "description": "Describes an intent for a client to deposit funds into the Cash App account balances in perpetuity until the Cash App account revokes the grant.",
+      "title": "OnFileDepositAction"
+    },
+    "OnFileDepositActionType": {
+      "type": "string",
+      "enum": [
+        "ON_FILE_DEPOSIT"
+      ],
+      "description": "The type of the action (`ON_FILE_DEPOSIT`).",
+      "title": "OnFileDepositActionType"
+    },
+    "OnFilePaymentAction": {
+      "type": "object",
+      "properties": {
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client or brand that will charge customers.\n\nIf a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.\n\nMerchant IDs may *not* be passed.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "type": {
+          "$ref": "#/$defs/OnFilePaymentActionType",
+          "description": "The type of the action (`ON_FILE_PAYMENT`)."
+        },
+        "account_reference_id": {
+          "type": "string",
+          "description": "Identifier of the account or customer associated to the on file action."
+        }
+      },
+      "required": [
+        "scope_id",
+        "type"
+      ],
+      "description": "Describes an intent for a client to store a customer's account, allowing a client to create payments or issue refunds for it on a recurring basis.",
+      "title": "OnFilePaymentAction"
+    },
+    "OnFilePaymentActionType": {
+      "type": "string",
+      "enum": [
+        "ON_FILE_PAYMENT"
+      ],
+      "default": "ON_FILE_PAYMENT",
+      "description": "The type of the action (`ON_FILE_PAYMENT`).",
+      "title": "OnFilePaymentActionType"
+    },
+    "OnFilePayoutAction": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/OnFilePayoutActionType",
+          "description": "The type of the action (`ON_FILE_PAYOUT`)."
+        },
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client or brand that indicates the set of merchants that will payout to customers.\n\nIf a client ID is passed, the grant from this action can be used to create a payout for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a payout for any merchant that has a matching brand ID.\n\nMerchant IDs may *not* be passed.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "account_reference_id": {
+          "type": "string",
+          "description": "Identifier of the account or customer associated to the on file action."
+        }
+      },
+      "required": [
+        "type",
+        "scope_id"
+      ],
+      "description": "Describes an intent for a client to payout funds from the Cash App account balances in perpetuity until the Cash App account revokes the grant.",
+      "title": "OnFilePayoutAction"
+    },
+    "OnFilePayoutActionType": {
+      "type": "string",
+      "enum": [
+        "ON_FILE_PAYOUT"
+      ],
+      "description": "The type of the action (`ON_FILE_PAYOUT`).",
+      "title": "OnFilePayoutActionType"
+    },
+    "OneTimePaymentAction": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "integer",
+          "description": "Amount to charge the customer, in the lowest unit of the associated currency.\n\nMin value: `1`"
+        },
+        "currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "scope_id": {
+          "type": "string",
+          "description": "ID of the client, brand, or merchant that will charge the customer.\n\nIf a client ID is passed, the grant from this action can be used to create a payment for any merchant owned by the client.\n\nIf a brand ID is passed, the grant from this action can be used to create a payment for any merchant that has a matching brand ID.\n\nIf a merchant ID is passed, the grant from this action can be used to create a payment for the merchant with a matching ID.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "type": {
+          "$ref": "#/$defs/OneTimePaymentActionType",
+          "description": "The type of the action (`ONE_TIME_PAYMENT`)."
+        }
+      },
+      "required": [
+        "scope_id",
+        "type"
+      ],
+      "description": "Describes an intent for a client to charge a customer a given amount.\n\nNote the following restrictions when using this action:\n\n- If no amount is provided to the action, the payment charged may be **any** amount.\n- If `amount` is provided, `currency` must be provided too (and vice versa).",
+      "title": "OneTimePaymentAction"
+    },
+    "OneTimePaymentActionType": {
+      "type": "string",
+      "enum": [
+        "ONE_TIME_PAYMENT"
+      ],
+      "description": "The type of the action (`ONE_TIME_PAYMENT`).",
+      "title": "OneTimePaymentActionType"
+    }
+  }
+}

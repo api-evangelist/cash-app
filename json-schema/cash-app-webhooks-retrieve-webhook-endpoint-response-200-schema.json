@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-webhooks-retrieve-webhook-endpoint-response-200-schema.json",
+  "title": "webhooks_retrieve-webhook-endpoint_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-webhooks-api-openapi.yml#/components/schemas/webhooks_retrieve-webhook-endpoint_Response_200",
+  "type": "object",
+  "properties": {
+    "webhook_endpoint": {
+      "$ref": "#/$defs/WebhookEndpoint"
+    }
+  },
+  "required": [
+    "webhook_endpoint"
+  ],
+  "$defs": {
+    "ApiVersion": {
+      "type": "string",
+      "enum": [
+        "v1"
+      ],
+      "description": "Represents the API version. ",
+      "title": "ApiVersion"
+    },
+    "EventConfiguration": {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "api_version": {
+          "$ref": "#/$defs/ApiVersion"
+        }
+      },
+      "required": [
+        "event_type",
+        "api_version"
+      ],
+      "description": "Represents a supported event type and the API version that the event of this type should be serialized to.",
+      "title": "EventConfiguration"
+    },
+    "EventType": {
+      "type": "string",
+      "enum": [
+        "customer.created",
+        "customer.deleted",
+        "customer.updated",
+        "customer_request.state.updated",
+        "dispute.created",
+        "dispute.state.updated",
+        "grant.created",
+        "grant.status.updated",
+        "merchant.status.updated",
+        "payment.status.updated",
+        "refund.status.updated"
+      ],
+      "description": "The type of event that will be sent to the webhook endpoint.",
+      "title": "EventType"
+    },
+    "WebhookEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID for a webhook endpoint issued by Cash App."
+        },
+        "api_key_id": {
+          "type": "string",
+          "description": "The API key ID which will be used to sign requests made to this webhook endpoint."
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "A user-defined identifier for this webhook endpoint, typically used to associate the webhook endpoint with a record in an external system."
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "description": "The events are delivered to this endpoint URL. If NULL, events will be not be delivered to an endpoint but will still be persisted and accessible via the List Webhook Events API."
+        },
+        "event_configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EventConfiguration"
+          },
+          "description": "The list of supported event types for this webhook endpoint. Events of a particular type will only be sent to endpoints that contain the type in this list."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of when this webhook endpoint was created."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of when this endpoint was last updated."
+        },
+        "delivery_timeout": {
+          "type": "number",
+          "format": "double",
+          "default": 5000,
+          "description": "The duration, in milliseconds, that Cash App will take to deliver an event to this endpoint before timing out."
+        },
+        "max_delivery_frequency": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double",
+          "description": "The maximum number of events per second that will be delivered to this endpoint before rate limiting kicks in. The default for this field is unset (NULL) which means no rate limiting. However, if you enable rate limiting, the values can range from 1 to 100000."
+        },
+        "status": {
+          "$ref": "#/$defs/WebhookEndpointStatus"
+        }
+      },
+      "required": [
+        "id",
+        "api_key_id",
+        "url",
+        "event_configurations",
+        "created_at",
+        "updated_at",
+        "delivery_timeout",
+        "status"
+      ],
+      "description": "The events will be sent to this webhook endpoint.",
+      "title": "WebhookEndpoint"
+    },
+    "WebhookEndpointStatus": {
+      "type": "string",
+      "enum": [
+        "APPROVED",
+        "ENDPOINT_URL_UNDER_REVIEW"
+      ],
+      "description": "The approval status of a webhook endpoint. Once a webhook endpoint is approved, Cash App will deliver events to that webhook endpoint.",
+      "title": "WebhookEndpointStatus"
+    }
+  }
+}

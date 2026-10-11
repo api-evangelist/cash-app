@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-evidence-schema.json",
+  "title": "evidence",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-disputes-api-openapi.yml#/components/schemas/evidence",
+  "type": "object",
+  "properties": {
+    "productDescription": {
+      "type": "string",
+      "description": "A description of the product or service and any relevant details on how this was presented to the customer at the time of purchase."
+    },
+    "refundPolicy": {
+      "type": "string",
+      "format": "binary",
+      "description": "Token of the file upload. The merchant’s refund policy, as shown or provided to the customer."
+    },
+    "refundPolicyDisclosure": {
+      "type": "string",
+      "description": "An explanation of how and when the customer was shown or provided with the merchant’s refund policy prior to purchase."
+    },
+    "refundRefusalExplanation": {
+      "type": "string",
+      "description": "The merchant’s explanation for why the customer is not entitled to a refund."
+    },
+    "shippingDocumentation": {
+      "type": "string",
+      "format": "binary",
+      "description": "Token of the file upload. A shipping label or receipt for the disputed payment."
+    },
+    "shippingAddress": {
+      "type": "string",
+      "description": "The address to which a physical product was shipped."
+    },
+    "shippingDate": {
+      "type": "string",
+      "description": "In cases of physical products, the date that a physical product began its route to the shipping address in a clear human-readable format. This date should be prior to the date of the dispute."
+    },
+    "shippingCarrier": {
+      "type": "string",
+      "description": "In cases of physical products, the delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If multiple carriers were used for this purchase, separate them with commas."
+    },
+    "shippingTrackingNumber": {
+      "type": "string",
+      "description": "The tracking number for a physical product, obtained from the delivery service."
+    },
+    "uncategorizedFile": {
+      "type": "string",
+      "format": "binary",
+      "description": "Token of the file upload. Additional file that’s not in any of the categories above."
+    },
+    "uncategorizedText": {
+      "type": "string",
+      "description": "Any additional text deemed relevant by the merchant."
+    }
+  }
+}

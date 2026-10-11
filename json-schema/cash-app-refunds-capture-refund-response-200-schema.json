@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-refunds-capture-refund-response-200-schema.json",
+  "title": "Refunds_capture-refund_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-refunds-api-openapi.yml#/components/schemas/Refunds_capture-refund_Response_200",
+  "type": "object",
+  "properties": {
+    "refund": {
+      "$ref": "#/$defs/Refund"
+    }
+  },
+  "required": [
+    "refund"
+  ],
+  "$defs": {
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/ErrorCategory",
+          "description": "The high-level reason the error occurred."
+        },
+        "code": {
+          "type": "string",
+          "description": "A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).\n\nMin length: `1`"
+        },
+        "detail": {
+          "type": "string",
+          "description": "Human-readable description of why the error occurred and how to resolve it.\n\nMin length: `1`"
+        },
+        "field": {
+          "type": "string",
+          "description": "The field in the request that caused the error, using array and object dot notation.\n\nMin length: `1`"
+        }
+      },
+      "required": [
+        "category",
+        "code"
+      ],
+      "description": "Represents an error encountered during a request to the API.",
+      "title": "Error"
+    },
+    "ErrorCategory": {
+      "type": "string",
+      "enum": [
+        "API_ERROR",
+        "AUTHENTICATION_ERROR",
+        "BRAND_ERROR",
+        "DISPUTE_ERROR",
+        "MERCHANT_ERROR",
+        "INVALID_REQUEST_ERROR",
+        "PAYMENT_PROCESSING_ERROR",
+        "RATE_LIMIT_ERROR",
+        "WEBHOOK_ERROR",
+        "API_KEY_ERROR",
+        "GRANT_ERROR"
+      ],
+      "description": "The high-level reason the error occurred.",
+      "title": "ErrorCategory"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    },
+    "Refund": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this refund issued by Cash App.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "amount": {
+          "type": "integer",
+          "description": "Amount of money to refund, in the lowest denomination of currency on the refund.\n\nMin value: `1`"
+        },
+        "currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "customer_id": {
+          "type": "string",
+          "description": "ID of the customer that received this refund.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "merchant_id": {
+          "type": "string",
+          "description": "ID of the merchant that issued this refund.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "status": {
+          "$ref": "#/$defs/RefundStatus",
+          "description": "The step of the refund processing lifecycle that this refund is currently at.\n\n- `AUTHORIZED`\n- `CAPTURED`\n- `VOIDED`\n- `DECLINED`"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this refund was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this refund was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "grant_id": {
+          "type": "string",
+          "description": "This is currently unused and empty.\n\nMin length: `1`\nMax length: `256`"
+        },
+        "payment_id": {
+          "type": "string",
+          "description": "This is currently unused and empty.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        },
+        "decline_errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Error"
+          },
+          "description": "If the refund was declined, contains a list of the reasons why it was declined.\n\nMin number of items: `1`"
+        }
+      },
+      "required": [
+        "id",
+        "amount",
+        "currency",
+        "customer_id",
+        "merchant_id",
+        "status",
+        "created_at",
+        "updated_at"
+      ],
+      "title": "Refund"
+    },
+    "RefundStatus": {
+      "type": "string",
+      "enum": [
+        "AUTHORIZED",
+        "CAPTURED",
+        "VOIDED",
+        "DECLINED"
+      ],
+      "description": "The step of the refund processing lifecycle that this refund is currently at.\n\n- `AUTHORIZED`\n- `CAPTURED`\n- `VOIDED`\n- `DECLINED`",
+      "title": "RefundStatus"
+    }
+  }
+}

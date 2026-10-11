@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-grant-approval-response-schema.json",
+  "title": "GrantApprovalResponse",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-grants-api-openapi.yml#/components/schemas/GrantApprovalResponse",
+  "type": "object",
+  "properties": {
+    "token": {
+      "type": "string",
+      "description": "Token identifying this grant approval request"
+    },
+    "expires": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this approval request expires"
+    },
+    "redirectCheckoutUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL where the consumer should be redirected to complete approval"
+    }
+  },
+  "required": [
+    "token",
+    "expires",
+    "redirectCheckoutUrl"
+  ]
+}

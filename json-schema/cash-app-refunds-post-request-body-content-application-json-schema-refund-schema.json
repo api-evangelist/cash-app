@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-refunds-post-request-body-content-application-json-schema-refund-schema.json",
+  "title": "RefundsPostRequestBodyContentApplicationJsonSchemaRefund",
+  "description": "Details about the refund to create.",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-refunds-api-openapi.yml#/components/schemas/RefundsPostRequestBodyContentApplicationJsonSchemaRefund",
+  "type": "object",
+  "properties": {
+    "amount": {
+      "type": "integer",
+      "description": "The amount of money to refund the customer, in the lowest denomination of currency for the refund.\n\nMin value: `1`"
+    },
+    "currency": {
+      "$ref": "#/$defs/Currency"
+    },
+    "merchant_id": {
+      "type": "string",
+      "description": "ID of the merchant to make the refund from.\n\nMin length: `1`\nMax length: `128`"
+    },
+    "payment_id": {
+      "type": "string",
+      "description": "For refunds, this is the ID of the payment to refund.\n\nMin length: `1`\nMax length: `128`"
+    },
+    "capture": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether or not to automatically capture the refund once it's created.\n\nDefault: `true`"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "A user-defined identifier for this refund, typically used to associate the refund with a record in an external system.\n\nMin length: `1`\nMax length: `1024`"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    }
+  },
+  "required": [
+    "amount",
+    "currency",
+    "merchant_id"
+  ],
+  "$defs": {
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    }
+  }
+}

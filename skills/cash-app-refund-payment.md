@@ -1,5 +1,5 @@
 ---
-name: Refund a Cash App Pay payment
+name: cash-app-refund-payment
 description: Issue and capture a refund against a captured Network API payment, handling decline codes.
 api: openapi/cash-app-network-api-openapi.json
 operations: [retrieve-payment, create-refund, capture-refund, retrieve-refund]

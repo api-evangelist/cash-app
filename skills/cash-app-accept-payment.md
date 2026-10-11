@@ -1,5 +1,5 @@
 ---
-name: Accept a Cash App Pay payment
+name: cash-app-accept-payment
 description: Collect a customer grant via a Customer Request, then create and capture a payment on the Network API.
 api: openapi/cash-app-network-api-openapi.json
 operations: [create-request, retrieve-request, create-payment, postV2PaymentsByOrderIdCapture]

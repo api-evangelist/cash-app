@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-webhook-endpoints-webhook-endpoint-id-patch-request-body-content-application-json-schema-webhook-endpoint-schema.json",
+  "title": "WebhookEndpointsWebhookEndpointIdPatchRequestBodyContentApplicationJsonSchemaWebhookEndpoint",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-webhooks-api-openapi.yml#/components/schemas/WebhookEndpointsWebhookEndpointIdPatchRequestBodyContentApplicationJsonSchemaWebhookEndpoint",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uri",
+      "description": "The events are delivered to this endpoint URL."
+    },
+    "reference_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "A user-defined identifier for this webhook endpoint, typically used to associate the webhook endpoint with a record in an external system."
+    },
+    "api_key_id": {
+      "type": "string",
+      "description": "The API key ID which will be used to sign requests made to this webhook endpoint."
+    },
+    "event_configurations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/EventConfiguration"
+      },
+      "description": "The list of supported event types for this webhook endpoint. Events of a particular type will only be sent to endpoints that contain the type in this list."
+    },
+    "delivery_timeout": {
+      "type": "number",
+      "format": "double",
+      "default": 5000,
+      "description": "The duration, in milliseconds, that Cash App will take to deliver an event to this endpoint before timing out."
+    },
+    "max_delivery_frequency": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "format": "double",
+      "description": "The maximum number of events per second that will be delivered to this endpoint before rate limiting kicks in. The default for this field is unset (NULL) which means no rate limiting. However, if you enable rate limiting, the values can range from 1 to 100000."
+    }
+  },
+  "$defs": {
+    "ApiVersion": {
+      "type": "string",
+      "enum": [
+        "v1"
+      ],
+      "description": "Represents the API version. ",
+      "title": "ApiVersion"
+    },
+    "EventConfiguration": {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "$ref": "#/$defs/EventType"
+        },
+        "api_version": {
+          "$ref": "#/$defs/ApiVersion"
+        }
+      },
+      "required": [
+        "event_type",
+        "api_version"
+      ],
+      "description": "Represents a supported event type and the API version that the event of this type should be serialized to.",
+      "title": "EventConfiguration"
+    },
+    "EventType": {
+      "type": "string",
+      "enum": [
+        "customer.created",
+        "customer.deleted",
+        "customer.updated",
+        "customer_request.state.updated",
+        "dispute.created",
+        "dispute.state.updated",
+        "grant.created",
+        "grant.status.updated",
+        "merchant.status.updated",
+        "payment.status.updated",
+        "refund.status.updated"
+      ],
+      "description": "The type of event that will be sent to the webhook endpoint.",
+      "title": "EventType"
+    }
+  }
+}

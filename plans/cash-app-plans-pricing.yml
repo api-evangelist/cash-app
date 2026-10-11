@@ -1,0 +1,10 @@
+name: Cash App Plans and Pricing
+generated: '2026-10-12'
+method: none
+source: https://developers.cash.app/cash-app-pay-partner-api/llms.txt
+audience: unclear
+pricing_basis: negotiated
+published: false
+plan_count: 0
+plans: []
+note: No public API pricing; Cash App Pay is offered to PSP partners through a partnership process (guides/partnerships/partner-with-cash-app-pay), and merchant fee plans are API objects (FeePlan, MerchantFeePlans), not a published price list.

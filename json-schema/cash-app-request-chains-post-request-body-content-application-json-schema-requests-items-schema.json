@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-request-chains-post-request-body-content-application-json-schema-requests-items-schema.json",
+  "title": "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-requestchains-api-openapi.yml#/components/schemas/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItems",
+  "type": "object",
+  "properties": {
+    "uid": {
+      "type": "string",
+      "description": "Unique identifier for the request"
+    },
+    "method": {
+      "$ref": "#/$defs/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod",
+      "description": "HTTP method of the request"
+    },
+    "path": {
+      "type": "string",
+      "description": "URL path to call. Use format `{path_params key name}` to add variable path parameters."
+    },
+    "path_params": {
+      "$ref": "#/$defs/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams",
+      "description": "A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**."
+    },
+    "query_params": {
+      "$ref": "#/$defs/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams",
+      "description": "A map of query parameters. The value fields allow for **Accessing a previous response's value**."
+    },
+    "body": {
+      "$ref": "#/$defs/RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody",
+      "description": "The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**."
+    }
+  },
+  "required": [
+    "uid",
+    "method",
+    "path"
+  ],
+  "$defs": {
+    "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody": {
+      "type": "object",
+      "properties": {},
+      "description": "The body that is required for the requested endpoint. The value fields allow for **Accessing a previous response's value**.",
+      "title": "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsBody"
+    },
+    "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod": {
+      "type": "string",
+      "enum": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "description": "HTTP method of the request",
+      "title": "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsMethod"
+    },
+    "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams": {
+      "type": "object",
+      "properties": {},
+      "description": "A map of path parameters. The keys represent variables from the `path`. The value fields allow for **Accessing a previous response's value**.",
+      "title": "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsPathParams"
+    },
+    "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams": {
+      "type": "object",
+      "properties": {},
+      "description": "A map of query parameters. The value fields allow for **Accessing a previous response's value**.",
+      "title": "RequestChainsPostRequestBodyContentApplicationJsonSchemaRequestsItemsQueryParams"
+    }
+  }
+}

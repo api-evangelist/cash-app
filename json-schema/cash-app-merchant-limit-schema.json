@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-merchant-limit-schema.json",
+  "title": "Merchant-limit",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-configuration-api-openapi.yml#/components/schemas/Merchant-limit",
+  "type": "object",
+  "properties": {
+    "minimumAmount": {
+      "$ref": "#/$defs/Money"
+    },
+    "maximumAmount": {
+      "$ref": "#/$defs/Money"
+    },
+    "publicId": {
+      "type": "string",
+      "description": "Merchant public identifier (MPID). Returned only when `include=publicid` is requested and a public mapping exists for the merchant."
+    },
+    "consumerLending": {
+      "$ref": "#/$defs/MerchantLimitConsumerLending",
+      "description": "Returned only when `include=consumerlending` is requested. Indicates whether consumer lending is enabled for the merchant's online channel and, when enabled, the eligible order amount range."
+    },
+    "payByInstallment": {
+      "$ref": "#/$defs/MerchantLimitPayByInstallment",
+      "description": "Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment."
+    }
+  },
+  "$defs": {
+    "MerchantLimitConsumerLending": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether consumer lending is enabled for this merchant."
+        },
+        "minimumAmount": {
+          "$ref": "#/$defs/Money",
+          "description": "Minimum eligible order amount when consumer lending is enabled."
+        },
+        "maximumAmount": {
+          "$ref": "#/$defs/Money",
+          "description": "Maximum eligible order amount when consumer lending is enabled."
+        }
+      },
+      "description": "Returned only when `include=consumerlending` is requested. Indicates whether consumer lending is enabled for the merchant's online channel and, when enabled, the eligible order amount range.",
+      "title": "MerchantLimitConsumerLending"
+    },
+    "MerchantLimitPayByInstallment": {
+      "type": "object",
+      "properties": {
+        "minimumAmount": {
+          "$ref": "#/$defs/Money",
+          "description": "Minimum eligible order amount for pay by installment."
+        },
+        "maximumAmount": {
+          "$ref": "#/$defs/Money",
+          "description": "Maximum eligible order amount for pay by installment."
+        }
+      },
+      "description": "Returned only when `include=paybyinstallment` is requested and pay by installment is configured for the merchant. Contains the eligible order amount range for pay by installment.",
+      "title": "MerchantLimitPayByInstallment"
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "The amount as a string representation of a decimal number, rounded to 2 decimal places."
+        },
+        "currency": {
+          "$ref": "#/$defs/MoneyCurrency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "description": "Object containing amount and currency",
+      "title": "Money"
+    },
+    "MoneyCurrency": {
+      "type": "string",
+      "enum": [
+        "AUD",
+        "NZD",
+        "USD",
+        "CAD",
+        "GBP"
+      ],
+      "title": "MoneyCurrency"
+    }
+  }
+}

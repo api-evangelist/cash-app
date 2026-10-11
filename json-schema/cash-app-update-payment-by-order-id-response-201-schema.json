@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-update-payment-by-order-id-response-201-schema.json",
+  "title": "update-payment-by-order-id_Response_201",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-payments-api-openapi.yml#/components/schemas/update-payment-by-order-id_Response_201",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique Afterpay (merchant payment) payment ID."
+    },
+    "token": {
+      "type": "string",
+      "description": "Checkout token to be used to complete customer checkout and payment."
+    },
+    "status": {
+      "type": "string",
+      "description": "\\\"APPROVED\" (update is only valid for successful orders)"
+    },
+    "created": {
+      "description": "The payment creation time [ISO 8601 UTC/Zulu time](https://www.iso.org/iso-8601-date-and-time-format.html)."
+    },
+    "originalAmount": {
+      "$ref": "#/$defs/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount",
+      "description": "Total amount for the order. See Money."
+    },
+    "openToCaptureAmount": {
+      "$ref": "#/$defs/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount",
+      "description": "Total amount that can be captured for order. See Money."
+    },
+    "paymentState": {
+      "type": "string",
+      "description": "Available states: \"AUTH_APPROVED\", \"CAPTURED\", \"VOIDED\", \"EXPIRED\", \"AUTH_DECLINED\", \"PARTIALLY_CAPTURED\", \"CAPTURE_DECLINED\"\""
+    },
+    "merchantReference": {
+      "description": "Any type"
+    },
+    "refunds": {
+      "$ref": "#/$defs/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds",
+      "description": "The refund details for merchant's order. See Refund."
+    },
+    "orderDetails": {
+      "$ref": "#/$defs/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails",
+      "description": "The order bound to the payment. See Order Details."
+    },
+    "events": {
+      "$ref": "#/$defs/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents",
+      "description": "Event list for for merchant's order. See Events."
+    }
+  },
+  "$defs": {
+    "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents": {
+      "type": "object",
+      "properties": {},
+      "description": "Event list for for merchant's order. See Events.",
+      "title": "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents"
+    },
+    "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount": {
+      "type": "object",
+      "properties": {},
+      "description": "Total amount that can be captured for order. See Money.",
+      "title": "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount"
+    },
+    "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails": {
+      "type": "object",
+      "properties": {},
+      "description": "The order bound to the payment. See Order Details.",
+      "title": "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails"
+    },
+    "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount": {
+      "type": "object",
+      "properties": {},
+      "description": "Total amount for the order. See Money.",
+      "title": "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount"
+    },
+    "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds": {
+      "type": "object",
+      "properties": {},
+      "description": "The refund details for merchant's order. See Refund.",
+      "title": "V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds"
+    }
+  }
+}

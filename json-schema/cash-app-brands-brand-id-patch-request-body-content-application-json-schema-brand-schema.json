@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-brands-brand-id-patch-request-body-content-application-json-schema-brand-schema.json",
+  "title": "BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand",
+  "description": "Details about the brand to update",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-brands-api-openapi.yml#/components/schemas/BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the brand to be shown in Cash App next to payments.\n\n*This field cannot be cleared.*\n\nMin length: `1`\nMax length: `1024`"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body).\n\n*This field cannot be cleared, and must be unique across all brands.*\n\nMin length: `1`\nMax length: `1024`"
+    },
+    "profile_image_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand's logo.\n\nThe image should be square and be at least 256x256. It must be less than 2MB in filesize.\n\nAcceptable image formats:\n- `png`\n- `jpg`\n- `jpeg`\n\n*This field cannot be cleared.*\n\nMin length: `8`\nMax length: `8000`"
+    },
+    "color": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Primary color associated with this brand and its logo, in 6-digit hex code format.\n\nPattern: `^#[a-fA-F0-9]{6}$`\nMin length: `7`\nMax length: `7`"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    }
+  },
+  "$defs": {
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    }
+  }
+}

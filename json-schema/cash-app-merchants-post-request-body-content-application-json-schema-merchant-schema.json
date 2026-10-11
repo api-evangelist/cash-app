@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-merchants-post-request-body-content-application-json-schema-merchant-schema.json",
+  "title": "MerchantsPostRequestBodyContentApplicationJsonSchemaMerchant",
+  "description": "Details about the merchant to create.",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-merchants-api-openapi.yml#/components/schemas/MerchantsPostRequestBodyContentApplicationJsonSchemaMerchant",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the individual or business entity associated with the merchant.\n\nMin length: `1`\nMax length: `1024`"
+    },
+    "brand_id": {
+      "type": "string",
+      "description": "ID of the brand associated with this merchant.\n\nMin length: `1`\nMax length: `128`\n"
+    },
+    "country": {
+      "$ref": "#/$defs/Country"
+    },
+    "currency": {
+      "$ref": "#/$defs/Currency"
+    },
+    "category": {
+      "$ref": "#/$defs/Category"
+    },
+    "reference_id": {
+      "type": "string",
+      "description": "A user-defined identifier for this merchant, typically used to associate the merchant with a record in an external system.\n\n**Must be unique across all merchants. Independent from the [brand reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-brand#request-body)**\n\nMin length: `1`\nMax length: `1024`"
+    },
+    "address": {
+      "$ref": "#/$defs/Address"
+    },
+    "site_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the website, if this merchant is for an eCommerce site.\n\nMin length: `8`\nMax length: `8000`"
+    },
+    "metadata": {
+      "$ref": "#/$defs/Metadata"
+    },
+    "default_fee_plans": {
+      "$ref": "#/$defs/MerchantFeePlans"
+    }
+  },
+  "required": [
+    "name",
+    "brand_id",
+    "country",
+    "currency",
+    "category",
+    "reference_id",
+    "address"
+  ],
+  "$defs": {
+    "Address": {
+      "type": "object",
+      "properties": {
+        "address_line_1": {
+          "type": "string",
+          "description": "First line of the street address, typically including street number, street name, and / or building name.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "address_line_2": {
+          "type": "string",
+          "description": "Second line of the address, if any.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "locality": {
+          "type": "string",
+          "description": "City or township where the entity is located.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "country": {
+          "$ref": "#/$defs/Country"
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "ZIP or postal code.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "administrative_district_level_1": {
+          "type": "string",
+          "description": "State or province.\n\nMin length: `1`\nMax length: `1024`"
+        }
+      },
+      "required": [
+        "country"
+      ],
+      "description": "Where this entity is located",
+      "title": "Address"
+    },
+    "Category": {
+      "type": "string",
+      "description": "The merchant category code associated with the entity. Values are from the [ISO-18245 specification](https://www.iso.org/standard/33365.html).",
+      "title": "Category"
+    },
+    "Country": {
+      "type": "string",
+      "enum": [
+        "US"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-3166 Alpha-2](https://www.iso.org/iso-3166-country-codes.html) specification.\n\nCurrent values:\n\n- `US`: United States of America",
+      "title": "Country"
+    },
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "MerchantFeePlans": {
+      "type": "object",
+      "properties": {
+        "in_app_fee_plan_id": {
+          "type": "string",
+          "description": "The fee plan ID identifying the fee plan that will be used for all in-app payments."
+        },
+        "in_person_fee_plan_id": {
+          "type": "string",
+          "description": "The fee plan ID identifying the fee plan that will be used for all in-person payments."
+        },
+        "online_fee_plan_id": {
+          "type": "string",
+          "description": "The fee plan ID identifying the fee plan that will be used for all online payments."
+        }
+      },
+      "description": "Merchant fee plans contains the IDs of the different fee plans for a merchant. These IDs represent the processing fees that merchants will be charged for processing payments for each channel. You can use the Fee Plans API to get all the fee information for each fee plan.",
+      "title": "MerchantFeePlans"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-contact-schema.json",
+  "title": "Contact",
+  "description": "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-payments-api-openapi.yml#/components/schemas/Contact",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "line1": {
+      "type": "string",
+      "description": "First line of the address"
+    },
+    "line2": {
+      "type": "string",
+      "description": "Second line of the address "
+    },
+    "area1": {
+      "type": "string",
+      "description": "- AU: Suburb\n- NZ: Town or City\n- UK: Postal Town\n- US: City\n- Canada: City"
+    },
+    "area2": {
+      "type": "string",
+      "description": "- NZ: suburb\n- UK: village or local area."
+    },
+    "region": {
+      "type": "string",
+      "description": "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+    },
+    "postcode": {
+      "type": "string"
+    },
+    "countryCode": {
+      "$ref": "#/$defs/ContactCountryCode"
+    },
+    "phoneNumber": {
+      "type": "string",
+      "description": "The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format."
+    }
+  },
+  "required": [
+    "name",
+    "line1",
+    "area1",
+    "region",
+    "postcode",
+    "countryCode"
+  ],
+  "$defs": {
+    "ContactCountryCode": {
+      "type": "string",
+      "enum": [
+        "AU",
+        "NZ",
+        "US",
+        "CA",
+        "GB"
+      ],
+      "title": "ContactCountryCode"
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-api-keys-retrieve-api-key-response-200-schema.json",
+  "title": "apiKeys_retrieve-api-key_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-api-keys-api-openapi.yml#/components/schemas/apiKeys_retrieve-api-key_Response_200",
+  "type": "object",
+  "properties": {
+    "api_key": {
+      "$ref": "#/$defs/ApiKey"
+    }
+  },
+  "required": [
+    "api_key"
+  ],
+  "$defs": {
+    "ApiKey": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this API key issued by Cash App. This is the API key value that is passed in the `Authorization` header."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this API key was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this API key will be automatically deleted and become unusable, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "scopes": {
+          "$ref": "#/$defs/Scopes"
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "A user-defined identifier for this API key, typically used to associate the API key with a record in an external system.\n\nMin length: `1`\nMax length: `1024`"
+        }
+      },
+      "required": [
+        "id",
+        "created_at",
+        "expires_at",
+        "scopes"
+      ],
+      "title": "ApiKey"
+    },
+    "Scopes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ScopesItems"
+      },
+      "description": "An array of permissions granted to the API key.\n\nCurrent values:\n\n- `API_KEYS_READ`: Permits listing API keys and retrieving individual keys.\n- `API_KEYS_WRITE`: Permits creating and deleting API keys.\n- `BRANDS_READ`: Permits listing brands and retrieving individual brands.\n- `BRANDS_WRITE`: Permits creating, upserting, and updating brands.\n- `CUSTOMERS_READ`: Permits listing customers and retrieving individual customers.\n- `DISPUTES_READ`: Permits listing disputes / dispute evidence and retrieving details about individual disputes / dispute evidence.\n- `DISPUTES_WRITE`: Permits uploading dispute evidence, accepting disputes, and challenging disputes.\n- `FEE_PLANS_READ`: Permits listing fee plans and retrieving individual fee plans.\n- `GRANTS_READ`: Permits listing grants for a customer and retrieving individual grants.\n- `GRANTS_WRITE`: Permits revoking a grant.\n- `MERCHANTS_READ`: Permits listing merchants and retrieving individual merchants.\n- `MERCHANTS_WRITE`: Permits creating, upserting, and updating merchants.\n- `PAYMENTS_READ`: Permits listing payments and retrieving individual payments.\n- `PAYMENTS_WRITE`: Permits taking payments, capturing payments, and voiding payments.\n- `PAYOUTS_READ`: Permits listing payouts and retrieving individual payouts.\n- `PAYOUTS_WRITE`: Permits creating payouts.\n- `REFUNDS_READ`: Permits listing refunds and retrieving individual refunds.\n- `REFUNDS_WRITE`: Permits issuing refunds, capturing refunds, and voiding refunds.\n- `WEBHOOK_CONFIG_READ`: Permits listing webhook delivery settings and retrieving individual configurations.\n- `WEBHOOK_CONFIG_WRITE`: Permits creating and updating webhook delivery settings.\n- `WEBHOOK_EVENTS_READ`: Permits listing webhook events and retrieving individual events.\n\nMin number of items: `1`",
+      "title": "Scopes"
+    },
+    "ScopesItems": {
+      "type": "string",
+      "enum": [
+        "PAYMENTS_READ",
+        "PAYMENTS_WRITE",
+        "PAYOUTS_READ",
+        "PAYOUTS_WRITE",
+        "REFUNDS_READ",
+        "REFUNDS_WRITE",
+        "DISPUTES_READ",
+        "DISPUTES_WRITE",
+        "CUSTOMERS_READ",
+        "FEE_PLANS_READ",
+        "GRANTS_READ",
+        "GRANTS_WRITE",
+        "API_KEYS_READ",
+        "API_KEYS_WRITE",
+        "BRANDS_READ",
+        "BRANDS_WRITE",
+        "MERCHANTS_READ",
+        "MERCHANTS_WRITE",
+        "WEBHOOK_CONFIG_READ",
+        "WEBHOOK_CONFIG_WRITE",
+        "WEBHOOK_EVENTS_READ"
+      ],
+      "title": "ScopesItems"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-customers-retrieve-customer-response-200-schema.json",
+  "title": "Customers_retrieve-customer_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-customers-api-openapi.yml#/components/schemas/Customers_retrieve-customer_Response_200",
+  "type": "object",
+  "properties": {
+    "customer": {
+      "$ref": "#/$defs/Customer"
+    }
+  },
+  "required": [
+    "customer"
+  ],
+  "$defs": {
+    "Customer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this customer issued by Cash App.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "cashtag": {
+          "type": "string",
+          "description": "Public identifier for the customer on Cash App. [Learn more](https://cash.app/help/us/en-us/3123-cashtags).\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "A user-defined identifier for this customer, typically used to associate the customer with a record in an external system. This value can be provided via the `CustomerRequest.customer_metadata.reference_id` attribute. Upon approval of the CustomerRequest, a corresponding customer resource is created with the `reference_id` attribute."
+        }
+      },
+      "required": [
+        "id",
+        "cashtag"
+      ],
+      "title": "Customer"
+    }
+  }
+}

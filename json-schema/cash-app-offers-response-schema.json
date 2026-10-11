@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-offers-response-schema.json",
+  "title": "OffersResponse",
+  "description": "Response containing available offers for the consumer",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-billing-agreements-api-openapi.yml#/components/schemas/OffersResponse",
+  "type": "object",
+  "properties": {
+    "consumerMaskedEmail": {
+      "type": "string",
+      "description": "Masked email address of the consumer"
+    },
+    "consumerAmount": {
+      "$ref": "#/$defs/Money",
+      "description": "Amount in consumer's currency"
+    },
+    "offers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Offer"
+      },
+      "description": "List of available offers details"
+    }
+  },
+  "$defs": {
+    "ConsumerOffers": {
+      "type": "object",
+      "properties": {
+        "noPaymentUpfront": {
+          "$ref": "#/$defs/ConsumerOffersNoPaymentUpfront",
+          "description": "Information about the no payment upfront feature eligibility"
+        }
+      },
+      "description": "Consumer offers",
+      "title": "ConsumerOffers"
+    },
+    "ConsumerOffersNoPaymentUpfront": {
+      "type": "object",
+      "properties": {
+        "eligible": {
+          "type": "boolean",
+          "description": "Indicates if the consumer is eligible for no payment upfront"
+        },
+        "eligibilityLimit": {
+          "$ref": "#/$defs/Money",
+          "description": "The maximum amount eligible for no payment upfront"
+        }
+      },
+      "required": [
+        "eligible",
+        "eligibilityLimit"
+      ],
+      "description": "Information about the no payment upfront feature eligibility",
+      "title": "ConsumerOffersNoPaymentUpfront"
+    },
+    "Money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "type": "string",
+          "description": "The amount as a string representation of a decimal number, rounded to 2 decimal places."
+        },
+        "currency": {
+          "$ref": "#/$defs/MoneyCurrency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "description": "Object containing amount and currency",
+      "title": "Money"
+    },
+    "MoneyCurrency": {
+      "type": "string",
+      "enum": [
+        "AUD",
+        "NZD",
+        "USD",
+        "CAD",
+        "GBP"
+      ],
+      "title": "MoneyCurrency"
+    },
+    "Offer": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/OfferType",
+          "description": "Type of the offer"
+        },
+        "merchantAmount": {
+          "$ref": "#/$defs/Money",
+          "description": "Amount for the merchant"
+        },
+        "exchangeRate": {
+          "type": "number",
+          "format": "double",
+          "description": "Exchange rate for cross-border transactions"
+        },
+        "amountDueToday": {
+          "$ref": "#/$defs/Money",
+          "description": "Amount due for immediate payment"
+        },
+        "payments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/PaymentSchedule"
+          },
+          "description": "List of scheduled payments"
+        },
+        "crossBorder": {
+          "type": "boolean",
+          "description": "Indicates if this is a cross-border transaction"
+        },
+        "appliedPromotion": {
+          "$ref": "#/$defs/Money",
+          "description": "Amount of promotion applied"
+        },
+        "consumer": {
+          "$ref": "#/$defs/ConsumerOffers",
+          "description": "Consumer offer details"
+        }
+      },
+      "description": "Represents an offer with payment details",
+      "title": "Offer"
+    },
+    "OfferType": {
+      "type": "string",
+      "enum": [
+        "PAY_IN_4"
+      ],
+      "description": "Type of the offer",
+      "title": "OfferType"
+    },
+    "PaymentSchedule": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/Money",
+          "description": "Amount for this payment installment"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Due date for this installment"
+        }
+      },
+      "required": [
+        "amount",
+        "dueDate"
+      ],
+      "description": "Represents a scheduled payment installment",
+      "title": "PaymentSchedule"
+    }
+  }
+}

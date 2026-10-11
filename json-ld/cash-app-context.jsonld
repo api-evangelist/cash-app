@@ -1,0 +1,804 @@
+{
+  "@context": {
+    "@vocab": "https://cash.app/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "cash": "https://cash.app/schema#",
+    "CashGrantDetailsStatus": "cash:CashGrantDetailsStatus",
+    "CashGrantDetailsCashapp": "cash:CashGrantDetailsCashapp",
+    "customerId": {
+      "@id": "cash:customerId",
+      "@type": "xsd:string"
+    },
+    "cashtag": {
+      "@id": "cash:cashtag",
+      "@type": "xsd:string"
+    },
+    "CashGrant": "cash:CashGrant",
+    "id": {
+      "@id": "cash:id",
+      "@type": "xsd:string"
+    },
+    "intent": {
+      "@id": "cash:intent",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "cash:type",
+      "@type": "@id"
+    },
+    "details": {
+      "@id": "cash:details",
+      "@type": "@id"
+    },
+    "CashGrantIntent": "cash:CashGrantIntent",
+    "CashGrantType": "cash:CashGrantType",
+    "CashGrantDetails": "cash:CashGrantDetails",
+    "status": {
+      "@id": "cash:status",
+      "@type": "@id"
+    },
+    "cashapp": {
+      "@id": "cash:cashapp",
+      "@type": "@id"
+    },
+    "createdAt": {
+      "@id": "cash:createdAt",
+      "@type": "xsd:string"
+    },
+    "updatedAt": {
+      "@id": "cash:updatedAt",
+      "@type": "xsd:string"
+    },
+    "expiresAt": {
+      "@id": "cash:expiresAt",
+      "@type": "xsd:string"
+    },
+    "apiKeys_retrieve-api-key_Response_200": "cash:apiKeys_retrieve-api-key_Response_200",
+    "api_key": {
+      "@id": "cash:api_key",
+      "@type": "@id"
+    },
+    "ErrorCategory": "cash:ErrorCategory",
+    "apiKeys_create-api-key_Response_201": "cash:apiKeys_create-api-key_Response_201",
+    "secret": {
+      "@id": "cash:secret",
+      "@type": "xsd:string"
+    },
+    "Error": "cash:Error",
+    "category": {
+      "@id": "cash:category",
+      "@type": "@id"
+    },
+    "code": {
+      "@id": "cash:code",
+      "@type": "xsd:string"
+    },
+    "detail": {
+      "@id": "cash:detail",
+      "@type": "xsd:string"
+    },
+    "field": {
+      "@id": "cash:field",
+      "@type": "xsd:string"
+    },
+    "apiKeys_list-api-keys_Response_200": "cash:apiKeys_list-api-keys_Response_200",
+    "api_keys": {
+      "@id": "cash:api_keys",
+      "@container": "@list"
+    },
+    "cursor": {
+      "@id": "cash:cursor",
+      "@type": "xsd:string"
+    },
+    "ErrorResponse": "cash:ErrorResponse",
+    "errors": {
+      "@id": "cash:errors",
+      "@container": "@list"
+    },
+    "ScopesItems": "cash:ScopesItems",
+    "ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey": "cash:ApiKeysPostRequestBodyContentApplicationJsonSchemaApiKey",
+    "scopes": {
+      "@id": "cash:scopes",
+      "@type": "@id"
+    },
+    "reference_id": {
+      "@id": "cash:reference_id",
+      "@type": "xsd:string"
+    },
+    "ApiKey": "cash:ApiKey",
+    "created_at": {
+      "@id": "cash:created_at",
+      "@type": "xsd:dateTime"
+    },
+    "expires_at": {
+      "@id": "cash:expires_at",
+      "@type": "xsd:dateTime"
+    },
+    "Retrieve-balanceRequestNotFoundError": "cash:Retrieve-balanceRequestNotFoundError",
+    "Currency": "cash:Currency",
+    "Balances_list-balances_Response_200": "cash:Balances_list-balances_Response_200",
+    "balances": {
+      "@id": "cash:balances",
+      "@container": "@list"
+    },
+    "BalancesGetParametersType": "cash:BalancesGetParametersType",
+    "Balances_retrieve-balance_Response_200": "cash:Balances_retrieve-balance_Response_200",
+    "balance": {
+      "@id": "cash:balance",
+      "@type": "@id"
+    },
+    "Balance": "cash:Balance",
+    "customer_id": {
+      "@id": "cash:customer_id",
+      "@type": "xsd:string"
+    },
+    "currency": {
+      "@id": "cash:currency",
+      "@type": "@id"
+    },
+    "amount": {
+      "@id": "cash:amount",
+      "@type": "xsd:integer"
+    },
+    "updated_at": {
+      "@id": "cash:updated_at",
+      "@type": "xsd:dateTime"
+    },
+    "BalanceType": "cash:BalanceType",
+    "GetBillingAgreementRequest": "cash:GetBillingAgreementRequest",
+    "token": {
+      "@id": "cash:token",
+      "@type": "xsd:string"
+    },
+    "Consumer": "cash:Consumer",
+    "email": {
+      "@id": "cash:email",
+      "@type": "xsd:string"
+    },
+    "givenNames": {
+      "@id": "cash:givenNames",
+      "@type": "xsd:string"
+    },
+    "surname": {
+      "@id": "cash:surname",
+      "@type": "xsd:string"
+    },
+    "phoneNumber": {
+      "@id": "cash:phoneNumber",
+      "@type": "xsd:string"
+    },
+    "CreateAgreementRequest": "cash:CreateAgreementRequest",
+    "requestId": {
+      "@id": "cash:requestId",
+      "@type": "xsd:string"
+    },
+    "merchantReference": {
+      "@id": "cash:merchantReference",
+      "@type": "xsd:string"
+    },
+    "BillingAgreementResponse": "cash:BillingAgreementResponse",
+    "created": {
+      "@id": "cash:created",
+      "@type": "xsd:dateTime"
+    },
+    "cancelled": {
+      "@id": "cash:cancelled",
+      "@type": "xsd:dateTime"
+    },
+    "expires": {
+      "@id": "cash:expires",
+      "@type": "xsd:dateTime"
+    },
+    "events": {
+      "@id": "cash:events",
+      "@container": "@list"
+    },
+    "consumerReference": {
+      "@id": "cash:consumerReference",
+      "@type": "xsd:string"
+    },
+    "OffersRequest": "cash:OffersRequest",
+    "BillingAgreementApprovalRequestMerchant": "cash:BillingAgreementApprovalRequestMerchant",
+    "redirectConfirmUrl": {
+      "@id": "cash:redirectConfirmUrl",
+      "@type": "xsd:string"
+    },
+    "redirectCancelUrl": {
+      "@id": "cash:redirectCancelUrl",
+      "@type": "xsd:string"
+    },
+    "popupOriginUrl": {
+      "@id": "cash:popupOriginUrl",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "cash:name",
+      "@type": "xsd:string"
+    },
+    "LinkStartResponse": "cash:LinkStartResponse",
+    "deliveryType": {
+      "@id": "cash:deliveryType",
+      "@type": "@id"
+    },
+    "BillingAgreementResponseType": "cash:BillingAgreementResponseType",
+    "Offer": "cash:Offer",
+    "merchantAmount": {
+      "@id": "cash:merchantAmount",
+      "@type": "@id"
+    },
+    "exchangeRate": {
+      "@id": "cash:exchangeRate",
+      "@type": "xsd:decimal"
+    },
+    "amountDueToday": {
+      "@id": "cash:amountDueToday",
+      "@type": "@id"
+    },
+    "payments": {
+      "@id": "cash:payments",
+      "@container": "@list"
+    },
+    "crossBorder": {
+      "@id": "cash:crossBorder",
+      "@type": "xsd:boolean"
+    },
+    "appliedPromotion": {
+      "@id": "cash:appliedPromotion",
+      "@type": "@id"
+    },
+    "consumer": {
+      "@id": "cash:consumer",
+      "@type": "@id"
+    },
+    "OffersResponse": "cash:OffersResponse",
+    "consumerMaskedEmail": {
+      "@id": "cash:consumerMaskedEmail",
+      "@type": "xsd:string"
+    },
+    "consumerAmount": {
+      "@id": "cash:consumerAmount",
+      "@type": "@id"
+    },
+    "offers": {
+      "@id": "cash:offers",
+      "@container": "@list"
+    },
+    "LinkStartResponseDeliveryType": "cash:LinkStartResponseDeliveryType",
+    "BillingAgreementAliasRequest": "cash:BillingAgreementAliasRequest",
+    "duration": {
+      "@id": "cash:duration",
+      "@type": "xsd:string"
+    },
+    "BillingAgreementApprovalRequest": "cash:BillingAgreementApprovalRequest",
+    "merchant": {
+      "@id": "cash:merchant",
+      "@type": "@id"
+    },
+    "agreements": {
+      "@id": "cash:agreements",
+      "@container": "@list"
+    },
+    "BillingAgreementApprovalResponse": "cash:BillingAgreementApprovalResponse",
+    "redirectCheckoutUrl": {
+      "@id": "cash:redirectCheckoutUrl",
+      "@type": "@id"
+    },
+    "AgreementEventResponseStatus": "cash:AgreementEventResponseStatus",
+    "BillingAgreementResponseStatus": "cash:BillingAgreementResponseStatus",
+    "PaymentSchedule": "cash:PaymentSchedule",
+    "dueDate": {
+      "@id": "cash:dueDate",
+      "@type": "xsd:date"
+    },
+    "BillingAgreementAliasResponse": "cash:BillingAgreementAliasResponse",
+    "expiry": {
+      "@id": "cash:expiry",
+      "@type": "xsd:dateTime"
+    },
+    "AgreementEventResponse": "cash:AgreementEventResponse",
+    "orderId": {
+      "@id": "cash:orderId",
+      "@type": "xsd:decimal"
+    },
+    "AgreementEventResponseType": "cash:AgreementEventResponseType",
+    "LinkStartRequest": "cash:LinkStartRequest",
+    "alias": {
+      "@id": "cash:alias",
+      "@type": "xsd:string"
+    },
+    "Money": "cash:Money",
+    "ConsumerOffers": "cash:ConsumerOffers",
+    "noPaymentUpfront": {
+      "@id": "cash:noPaymentUpfront",
+      "@type": "@id"
+    },
+    "ConsumerOffersNoPaymentUpfront": "cash:ConsumerOffersNoPaymentUpfront",
+    "eligible": {
+      "@id": "cash:eligible",
+      "@type": "xsd:boolean"
+    },
+    "eligibilityLimit": {
+      "@id": "cash:eligibilityLimit",
+      "@type": "@id"
+    },
+    "AgreementApprovalType": "cash:AgreementApprovalType",
+    "CancelBillingAgreementRequest": "cash:CancelBillingAgreementRequest",
+    "AgreementApproval": "cash:AgreementApproval",
+    "OfferType": "cash:OfferType",
+    "MoneyCurrency": "cash:MoneyCurrency",
+    "WebhooksAgreementStatusUpdatedPayloadContentApplicationJsonSchemaStatus": "cash:WebhooksAgreementStatusUpdatedPayloadContentApplicationJsonSchemaStatus",
+    "Brands_list-brands_Response_200": "cash:Brands_list-brands_Response_200",
+    "brands": {
+      "@id": "cash:brands",
+      "@container": "@list"
+    },
+    "Brands_update-brand_Response_200": "cash:Brands_update-brand_Response_200",
+    "brand": {
+      "@id": "cash:brand",
+      "@type": "@id"
+    },
+    "BrandsPutRequestBodyContentApplicationJsonSchemaBrand": "cash:BrandsPutRequestBodyContentApplicationJsonSchemaBrand",
+    "profile_image_url": {
+      "@id": "cash:profile_image_url",
+      "@type": "@id"
+    },
+    "color": {
+      "@id": "cash:color",
+      "@type": "xsd:string"
+    },
+    "metadata": {
+      "@id": "cash:metadata",
+      "@type": "@id"
+    },
+    "Brand": "cash:Brand",
+    "BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand": "cash:BrandsBrandIdPatchRequestBodyContentApplicationJsonSchemaBrand",
+    "BrandsPostRequestBodyContentApplicationJsonSchemaBrand": "cash:BrandsPostRequestBodyContentApplicationJsonSchemaBrand",
+    "Brands_create-brand_Response_201": "cash:Brands_create-brand_Response_201",
+    "Brands_retrieve-brand_Response_200": "cash:Brands_retrieve-brand_Response_200",
+    "Brands_upsert-brand_Response_200": "cash:Brands_upsert-brand_Response_200",
+    "get-checkout_Response_200": "cash:get-checkout_Response_200",
+    "billing": {
+      "@id": "cash:billing",
+      "@type": "@id"
+    },
+    "shipping": {
+      "@id": "cash:shipping",
+      "@type": "@id"
+    },
+    "items": {
+      "@id": "cash:items",
+      "@container": "@list"
+    },
+    "courier": {
+      "@id": "cash:courier",
+      "@type": "@id"
+    },
+    "taxAmount": {
+      "@id": "cash:taxAmount",
+      "@type": "@id"
+    },
+    "shippingAmount": {
+      "@id": "cash:shippingAmount",
+      "@type": "@id"
+    },
+    "discounts": {
+      "@id": "cash:discounts",
+      "@container": "@list"
+    },
+    "description": {
+      "@id": "cash:description",
+      "@type": "xsd:string"
+    },
+    "mode": {
+      "@id": "cash:mode",
+      "@type": "xsd:string"
+    },
+    "Shipping-Courier": "cash:Shipping-Courier",
+    "shippedAt": {
+      "@id": "cash:shippedAt",
+      "@type": "xsd:dateTime"
+    },
+    "tracking": {
+      "@id": "cash:tracking",
+      "@type": "xsd:string"
+    },
+    "priority": {
+      "@id": "cash:priority",
+      "@type": "@id"
+    },
+    "Checkout-Request": "cash:Checkout-Request",
+    "ShippingCourierPriority": "cash:ShippingCourierPriority",
+    "ContactCountryCode": "cash:ContactCountryCode",
+    "Contact": "cash:Contact",
+    "line1": {
+      "@id": "cash:line1",
+      "@type": "xsd:string"
+    },
+    "line2": {
+      "@id": "cash:line2",
+      "@type": "xsd:string"
+    },
+    "area1": {
+      "@id": "cash:area1",
+      "@type": "xsd:string"
+    },
+    "area2": {
+      "@id": "cash:area2",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "cash:region",
+      "@type": "xsd:string"
+    },
+    "postcode": {
+      "@id": "cash:postcode",
+      "@type": "xsd:string"
+    },
+    "countryCode": {
+      "@id": "cash:countryCode",
+      "@type": "@id"
+    },
+    "Discount": "cash:Discount",
+    "displayName": {
+      "@id": "cash:displayName",
+      "@type": "xsd:string"
+    },
+    "Item": "cash:Item",
+    "sku": {
+      "@id": "cash:sku",
+      "@type": "xsd:string"
+    },
+    "pageUrl": {
+      "@id": "cash:pageUrl",
+      "@type": "xsd:string"
+    },
+    "imageUrl": {
+      "@id": "cash:imageUrl",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "cash:quantity",
+      "@type": "xsd:integer"
+    },
+    "price": {
+      "@id": "cash:price",
+      "@type": "@id"
+    },
+    "categories": {
+      "@id": "cash:categories",
+      "@container": "@list"
+    },
+    "estimatedShipmentDate": {
+      "@id": "cash:estimatedShipmentDate",
+      "@type": "xsd:date"
+    },
+    "preorder": {
+      "@id": "cash:preorder",
+      "@type": "xsd:boolean"
+    },
+    "CheckoutRequestMerchant": "cash:CheckoutRequestMerchant",
+    "Checkout-Response": "cash:Checkout-Response",
+    "ConfigurationMappings": "cash:ConfigurationMappings",
+    "externalBrandId": {
+      "@id": "cash:externalBrandId",
+      "@type": "xsd:string"
+    },
+    "Get-configuration-mappingsRequestUnauthorizedError": "cash:Get-configuration-mappingsRequestUnauthorizedError",
+    "errorCode": {
+      "@id": "cash:errorCode",
+      "@type": "xsd:string"
+    },
+    "errorId": {
+      "@id": "cash:errorId",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "cash:message",
+      "@type": "xsd:string"
+    },
+    "httpStatusCode": {
+      "@id": "cash:httpStatusCode",
+      "@type": "xsd:integer"
+    },
+    "MerchantLimitPayByInstallment": "cash:MerchantLimitPayByInstallment",
+    "minimumAmount": {
+      "@id": "cash:minimumAmount",
+      "@type": "@id"
+    },
+    "maximumAmount": {
+      "@id": "cash:maximumAmount",
+      "@type": "@id"
+    },
+    "Get-configuration-mappingsRequestForbiddenError": "cash:Get-configuration-mappingsRequestForbiddenError",
+    "MerchantLimitConsumerLending": "cash:MerchantLimitConsumerLending",
+    "enabled": {
+      "@id": "cash:enabled",
+      "@type": "xsd:boolean"
+    },
+    "Get-configurationRequestUnauthorizedError": "cash:Get-configurationRequestUnauthorizedError",
+    "Merchant-limit": "cash:Merchant-limit",
+    "publicId": {
+      "@id": "cash:publicId",
+      "@type": "xsd:string"
+    },
+    "consumerLending": {
+      "@id": "cash:consumerLending",
+      "@type": "@id"
+    },
+    "payByInstallment": {
+      "@id": "cash:payByInstallment",
+      "@type": "@id"
+    },
+    "Request": "cash:Request",
+    "actions": {
+      "@id": "cash:actions",
+      "@container": "@list"
+    },
+    "auth_flow_triggers": {
+      "@id": "cash:auth_flow_triggers",
+      "@type": "@id"
+    },
+    "redirect_url": {
+      "@id": "cash:redirect_url",
+      "@type": "@id"
+    },
+    "origin": {
+      "@id": "cash:origin",
+      "@type": "@id"
+    },
+    "channel": {
+      "@id": "cash:channel",
+      "@type": "@id"
+    },
+    "grants": {
+      "@id": "cash:grants",
+      "@container": "@list"
+    },
+    "requester_profile": {
+      "@id": "cash:requester_profile",
+      "@type": "@id"
+    },
+    "customer_profile": {
+      "@id": "cash:customer_profile",
+      "@type": "@id"
+    },
+    "customer_metadata": {
+      "@id": "cash:customer_metadata",
+      "@type": "@id"
+    },
+    "OneTimePaymentActionType": "cash:OneTimePaymentActionType",
+    "OnFilePayoutAction": "cash:OnFilePayoutAction",
+    "scope_id": {
+      "@id": "cash:scope_id",
+      "@type": "xsd:string"
+    },
+    "account_reference_id": {
+      "@id": "cash:account_reference_id",
+      "@type": "xsd:string"
+    },
+    "OnFilePaymentActionType": "cash:OnFilePaymentActionType",
+    "Channel": "cash:Channel",
+    "LinkAccountActionType": "cash:LinkAccountActionType",
+    "CheckingBalanceActionType": "cash:CheckingBalanceActionType",
+    "WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaData": "cash:WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaData",
+    "object": {
+      "@id": "cash:object",
+      "@type": "@id"
+    },
+    "WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject": "cash:WebhooksCustomerRequestStateUpdatedPayloadContentApplicationJsonSchemaDataObject",
+    "request": {
+      "@id": "cash:request",
+      "@type": "@id"
+    },
+    "OneTimePaymentAction": "cash:OneTimePaymentAction",
+    "RequestAuthFlowTriggers": "cash:RequestAuthFlowTriggers",
+    "qr_code_image_url": {
+      "@id": "cash:qr_code_image_url",
+      "@type": "@id"
+    },
+    "qr_code_svg_url": {
+      "@id": "cash:qr_code_svg_url",
+      "@type": "@id"
+    },
+    "mobile_url": {
+      "@id": "cash:mobile_url",
+      "@type": "@id"
+    },
+    "refreshes_at": {
+      "@id": "cash:refreshes_at",
+      "@type": "xsd:dateTime"
+    },
+    "desktop_url": {
+      "@id": "cash:desktop_url",
+      "@type": "@id"
+    },
+    "CustomerMetadata": "cash:CustomerMetadata",
+    "RequestCustomerProfile": "cash:RequestCustomerProfile",
+    "RequestRequesterProfile": "cash:RequestRequesterProfile",
+    "logo_url": {
+      "@id": "cash:logo_url",
+      "@type": "@id"
+    },
+    "RequestStatus": "cash:RequestStatus",
+    "OnFileDepositActionType": "cash:OnFileDepositActionType",
+    "CheckingBalanceAction": "cash:CheckingBalanceAction",
+    "OnFilePaymentAction": "cash:OnFilePaymentAction",
+    "GrantType": "cash:GrantType",
+    "OnFileDepositAction": "cash:OnFileDepositAction",
+    "RequestOriginType": "cash:RequestOriginType",
+    "GrantStatus": "cash:GrantStatus",
+    "LinkAccountAction": "cash:LinkAccountAction",
+    "Grant": "cash:Grant",
+    "request_id": {
+      "@id": "cash:request_id",
+      "@type": "xsd:string"
+    },
+    "action": {
+      "@id": "cash:action",
+      "@type": "@id"
+    },
+    "OnFilePayoutActionType": "cash:OnFilePayoutActionType",
+    "RequestOrigin": "cash:RequestOrigin",
+    "Customers_revoke-customer-grant_Response_200": "cash:Customers_revoke-customer-grant_Response_200",
+    "grant": {
+      "@id": "cash:grant",
+      "@type": "@id"
+    },
+    "Customers_retrieve-customer-grant_Response_200": "cash:Customers_retrieve-customer-grant_Response_200",
+    "Customers_list-customer-grants_Response_200": "cash:Customers_list-customer-grants_Response_200",
+    "Customers_retrieve-customer_Response_200": "cash:Customers_retrieve-customer_Response_200",
+    "customer": {
+      "@id": "cash:customer",
+      "@type": "@id"
+    },
+    "Customers_list-customers_Response_200": "cash:Customers_list-customers_Response_200",
+    "customers": {
+      "@id": "cash:customers",
+      "@container": "@list"
+    },
+    "Customer": "cash:Customer",
+    "evidence": "cash:evidence",
+    "productDescription": {
+      "@id": "cash:productDescription",
+      "@type": "xsd:string"
+    },
+    "refundPolicy": {
+      "@id": "cash:refundPolicy",
+      "@type": "xsd:string"
+    },
+    "refundPolicyDisclosure": {
+      "@id": "cash:refundPolicyDisclosure",
+      "@type": "xsd:string"
+    },
+    "refundRefusalExplanation": {
+      "@id": "cash:refundRefusalExplanation",
+      "@type": "xsd:string"
+    },
+    "shippingDocumentation": {
+      "@id": "cash:shippingDocumentation",
+      "@type": "xsd:string"
+    },
+    "shippingAddress": {
+      "@id": "cash:shippingAddress",
+      "@type": "xsd:string"
+    },
+    "shippingDate": {
+      "@id": "cash:shippingDate",
+      "@type": "xsd:string"
+    },
+    "shippingCarrier": {
+      "@id": "cash:shippingCarrier",
+      "@type": "xsd:string"
+    },
+    "shippingTrackingNumber": {
+      "@id": "cash:shippingTrackingNumber",
+      "@type": "xsd:string"
+    },
+    "uncategorizedFile": {
+      "@id": "cash:uncategorizedFile",
+      "@type": "xsd:string"
+    },
+    "uncategorizedText": {
+      "@id": "cash:uncategorizedText",
+      "@type": "xsd:string"
+    },
+    "DisputeReason": "cash:DisputeReason",
+    "DisputeClosingReason": "cash:DisputeClosingReason",
+    "retrieve-dispute_Response_200": "cash:retrieve-dispute_Response_200",
+    "data": {
+      "@id": "cash:data",
+      "@container": "@list"
+    },
+    "offset": {
+      "@id": "cash:offset",
+      "@type": "xsd:integer"
+    },
+    "limit": {
+      "@id": "cash:limit",
+      "@type": "xsd:integer"
+    },
+    "total": {
+      "@id": "cash:total",
+      "@type": "xsd:integer"
+    },
+    "upload-file_Response_200": "cash:upload-file_Response_200",
+    "dispute": "cash:dispute",
+    "order": {
+      "@id": "cash:order",
+      "@type": "xsd:string"
+    },
+    "reason": {
+      "@id": "cash:reason",
+      "@type": "@id"
+    },
+    "open": {
+      "@id": "cash:open",
+      "@type": "xsd:boolean"
+    },
+    "responseDueBy": {
+      "@id": "cash:responseDueBy",
+      "@type": "xsd:string"
+    },
+    "openingNote": {
+      "@id": "cash:openingNote",
+      "@type": "xsd:string"
+    },
+    "openingNoteAttachments": {
+      "@id": "cash:openingNoteAttachments",
+      "@type": "xsd:string"
+    },
+    "closingReason": {
+      "@id": "cash:closingReason",
+      "@type": "@id"
+    },
+    "closingNote": {
+      "@id": "cash:closingNote",
+      "@type": "xsd:string"
+    },
+    "merchantOrderId": {
+      "@id": "cash:merchantOrderId",
+      "@type": "xsd:string"
+    },
+    "transactionDate": {
+      "@id": "cash:transactionDate",
+      "@type": "xsd:string"
+    },
+    "settlementAmount": {
+      "@id": "cash:settlementAmount",
+      "@type": "xsd:string"
+    },
+    "meta": {
+      "@id": "cash:meta",
+      "@type": "@id"
+    },
+    "DisputeStatus": "cash:DisputeStatus",
+    "retrieve-file_Response_200": "cash:retrieve-file_Response_200",
+    "url": {
+      "@id": "cash:url",
+      "@type": "xsd:string"
+    },
+    "Disputes_create-dispute-evidence-text_Response_201": "cash:Disputes_create-dispute-evidence-text_Response_201",
+    "DisputeEvidenceFile": "cash:DisputeEvidenceFile",
+    "filename": {
+      "@id": "cash:filename",
+      "@type": "xsd:string"
+    },
+    "content_type": {
+      "@id": "cash:content_type",
+      "@type": "@id"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Cash App API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Cash App's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-12) from openapi/cash-app-add-cash-app-pay-to-your-site-api-openapi.yml, openapi/cash-app-api-keys-api-openapi.yml, openapi/cash-app-balances-api-openapi.yml.",
+  "dcterms:created": "2026-10-12",
+  "dcterms:source": [
+    "openapi/cash-app-add-cash-app-pay-to-your-site-api-openapi.yml",
+    "openapi/cash-app-api-keys-api-openapi.yml",
+    "openapi/cash-app-balances-api-openapi.yml",
+    "openapi/cash-app-billing-agreements-api-openapi.yml",
+    "openapi/cash-app-billing-agreements-deprecated-api-openapi.yml"
+  ]
+}

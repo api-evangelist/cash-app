@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-disputes-list-dispute-evidence-response-200-schema.json",
+  "title": "Disputes_list-dispute-evidence_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-disputes-api-openapi.yml#/components/schemas/Disputes_list-dispute-evidence_Response_200",
+  "type": "object",
+  "properties": {
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/DisputeEvidence"
+      },
+      "description": "List of pieces of evidence for the dispute matching the given query parameters"
+    },
+    "cursor": {
+      "type": "string",
+      "description": "The pagination cursor to be used in a subsequent request. If empty, this is the final response."
+    }
+  },
+  "required": [
+    "evidence"
+  ],
+  "$defs": {
+    "DisputeEvidence": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the dispute evidence issued by Cash App.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "dispute_id": {
+          "type": "string",
+          "description": "ID of the dispute this evidence is associated with.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "category": {
+          "$ref": "#/$defs/DisputeEvidenceCategory",
+          "description": "Describes what type of information is contained in this piece of evidence.\n\nCurrent values:\n\n- `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.\n- `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.\n- `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.\n- `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.\n- `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.\n- `CARDHOLDER_INFORMATION`: Evidence that validates the customer's identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.\n- `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.\n- `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.\n- `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.\n- `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.\n- `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.\n- `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.\n- `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.\n- `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.\n- `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence."
+        },
+        "file": {
+          "$ref": "#/$defs/DisputeEvidenceFile",
+          "description": "If the evidence is of type `FILE`, contains metadata about the binary file uploaded as evidence."
+        },
+        "text": {
+          "type": "string",
+          "description": "If the evidence is of type `TEXT`, contains the blob of text created as evidence.\n\nMin length: `1`\nMax length: `500`"
+        },
+        "type": {
+          "$ref": "#/$defs/DisputeEvidenceType",
+          "description": "Indicates if the evidence is a file or plain text.\n\nCurrent values:\n- `TEXT`: The evidence is a blob of text under 500 characters.\n- `FILE`: The evidence is an uploaded binary file."
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this evidence was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      },
+      "required": [
+        "id",
+        "dispute_id",
+        "category",
+        "type",
+        "created_at"
+      ],
+      "title": "DisputeEvidence"
+    },
+    "DisputeEvidenceCategory": {
+      "type": "string",
+      "enum": [
+        "GENERIC_EVIDENCE",
+        "ONLINE_OR_APP_ACCESS_LOG",
+        "AUTHORIZATION_DOCUMENTATION",
+        "CANCELLATION_OR_REFUND_DOCUMENTATION",
+        "CARDHOLDER_COMMUNICATION",
+        "CARDHOLDER_INFORMATION",
+        "PURCHASE_ACKNOWLEDGEMENT",
+        "DUPLICATE_CHARGE_DOCUMENTATION",
+        "PRODUCT_OR_SERVICE_DESCRIPTION",
+        "RECEIPT",
+        "SERVICE_RECEIVED_DOCUMENTATION",
+        "PROOF_OF_DELIVERY_DOCUMENTATION",
+        "RELATED_TRANSACTION_DOCUMENTATION",
+        "REBUTTAL_EXPLANATION",
+        "TRACKING_NUMBER"
+      ],
+      "description": "Describes what type of information is contained in this piece of evidence.\n\nCurrent values:\n\n- `GENERIC_EVIDENCE`: Default evidence type used if no other category applies.\n- `ONLINE_OR_APP_ACCESS_LOG`: Server or activity logs that show proof of the cardholder’s identity and that the cardholder successfully ordered and received the goods (digitally or otherwise). Example evidence includes IP addresses, corresponding timestamps/dates, cardholder’s name and email address linked to a cardholder profile held by the seller, proof the same device and card (used in dispute) were previously used in prior undisputed transaction, and any related detailed activity.\n- `AUTHORIZATION_DOCUMENTATION`: **[File Only]** Evidence that the cardholder did provide authorization for the charge. Example evidence includes a signed credit card authorization.\n- `CANCELLATION_OR_REFUND_DOCUMENTATION`: Evidence that the cardholder acknowledged your refund or cancellation policy. Example evidence includes a signature or checkbox showing the cardholder’s acknowledgement of your refund or cancellation policy.\n- `CARDHOLDER_COMMUNICATION`: **[File Only]** Evidence that shows relevant communication with the cardholder. Example evidence includes emails or texts that show the cardholder received goods/services or demonstrate cardholder satisfaction.\n- `CARDHOLDER_INFORMATION`: Evidence that validates the customer's identity. Example evidence includes personally identifiable details such as name, email address, purchaser IP address, and a copy of the cardholder ID.\n- `PURCHASE_ACKNOWLEDGEMENT`: Evidence that shows proof of the sale/transaction. Example evidence includes an invoice, contract, or other item showing the customer’s acknowledgement of the purchase and your terms.\n- `DUPLICATE_CHARGE_DOCUMENTATION`: **[File Only]** Evidence that shows the charges in question are valid and distinct from one another. Example evidence includes receipts, shipping labels, and invoices along with their distinct payment IDs.\n- `PRODUCT_OR_SERVICE_DESCRIPTION`: A description of the product or service sold.\n- `RECEIPT`: A receipt or message sent to the cardholder detailing the charge. Note: You do not need to upload the Square receipt; Square submits the receipt on your behalf.\n- `SERVICE_RECEIVED_DOCUMENTATION`: Evidence that the service was provided to the cardholder or the expected date that services will be rendered. Example evidence includes a signed delivery form, work order, expected delivery date, or other written agreements.\n- `PROOF_OF_DELIVERY_DOCUMENTATION`: Evidence that shows the product was provided to the cardholder or the expected date of delivery. Example evidence includes a signed delivery form or written agreement acknowledging receipt of the goods or services.\n- `RELATED_TRANSACTION_DOCUMENTATION`: Evidence that shows the cardholder previously processed transactions on the same card and did not dispute them.\n- `REBUTTAL_EXPLANATION`: An explanation of why the cardholder’s claim is invalid. Example evidence includes an explanation of why each distinct charge is a legitimate purchase, why the cardholder’s claim for credit owed due to their attempt to cancel, return, or refund is invalid per your stated policy and cardholder agreement, or an explanation of how the cardholder did not attempt to remedy the issue with you first to receive credit.\n- `TRACKING_NUMBER`: The tracking number for the order provided by the shipping carrier. If you have multiple numbers, they need to be submitted individually as separate pieces of evidence.",
+      "title": "DisputeEvidenceCategory"
+    },
+    "DisputeEvidenceFile": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Name of the uploaded file. It should be descriptive enough to indicate what type of information is contained in the uploaded file."
+        },
+        "content_type": {
+          "$ref": "#/$defs/DisputeEvidenceFileContentType",
+          "description": "The MIME type of the uploaded file.\n\nCurrent values:\n\n- `application/pdf`\n- `image/heic`\n- `image/heif`\n- `image/jpeg`\n- `image/png`\n- `image/tiff`"
+        }
+      },
+      "required": [
+        "filename",
+        "content_type"
+      ],
+      "description": "If the evidence is of type `FILE`, contains metadata about the binary file uploaded as evidence.",
+      "title": "DisputeEvidenceFile"
+    },
+    "DisputeEvidenceFileContentType": {
+      "type": "string",
+      "enum": [
+        "application/pdf",
+        "image/heic",
+        "image/heif",
+        "image/jpeg",
+        "image/png",
+        "image/tiff"
+      ],
+      "description": "The MIME type of the uploaded file.\n\nCurrent values:\n\n- `application/pdf`\n- `image/heic`\n- `image/heif`\n- `image/jpeg`\n- `image/png`\n- `image/tiff`",
+      "title": "DisputeEvidenceFileContentType"
+    },
+    "DisputeEvidenceType": {
+      "type": "string",
+      "enum": [
+        "FILE",
+        "TEXT"
+      ],
+      "description": "Indicates if the evidence is a file or plain text.\n\nCurrent values:\n- `TEXT`: The evidence is a blob of text under 500 characters.\n- `FILE`: The evidence is an uploaded binary file.",
+      "title": "DisputeEvidenceType"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    }
+  }
+}

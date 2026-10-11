@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-payouts-create-payout-response-201-schema.json",
+  "title": "Payouts_create-payout_Response_201",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-payouts-api-openapi.yml#/components/schemas/Payouts_create-payout_Response_201",
+  "type": "object",
+  "properties": {
+    "payout": {
+      "$ref": "#/$defs/Payout"
+    }
+  },
+  "$defs": {
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "USD"
+      ],
+      "description": "Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.\n\nCurrent values:\n\n- `USD`: United States Dollar",
+      "title": "Currency"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/ErrorCategory",
+          "description": "The high-level reason the error occurred."
+        },
+        "code": {
+          "type": "string",
+          "description": "A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).\n\nMin length: `1`"
+        },
+        "detail": {
+          "type": "string",
+          "description": "Human-readable description of why the error occurred and how to resolve it.\n\nMin length: `1`"
+        },
+        "field": {
+          "type": "string",
+          "description": "The field in the request that caused the error, using array and object dot notation.\n\nMin length: `1`"
+        }
+      },
+      "required": [
+        "category",
+        "code"
+      ],
+      "description": "Represents an error encountered during a request to the API.",
+      "title": "Error"
+    },
+    "ErrorCategory": {
+      "type": "string",
+      "enum": [
+        "API_ERROR",
+        "AUTHENTICATION_ERROR",
+        "BRAND_ERROR",
+        "DISPUTE_ERROR",
+        "MERCHANT_ERROR",
+        "INVALID_REQUEST_ERROR",
+        "PAYMENT_PROCESSING_ERROR",
+        "RATE_LIMIT_ERROR",
+        "WEBHOOK_ERROR",
+        "API_KEY_ERROR",
+        "GRANT_ERROR"
+      ],
+      "description": "The high-level reason the error occurred.",
+      "title": "ErrorCategory"
+    },
+    "FeeRate": {
+      "type": "object",
+      "properties": {
+        "basis_points": {
+          "type": "integer",
+          "description": "The variable fee charged for processing the payment expressed as 1/100th of a percentage."
+        },
+        "fixed_amount": {
+          "type": "integer",
+          "description": "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
+        }
+      },
+      "description": "A fee rate contains the components of a fee charged by Cash App to partners for a given payment.",
+      "title": "FeeRate"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    },
+    "Payout": {
+      "type": "object",
+      "properties": {
+        "payout_id": {
+          "type": "string",
+          "description": "Unique identifier for this payout issued by Cash App.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "grant_id": {
+          "type": "string",
+          "description": "ID of the grant used to create this payout.\n\nMin length: `1`\nMax length: `256`"
+        },
+        "amount": {
+          "type": "integer",
+          "description": "The amount of money to pay, in the lowest denomination of currency on the payout. This is the _original_ amount authorized when the payout was created.\n\nMin value: `1`"
+        },
+        "currency": {
+          "$ref": "#/$defs/Currency"
+        },
+        "status": {
+          "$ref": "#/$defs/PayoutStatus"
+        },
+        "merchant_id": {
+          "type": "string",
+          "description": "ID of the merchant that made this payout.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "customer_id": {
+          "type": "string",
+          "description": "ID of the customer that received this payout.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "purpose": {
+          "$ref": "#/$defs/PayoutPurpose"
+        },
+        "authorized_amount": {
+          "type": "integer",
+          "description": "The amount of money on this payout that has been authorized. The amount will be in the lowest denomination of the currency on the payout.\n\nMin value: `0`"
+        },
+        "captured_amount": {
+          "type": "integer",
+          "description": "The amount of money on this payout that has been allocated for settlement. The amount will be in the lowest denomination of the currency on the payout.\n\nMin value: `0`"
+        },
+        "declined_amount": {
+          "type": "integer",
+          "description": "The amount of money on this payout that was declined. The amount will be in the lowest denomination of the currency on the payout.\n\nMin value: `0`"
+        },
+        "voided_amount": {
+          "type": "integer",
+          "description": "The amount of money on this payout that is no longer authorized and has been released. The amount will be in the lowest denomination of the currency on the payout.\n\nMin value: `0`"
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "A user-defined identifier for this payout, typically used to associate the payout with a record in an external system.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "fee_amount": {
+          "type": "number",
+          "format": "double",
+          "description": "The total fee amount that was charged to the merchant for processing this payout."
+        },
+        "fee_rate": {
+          "$ref": "#/$defs/FeeRate",
+          "description": "The breakdown of the fee that was charged to the merchant for processing this payout."
+        },
+        "note": {
+          "type": "string",
+          "description": "A note about the payout that will be shown to the customer.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        },
+        "decline_errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Error"
+          },
+          "description": "If the payout was declined, contains a list of the reasons why it was declined.\n\nMin number of items: `1`"
+        }
+      },
+      "required": [
+        "payout_id",
+        "grant_id",
+        "amount",
+        "currency",
+        "status",
+        "merchant_id",
+        "purpose"
+      ],
+      "title": "Payout"
+    },
+    "PayoutPurpose": {
+      "type": "string",
+      "enum": [
+        "SERVICES"
+      ],
+      "description": "The purpose or intent of the payout.",
+      "title": "PayoutPurpose"
+    },
+    "PayoutStatus": {
+      "type": "string",
+      "enum": [
+        "CAPTURED",
+        "DECLINED",
+        "AUTHORIZED",
+        "INITIATED"
+      ],
+      "description": "The step of the payout processing lifecycle that this payout is currently at.\n\n- `CAPTURED` - Payout is captured and funds have been sent\n- `DECLINED` - Payout was declined\n- `AUTHORIZED` - Payout is authorized but not yet captured\n- `INITIATED` - Payout has been created but no money movement has happened yet",
+      "title": "PayoutStatus"
+    }
+  }
+}

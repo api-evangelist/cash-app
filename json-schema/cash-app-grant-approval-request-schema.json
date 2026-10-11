@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-grant-approval-request-schema.json",
+  "title": "GrantApprovalRequest",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-grants-api-openapi.yml#/components/schemas/GrantApprovalRequest",
+  "type": "object",
+  "properties": {
+    "grants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/GrantApprovalType"
+      },
+      "description": "Grant type for approval (only single grant is supported)"
+    },
+    "merchant": {
+      "$ref": "#/$defs/GrantApprovalRequestMerchant"
+    },
+    "consumer": {
+      "$ref": "#/$defs/Consumer",
+      "description": "Consumer details for the grant"
+    }
+  },
+  "required": [
+    "grants",
+    "merchant"
+  ],
+  "$defs": {
+    "Consumer": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "givenNames": {
+          "type": "string",
+          "description": "The consumer's first name"
+        },
+        "surname": {
+          "type": "string",
+          "description": "The consumer's last name"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "description": "The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.",
+      "title": "Consumer"
+    },
+    "GrantApprovalRequestMerchant": {
+      "type": "object",
+      "properties": {
+        "redirectConfirmUrl": {
+          "type": "string"
+        },
+        "redirectCancelUrl": {
+          "type": "string"
+        },
+        "popupOriginUrl": {
+          "type": "string",
+          "description": "This property is optional when a `redirectConfirmURL` is provided."
+        },
+        "name": {
+          "type": "string",
+          "description": "The merchant name displayed in the Afterpay approval flow."
+        }
+      },
+      "required": [
+        "redirectConfirmUrl",
+        "redirectCancelUrl"
+      ],
+      "title": "GrantApprovalRequestMerchant"
+    },
+    "GrantApprovalType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/GrantApprovalTypeType",
+          "description": "Grant Type for approval."
+        },
+        "merchantReference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A merchant-provided reference for the grant."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Details about the grant to be created.",
+      "title": "GrantApprovalType"
+    },
+    "GrantApprovalTypeType": {
+      "type": "string",
+      "enum": [
+        "ON_FILE"
+      ],
+      "description": "Grant Type for approval.",
+      "title": "GrantApprovalTypeType"
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-billing-agreement-approval-request-schema.json",
+  "title": "BillingAgreementApprovalRequest",
+  "description": "Request body for initiating a billing agreement approval process",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-billing-agreements-api-openapi.yml#/components/schemas/BillingAgreementApprovalRequest",
+  "type": "object",
+  "properties": {
+    "consumer": {
+      "$ref": "#/$defs/Consumer",
+      "description": "Consumer details for the billing agreement"
+    },
+    "merchant": {
+      "$ref": "#/$defs/BillingAgreementApprovalRequestMerchant"
+    },
+    "merchantReference": {
+      "type": "string",
+      "description": "Merchant's unique reference for this billing agreement"
+    },
+    "agreements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AgreementApproval"
+      },
+      "description": "Agreement type for approval (only single agreement is supported)"
+    }
+  },
+  "required": [
+    "merchant"
+  ],
+  "$defs": {
+    "AgreementApproval": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/AgreementApprovalType",
+          "description": "Agreement Type for approval."
+        },
+        "merchantReference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A merchant-provided reference for the agreement."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Details about the agreement to be created.",
+      "title": "AgreementApproval"
+    },
+    "AgreementApprovalType": {
+      "type": "string",
+      "enum": [
+        "BILLING"
+      ],
+      "description": "Agreement Type for approval.",
+      "title": "AgreementApprovalType"
+    },
+    "BillingAgreementApprovalRequestMerchant": {
+      "type": "object",
+      "properties": {
+        "redirectConfirmUrl": {
+          "type": "string"
+        },
+        "redirectCancelUrl": {
+          "type": "string"
+        },
+        "popupOriginUrl": {
+          "type": "string",
+          "description": "This property is optional when a `redirectConfirmURL` is provided."
+        },
+        "name": {
+          "type": "string",
+          "description": "The merchant name displayed in the Afterpay approval flow."
+        }
+      },
+      "required": [
+        "redirectConfirmUrl",
+        "redirectCancelUrl"
+      ],
+      "title": "BillingAgreementApprovalRequestMerchant"
+    },
+    "Consumer": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "givenNames": {
+          "type": "string",
+          "description": "The consumer's first name"
+        },
+        "surname": {
+          "type": "string",
+          "description": "The consumer's last name"
+        },
+        "phoneNumber": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "email"
+      ],
+      "description": "The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.",
+      "title": "Consumer"
+    }
+  }
+}

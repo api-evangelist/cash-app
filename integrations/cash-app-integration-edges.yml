@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/cash-app/integrations
 - https://zapier.com/apps/cash/integrations
@@ -9,12 +9,94 @@ source:
 - https://monid.ai/tools/cash-app
 checked:
 - https://composio.dev/toolkits/cash-app
+- https://developers.cash.app/afterpay/guides/platforms/adobe-commerce-magento.md
+- https://developers.cash.app/afterpay/guides/platforms/adyen.md
+- https://developers.cash.app/afterpay/guides/platforms/big-commerce.md
+- https://developers.cash.app/afterpay/guides/platforms/ecwid.md
+- https://developers.cash.app/afterpay/guides/platforms/presta-shop.md
+- https://developers.cash.app/afterpay/guides/platforms/salesforce-commerce-cloud.md
+- https://developers.cash.app/afterpay/guides/platforms/shopify.md
+- https://developers.cash.app/afterpay/guides/platforms/stripe.md
+- https://developers.cash.app/afterpay/guides/platforms/wix.md
+- https://developers.cash.app/afterpay/guides/platforms/woo-commerce.md
+- https://developers.cash.app/afterpay/llms.txt
 - https://monid.ai/tools/cash-app
 - https://n8n.io/integrations/cash-app/
 - https://n8n.io/integrations/cash/
 - https://zapier.com/apps/cash-app/integrations
 - https://zapier.com/apps/cash/integrations
-summary: null
+summary: Afterpay (Cash App Afterpay) documents 10 ecommerce platform/PSP integrations on its own developer portal;
+  Cash App appears on none of Zapier, n8n, Composio or Monid.
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Adobe Commerce (Magento)
+  partner: adobe-commerce
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/adobe-commerce-magento.md
+  direction: provider-built
+  category: ecommerce-platform
+  use_case: Afterpay Adobe Commerce Extension
+- partner_name: Adyen
+  partner: adyen
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/adyen.md
+  direction: partner-built
+  category: ecommerce-platform
+  use_case: Afterpay as an Adyen payment method, via Adyen account manager
+- partner_name: BigCommerce
+  partner: bigcommerce
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/big-commerce.md
+  direction: unknown
+  category: ecommerce-platform
+  use_case: Afterpay payment option in BigCommerce checkout
+- partner_name: Ecwid
+  partner: ecwid
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/ecwid.md
+  direction: unknown
+  category: ecommerce-platform
+  use_case: Afterpay payment method enabled in Ecwid admin
+- partner_name: PrestaShop
+  partner: prestashop
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/presta-shop.md
+  direction: provider-built
+  category: ecommerce-platform
+  use_case: Afterpay module for PrestaShop back office
+- partner_name: Salesforce Commerce Cloud
+  partner: salesforce-commerce-cloud
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/salesforce-commerce-cloud.md
+  direction: provider-built
+  category: ecommerce-platform
+  use_case: Afterpay cartridges for SFRA and SiteGenesis
+- partner_name: Shopify
+  partner: shopify
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/shopify.md
+  direction: unknown
+  category: ecommerce-platform
+  use_case: Afterpay and Cash App Pay at Shopify checkout, on-site messaging app
+- partner_name: Stripe
+  partner: stripe
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/stripe.md
+  direction: partner-built
+  category: ecommerce-platform
+  use_case: Afterpay as a Stripe payment method, via Stripe account manager
+- partner_name: Wix
+  partner: wix
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/wix.md
+  direction: unknown
+  category: ecommerce-platform
+  use_case: Afterpay payment method enabled in Wix admin
+- partner_name: WooCommerce
+  partner: woocommerce
+  type: claimed
+  evidence: https://developers.cash.app/afterpay/guides/platforms/woo-commerce.md
+  direction: provider-built
+  category: ecommerce-platform
+  use_case: Afterpay WooCommerce Plugin
 templates: []

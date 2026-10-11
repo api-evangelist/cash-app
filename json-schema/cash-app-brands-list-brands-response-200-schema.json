@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/cash-app/main/json-schema/cash-app-brands-list-brands-response-200-schema.json",
+  "title": "Brands_list-brands_Response_200",
+  "x-generated": "2026-10-12",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/cash-app-brands-api-openapi.yml#/components/schemas/Brands_list-brands_Response_200",
+  "type": "object",
+  "properties": {
+    "brands": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Brand"
+      },
+      "description": "List of brands matching the given query parameters."
+    },
+    "cursor": {
+      "type": "string",
+      "description": "The pagination cursor to be used in a subsequent request. If empty, this is the final response."
+    }
+  },
+  "required": [
+    "brands"
+  ],
+  "$defs": {
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for the brand issued by Cash App.\n\nMin length: `1`\nMax length: `128`"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the brand to be shown in Cash App next to payments.\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this brand was created, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When this brand was last updated, in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format (UTC)."
+        },
+        "reference_id": {
+          "type": "string",
+          "description": "A user-defined identifier for this brand, typically used to associate the brand with a record in an external system.  Independent from the [merchant reference_id](https://developers.cash.app/docs/api/network-api/operations/create-a-merchant#request-body).\n\nMin length: `1`\nMax length: `1024`"
+        },
+        "color": {
+          "type": "string",
+          "description": "Primary color associated with this brand and its logo, in 6-digit hex code format (`#f0f0f0`).\n\nMin length: `7`\nMax length: `7`"
+        },
+        "profile_image_url": {
+          "type": "string",
+          "format": "uri",
+          "default": "https://example.com",
+          "description": "URL to the image that should be shown in Cash App next to payments made to this brand, typically the brand's logo.\n\nThe image should be square and be at least 256x256. It must be less than 2MB in filesize.\n\nAcceptable file formats:\n- `.png`\n- `.jpg`\n- `.jpeg`\n\nMin length: `8`\nMax length: `8000`"
+        },
+        "metadata": {
+          "$ref": "#/$defs/Metadata"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "created_at",
+        "updated_at",
+        "reference_id"
+      ],
+      "description": "A brand is the entity a customer perceives that they are transacting with.",
+      "title": "Brand"
+    },
+    "Metadata": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Freeform key-value pairs of arbitrary data associated with this resource.\n\nKeys and values must be passed as strings and not contain any personally identifiable information (PII).\n\nMin keys: `0`\nMax keys: `50`\n\n\n> Note: Nested keys are not supported.",
+      "title": "Metadata"
+    }
+  }
+}

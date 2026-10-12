@@ -1,0 +1,41 @@
+# DERIVED by build-integration-preconfigs.py (roadmap#949). Overlay on the PARTNER's contract:
+# where stripe's enum names cash-app, and what that value is.
+overlay: 1.0.0
+info:
+  title: cash-app as a payment-method in stripe's contract
+  version: 1.0.0
+extends: https://raw.githubusercontent.com/api-evangelist/stripe/refs/heads/main/openapi/stripe-setup-intents-api-openapi.yml
+actions:
+- target: $.components.schemas.PostSetupIntentsRequest.properties.payment_method_data.properties.type
+  update:
+    x-apievangelist-integration:
+      values:
+        afterpay_clearpay:
+          provider: cash-app
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py
+- target: $.components.schemas.PostSetupIntentsIntentConfirmRequest.properties.payment_method_data.properties.type
+  update:
+    x-apievangelist-integration:
+      values:
+        afterpay_clearpay:
+          provider: cash-app
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py
+- target: $.components.schemas.PostSetupIntentsIntentRequest.properties.payment_method_data.properties.type
+  update:
+    x-apievangelist-integration:
+      values:
+        afterpay_clearpay:
+          provider: cash-app
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py

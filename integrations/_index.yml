@@ -89,8 +89,8 @@
   type: claimed
   evidence: https://developers.cash.app/afterpay/guides/platforms/stripe.md
   source: edge
-  status: pending-generation
-  arazzo: null
+  arazzo: cash-app-stripe-preconfig.yml
+  status: arazzo
 - slug: cash-app-wix
   label: Wix
   partner: wix
@@ -129,5 +129,5 @@
     property: schemas.PostSetupIntentsRequest.payment_method_data
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
-  status: not-a-workflow
-  arazzo: null
+  arazzo: cash-app-stripe-preconfig.yml
+  status: arazzo

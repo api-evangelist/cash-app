@@ -1,0 +1,44 @@
+arazzo: 1.0.1
+info:
+  title: 'cash-app through stripe: PostSetupIntents preconfigured with afterpay_clearpay'
+  summary: Calls stripe's PostSetupIntents with `afterpay_clearpay` preset, the way cash-app is used inside stripe.
+  description: 'A PRECONFIGURATION, not an orchestration: cash-app is a payment-method inside stripe, so the integration
+    is stripe''s own operation with cash-app''s enum value set. Derived from stripe''s contract (stripe-setup-intents-api-openapi.yml);
+    required properties are inputs.'
+  version: 1.0.0
+x-integration:
+  partner: stripe
+  relationship: payment-method
+  preconfig: true
+  edge_evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+  edge_type: contract
+  preset:
+    payment_method_data.type: afterpay_clearpay
+  method: derived
+  generated: '2026-10-12'
+  generator: build-integration-preconfigs.py
+sourceDescriptions:
+- name: stripeSetupIntentsApiOpenapi
+  url: https://raw.githubusercontent.com/api-evangelist/stripe/refs/heads/main/openapi/stripe-setup-intents-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: cash-app-via-stripe-postsetupintents
+  summary: PostSetupIntents with afterpay_clearpay preset
+  inputs:
+    type: object
+    required: []
+    properties: {}
+  steps:
+  - stepId: call-with-preset
+    operationId: $sourceDescriptions.stripeSetupIntentsApiOpenapi.PostSetupIntents
+    requestBody:
+      contentType: application/x-www-form-urlencoded
+      payload:
+        payment_method_data:
+          type: afterpay_clearpay
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      id: $response.body#/id
+  outputs:
+    id: $steps.call-with-preset.outputs.id

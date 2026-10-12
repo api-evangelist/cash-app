@@ -113,3 +113,21 @@
   source: edge
   arazzo: cash-app-woocommerce-afterpay-checkout.yml
   status: arazzo
+- slug: cash-app-stripe
+  label: stripe
+  partner: stripe
+  partner_name: stripe
+  type: contract
+  channel: partner-built
+  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+  source: edge
+  relationship: payment-method
+  contract_reference:
+    repo: stripe
+    spec_file: stripe-setup-intents-api-openapi.yml
+    value: afterpay_clearpay
+    property: schemas.PostSetupIntentsRequest.payment_method_data
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+  status: not-a-workflow
+  arazzo: null

@@ -1,0 +1,282 @@
+# DERIVED by derive-integration-map.py (roadmap#949): each integration workflow, step by step,
+# resolved to spec file -> tag -> business capability (Turbo EA, CC BY 4.0) and the operation's
+# phrasing intent. Read from our own files; an unmapped link says why.
+slug: cash-app
+workflows:
+- file: cash-app-bigcommerce-afterpay-checkout.yml
+  title: Cash App Afterpay checkout for BigCommerce orders
+  partner: bigcommerce
+  template: null
+  repos:
+  - bigcommerce
+  - cash-app
+  steps:
+  - step: get-bigcommerce-order
+    repo: bigcommerce
+    spec_file: bigcommerce-order-api-openapi.yml
+    operationId: getOrder
+    tag: Order
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: create-afterpay-checkout
+    repo: cash-app
+    spec_file: cash-app-checkouts-api-openapi.yml
+    operationId: create-checkout-1
+    tag: Checkouts
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    bigcommerce:
+      capabilities: []
+      tags:
+      - Order
+    cash-app:
+      capabilities: []
+      tags:
+      - Checkouts
+  intents: []
+- file: cash-app-ecwid-afterpay-checkout.yml
+  title: Cash App Afterpay checkout for Ecwid orders
+  partner: ecwid
+  template: null
+  repos:
+  - ecwid
+  - cash-app
+  steps:
+  - step: get-ecwid-order
+    repo: ecwid
+    spec_file: ecwid-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: create-afterpay-checkout
+    repo: cash-app
+    spec_file: cash-app-checkouts-api-openapi.yml
+    operationId: create-checkout-1
+    tag: Checkouts
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: mark-ecwid-order
+    repo: ecwid
+    spec_file: ecwid-orders-api-openapi.yml
+    operationId: updateOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    ecwid:
+      capabilities: []
+      tags:
+      - Orders
+    cash-app:
+      capabilities: []
+      tags:
+      - Checkouts
+  intents: []
+- file: cash-app-salesforce-commerce-cloud-afterpay-checkout.yml
+  title: Cash App Afterpay checkout for Salesforce Commerce Cloud baskets
+  partner: salesforce-commerce-cloud
+  template: null
+  repos:
+  - salesforce-commerce-cloud
+  - cash-app
+  steps:
+  - step: get-sfcc-basket
+    repo: salesforce-commerce-cloud
+    spec_file: salesforce-commerce-cloud-shopper-api-openapi.yml
+    operationId: getBasket
+    tag: Shopper
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: create-afterpay-checkout
+    repo: cash-app
+    spec_file: cash-app-checkouts-api-openapi.yml
+    operationId: create-checkout-1
+    tag: Checkouts
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    salesforce-commerce-cloud:
+      capabilities: []
+      tags:
+      - Shopper
+    cash-app:
+      capabilities: []
+      tags:
+      - Checkouts
+  intents: []
+- file: cash-app-shopify-afterpay-checkout.yml
+  title: Cash App Afterpay checkout for Shopify orders
+  partner: shopify
+  template: null
+  repos:
+  - shopify
+  - cash-app
+  steps:
+  - step: get-shopify-order
+    repo: shopify
+    spec_file: shopify-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: BC-520.40
+    capability: Order Fulfilment Management
+    capability_l1: BC-520
+    intent: Get one order's details
+    effect: read
+    unmapped: null
+  - step: create-afterpay-checkout
+    repo: cash-app
+    spec_file: cash-app-checkouts-api-openapi.yml
+    operationId: create-checkout-1
+    tag: Checkouts
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: tag-shopify-order
+    repo: shopify
+    spec_file: shopify-orders-api-openapi.yml
+    operationId: updateOrder
+    tag: Orders
+    capability_id: BC-520.40
+    capability: Order Fulfilment Management
+    capability_l1: BC-520
+    intent: Update an order's note, tags or contact info
+    effect: write
+    unmapped: null
+  connects:
+    shopify:
+      capabilities:
+      - BC-520.40
+      tags:
+      - Orders
+    cash-app:
+      capabilities: []
+      tags:
+      - Checkouts
+  intents:
+  - Get one order's details
+  - Update an order's note, tags or contact info
+- file: cash-app-wix-afterpay-checkout.yml
+  title: Cash App Afterpay checkout for Wix orders
+  partner: wix
+  template: null
+  repos:
+  - wix
+  - cash-app
+  steps:
+  - step: get-wix-order
+    repo: wix
+    spec_file: wix-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: create-afterpay-checkout
+    repo: cash-app
+    spec_file: cash-app-checkouts-api-openapi.yml
+    operationId: create-checkout-1
+    tag: Checkouts
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    wix:
+      capabilities: []
+      tags:
+      - Orders
+    cash-app:
+      capabilities: []
+      tags:
+      - Checkouts
+  intents: []
+- file: cash-app-woocommerce-afterpay-checkout.yml
+  title: Cash App Afterpay checkout for WooCommerce orders
+  partner: woocommerce
+  template: null
+  repos:
+  - woocommerce
+  - cash-app
+  steps:
+  - step: get-woo-order
+    repo: woocommerce
+    spec_file: woocommerce-orders-api-openapi.yml
+    operationId: getOrder
+    tag: Orders
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: create-afterpay-checkout
+    repo: cash-app
+    spec_file: cash-app-checkouts-api-openapi.yml
+    operationId: create-checkout-1
+    tag: Checkouts
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  - step: note-woo-order
+    repo: woocommerce
+    spec_file: woocommerce-order-notes-api-openapi.yml
+    operationId: createOrderNote
+    tag: Order Notes
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: null
+    effect: null
+    unmapped: no capability edge for this spec file
+  connects:
+    woocommerce:
+      capabilities: []
+      tags:
+      - Order Notes
+      - Orders
+    cash-app:
+      capabilities: []
+      tags:
+      - Checkouts
+  intents: []

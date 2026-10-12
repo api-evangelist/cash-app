@@ -99,4 +99,19 @@ edges:
   direction: provider-built
   category: ecommerce-platform
   use_case: Afterpay WooCommerce Plugin
+- partner_name: stripe
+  partner: stripe
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: payment-method
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+  contract_reference:
+    repo: stripe
+    spec_file: stripe-setup-intents-api-openapi.yml
+    value: afterpay_clearpay
+    property: schemas.PostSetupIntentsRequest.payment_method_data
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
 templates: []

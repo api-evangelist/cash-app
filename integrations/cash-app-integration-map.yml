@@ -188,6 +188,31 @@ workflows:
   intents:
   - Get one order's details
   - Update an order's note, tags or contact info
+- file: cash-app-stripe-preconfig.yml
+  title: 'cash-app through stripe: PostSetupIntents preconfigured with afterpay_clearpay'
+  partner: stripe
+  template: null
+  repos:
+  - stripe
+  steps:
+  - step: call-with-preset
+    repo: stripe
+    spec_file: stripe-setup-intents-api-openapi.yml
+    operationId: PostSetupIntents
+    tag: Setup Intents
+    capability_id: null
+    capability: null
+    capability_l1: null
+    intent: Start saving a payment method for later
+    effect: write
+    unmapped: no capability edge for this spec file
+  connects:
+    stripe:
+      capabilities: []
+      tags:
+      - Setup Intents
+  intents:
+  - Start saving a payment method for later
 - file: cash-app-wix-afterpay-checkout.yml
   title: Cash App Afterpay checkout for Wix orders
   partner: wix

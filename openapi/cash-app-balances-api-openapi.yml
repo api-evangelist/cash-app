@@ -148,22 +148,30 @@ paths:
                 $ref: '#/components/schemas/Retrieve-balanceRequestNotFoundError'
 components:
   schemas:
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
+    Balances_list-balances_Response_200:
+      type: object
+      properties:
+        balances:
+          type: array
+          items:
+            $ref: '#/components/schemas/Balance'
+          description: List of balances matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - balances
+      title: Balances_list-balances_Response_200
+    Retrieve-balanceRequestNotFoundError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+      required:
+      - errors
+      title: Retrieve-balanceRequestNotFoundError
     Error:
       type: object
       properties:
@@ -193,42 +201,22 @@ components:
       - code
       description: Represents an error encountered during a request to the API.
       title: Error
-    Retrieve-balanceRequestNotFoundError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-      required:
-      - errors
-      title: Retrieve-balanceRequestNotFoundError
-    Currency:
+    ErrorCategory:
       type: string
       enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    Balances_list-balances_Response_200:
-      type: object
-      properties:
-        balances:
-          type: array
-          items:
-            $ref: '#/components/schemas/Balance'
-          description: List of balances matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - balances
-      title: Balances_list-balances_Response_200
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
     BalancesGetParametersType:
       type: string
       enum:
@@ -256,6 +244,12 @@ components:
       required:
       - balance
       title: Balances_retrieve-balance_Response_200
+    BalanceType:
+      type: string
+      enum:
+      - CHECKING
+      description: The type of balance.
+      title: BalanceType
     Balance:
       type: object
       properties:
@@ -297,9 +291,15 @@ components:
       - currency
       - amount
       title: Balance
-    BalanceType:
+    Currency:
       type: string
       enum:
-      - CHECKING
-      description: The type of balance.
-      title: BalanceType
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency

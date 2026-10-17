@@ -54,41 +54,13 @@ webhooks:
       - Add Cash App Pay To Your Site
 components:
   schemas:
-    CashGrantDetailsStatus:
+    CashGrantIntent:
       type: string
       enum:
-      - ACTIVE
-      - EXPIRED
-      - CONSUMED
-      - REVOKED
-      description: 'Describes whether or not this grant can be used to perform the action associated with it.
-
-
-        If `ACTIVE`, it can be used to perform the action.
-
-
-        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
-
-
-        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
-
-
-        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
-
-        '
-      title: CashGrantDetailsStatus
-    CashGrantDetailsCashapp:
-      type: object
-      properties:
-        customerId:
-          type: string
-        cashtag:
-          type: string
-          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
-      required:
-      - customerId
-      - cashtag
-      title: CashGrantDetailsCashapp
+      - ON_FILE
+      - ONE_TIME
+      description: Either ON_FILE or ONE_TIME
+      title: CashGrantIntent
     CashGrant:
       type: object
       properties:
@@ -110,19 +82,6 @@ components:
       - details
       description: Describes a grant provided by Cash App.
       title: CashGrant
-    CashGrantIntent:
-      type: string
-      enum:
-      - ON_FILE
-      - ONE_TIME
-      description: Either ON_FILE or ONE_TIME
-      title: CashGrantIntent
-    CashGrantType:
-      type: string
-      enum:
-      - CASHAPP
-      description: CASHAPP for all Cash App Pay transactions
-      title: CashGrantType
     CashGrantDetails:
       type: object
       properties:
@@ -166,6 +125,47 @@ components:
       - updatedAt
       - expiresAt
       title: CashGrantDetails
+    CashGrantDetailsStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - EXPIRED
+      - CONSUMED
+      - REVOKED
+      description: 'Describes whether or not this grant can be used to perform the action associated with it.
+
+
+        If `ACTIVE`, it can be used to perform the action.
+
+
+        If `EXPIRED`, it may no longer be used to perform the action due to the current time being past the "expires_at" time.
+
+
+        If `CONSUMED`, it was already redeemed to perform the action and cannot be used again.
+
+
+        If `REVOKED`, the customer or merchant explicitly unauthorized the grant, preventing it from being used to perform the action.
+
+        '
+      title: CashGrantDetailsStatus
+    CashGrantType:
+      type: string
+      enum:
+      - CASHAPP
+      description: CASHAPP for all Cash App Pay transactions
+      title: CashGrantType
+    CashGrantDetailsCashapp:
+      type: object
+      properties:
+        customerId:
+          type: string
+        cashtag:
+          type: string
+          description: A publicly-accessible, unique identifier (username) for individuals and businesses using Cash App.
+      required:
+      - customerId
+      - cashtag
+      title: CashGrantDetailsCashapp
   securitySchemes:
     sec0:
       type: http

@@ -196,13 +196,6 @@ paths:
               $ref: '#/components/schemas/RecurringPaymentRequest'
 components:
   schemas:
-    PaymentAuthStatus:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: represents the status of the order
-      title: PaymentAuthStatus
     PaymentStatus:
       type: string
       enum:
@@ -210,37 +203,43 @@ components:
       - DECLINED
       description: represents the status of the order
       title: PaymentStatus
-    RecurringPaymentRequestEnrichmentsInitiation:
+    RecurringPaymentRequestEnrichmentsInitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
+      title: RecurringPaymentRequestEnrichmentsInitiationActor
+    Payment-Event:
       type: object
       properties:
-        actor:
-          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiationActor'
-          description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
-      description: Describes who initiated the transaction
-      title: RecurringPaymentRequestEnrichmentsInitiation
-    Shipping-Courier:
+        id:
+          type: string
+        created:
+          type: string
+        expires:
+          type: string
+        type:
+          $ref: '#/components/schemas/PaymentEventType'
+        amount:
+          $ref: '#/components/schemas/Money'
+        paymentEventMerchantReference:
+          type: string
+      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
+      title: Payment-Event
+    RecurringPaymentRequestPaymentMethod:
       type: object
       properties:
-        shippedAt:
+        token:
           type: string
-          format: date-time
-        name:
-          type: string
-        tracking:
-          type: string
-        priority:
-          $ref: '#/components/schemas/ShippingCourierPriority'
-      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
-
-
-        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
-
-
-        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
-
-
-        The `priority` field tracks the shipping speed or service level associated with the delivery. '
-      title: Shipping-Courier
+          description: The billing agreement token
+        type:
+          $ref: '#/components/schemas/RecurringPaymentRequestPaymentMethodType'
+          description: The payment method type
+      required:
+      - token
+      - type
+      title: RecurringPaymentRequestPaymentMethod
     PaymentPaymentState:
       type: string
       enum:
@@ -252,31 +251,104 @@ components:
       - VOIDED
       description: is the current state for capturing payments
       title: PaymentPaymentState
-    Consumer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        givenNames:
-          type: string
-          description: The consumer's first name
-        surname:
-          type: string
-          description: The consumer's last name
-        phoneNumber:
-          type: string
-      required:
-      - email
-      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
-      title: Consumer
-    RecurringPaymentRequestEnrichmentsInitiationActor:
+    PaymentAuthStatus:
       type: string
       enum:
-      - CUSTOMER
-      - MERCHANT
-      description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
-      title: RecurringPaymentRequestEnrichmentsInitiationActor
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentAuthStatus
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    Order-Details:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
+      title: Order-Details
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+          description: First line of the address
+        line2:
+          type: string
+          description: 'Second line of the address '
+        area1:
+          type: string
+          description: '- AU: Suburb
+
+            - NZ: Town or City
+
+            - UK: Postal Town
+
+            - US: City
+
+            - Canada: City'
+        area2:
+          type: string
+          description: '- NZ: suburb
+
+            - UK: village or local area.'
+        region:
+          type: string
+          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+        postcode:
+          type: string
+        countryCode:
+          $ref: '#/components/schemas/ContactCountryCode'
+        phoneNumber:
+          type: string
+          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
+      required:
+      - name
+      - line1
+      - area1
+      - region
+      - postcode
+      - countryCode
+      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
+      title: Contact
+    RecurringPaymentRequestMerchant:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The merchant name to display
+      title: RecurringPaymentRequestMerchant
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
     PaymentAuthPaymentState:
       type: string
       enum:
@@ -288,6 +360,14 @@ components:
       - VOIDED
       description: is the current state for capturing payments
       title: PaymentAuthPaymentState
+    RecurringPaymentRequestEnrichmentsInitiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiationActor'
+          description: The actor initiating the transaction. Use MERCHANT when the customer is not present.
+      description: Describes who initiated the transaction
+      title: RecurringPaymentRequestEnrichmentsInitiation
     RecurringPaymentRequestEnrichments:
       type: object
       properties:
@@ -295,13 +375,35 @@ components:
           $ref: '#/components/schemas/RecurringPaymentRequestEnrichmentsInitiation'
           description: Describes who initiated the transaction
       title: RecurringPaymentRequestEnrichments
-    RecurringPaymentRequestMerchant:
+    Refund:
       type: object
       properties:
-        name:
+        requestId:
           type: string
-          description: The merchant name to display
-      title: RecurringPaymentRequestMerchant
+          description: Unique ID required for safe retries. Max length 64 (varchar).
+        amount:
+          $ref: '#/components/schemas/Money'
+        merchantReference:
+          type: string
+          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
+        refundMerchantReference:
+          type: string
+          description: A unique reference for the individual refund event. Max length 128 (varchar).
+        refundId:
+          type: string
+          description: The unique, permanent, Afterpay-generated Refund ID.
+        refundedAt:
+          type: string
+      description: 'To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records
+
+
+        Unique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request.
+
+
+        The `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as "Payment Event Id". In most cases, this would hold the same value as the `merchantReference`.
+
+        '
+      title: Refund
     RecurringPaymentRequest:
       type: object
       properties:
@@ -358,6 +460,39 @@ components:
       - paymentMethod
       - amount
       title: RecurringPaymentRequest
+    Shipping-Courier:
+      type: object
+      properties:
+        shippedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        tracking:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ShippingCourierPriority'
+      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
+
+
+        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
+
+
+        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
+
+
+        The `priority` field tracks the shipping speed or service level associated with the delivery. '
+      title: Shipping-Courier
+    PaymentEventType:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      - EXPIRED
+      title: PaymentEventType
     Item:
       type: object
       properties:
@@ -391,6 +526,33 @@ components:
       - price
       description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
       title: Item
+    Consumer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        givenNames:
+          type: string
+          description: The consumer's first name
+        surname:
+          type: string
+          description: The consumer's last name
+        phoneNumber:
+          type: string
+      required:
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
     Payment:
       type: object
       properties:
@@ -428,126 +590,12 @@ components:
             $ref: '#/components/schemas/Payment-Event'
       description: Describes the schema for a (read-only) payment object
       title: Payment
-    Order-Details:
-      type: object
-      properties:
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-        billing:
-          $ref: '#/components/schemas/Contact'
-        courier:
-          $ref: '#/components/schemas/Shipping-Courier'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Discount'
-        taxAmount:
-          $ref: '#/components/schemas/Money'
-        shippingAmount:
-          $ref: '#/components/schemas/Money'
-      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
-      title: Order-Details
-    Payment-Event:
-      type: object
-      properties:
-        id:
-          type: string
-        created:
-          type: string
-        expires:
-          type: string
-        type:
-          $ref: '#/components/schemas/PaymentEventType'
-        amount:
-          $ref: '#/components/schemas/Money'
-        paymentEventMerchantReference:
-          type: string
-      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
-      title: Payment-Event
-    RecurringPaymentRequestPaymentMethod:
-      type: object
-      properties:
-        token:
-          type: string
-          description: The billing agreement token
-        type:
-          $ref: '#/components/schemas/RecurringPaymentRequestPaymentMethodType'
-          description: The payment method type
-      required:
-      - token
-      - type
-      title: RecurringPaymentRequestPaymentMethod
-    Refund:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique ID required for safe retries. Max length 64 (varchar).
-        amount:
-          $ref: '#/components/schemas/Money'
-        merchantReference:
-          type: string
-          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
-        refundMerchantReference:
-          type: string
-          description: A unique reference for the individual refund event. Max length 128 (varchar).
-        refundId:
-          type: string
-          description: The unique, permanent, Afterpay-generated Refund ID.
-        refundedAt:
-          type: string
-      description: 'To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records
-
-
-        Unique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request.
-
-
-        The `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as "Payment Event Id". In most cases, this would hold the same value as the `merchantReference`.
-
-        '
-      title: Refund
-    Discount:
-      type: object
-      properties:
-        displayName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
-    PaymentEventType:
-      type: string
-      enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      - EXPIRED
-      title: PaymentEventType
     RecurringPaymentRequestPaymentMethodType:
       type: string
       enum:
       - BILLING_AGREEMENT
       description: The payment method type
       title: RecurringPaymentRequestPaymentMethodType
-    Money:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
     PaymentAuth:
       type: object
       properties:
@@ -585,21 +633,6 @@ components:
             $ref: '#/components/schemas/Payment-Event'
       description: Describes the schema for a (read-only) payment object
       title: PaymentAuth
-    ShippingCourierPriority:
-      type: string
-      enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
     ContactCountryCode:
       type: string
       enum:
@@ -609,52 +642,19 @@ components:
       - CA
       - GB
       title: ContactCountryCode
-    Contact:
+    Money:
       type: object
       properties:
-        name:
+        amount:
           type: string
-        line1:
-          type: string
-          description: First line of the address
-        line2:
-          type: string
-          description: 'Second line of the address '
-        area1:
-          type: string
-          description: '- AU: Suburb
-
-            - NZ: Town or City
-
-            - UK: Postal Town
-
-            - US: City
-
-            - Canada: City'
-        area2:
-          type: string
-          description: '- NZ: suburb
-
-            - UK: village or local area.'
-        region:
-          type: string
-          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
-        postcode:
-          type: string
-        countryCode:
-          $ref: '#/components/schemas/ContactCountryCode'
-        phoneNumber:
-          type: string
-          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
       required:
-      - name
-      - line1
-      - area1
-      - region
-      - postcode
-      - countryCode
-      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
-      title: Contact
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
   securitySchemes:
     sec0:
       type: http

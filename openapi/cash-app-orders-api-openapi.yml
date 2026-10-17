@@ -66,71 +66,18 @@ paths:
               $ref: '#/components/schemas/OrderRequest'
 components:
   schemas:
-    Shipping-Courier:
+    Enrichments:
       type: object
       properties:
-        shippedAt:
-          type: string
-          format: date-time
-        name:
-          type: string
-        tracking:
-          type: string
-        priority:
-          $ref: '#/components/schemas/ShippingCourierPriority'
-      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
-
-
-        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
-
-
-        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
-
-
-        The `priority` field tracks the shipping speed or service level associated with the delivery. '
-      title: Shipping-Courier
-    InitiationActor:
-      type: string
-      enum:
-      - CUSTOMER
-      - MERCHANT
-      description: The party who initiated the order
-      title: InitiationActor
-    CreateOrderResponse:
-      type: object
-      properties:
-        token:
-          type: string
-        expires:
-          type: string
-          format: date-time
-        paymentSchedule:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentSchedule'
-          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+          description: Who initiated the order
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+          description: Metadata on the subscription details
       required:
-      - token
-      - expires
-      title: CreateOrderResponse
-    Consumer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        givenNames:
-          type: string
-          description: The consumer's first name
-        surname:
-          type: string
-          description: The consumer's last name
-        phoneNumber:
-          type: string
-      required:
-      - email
-      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
-      title: Consumer
+      - initiation
+      title: Enrichments
     OrderRequest:
       type: object
       properties:
@@ -184,39 +131,6 @@ components:
       - amount
       - enrichments
       title: OrderRequest
-    Item:
-      type: object
-      properties:
-        name:
-          type: string
-        sku:
-          type: string
-        pageUrl:
-          type: string
-        imageUrl:
-          type: string
-        quantity:
-          type: integer
-        price:
-          $ref: '#/components/schemas/Money'
-        categories:
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-        estimatedShipmentDate:
-          type: string
-          format: date
-        preorder:
-          type: boolean
-          default: false
-      required:
-      - name
-      - quantity
-      - price
-      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
-      title: Item
     Subscription:
       type: object
       properties:
@@ -227,64 +141,6 @@ components:
         intervalCount:
           type: integer
       title: Subscription
-    Enrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/Initiation'
-          description: Who initiated the order
-        subscription:
-          $ref: '#/components/schemas/Subscription'
-          description: Metadata on the subscription details
-      required:
-      - initiation
-      title: Enrichments
-    PaymentSchedule:
-      type: object
-      properties:
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: Amount for this payment installment
-        dueDate:
-          type: string
-          format: date
-          description: Due date for this installment
-      required:
-      - amount
-      - dueDate
-      description: Represents a scheduled payment installment
-      title: PaymentSchedule
-    Initiation:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/InitiationActor'
-          description: The party who initiated the order
-      required:
-      - actor
-      title: Initiation
-    Discount:
-      type: object
-      properties:
-        displayName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
-    Money:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
     OrderRequestPaymentScheduleType:
       type: string
       enum:
@@ -297,24 +153,6 @@ components:
       - STANDARD
       - EXPRESS
       title: ShippingCourierPriority
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
-    ContactCountryCode:
-      type: string
-      enum:
-      - AU
-      - NZ
-      - US
-      - CA
-      - GB
-      title: ContactCountryCode
     Contact:
       type: object
       properties:
@@ -369,12 +207,174 @@ components:
       - MONTH
       - YEAR
       title: SubscriptionInterval
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
+    CreateOrderResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        expires:
+          type: string
+          format: date-time
+        paymentSchedule:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentSchedule'
+          description: Experimental. The installment payment schedule for the order, when available. This field is optional while the feature is rolling out.
+      required:
+      - token
+      - expires
+      title: CreateOrderResponse
+    Shipping-Courier:
+      type: object
+      properties:
+        shippedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        tracking:
+          type: string
+        priority:
+          $ref: '#/components/schemas/ShippingCourierPriority'
+      description: 'Essential information for tracking a shipment. The `shippedAt` key represents the date and time when the item was shipped. This value follows the [ISO 8601 standard format](https://www.iso.org/iso-8601-date-and-time-format.html) for date and time representations.
+
+
+        The `name` field indicates the courier service employed to handle the shipment (e.g. FEDEX, UPS). For orders that are picked up in-store (also known as Buy-Online-Pickup-Instore), please use "INSTORE_PICKUP" as the `name` field value.
+
+
+        The `tracking` key represents a unique tracking number provided by the courier service to monitor the shipment''s progress. It''s a valuable tool for customers and businesses to track and trace their packages.
+
+
+        The `priority` field tracks the shipping speed or service level associated with the delivery. '
+      title: Shipping-Courier
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        pageUrl:
+          type: string
+        imageUrl:
+          type: string
+        quantity:
+          type: integer
+        price:
+          $ref: '#/components/schemas/Money'
+        categories:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        estimatedShipmentDate:
+          type: string
+          format: date
+        preorder:
+          type: boolean
+          default: false
+      required:
+      - name
+      - quantity
+      - price
+      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
+      title: Item
     SubscriptionType:
       type: string
       enum:
       - FIXED
       - VARIABLE
       title: SubscriptionType
+    Consumer:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        givenNames:
+          type: string
+          description: The consumer's first name
+        surname:
+          type: string
+          description: The consumer's last name
+        phoneNumber:
+          type: string
+      required:
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
+    PaymentSchedule:
+      type: object
+      properties:
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: Amount for this payment installment
+        dueDate:
+          type: string
+          format: date
+          description: Due date for this installment
+      required:
+      - amount
+      - dueDate
+      description: Represents a scheduled payment installment
+      title: PaymentSchedule
+    Initiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/InitiationActor'
+          description: The party who initiated the order
+      required:
+      - actor
+      title: Initiation
+    ContactCountryCode:
+      type: string
+      enum:
+      - AU
+      - NZ
+      - US
+      - CA
+      - GB
+      title: ContactCountryCode
+    InitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The party who initiated the order
+      title: InitiationActor
+    Money:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
+      required:
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
   securitySchemes:
     sec0:
       type: http

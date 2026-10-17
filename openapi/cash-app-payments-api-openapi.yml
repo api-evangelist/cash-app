@@ -1483,34 +1483,26 @@ paths:
       description: Production
 components:
   schemas:
-    PaymentEnrichmentsInitiation:
+    Payments_create-payment_Response_201:
       type: object
       properties:
-        actor:
-          $ref: '#/components/schemas/PaymentEnrichmentsInitiationActor'
-          description: 'The party who initiated the payment.
+        payment:
+          $ref: '#/components/schemas/Payment'
+      title: Payments_create-payment_Response_201
+    AuthorizationStatus:
+      type: string
+      enum:
+      - AUTHORIZED
+      - DECLINED
+      description: 'The step of the authorization processing lifecycle that this authorization is currently at.
 
 
-            - `CUSTOMER`
+        Allowed values:
 
-            - `MERCHANT`'
-      required:
-      - actor
-      description: If present, provides information about transaction initiation.
-      title: PaymentEnrichmentsInitiation
-    Create-payment-authorizationRequestBadRequestError:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: "A list of errors indicating why the request failed.\n \nMin number of items: `1`"
-        authorization:
-          $ref: '#/components/schemas/Authorization'
-      required:
-      - errors
-      title: Create-payment-authorizationRequestBadRequestError
+        - AUTHORIZED
+
+        - DECLINED'
+      title: AuthorizationStatus
     PaymentStatus:
       type: string
       enum:
@@ -1529,6 +1521,178 @@ components:
 
         - `DECLINED`'
       title: PaymentStatus
+    Payments_void-payment_Response_200:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - payment
+      title: Payments_void-payment_Response_200
+    Metadata:
+      type: object
+      additionalProperties:
+        type: string
+      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
+
+
+        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
+
+
+        Min keys: `0`
+
+        Max keys: `50`
+
+
+
+        > Note: Nested keys are not supported.'
+      title: Metadata
+    Payments_void-payment-by-idempotency-key_Response_200:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - payment
+      title: Payments_void-payment-by-idempotency-key_Response_200
+    Create-paymentRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: 'A list of errors indicating why the request failed.
+
+
+            Min number of items: `1`'
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - errors
+      title: Create-paymentRequestBadRequestError
+    Payments_capture-payment_Response_200:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - payment
+      title: Payments_capture-payment_Response_200
+    Currency:
+      type: string
+      enum:
+      - USD
+      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
+
+
+        Current values:
+
+
+        - `USD`: United States Dollar'
+      title: Currency
+    PaymentEnrichmentsInitiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/PaymentEnrichmentsInitiationActor'
+          description: 'The party who initiated the payment.
+
+
+            - `CUSTOMER`
+
+            - `MERCHANT`'
+      required:
+      - actor
+      description: If present, provides information about transaction initiation.
+      title: PaymentEnrichmentsInitiation
+    PaymentEnrichmentsInitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: 'The party who initiated the payment.
+
+
+        - `CUSTOMER`
+
+        - `MERCHANT`'
+      title: PaymentEnrichmentsInitiationActor
+    Create-payment-authorizationRequestBadRequestError:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+          description: "A list of errors indicating why the request failed.\n \nMin number of items: `1`"
+        authorization:
+          $ref: '#/components/schemas/Authorization'
+      required:
+      - errors
+      title: Create-payment-authorizationRequestBadRequestError
+    PaymentsPaymentIdAuthorizationsPostRequestBodyContentApplicationJsonSchemaAuthorization:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: 'The updated total amount of money to collect from the customer, in the lowest denomination of currency for the payment.
+
+            This value must be greater than or equal to the current authorized amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        reference_id:
+          type: string
+          description: 'A user-defined identifier for this authorization, typically used to associate the authorization with a record in an external system.
+
+
+            Min length: `1`
+
+            Max length: `1024`'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+      required:
+      - amount
+      - currency
+      description: Details about the authorization to create.
+      title: PaymentsPaymentIdAuthorizationsPostRequestBodyContentApplicationJsonSchemaAuthorization
+    Payments_retrieve-payment_Response_200:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/Payment'
+      required:
+      - payment
+      title: Payments_retrieve-payment_Response_200
+    Error:
+      type: object
+      properties:
+        category:
+          $ref: '#/components/schemas/ErrorCategory'
+          description: The high-level reason the error occurred.
+        code:
+          type: string
+          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
+
+
+            Min length: `1`'
+        detail:
+          type: string
+          description: 'Human-readable description of why the error occurred and how to resolve it.
+
+
+            Min length: `1`'
+        field:
+          type: string
+          description: 'The field in the request that caused the error, using array and object dot notation.
+
+
+            Min length: `1`'
+      required:
+      - category
+      - code
+      description: Represents an error encountered during a request to the API.
+      title: Error
     Authorization:
       type: object
       properties:
@@ -1593,99 +1757,28 @@ components:
       - previous_amount
       description: Represents an authorization update for a payment
       title: Authorization
-    Payments_void-payment-by-idempotency-key_Response_200:
+    Payments_list-payments_Response_200:
       type: object
       properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      required:
-      - payment
-      title: Payments_void-payment-by-idempotency-key_Response_200
-    Payments_void-payment_Response_200:
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      required:
-      - payment
-      title: Payments_void-payment_Response_200
-    PaymentEnrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/PaymentEnrichmentsInitiation'
-          description: If present, provides information about transaction initiation.
-        recurring_series_id:
-          type: string
-          description: 'If present, indicates that this payment is part of a recurring series of payments, such as a subscription.
-
-
-            The value should contain a unique identifier for the recurring series that is constant across all of its payments, so it can be used to group them together.
-
-
-            Min length: `1`
-
-            Max length: `1024`'
-        statement_descriptor:
-          type: string
-          description: 'If present, adds the descriptor as line item on to a customer''s payment receipt in their in-app Activity page.
-
-            The descriptor will be present under the header "On statement as".
-
-
-            Statement descriptor requirements vary by platform. If the input for this field exceeds the character limit, it will be truncated to the limit, then suffixed with an ellipsis (...).
-
-
-            Min length: `1`
-
-            Max length: `22`'
-        restricted_categories:
+        payments:
           type: array
           items:
-            $ref: '#/components/schemas/PaymentEnrichmentsRestrictedCategoriesItems'
-          description: If present, indicates that this payment is associated with one or more restricted categories. Contact the Cash App Pay support team to use this field.
-      description: "Describes optional fields beyond core payment information to supplement payment processing.\n\nEnrichments provide additional context about a payment, which can improve the overall payment experience including, but not limited to: \n  - Increased approval rates\n  - Enhanced transaction insights\n  - Better payment flows in Cash App"
-      title: PaymentEnrichments
-    Create-paymentRequestBadRequestError:
+            $ref: '#/components/schemas/Payment'
+          description: List of payments matching the given query parameters.
+        cursor:
+          type: string
+          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
+      required:
+      - payments
+      title: Payments_list-payments_Response_200
+    Payments_create-payment-authorization_Response_201:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-          description: 'A list of errors indicating why the request failed.
-
-
-            Min number of items: `1`'
-        payment:
-          $ref: '#/components/schemas/Payment'
+        authorization:
+          $ref: '#/components/schemas/Authorization'
       required:
-      - errors
-      title: Create-paymentRequestBadRequestError
-    ErrorCategory:
-      type: string
-      enum:
-      - API_ERROR
-      - AUTHENTICATION_ERROR
-      - BRAND_ERROR
-      - DISPUTE_ERROR
-      - MERCHANT_ERROR
-      - INVALID_REQUEST_ERROR
-      - PAYMENT_PROCESSING_ERROR
-      - RATE_LIMIT_ERROR
-      - WEBHOOK_ERROR
-      - API_KEY_ERROR
-      - GRANT_ERROR
-      description: The high-level reason the error occurred.
-      title: ErrorCategory
-    Payments_retrieve-payment_Response_200:
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      required:
-      - payment
-      title: Payments_retrieve-payment_Response_200
+      - authorization
+      title: Payments_create-payment-authorization_Response_201
     PaymentsPostRequestBodyContentApplicationJsonSchemaPayment:
       type: object
       properties:
@@ -1739,59 +1832,53 @@ components:
       - grant_id
       description: Data about the payment to create.
       title: PaymentsPostRequestBodyContentApplicationJsonSchemaPayment
-    PaymentsPaymentIdAuthorizationsPostRequestBodyContentApplicationJsonSchemaAuthorization:
+    PaymentEnrichments:
       type: object
       properties:
-        amount:
-          type: integer
-          description: 'The updated total amount of money to collect from the customer, in the lowest denomination of currency for the payment.
-
-            This value must be greater than or equal to the current authorized amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-        reference_id:
+        initiation:
+          $ref: '#/components/schemas/PaymentEnrichmentsInitiation'
+          description: If present, provides information about transaction initiation.
+        recurring_series_id:
           type: string
-          description: 'A user-defined identifier for this authorization, typically used to associate the authorization with a record in an external system.
+          description: 'If present, indicates that this payment is part of a recurring series of payments, such as a subscription.
+
+
+            The value should contain a unique identifier for the recurring series that is constant across all of its payments, so it can be used to group them together.
 
 
             Min length: `1`
 
             Max length: `1024`'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-      required:
-      - amount
-      - currency
-      description: Details about the authorization to create.
-      title: PaymentsPaymentIdAuthorizationsPostRequestBodyContentApplicationJsonSchemaAuthorization
-    Payments_create-payment_Response_201:
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      title: Payments_create-payment_Response_201
-    ErrorResponse:
+        statement_descriptor:
+          type: string
+          description: 'If present, adds the descriptor as line item on to a customer''s payment receipt in their in-app Activity page.
+
+            The descriptor will be present under the header "On statement as".
+
+
+            Statement descriptor requirements vary by platform. If the input for this field exceeds the character limit, it will be truncated to the limit, then suffixed with an ellipsis (...).
+
+
+            Min length: `1`
+
+            Max length: `22`'
+        restricted_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentEnrichmentsRestrictedCategoriesItems'
+          description: If present, indicates that this payment is associated with one or more restricted categories. Contact the Cash App Pay support team to use this field.
+      description: "Describes optional fields beyond core payment information to supplement payment processing.\n\nEnrichments provide additional context about a payment, which can improve the overall payment experience including, but not limited to: \n  - Increased approval rates\n  - Enhanced transaction insights\n  - Better payment flows in Cash App"
+      title: PaymentEnrichments
+    Retrieve-paymentRequestNotFoundError:
       type: object
       properties:
         errors:
           type: array
           items:
             $ref: '#/components/schemas/Error'
-          description: 'A list of errors that occurred while processing the request.
-
-
-            Min number of items: `1`'
       required:
       - errors
-      title: ErrorResponse
-    Payments_capture-payment_Response_200:
-      type: object
-      properties:
-        payment:
-          $ref: '#/components/schemas/Payment'
-      required:
-      - payment
-      title: Payments_capture-payment_Response_200
+      title: Retrieve-paymentRequestNotFoundError
     Payment:
       type: object
       properties:
@@ -1945,112 +2032,22 @@ components:
       - created_at
       - updated_at
       title: Payment
-    Payments_create-payment-authorization_Response_201:
-      type: object
-      properties:
-        authorization:
-          $ref: '#/components/schemas/Authorization'
-      required:
-      - authorization
-      title: Payments_create-payment-authorization_Response_201
-    Error:
-      type: object
-      properties:
-        category:
-          $ref: '#/components/schemas/ErrorCategory'
-          description: The high-level reason the error occurred.
-        code:
-          type: string
-          description: 'A unique identifier for the specific type of error that occurred. For more information, see [Error Code Reference](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/errors/error-code-reference).
-
-
-            Min length: `1`'
-        detail:
-          type: string
-          description: 'Human-readable description of why the error occurred and how to resolve it.
-
-
-            Min length: `1`'
-        field:
-          type: string
-          description: 'The field in the request that caused the error, using array and object dot notation.
-
-
-            Min length: `1`'
-      required:
-      - category
-      - code
-      description: Represents an error encountered during a request to the API.
-      title: Error
-    Metadata:
-      type: object
-      additionalProperties:
-        type: string
-      description: 'Freeform key-value pairs of arbitrary data associated with this resource.
-
-
-        Keys and values must be passed as strings and not contain any personally identifiable information (PII).
-
-
-        Min keys: `0`
-
-        Max keys: `50`
-
-
-
-        > Note: Nested keys are not supported.'
-      title: Metadata
-    IdempotencyKey:
-      type: string
-      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
-      title: IdempotencyKey
-    Payments_list-payments_Response_200:
-      type: object
-      properties:
-        payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-          description: List of payments matching the given query parameters.
-        cursor:
-          type: string
-          description: The pagination cursor to be used in a subsequent request. If empty, this is the final response.
-      required:
-      - payments
-      title: Payments_list-payments_Response_200
-    PaymentEnrichmentsRestrictedCategoriesItems:
+    ErrorCategory:
       type: string
       enum:
-      - ALCOHOL
-      - FINANCIAL_SERVICES
-      - CANNABIS
-      title: PaymentEnrichmentsRestrictedCategoriesItems
-    PaymentEnrichmentsInitiationActor:
-      type: string
-      enum:
-      - CUSTOMER
-      - MERCHANT
-      description: 'The party who initiated the payment.
-
-
-        - `CUSTOMER`
-
-        - `MERCHANT`'
-      title: PaymentEnrichmentsInitiationActor
-    AuthorizationStatus:
-      type: string
-      enum:
-      - AUTHORIZED
-      - DECLINED
-      description: 'The step of the authorization processing lifecycle that this authorization is currently at.
-
-
-        Allowed values:
-
-        - AUTHORIZED
-
-        - DECLINED'
-      title: AuthorizationStatus
+      - API_ERROR
+      - AUTHENTICATION_ERROR
+      - BRAND_ERROR
+      - DISPUTE_ERROR
+      - MERCHANT_ERROR
+      - INVALID_REQUEST_ERROR
+      - PAYMENT_PROCESSING_ERROR
+      - RATE_LIMIT_ERROR
+      - WEBHOOK_ERROR
+      - API_KEY_ERROR
+      - GRANT_ERROR
+      description: The high-level reason the error occurred.
+      title: ErrorCategory
     FeeRate:
       type: object
       properties:
@@ -2062,28 +2059,275 @@ components:
           description: "The amount charged for processing the payment, in the lowest denomination of currency on the payment.\n **Note: The currency for the fee is found on the fee plan.**"
       description: A fee rate contains the components of a fee charged by Cash App to partners for a given payment.
       title: FeeRate
-    Currency:
-      type: string
-      enum:
-      - USD
-      description: 'Indicates the country associated with an entity. Values are from the [ISO-4217 Alpha-3](https://www.iso.org/iso-4217-currency-codes.html) specification.
-
-
-        Current values:
-
-
-        - `USD`: United States Dollar'
-      title: Currency
-    Retrieve-paymentRequestNotFoundError:
+    ErrorResponse:
       type: object
       properties:
         errors:
           type: array
           items:
             $ref: '#/components/schemas/Error'
+          description: 'A list of errors that occurred while processing the request.
+
+
+            Min number of items: `1`'
       required:
       - errors
-      title: Retrieve-paymentRequestNotFoundError
+      title: ErrorResponse
+    IdempotencyKey:
+      type: string
+      description: A unique identifier which can be used by Cash App to de-duplicate retries of this request, making it idempotent. For more information, see [Idempotency](/cash-app-pay-partner-api/guides/technical-guides/api-fundamentals/idempotency).
+      title: IdempotencyKey
+    PaymentEnrichmentsRestrictedCategoriesItems:
+      type: string
+      enum:
+      - ALCOHOL
+      - FINANCIAL_SERVICES
+      - CANNABIS
+      title: PaymentEnrichmentsRestrictedCategoriesItems
+    Enrichments:
+      type: object
+      properties:
+        initiation:
+          $ref: '#/components/schemas/Initiation'
+          description: Who initiated the order
+        subscription:
+          $ref: '#/components/schemas/Subscription'
+          description: Metadata on the subscription details
+      required:
+      - initiation
+      title: Enrichments
+    PaymentStatus_2:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentStatus
+    Subscription:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/SubscriptionType'
+        interval:
+          $ref: '#/components/schemas/SubscriptionInterval'
+        intervalCount:
+          type: integer
+      title: Subscription
+    V2PaymentsOrderIdCourierPutParametersAccept:
+      type: string
+      enum:
+      - application/json
+      title: V2PaymentsOrderIdCourierPutParametersAccept
+    AuthorizePayment:
+      type: object
+      properties:
+        requestid:
+          type: string
+          format: uuid
+          description: A unique request ID, required for idempotent retries. We recommend that merchants generate a Universally Unique Identifier (UUID) for each unique request.
+        token:
+          type: string
+        merchantReference:
+          type: string
+          description: 'The reference/order ID that this payment corresponds to in the merchant''s system.
+
+
+            **Note:** Providing a new value updates any value previously set in the Create Checkout request.'
+        amount:
+          $ref: '#/components/schemas/Money'
+          description: '**Required for express checkout only.** Amount to be checked against the value in the create checkout request. If the amounts do not match, then the request is rejected and an error specific to this scenario is returned.'
+        isCheckoutAdjusted:
+          type: boolean
+          description: '**Express checkout only.** The isCheckoutAdjusted field can be used to allow the order amount to be changed after the checkout flow. Used for express checkout.'
+        paymentScheduleChecksum:
+          type: string
+          description: '**Express checkout only.** A unique value representing the payment schedule that must be provided when there has been changes since the initial order creation (retrieved from checkout widget).'
+        items:
+          type: array
+          items:
+            description: Any type
+          description: '**Express checkout only.** An array of order items that have been updated to be provided if it has changed since the initial order creation.'
+        shipping:
+          $ref: '#/components/schemas/Contact'
+          description: '**Express checkout only.** The shipping address if it has changed since the initial order creation.'
+        enrichments:
+          $ref: '#/components/schemas/Enrichments'
+        grantId:
+          type: string
+          description: The Afterpay or Cash App Pay on-file grant ID. Required when processing a payment using a previously stored on-file grant.
+      required:
+      - token
+      title: AuthorizePayment
+    list-payments_Response_200:
+      type: object
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+        offset:
+          type: integer
+          description: The offer of the pagination
+        limit:
+          type: integer
+          description: The number of payments to include in the results
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment_2'
+      title: list-payments_Response_200
+    Payment-Event:
+      type: object
+      properties:
+        id:
+          type: string
+        created:
+          type: string
+        expires:
+          type: string
+        type:
+          $ref: '#/components/schemas/PaymentEventType'
+        amount:
+          $ref: '#/components/schemas/Money'
+        paymentEventMerchantReference:
+          type: string
+      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
+      title: Payment-Event
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents:
+      type: object
+      properties: {}
+      description: Event list for for merchant's order. See Events.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds:
+      type: object
+      properties: {}
+      description: The refund details for merchant's order. See Refund.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds
+    PaymentPaymentState:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - PARTIALLY_CAPTURED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      description: is the current state for capturing payments
+      title: PaymentPaymentState
+    PaymentAuthStatus:
+      type: string
+      enum:
+      - APPROVED
+      - DECLINED
+      description: represents the status of the order
+      title: PaymentAuthStatus
+    ShippingCourierPriority:
+      type: string
+      enum:
+      - STANDARD
+      - EXPRESS
+      title: ShippingCourierPriority
+    Order-Details:
+      type: object
+      properties:
+        consumer:
+          $ref: '#/components/schemas/Consumer'
+        billing:
+          $ref: '#/components/schemas/Contact'
+        courier:
+          $ref: '#/components/schemas/Shipping-Courier'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Item'
+        discounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Discount'
+        taxAmount:
+          $ref: '#/components/schemas/Money'
+        shippingAmount:
+          $ref: '#/components/schemas/Money'
+      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
+      title: Order-Details
+    Contact:
+      type: object
+      properties:
+        name:
+          type: string
+        line1:
+          type: string
+          description: First line of the address
+        line2:
+          type: string
+          description: 'Second line of the address '
+        area1:
+          type: string
+          description: '- AU: Suburb
+
+            - NZ: Town or City
+
+            - UK: Postal Town
+
+            - US: City
+
+            - Canada: City'
+        area2:
+          type: string
+          description: '- NZ: suburb
+
+            - UK: village or local area.'
+        region:
+          type: string
+          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
+        postcode:
+          type: string
+        countryCode:
+          $ref: '#/components/schemas/ContactCountryCode'
+        phoneNumber:
+          type: string
+          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
+      required:
+      - name
+      - line1
+      - area1
+      - region
+      - postcode
+      - countryCode
+      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
+      title: Contact
+    Discount:
+      type: object
+      properties:
+        displayName:
+          type: string
+        amount:
+          $ref: '#/components/schemas/Money'
+      description: Discount applied to an order
+      title: Discount
+    reverse-payment-by-token_Response_204:
+      type: object
+      properties: {}
+      description: Empty response body
+      title: reverse-payment-by-token_Response_204
+    SubscriptionInterval:
+      type: string
+      enum:
+      - DAY
+      - WEEK
+      - MONTH
+      - YEAR
+      title: SubscriptionInterval
+    PaymentAuthPaymentState:
+      type: string
+      enum:
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - PARTIALLY_CAPTURED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      description: is the current state for capturing payments
+      title: PaymentAuthPaymentState
     CreateRefund:
       type: object
       properties:
@@ -2100,25 +2344,35 @@ components:
           description: A unique reference for the individual refund event. Max length 128 (varchar).
       description: "To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records\n\nUnique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request. \n\nThe `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as \"Payment Event Id\". In most cases, this would hold the same value as the `merchantReference`.\n"
       title: CreateRefund
-    PaymentStatus_2:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: represents the status of the order
-      title: PaymentStatus
-    PaymentAuthStatus:
-      type: string
-      enum:
-      - APPROVED
-      - DECLINED
-      description: represents the status of the order
-      title: PaymentAuthStatus
-    reverse-payment-by-token_Response_204:
+    Refund:
       type: object
-      properties: {}
-      description: Empty response body
-      title: reverse-payment-by-token_Response_204
+      properties:
+        requestId:
+          type: string
+          description: Unique ID required for safe retries. Max length 64 (varchar).
+        amount:
+          $ref: '#/components/schemas/Money'
+        merchantReference:
+          type: string
+          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
+        refundMerchantReference:
+          type: string
+          description: A unique reference for the individual refund event. Max length 128 (varchar).
+        refundId:
+          type: string
+          description: The unique, permanent, Afterpay-generated Refund ID.
+        refundedAt:
+          type: string
+      description: 'To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records
+
+
+        Unique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request.
+
+
+        The `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as "Payment Event Id". In most cases, this would hold the same value as the `merchantReference`.
+
+        '
+      title: Refund
     Shipping-Courier:
       type: object
       properties:
@@ -2142,68 +2396,60 @@ components:
 
         The `priority` field tracks the shipping speed or service level associated with the delivery. '
       title: Shipping-Courier
-    InitiationActor:
-      type: string
-      enum:
-      - CUSTOMER
-      - MERCHANT
-      description: The party who initiated the order
-      title: InitiationActor
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount:
-      type: object
-      properties: {}
-      description: Total amount that can be captured for order. See Money.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount
-    PaymentPaymentState:
-      type: string
-      enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - PARTIALLY_CAPTURED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      description: is the current state for capturing payments
-      title: PaymentPaymentState
-    Consumer:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-        givenNames:
-          type: string
-          description: The consumer's first name
-        surname:
-          type: string
-          description: The consumer's last name
-        phoneNumber:
-          type: string
-      required:
-      - email
-      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
-      title: Consumer
-    PaymentAuthPaymentState:
-      type: string
-      enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - PARTIALLY_CAPTURED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      description: is the current state for capturing payments
-      title: PaymentAuthPaymentState
     V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount:
       type: object
       properties: {}
       description: Total amount for the order. See Money.
       title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOriginalAmount
-    V2PaymentsOrderIdCourierPutParametersAccept:
+    PaymentEventType:
       type: string
       enum:
-      - application/json
-      title: V2PaymentsOrderIdCourierPutParametersAccept
+      - AUTH_APPROVED
+      - AUTH_DECLINED
+      - CAPTURED
+      - CAPTURE_DECLINED
+      - VOIDED
+      - EXPIRED
+      title: PaymentEventType
+    Item:
+      type: object
+      properties:
+        name:
+          type: string
+        sku:
+          type: string
+        pageUrl:
+          type: string
+        imageUrl:
+          type: string
+        quantity:
+          type: integer
+        price:
+          $ref: '#/components/schemas/Money'
+        categories:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        estimatedShipmentDate:
+          type: string
+          format: date
+        preorder:
+          type: boolean
+          default: false
+      required:
+      - name
+      - quantity
+      - price
+      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
+      title: Item
+    SubscriptionType:
+      type: string
+      enum:
+      - FIXED
+      - VARIABLE
+      title: SubscriptionType
     update-payment-by-order-id_Response_201:
       type: object
       properties:
@@ -2239,56 +2485,33 @@ components:
           $ref: '#/components/schemas/V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents'
           description: Event list for for merchant's order. See Events.
       title: update-payment-by-order-id_Response_201
-    Item:
+    Consumer:
       type: object
       properties:
-        name:
+        email:
           type: string
-        sku:
+          format: email
+        givenNames:
           type: string
-        pageUrl:
+          description: The consumer's first name
+        surname:
           type: string
-        imageUrl:
+          description: The consumer's last name
+        phoneNumber:
           type: string
-        quantity:
-          type: integer
-        price:
-          $ref: '#/components/schemas/Money'
-        categories:
-          type: array
-          items:
-            type: array
-            items:
-              type: string
-        estimatedShipmentDate:
-          type: string
-          format: date
-        preorder:
-          type: boolean
-          default: false
       required:
-      - name
-      - quantity
-      - price
-      description: "This data model is used to store crucial product details. The `price.amount` field represents the unit price of the individual item. The `quantity` field shows the number of units of the item. The `name` field denotes the name of the product, while `sku` holds the Stock Keeping Unit identifier. 100 is the maximum number of item objects in the items array.\n<Warning Title=\"Important Note\">\n  It is crucial that the `price.amount` represents the unit price of the individual item.\n  **Never** populate the `price.amount` by multiplying the quantity by the unit cost. Always enter the price for a single unit to maintain data accuracy.\n</Warning>\n"
-      title: Item
-    list-payments_Response_200:
-      type: object
-      properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-        offset:
-          type: integer
-          description: The offer of the pagination
-        limit:
-          type: integer
-          description: The number of payments to include in the results
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment_2'
-      title: list-payments_Response_200
+      - email
+      description: The consumer data model is used for gathering essential user information. It captures details such as the individual's first name, represented by `givenNames`, and their last name, captured under `surname`. In addition, it stores the user's contact number under `phoneNumber` and their email address under `email`. These fields collectively provide contact and identification details for a user.
+      title: Consumer
+    MoneyCurrency:
+      type: string
+      enum:
+      - AUD
+      - NZD
+      - USD
+      - CAD
+      - GBP
+      title: MoneyCurrency
     CapturePayment:
       type: object
       properties:
@@ -2347,188 +2570,6 @@ components:
             $ref: '#/components/schemas/Payment-Event'
       description: Describes the schema for a (read-only) payment object
       title: Payment
-    Order-Details:
-      type: object
-      properties:
-        consumer:
-          $ref: '#/components/schemas/Consumer'
-        billing:
-          $ref: '#/components/schemas/Contact'
-        courier:
-          $ref: '#/components/schemas/Shipping-Courier'
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Item'
-        discounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Discount'
-        taxAmount:
-          $ref: '#/components/schemas/Money'
-        shippingAmount:
-          $ref: '#/components/schemas/Money'
-      description: This comprehensive schema is designed to store an entire transaction's detail, covering crucial aspects like consumer information, billing and shipping details, courier particulars, item list, discounts, tax, and shipping amount.
-      title: Order-Details
-    AuthorizePayment:
-      type: object
-      properties:
-        requestid:
-          type: string
-          format: uuid
-          description: A unique request ID, required for idempotent retries. We recommend that merchants generate a Universally Unique Identifier (UUID) for each unique request.
-        token:
-          type: string
-        merchantReference:
-          type: string
-          description: 'The reference/order ID that this payment corresponds to in the merchant''s system.
-
-
-            **Note:** Providing a new value updates any value previously set in the Create Checkout request.'
-        amount:
-          $ref: '#/components/schemas/Money'
-          description: '**Required for express checkout only.** Amount to be checked against the value in the create checkout request. If the amounts do not match, then the request is rejected and an error specific to this scenario is returned.'
-        isCheckoutAdjusted:
-          type: boolean
-          description: '**Express checkout only.** The isCheckoutAdjusted field can be used to allow the order amount to be changed after the checkout flow. Used for express checkout.'
-        paymentScheduleChecksum:
-          type: string
-          description: '**Express checkout only.** A unique value representing the payment schedule that must be provided when there has been changes since the initial order creation (retrieved from checkout widget).'
-        items:
-          type: array
-          items:
-            description: Any type
-          description: '**Express checkout only.** An array of order items that have been updated to be provided if it has changed since the initial order creation.'
-        shipping:
-          $ref: '#/components/schemas/Contact'
-          description: '**Express checkout only.** The shipping address if it has changed since the initial order creation.'
-        enrichments:
-          $ref: '#/components/schemas/Enrichments'
-        grantId:
-          type: string
-          description: The Afterpay or Cash App Pay on-file grant ID. Required when processing a payment using a previously stored on-file grant.
-      required:
-      - token
-      title: AuthorizePayment
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents:
-      type: object
-      properties: {}
-      description: Event list for for merchant's order. See Events.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaEvents
-    Subscription:
-      type: object
-      properties:
-        type:
-          $ref: '#/components/schemas/SubscriptionType'
-        interval:
-          $ref: '#/components/schemas/SubscriptionInterval'
-        intervalCount:
-          type: integer
-      title: Subscription
-    Payment-Event:
-      type: object
-      properties:
-        id:
-          type: string
-        created:
-          type: string
-        expires:
-          type: string
-        type:
-          $ref: '#/components/schemas/PaymentEventType'
-        amount:
-          $ref: '#/components/schemas/Money'
-        paymentEventMerchantReference:
-          type: string
-      description: Each payment event has a unique ID, creation timestamp, and type (e.g., "AUTH_APPROVED", "AUTH_DECLINED"). For "AUTH_APPROVED" events, an expiration timestamp is provided. The "payment event merchant reference" field, which can be used for payment capture events
-      title: Payment-Event
-    Enrichments:
-      type: object
-      properties:
-        initiation:
-          $ref: '#/components/schemas/Initiation'
-          description: Who initiated the order
-        subscription:
-          $ref: '#/components/schemas/Subscription'
-          description: Metadata on the subscription details
-      required:
-      - initiation
-      title: Enrichments
-    Refund:
-      type: object
-      properties:
-        requestId:
-          type: string
-          description: Unique ID required for safe retries. Max length 64 (varchar).
-        amount:
-          $ref: '#/components/schemas/Money'
-        merchantReference:
-          type: string
-          description: The merchant’s internal refund id/reference. This must be included along with the `requestId` to utilise idempotency. Max length 85 (varchar).
-        refundMerchantReference:
-          type: string
-          description: A unique reference for the individual refund event. Max length 128 (varchar).
-        refundId:
-          type: string
-          description: The unique, permanent, Afterpay-generated Refund ID.
-        refundedAt:
-          type: string
-      description: 'To guarantee safe retries, the merchant should offer their refund ID or reference, aligning with their internal records
-
-
-        Unique values for the `requestID`  and `merchantReference` are required to guarantee safe retries. It is recommended that the merchant generates a UUID for each unique refund request.
-
-
-        The `refundMerchantReference` is a unique reference that when provided, will appear in the daily settlement file as "Payment Event Id". In most cases, this would hold the same value as the `merchantReference`.
-
-        '
-      title: Refund
-    Initiation:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/InitiationActor'
-          description: The party who initiated the order
-      required:
-      - actor
-      title: Initiation
-    PaymentEventType:
-      type: string
-      enum:
-      - AUTH_APPROVED
-      - AUTH_DECLINED
-      - CAPTURED
-      - CAPTURE_DECLINED
-      - VOIDED
-      - EXPIRED
-      title: PaymentEventType
-    Discount:
-      type: object
-      properties:
-        displayName:
-          type: string
-        amount:
-          $ref: '#/components/schemas/Money'
-      description: Discount applied to an order
-      title: Discount
-    Money:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
-        currency:
-          $ref: '#/components/schemas/MoneyCurrency'
-      required:
-      - amount
-      - currency
-      description: Object containing amount and currency
-      title: Money
-    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds:
-      type: object
-      properties: {}
-      description: The refund details for merchant's order. See Refund.
-      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaRefunds
     V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOrderDetails:
       type: object
       properties: {}
@@ -2571,21 +2612,15 @@ components:
             $ref: '#/components/schemas/Payment-Event'
       description: Describes the schema for a (read-only) payment object
       title: PaymentAuth
-    ShippingCourierPriority:
-      type: string
-      enum:
-      - STANDARD
-      - EXPRESS
-      title: ShippingCourierPriority
-    MoneyCurrency:
-      type: string
-      enum:
-      - AUD
-      - NZD
-      - USD
-      - CAD
-      - GBP
-      title: MoneyCurrency
+    Initiation:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/InitiationActor'
+          description: The party who initiated the order
+      required:
+      - actor
+      title: Initiation
     ContactCountryCode:
       type: string
       enum:
@@ -2595,66 +2630,31 @@ components:
       - CA
       - GB
       title: ContactCountryCode
-    Contact:
+    InitiationActor:
+      type: string
+      enum:
+      - CUSTOMER
+      - MERCHANT
+      description: The party who initiated the order
+      title: InitiationActor
+    V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount:
+      type: object
+      properties: {}
+      description: Total amount that can be captured for order. See Money.
+      title: V2PaymentsOrderIdPutResponsesContentApplicationJsonSchemaOpenToCaptureAmount
+    Money:
       type: object
       properties:
-        name:
+        amount:
           type: string
-        line1:
-          type: string
-          description: First line of the address
-        line2:
-          type: string
-          description: 'Second line of the address '
-        area1:
-          type: string
-          description: '- AU: Suburb
-
-            - NZ: Town or City
-
-            - UK: Postal Town
-
-            - US: City
-
-            - Canada: City'
-        area2:
-          type: string
-          description: '- NZ: suburb
-
-            - UK: village or local area.'
-        region:
-          type: string
-          description: "- AU: State \n- NZ: Region\n- UK: County\n- US: State\n- CA: Province or Territory"
-        postcode:
-          type: string
-        countryCode:
-          $ref: '#/components/schemas/ContactCountryCode'
-        phoneNumber:
-          type: string
-          description: The phone number, in [E.123](https://en.wikipedia.org/wiki/E.123) format.
+          description: The amount as a string representation of a decimal number, rounded to 2 decimal places.
+        currency:
+          $ref: '#/components/schemas/MoneyCurrency'
       required:
-      - name
-      - line1
-      - area1
-      - region
-      - postcode
-      - countryCode
-      description: "This data model is used for storing an individual's contact information. Mandatory fields such as **name**, **line1**, **area1**, **region**, **postcode**, and **countryCode** help in capturing vital information about a user's location. \n\nThe `line2` and `area2` fields provide additional space for extended addresses, while `phoneNumber` can be used to store the user's contact number.\n\n\n<Warning Title=\"Important Note\">\n  The `area1`, `area2` and `region` properties feature localized terminology based on country. Refer to the property descriptions for insights on each country's specific usage \n</Warning>\n"
-      title: Contact
-    SubscriptionInterval:
-      type: string
-      enum:
-      - DAY
-      - WEEK
-      - MONTH
-      - YEAR
-      title: SubscriptionInterval
-    SubscriptionType:
-      type: string
-      enum:
-      - FIXED
-      - VARIABLE
-      title: SubscriptionType
+      - amount
+      - currency
+      description: Object containing amount and currency
+      title: Money
   securitySchemes:
     sec0:
       type: http

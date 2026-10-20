@@ -25,6 +25,12 @@ checked:
 - https://n8n.io/integrations/cash/
 - https://zapier.com/apps/cash-app/integrations
 - https://zapier.com/apps/cash/integrations
+- https://api.github.com
+- https://claude-plugins.dev/sitemap.xml
+- https://github.com/VoltAgent/awesome-agent-skills
+- https://officialskills.sh/sitemap.xml
+- https://skillsmp.com/sitemap.xml
+- https://www.skills.sh/sitemap.xml
 summary: Afterpay (Cash App Afterpay) documents 10 ecommerce platform/PSP integrations on its own developer portal;
   Cash App appears on none of Zapier, n8n, Composio or Monid.
 marketplace_apps: []
@@ -114,4 +120,34 @@ edges:
     property: PostInvoicesRequest.payment_settings.payment_method_types
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
+- partner_name: SkillsMP (skillsmp.com)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  category: Agent Skills register
+  evidence: https://skillsmp.com/creators/cashapp
+  channel: standard-directory
+  relationship: compatible
+  shape: agent-skills
+  evidence_kind: register-listing
+  degree: listed
+  report_only: true
+  agent_skills_register:
+    repos:
+    - cashapp
+    repo_verified: false
+    signal_note: the provider's own-org repos the register lists; skill / install counts never read
+  contract_reference:
+    register: SkillsMP (skillsmp.com) (public sitemap / list)
+    spec_file: null
+    standard: Agent Skills (agentskills.io)
+    role: agent-skills-listing
+    matched_org: cashapp
+    matched_by: org-profile-domain:cash.app
+    sample_skills: []
+    detected_by: sweep-agent-skills.py
+    detected: '2026-10-20'
+  detected_by: sweep-agent-skills.py
+  first_seen: '2026-10-20'
 templates: []

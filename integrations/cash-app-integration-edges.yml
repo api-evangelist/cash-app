@@ -106,12 +106,12 @@ edges:
   channel: partner-built
   relationship: payment-method
   direction: partner-built
-  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-setup-intents-api-openapi.yml
+  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-invoices-api-openapi.yml
   contract_reference:
     repo: stripe
-    spec_file: stripe-setup-intents-api-openapi.yml
-    value: afterpay_clearpay
-    property: schemas.PostSetupIntentsRequest.payment_method_data
+    spec_file: stripe-invoices-api-openapi.yml
+    value: cashapp
+    property: PostInvoicesRequest.payment_settings.payment_method_types
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
 templates: []

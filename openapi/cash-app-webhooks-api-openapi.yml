@@ -2301,3 +2301,9 @@ components:
       required:
       - webhook_endpoint
       title: webhooks_update-webhook-endpoint_Response_200
+x-provenance:
+  method: harvested
+  publisher: Cash App
+  source: https://developers.cash.app/openapi/management-api.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
